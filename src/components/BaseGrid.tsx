@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import InfiniteLoader from "react-window-infinite-loader";
 
-import { Alert, Box, Container } from "@mui/material";
 import { BaseGridList } from "./BaseGridList";
 
 const SearchSort = React.lazy(() => import("./SearchSort"));
@@ -34,13 +33,7 @@ export default function BaseGrid({
         content = <p>...</p>;
       } else {
         content = (
-          <Alert
-            variant="filled"
-            severity="info"
-            sx={{ mx: "auto", maxWidth: 500 }}
-          >
-            No search results found :(
-          </Alert>
+          <p>No search results found :(</p>
         );
       }
 
@@ -57,37 +50,17 @@ export default function BaseGrid({
     const rowData = items[index];
 
     return (
-      <Container
-        maxWidth="lg"
-        className={"lazy-row"}
-        sx={{
-          my: 2,
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
         <div style={style}>
           {Array.from(rowData).map((image: any, imgIdx) => (
             <BaseCard key={`${index}-${imgIdx}`} item={image} />
           ))}
         </div>
-      </Container>
     );
   };
 
   return (
     <React.Fragment>
-      <Container maxWidth="lg">
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "flex-end",
-            my: 2,
-          }}
-        >
-          <SearchSort />
-        </Box>
-      </Container>
+      <SearchSort />
       <InfiniteLoader
         ref={listRef}
         isItemLoaded={isItemLoaded}

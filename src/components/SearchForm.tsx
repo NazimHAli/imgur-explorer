@@ -1,5 +1,4 @@
 import * as React from "react";
-import { TextField } from "@mui/material";
 
 function SearchForm({ handleOnSubmit }) {
   const isValidQuery = (event) => {
@@ -17,16 +16,9 @@ function SearchForm({ handleOnSubmit }) {
 
   return (
     <React.Fragment>
-      <TextField
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          mx: "auto",
-          width: "50%",
-        }}
+      <input
         id="search-input"
         color="primary"
-        label="Search"
         placeholder="Search for goodies"
         type="search"
         defaultValue="meow"
