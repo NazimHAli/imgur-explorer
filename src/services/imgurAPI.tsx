@@ -1,5 +1,6 @@
 import { arrToMatrix, extractImageResults } from "../utils/dataUtils";
 
+const imgurClientId = process.env.imgurClientId;
 const BASE = "https://api.imgur.com/3";
 const EP_GALLERY = `${BASE}/gallery`;
 const EP_GALLERY_HOT = `${EP_GALLERY}/hot`;
@@ -35,7 +36,7 @@ class ImgurAPI {
    * @returns
    */
   private async imgurBaseApi(args: Args) {
-    const clientId = "SECRET_KEY";
+    const clientId = imgurClientId;
 
     const myHeaders = new Headers({
       Authorization: `Client-ID ${clientId}`,
@@ -101,7 +102,7 @@ class ImgurAPI {
    * @returns
    */
   private filterImageResults(response) {
-    let cleanedData = extractImageResults(response);
+    const cleanedData = extractImageResults(response);
     return arrToMatrix(cleanedData, 4);
   }
 }

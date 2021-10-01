@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import InfiniteLoader from "react-window-infinite-loader";
 
-import { Box, Container } from "@mui/material";
+import { Alert, Box, Container } from "@mui/material";
 import { BaseGridList } from "./BaseGridList";
 
 const SearchSort = React.lazy(() => import("./SearchSort"));
@@ -26,13 +26,25 @@ export default function BaseGrid({
 
   const isItemLoaded = (index) => !hasNextPage || index < items.length;
 
-  useEffect(() => {
-    return () => {};
-  });
-
   const RenderRow = ({ index, style }) => {
     if (!isItemLoaded(index)) {
-      return <p>...</p>;
+      let content;
+
+      if (isNextPageLoading) {
+        content = <p>...</p>;
+      } else {
+        content = (
+          <Alert
+            variant="filled"
+            severity="info"
+            sx={{ mx: "auto", maxWidth: 500 }}
+          >
+            No search results found :(
+          </Alert>
+        );
+      }
+
+      return content;
     }
 
     useEffect(() => {
