@@ -11,7 +11,7 @@ function BaseGridList(
   return (
     <VariableSizeList
       className="List"
-      height={document.documentElement.clientHeight - 50}
+      height={document.documentElement.clientHeight}
       itemCount={itemCount}
       itemSize={() => 350}
       minimumBatchSize={20}

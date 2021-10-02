@@ -13,7 +13,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-export default function BaseCard({ item }) {
+export default function BaseCard({ item, cRef }) {
   return (
     <Card sx={{ width: 250 }}>
       <CardHeader
@@ -32,6 +32,7 @@ export default function BaseCard({ item }) {
       <CardMedia
         component="img"
         height="194"
+        ref={cRef}
         srcSet={item?.images[0]?.link}
         alt={`${item?.title} image`}
       />

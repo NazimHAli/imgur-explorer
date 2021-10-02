@@ -7,9 +7,9 @@ import { BaseGridList } from "./BaseGridList";
 const SearchSort = React.lazy(() => import("./SearchSort"));
 const BaseCard = React.lazy(() => import("./BaseCard"));
 
-let inObserver;
+let imgObserver;
 import("../utils/visibilityUtils").then((mod) => {
-  inObserver = new mod.ObserveElementsInView();
+  imgObserver = new mod.ObserveElementsInView();
 });
 
 export default function BaseGrid({
@@ -47,11 +47,10 @@ export default function BaseGrid({
       return content;
     }
 
-    useEffect(() => {
-      const elsToObserve = innerListRef.current.querySelectorAll(
-        "img.MuiCardMedia-img:not([style*='opacity: 100'])"
-      );
-      inObserver.observeElements(elsToObserve);
+    const measuredRef = React.useCallback((node) => {
+      if (node !== null && !node.style.opacity) {
+        imgObserver.observeElements([node]);
+      }
     }, []);
 
     const rowData = items[index];
@@ -68,7 +67,11 @@ export default function BaseGrid({
       >
         <div style={style}>
           {Array.from(rowData).map((image: any, imgIdx) => (
-            <BaseCard key={`${index}-${imgIdx}`} item={image} />
+            <BaseCard
+              key={`${index}-${imgIdx}`}
+              item={image}
+              cRef={measuredRef}
+            />
           ))}
         </div>
       </Container>
