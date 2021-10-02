@@ -69,14 +69,12 @@ class ImgurAPI {
    * @param filterImageResults
    * @returns
    */
-  public async submitGallerySearch(
-    searchQuery: string,
-    page = 1 as number,
-    filterImageResults = false as boolean
-  ) {
+  public async submitGallerySearch(args) {
     return await this.imgurBaseApi({
-      endPoint: `${EP_GALLERY}/search/time/viral/${page}?q=${searchQuery}&q_size_px=small&q_type=jpg`,
-      filterImageResults: filterImageResults,
+      endPoint: `${EP_GALLERY}/search/${args.sort || "viral"}/all/${
+        args.page || 1
+      }?q=${args.searchQuery}&q_size_px=small&q_type=jpg`,
+      filterImageResults: args.filterImageResults || false,
     });
   }
 

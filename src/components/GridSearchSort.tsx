@@ -7,12 +7,19 @@ import {
   MenuItem,
 } from "@mui/material";
 
-function GridSearchSort() {
+const SORT_MAP = {
+  0: "time",
+  1: "viral",
+  2: "top",
+};
+
+function GridSearchSort({ handleSortChange }) {
   const [sortOption, setSortOption] = React.useState<string | number>(1);
   const [open, setOpen] = React.useState(false);
 
   const handleChange = (event: SelectChangeEvent<typeof sortOption>) => {
     setSortOption(event.target.value);
+    handleSortChange({ sort: SORT_MAP[event.target.value] });
   };
 
   const handleClose = () => {

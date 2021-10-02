@@ -2,20 +2,19 @@ import React from "react";
 
 import { Alert, Box, Container } from "@mui/material";
 import { intersectionObserverHook } from "../hooks/intersectionObserverHook";
-import { fetchDataHook } from "../hooks/fetchDataHook";
 
 const CardSkeleton = React.lazy(() => import("./CardSkeleton"));
 const GridSearchSort = React.lazy(() => import("./GridSearchSort"));
 const Header = React.lazy(() => import("./Header"));
 
 let lazyLoadImg;
+
 import("../utils/visibilityUtils").then((mod) => {
   lazyLoadImg = new mod.LazyLoadImages();
 });
 
 function Grid() {
-  let data = fetchDataHook("meow", 1, true);
-
+  const [data, setData] = React.useState([]);
   const [state, setState] = React.useState({
     hasNextPage: false,
     isInterSecting: false,
@@ -23,6 +22,13 @@ function Grid() {
     nextIdx: 0,
     numItemsPerRequest: 12,
     stopLazyLoading: false,
+    requestArgs: {
+      filter: false,
+      newSearch: true,
+      page: 1,
+      query: "meow",
+      sort: "viral",
+    },
   });
 
   const ioElementRef = React.useRef();
@@ -50,15 +56,30 @@ function Grid() {
   }, [isIOelementVisible]);
 
   const isItemLoaded = (index) => !state.hasNextPage || index < data.length;
+  const submitSearchRequest = async (args) => {
+    import("../services/imgurAPI").then(async (mod) => {
+      const imgurClient = mod.ImgurAPI.getInstance();
+
+      imgurClient
+        .submitGallerySearch({
+          searchQuery: args.query || state.requestArgs.query,
+          pageNumber: args.page || state.requestArgs.page,
+          filterImageResults: args.filter || state.requestArgs.filter,
+          sort: args.sort || state.requestArgs.sort,
+        })
+        .then((res) => {
+          setData(state.requestArgs.newSearch ? res : data.concat(res));
+          setState(() => ({
+            ...state,
+            nextIdx: state.nextIdx + state.numItemsPerRequest,
+          }));
+        });
+    });
+  };
 
   React.useEffect(() => {
-    if (data !== null) {
-      setState(() => ({
-        ...state,
-        nextIdx: state.nextIdx + state.numItemsPerRequest,
-      }));
-    }
-  }, [data]);
+    submitSearchRequest(state.requestArgs);
+  }, []);
 
   const imageRef = React.useCallback((node) => {
     if (node !== null && !node.observed && !node.style.opacity) {
@@ -85,7 +106,7 @@ function Grid() {
             my: 2,
           }}
         >
-          <GridSearchSort />
+          <GridSearchSort handleSortChange={submitSearchRequest} />
         </Box>
         <Box className="container-img">
           {Array.from(
