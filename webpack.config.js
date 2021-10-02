@@ -1,6 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-
+const webpack = require("webpack");
 const isProd = process.env.NODE_ENV === "prod";
 
 module.exports = {
@@ -44,6 +44,9 @@ module.exports = {
       manifest: "./public/manifest.json",
       favicon: "./public/favicon.ico",
       template: "./public/index.html",
+    }),
+    new webpack.DefinePlugin({
+      "process.env.imgurClientId": JSON.stringify(process.env.imgurClientId),
     }),
   ],
   optimization: {

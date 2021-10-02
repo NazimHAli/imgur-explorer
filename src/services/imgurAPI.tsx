@@ -36,10 +36,8 @@ class ImgurAPI {
    * @returns
    */
   private async imgurBaseApi(args: Args) {
-    const clientId = imgurClientId;
-
     const myHeaders = new Headers({
-      Authorization: `Client-ID ${clientId}`,
+      Authorization: `Client-ID ${imgurClientId}`,
     });
 
     args.requestOptions = {
