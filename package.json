@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "rm -rf dist && webpack --mode production",
+    "build": "rm -rf dist && webpack --mode production --node-env prod",
     "build:a": "NODE_ENV=prod yarn build",
     "lint": "eslint src",
     "lint:fix": "yarn lint --fix",

@@ -1,9 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
-const BundleAnalyzerPlugin =
-  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-
+// const BundleAnalyzerPlugin =
+//   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 const isProd = process.env.NODE_ENV === "prod";
 
@@ -13,7 +12,7 @@ module.exports = {
     static: path.join(__dirname, "dist"),
     port: 3001,
   },
-  devtool: "eval-source-map",
+  devtool: isProd ? false : "eval-source-map",
   output: {
     publicPath: "auto",
     filename: "[name].[contenthash].js",
@@ -50,7 +49,7 @@ module.exports = {
       template: "./public/index.html",
     }),
     new Dotenv(),
-    isProd ? new BundleAnalyzerPlugin() : ()=>{},
+    // isProd ? new BundleAnalyzerPlugin() : ()=>{},
   ],
   optimization: {
     splitChunks: {
