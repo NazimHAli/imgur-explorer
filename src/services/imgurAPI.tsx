@@ -75,7 +75,7 @@ class ImgurAPI {
     filterImageResults = false as boolean
   ) {
     return await this.imgurBaseApi({
-      endPoint: `${EP_GALLERY}/search/time/all/${page}?q=${searchQuery}&q_size_px=small&q_type=jpg`,
+      endPoint: `${EP_GALLERY}/search/time/viral/${page}?q=${searchQuery}&q_size_px=small&q_type=jpg`,
       filterImageResults: filterImageResults,
     });
   }

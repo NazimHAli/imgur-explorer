@@ -5,7 +5,7 @@ import "./style/index.scss";
 
 const CssBaseline = React.lazy(() => import("./intermediates/muiCssBaseline"));
 const HeaderSearch = React.lazy(() => import("./components/PrimaryHeader"));
-const GridGallery = React.lazy(() => import("./components/GridGallery"));
+const Grid = React.lazy(() => import("./components/Grid"));
 
 const darkTheme = createTheme({
   palette: {
@@ -18,7 +18,7 @@ ReactDOM.render(
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <HeaderSearch />
-      <GridGallery />
+      <Grid />
     </ThemeProvider>
   </React.Suspense>,
   document.getElementById("root")

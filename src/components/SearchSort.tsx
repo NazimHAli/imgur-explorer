@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 
 export default function SearchSort() {
-  const [sortOption, setSortOption] = React.useState<string | number>(0);
+  const [sortOption, setSortOption] = React.useState<string | number>(1);
   const [open, setOpen] = React.useState(false);
 
   const handleChange = (event: SelectChangeEvent<typeof sortOption>) => {

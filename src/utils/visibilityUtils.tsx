@@ -1,4 +1,4 @@
-class ObserveElementsInView {
+class LazyLoadImages {
   rootObserver: IntersectionObserver;
   activeElementIDs: Set<unknown>;
 
@@ -15,21 +15,7 @@ class ObserveElementsInView {
     observer: { unobserve: (arg0: any) => void }
   ) {
     entries.forEach((entry) => {
-      if (!entry.isIntersecting) {
-        return;
-      }
-
-      if (entry.target.childNodes.length) {
-        entry.target.childNodes.forEach(
-          (el: { src: any; dataset: { srcset: any } }) => {
-            el.src = el.dataset.srcset;
-          }
-        );
-      } else {
-        entry.target.src = entry.target.dataset.srcset;
-      }
-      entry.target.style.opacity = 100;
-      observer.unobserve(entry.target);
+      handleIntersectEntry(entry, observer);
     });
   }
 
@@ -39,6 +25,24 @@ class ObserveElementsInView {
       element.setAttribute("observed", "");
     });
   }
+}
+
+function handleIntersectEntry(entry, observer): void {
+  if (!entry.isIntersecting) {
+    return;
+  }
+
+  if (entry.target.childNodes.length) {
+    entry.target.childNodes.forEach(
+      (el: { src: any; dataset: { srcset: any } }) => {
+        el.src = el.dataset.srcset;
+      }
+    );
+  } else {
+    entry.target.src = entry.target.dataset.srcset;
+  }
+  entry.target.style.opacity = 100;
+  observer.unobserve(entry.target);
 }
 
 function isElementInView(element: { getBoundingClientRect: () => any }) {
@@ -55,4 +59,4 @@ function isElementInView(element: { getBoundingClientRect: () => any }) {
   );
 }
 
-export { ObserveElementsInView, isElementInView };
+export { LazyLoadImages, isElementInView };

@@ -5,29 +5,26 @@ html {
 }
 
 body {
-  overflow: hidden;
   margin: 0;
 }
 
 .item-img {
   max-height: 15rem;
-  max-width: 10rem;
+  height: 100%;
+  margin: 0 auto;
+  display: block;
 }
 
-.lazy-img, .MuiCardMedia-img {
+.lazy-img {
   opacity: 0;
   transition: opacity ease-in-out 1s;
 }
 
-.lazy-row {
-  position: relative;
-
-  > div {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
+.container-img {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 /*! purgecss end ignore */
