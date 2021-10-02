@@ -4,7 +4,6 @@ import * as ReactDOM from "react-dom";
 import "./style/index.scss";
 
 const CssBaseline = React.lazy(() => import("./intermediates/muiCssBaseline"));
-const HeaderSearch = React.lazy(() => import("./components/PrimaryHeader"));
 const Grid = React.lazy(() => import("./components/Grid"));
 
 const darkTheme = createTheme({
@@ -17,7 +16,6 @@ ReactDOM.render(
   <React.Suspense fallback={<div>...</div>}>
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <HeaderSearch />
       <Grid />
     </ThemeProvider>
   </React.Suspense>,

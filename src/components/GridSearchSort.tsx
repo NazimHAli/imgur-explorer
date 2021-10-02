@@ -7,7 +7,7 @@ import {
   MenuItem,
 } from "@mui/material";
 
-export default function SearchSort() {
+function GridSearchSort() {
   const [sortOption, setSortOption] = React.useState<string | number>(1);
   const [open, setOpen] = React.useState(false);
 
@@ -45,3 +45,5 @@ export default function SearchSort() {
     </FormControl>
   );
 }
+
+export default GridSearchSort;

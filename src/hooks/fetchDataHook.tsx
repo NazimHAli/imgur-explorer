@@ -1,6 +1,6 @@
 import React from "react";
 
-export const fetchData = (
+export const fetchDataHook = (
   searchQuery = "meow",
   pageNumber = 1,
   newSearch = false

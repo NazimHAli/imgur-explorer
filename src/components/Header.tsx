@@ -13,9 +13,9 @@ import {
   Toolbar,
 } from "@mui/material";
 
-import { Search, SearchIconWrapper, StyledInputBase } from "./SearchStyling";
+import { HeaderSearchStyling, SearchIconWrapper, StyledInputBase } from "./HeaderSearchStyling";
 
-export default function PrimaryHeader() {
+export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -62,7 +62,7 @@ export default function PrimaryHeader() {
         width: "100%",
       }}
     >
-      <Search>
+      <HeaderSearchStyling>
         <SearchIconWrapper>
           <SearchIcon />
         </SearchIconWrapper>
@@ -70,7 +70,7 @@ export default function PrimaryHeader() {
           placeholder="Search for goodies..."
           inputProps={{ "aria-label": "search" }}
         />
-      </Search>
+      </HeaderSearchStyling>
     </Box>
   );
 

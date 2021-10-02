@@ -2,10 +2,11 @@ import React from "react";
 
 import { Alert, Box, Container } from "@mui/material";
 import { intersectionObserverHook } from "../hooks/intersectionObserverHook";
-import { fetchData } from "./fetchData";
-import CardSkeleton from "./CardSkeleton";
+import { fetchDataHook } from "../hooks/fetchDataHook";
 
-const SearchSort = React.lazy(() => import("./SearchSort"));
+const CardSkeleton = React.lazy(() => import("./CardSkeleton"));
+const GridSearchSort = React.lazy(() => import("./GridSearchSort"));
+const Header = React.lazy(() => import("./Header"));
 
 let lazyLoadImg;
 import("../utils/visibilityUtils").then((mod) => {
@@ -13,7 +14,7 @@ import("../utils/visibilityUtils").then((mod) => {
 });
 
 function Grid() {
-  let data = fetchData("meow", 1, true);
+  let data = fetchDataHook("meow", 1, true);
 
   const [state, setState] = React.useState({
     hasNextPage: false,
@@ -52,7 +53,10 @@ function Grid() {
 
   React.useEffect(() => {
     if (data !== null) {
-      setState(() => ({ ...state, nextIdx: state.nextIdx + state.numItemsPerRequest }));
+      setState(() => ({
+        ...state,
+        nextIdx: state.nextIdx + state.numItemsPerRequest,
+      }));
     }
   }, [data]);
 
@@ -72,6 +76,7 @@ function Grid() {
 
   return (
     <>
+      <Header />
       <Container maxWidth="lg">
         <Box
           sx={{
@@ -80,7 +85,7 @@ function Grid() {
             my: 2,
           }}
         >
-          <SearchSort />
+          <GridSearchSort />
         </Box>
         <Box className="container-img">
           {Array.from(

@@ -1,7 +1,7 @@
 import { InputBase } from "@mui/material";
 import { alpha, styled } from "@mui/material/styles";
 
-export const Search = styled("div")(({ theme }) => ({
+export const HeaderSearchStyling = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
