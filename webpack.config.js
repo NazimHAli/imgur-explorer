@@ -1,17 +1,18 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const Dotenv = require('dotenv-webpack');
+
+const isProd = process.env.NODE_ENV === "prod";
 
 module.exports = {
   entry: path.resolve(__dirname, "./src/index.tsx"),
   devServer: {
     static: path.join(__dirname, "dist"),
-    port: 3001
+    port: 3001,
   },
-  devtool: "eval-source-map",
+  devtool: isProd ? false : "eval-source-map",
   output: {
     publicPath: "auto",
-    filename: '[name].[contenthash].js',
+    filename: "[name].[contenthash].js",
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
@@ -44,7 +45,6 @@ module.exports = {
       favicon: "./public/favicon.ico",
       template: "./public/index.html",
     }),
-    new Dotenv(),
   ],
   optimization: {
     splitChunks: {
