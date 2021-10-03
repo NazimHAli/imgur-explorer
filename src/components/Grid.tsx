@@ -60,17 +60,29 @@ function Grid() {
     import("../services/imgurAPI").then(async (mod) => {
       const imgurClient = mod.ImgurAPI.getInstance();
 
+      const filter = args.filter || state.requestArgs.filter;
+      const page = args.page || state.requestArgs.page;
+      const query = args.query || state.requestArgs.query;
+      const sort = args.sort || state.requestArgs.sort;
+
       imgurClient
         .submitGallerySearch({
-          searchQuery: args.query || state.requestArgs.query,
-          pageNumber: args.page || state.requestArgs.page,
-          filterImageResults: args.filter || state.requestArgs.filter,
-          sort: args.sort || state.requestArgs.sort,
+          searchQuery: query,
+          pageNumber: page,
+          filterImageResults: filter,
+          sort: sort,
         })
         .then((res) => {
           setData(state.requestArgs.newSearch ? res : data.concat(res));
           setState(() => ({
             ...state,
+            requestArgs: {
+              filter: filter,
+              newSearch: true,
+              page: page,
+              query: query,
+              sort: sort,
+            },
             nextIdx: state.nextIdx + state.numItemsPerRequest,
           }));
         });
@@ -97,7 +109,10 @@ function Grid() {
 
   return (
     <>
-      <Header />
+      <Header
+        query={state.requestArgs.query}
+        handleOnSubmit={submitSearchRequest}
+      />
       <Container maxWidth="lg">
         <Box
           sx={{

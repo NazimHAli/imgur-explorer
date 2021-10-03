@@ -30,6 +30,8 @@ function Media(props: MediaProps) {
     return () => clearTimeout(showImg);
   }, [props.item]);
 
+  const imgBase = (item?.images && <BaseImage cRef={cRef} src={item?.images[0].link} id={item?.id} />);
+
   return (
     <Card sx={{ width: "15rem", height: "25rem", m: 2 }}>
       <CardHeader
@@ -64,25 +66,25 @@ function Media(props: MediaProps) {
               style={{ marginBottom: 6 }}
             />
           ) : (
-            item.account_url.slice(0, 10)
+            item?.account_url?.slice(0, 10)
           )
         }
         subheader={
           isLoading ? (
             <Skeleton animation="pulse" height={10} width="40%" />
           ) : (
-            new Date(item.datetime*1000).toDateString()
+            new Date(item?.datetime*1000).toDateString()
           )
         }
       />
-      {isLoading && (
+      {(isLoading || !item?.images) && (
         <Skeleton
           sx={{ height: 190 }}
           animation="pulse"
           variant="rectangular"
         />
       )}
-      <BaseImage cRef={cRef} src={item?.images[0]?.link} id={item?.id} />
+      {imgBase}
       <CardContent>
         {isLoading ? (
           <React.Fragment>

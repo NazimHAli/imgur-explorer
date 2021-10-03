@@ -13,9 +13,13 @@ import {
   Toolbar,
 } from "@mui/material";
 
-import { HeaderSearchStyling, SearchIconWrapper, StyledInputBase } from "./HeaderSearchStyling";
+import {
+  HeaderSearchStyling,
+  SearchIconWrapper,
+  StyledInputBase,
+} from "./HeaderSearchStyling";
 
-export default function Header() {
+export default function Header({ query, handleOnSubmit }) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -32,6 +36,19 @@ export default function Header() {
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
+  };
+
+  const isValidQuery = (event) => {
+    return (
+      event.keyCode === 13 && event.target.value.replace(/\s+/g, "").length
+    );
+  };
+
+  const onSubmit = (event) => {
+    if (isValidQuery(event)) {
+      handleOnSubmit({ query: event.target.value });
+      event.preventDefault();
+    }
   };
 
   const menuId = "primary-search-account-menu";
@@ -69,6 +86,8 @@ export default function Header() {
         <StyledInputBase
           placeholder="Search for goodies..."
           inputProps={{ "aria-label": "search" }}
+          defaultValue={query}
+          onKeyDown={onSubmit}
         />
       </HeaderSearchStyling>
     </Box>
