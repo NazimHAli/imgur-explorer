@@ -35,7 +35,7 @@ function Media(props: MediaProps) {
   );
 
   return (
-    <Card sx={{ width: "15rem", height: "25rem", m: 2 }}>
+    <Card>
       <CardHeader
         avatar={
           isLoading ? (
@@ -113,11 +113,7 @@ function Media(props: MediaProps) {
 }
 
 function CardSkeleton({ cRef, item }) {
-  return (
-    <div>
-      <Media cRef={cRef} item={item} loading={true} />
-    </div>
-  );
+  return <Media cRef={cRef} item={item} loading={true} />;
 }
 
 export default CardSkeleton;

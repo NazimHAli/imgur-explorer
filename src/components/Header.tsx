@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import { AccountCircle } from "@mui/icons-material";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -14,9 +15,9 @@ import {
 } from "@mui/material";
 
 import {
-  HeaderSearchStyling,
+  SearchStyling,
   SearchIconWrapper,
-  StyledInputBase,
+  SearchInput,
 } from "./HeaderSearchStyling";
 
 export default function Header({ query, handleOnSubmit }) {
@@ -74,23 +75,23 @@ export default function Header({ query, handleOnSubmit }) {
   );
 
   const toolbarSearch = (
-    <Box
-      sx={{
-        width: "100%",
-      }}
-    >
-      <HeaderSearchStyling>
+    // <Box
+    //   sx={{
+    //     width: "100%",
+    //   }}
+    // >
+      <SearchStyling>
         <SearchIconWrapper>
           <SearchIcon />
         </SearchIconWrapper>
-        <StyledInputBase
+        <SearchInput
           placeholder="Search for goodies..."
           inputProps={{ "aria-label": "search" }}
           defaultValue={query}
           onKeyDown={onSubmit}
         />
-      </HeaderSearchStyling>
-    </Box>
+      </SearchStyling>
+    // </Box>
   );
 
   const toolbarProfile = (

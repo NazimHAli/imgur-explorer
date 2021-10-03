@@ -21,10 +21,10 @@ body {
 }
 
 .container-img {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  column-gap: 0.5rem;
+  row-gap: 0.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
 
 /*! purgecss end ignore */
