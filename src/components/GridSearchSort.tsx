@@ -32,8 +32,11 @@ function GridSearchSort({ handleSortChange }) {
 
   return (
     <FormControl sx={{ m: 1, minWidth: 100 }}>
-      <InputLabel id="sort-select">Sort</InputLabel>
+      <InputLabel id="sort-select" sx={{ left: "-1rem" }}>
+        Sort
+      </InputLabel>
       <Select
+        sx={{ mt: 0 }}
         labelId="sort-select"
         id="sort-select"
         open={open}

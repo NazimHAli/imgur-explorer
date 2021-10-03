@@ -118,7 +118,7 @@ function Grid() {
         query={state.requestArgs.query}
         handleOnSubmit={submitSearchRequest}
       />
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Box
           sx={{
             display: "flex",

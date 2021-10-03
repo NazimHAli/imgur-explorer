@@ -25,7 +25,7 @@ function Media(props: MediaProps) {
   React.useEffect(() => {
     const showImg = setTimeout(() => {
       setIsLoading(false);
-    }, 100);
+    }, 250);
 
     return () => clearTimeout(showImg);
   }, [props.item]);
@@ -46,10 +46,7 @@ function Media(props: MediaProps) {
               height={40}
             />
           ) : (
-            <Avatar
-              alt="Ted talk"
-              src="https://pbs.twimg.com/profile_images/877631054525472768/Xp5FAPD5_reasonably_small.jpg"
-            />
+            <Avatar alt="account avatar">{item?.account_url?.slice(0, 1).toUpperCase()}</Avatar>
           )
         }
         action={
@@ -104,7 +101,7 @@ function Media(props: MediaProps) {
             component="p"
             noWrap={true}
           >
-            {"Why First Minister of Scotland Nicola Sturgeon"}
+            {item?.title}
           </Typography>
         )}
       </CardContent>
