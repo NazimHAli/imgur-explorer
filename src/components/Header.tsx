@@ -11,16 +11,12 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  TextField,
   Toolbar,
 } from "@mui/material";
 
-import {
-  SearchStyling,
-  SearchIconWrapper,
-  SearchInput,
-} from "./HeaderSearchStyling";
-
 export default function Header({ query, handleOnSubmit }) {
+  const [curQuery, setCurQuery] = React.useState(query);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -40,14 +36,13 @@ export default function Header({ query, handleOnSubmit }) {
   };
 
   const isValidQuery = (event) => {
-    return (
-      event.keyCode === 13 && event.target.value.replace(/\s+/g, "").length
-    );
+    const validEvent = ["click"].includes(event.type) || event.keyCode === 13;
+    return validEvent && curQuery.replace(/\s+/g, "").length > 0;
   };
 
   const onSubmit = (event) => {
     if (isValidQuery(event)) {
-      handleOnSubmit({ query: event.target.value });
+      handleOnSubmit({ query: curQuery });
       event.preventDefault();
     }
   };
@@ -75,27 +70,37 @@ export default function Header({ query, handleOnSubmit }) {
   );
 
   const toolbarSearch = (
-    // <Box
-    //   sx={{
-    //     width: "100%",
-    //   }}
-    // >
-      <SearchStyling>
-        <SearchIconWrapper>
-          <SearchIcon />
-        </SearchIconWrapper>
-        <SearchInput
-          placeholder="Search for goodies..."
-          inputProps={{ "aria-label": "search" }}
-          defaultValue={query}
-          onKeyDown={onSubmit}
-        />
-      </SearchStyling>
-    // </Box>
+    <Box
+      sx={{
+        display: "grid",
+        gridColumn: { xs: "2/12", sm: "4/10" },
+        gridTemplateColumns: "1fr auto",
+      }}
+    >
+      <TextField
+        fullWidth
+        sx={{ textAlign: "center" }}
+        placeholder="Search for goodies..."
+        inputProps={{ "aria-label": "search" }}
+        value={curQuery}
+        onKeyDown={onSubmit}
+        onChange={(e) => setCurQuery(e.target.value)}
+        type="search"
+        variant="standard"
+      />
+      <IconButton
+        type="submit"
+        sx={{ p: "10px" }}
+        aria-label="search"
+        onClick={onSubmit}
+      >
+        <SearchIcon />
+      </IconButton>
+    </Box>
   );
 
   const toolbarProfile = (
-    <Box sx={{ display: { xs: "none", md: "flex" } }}>
+    <Box sx={{ display: { xs: "none", md: "flex", gridColumnEnd: 12 } }}>
       <IconButton size="large" aria-label="show 1 new mails" color="inherit">
         <Badge badgeContent={1} color="error">
           <MailIcon />
@@ -127,7 +132,7 @@ export default function Header({ query, handleOnSubmit }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="relative" sx={{ height: "5rem" }}>
-        <Toolbar>
+        <Toolbar className="header-toolbar" sx={{ display: "grid" }}>
           {toolbarSearch}
           {toolbarProfile}
         </Toolbar>
