@@ -2,6 +2,7 @@ import React from "react";
 
 import { Alert, Box, Container } from "@mui/material";
 import { intersectionObserverHook } from "../hooks/intersectionObserverHook";
+import LoadingResults from "./LoadingResults";
 
 const CardSkeleton = React.lazy(() => import("./CardSkeleton"));
 const GridSearchSort = React.lazy(() => import("./GridSearchSort"));
@@ -15,6 +16,7 @@ import("../utils/visibilityUtils").then((mod) => {
 
 function Grid() {
   const [data, setData] = React.useState([]);
+  const [showLoading, setShowLoading] = React.useState(true);
   const [state, setState] = React.useState({
     hasNextPage: false,
     isInterSecting: false,
@@ -57,6 +59,7 @@ function Grid() {
 
   const isItemLoaded = (index) => !state.hasNextPage || index < data.length;
   const submitSearchRequest = async (args) => {
+    setShowLoading(true);
     import("../services/imgurAPI").then(async (mod) => {
       const imgurClient = mod.ImgurAPI.getInstance();
 
@@ -85,6 +88,7 @@ function Grid() {
             },
             nextIdx: state.nextIdx + state.numItemsPerRequest,
           }));
+          setShowLoading(false);
         });
     });
   };
@@ -109,6 +113,7 @@ function Grid() {
 
   return (
     <>
+      <LoadingResults open={showLoading} />
       <Header
         query={state.requestArgs.query}
         handleOnSubmit={submitSearchRequest}

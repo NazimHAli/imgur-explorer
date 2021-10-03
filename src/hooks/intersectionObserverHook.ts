@@ -11,7 +11,7 @@ import { useState, useRef, useEffect, MutableRefObject } from "react";
 export const intersectionObserverHook = (
   ref: MutableRefObject<Element | null>,
   options: any = {},
-  forward: boolean = true
+  forward = true
 ) => {
   const [element, setElement] = useState<Element | null>(null);
   const [isIntersecting, setIsIntersecting] = useState(false);
