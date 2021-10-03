@@ -1,4 +1,4 @@
-const galleryTags = {
+export const fakeGalleryTags = {
   data: {
     tags: [
       {

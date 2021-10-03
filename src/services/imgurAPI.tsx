@@ -14,6 +14,11 @@ interface Args {
 
 class ImgurAPI {
   private static instance: ImgurAPI;
+  useFakeResponse: boolean;
+
+  constructor() {
+    this.useFakeResponse = !imgurClientId?.length;
+  }
 
   /**
    * getInstance
@@ -70,12 +75,20 @@ class ImgurAPI {
    * @returns
    */
   public async submitGallerySearch(args) {
-    return await this.imgurBaseApi({
-      endPoint: `${EP_GALLERY}/search/${args.sort || "viral"}/all/${
-        args.page || 1
-      }?q=${args.searchQuery}&q_size_px=small&q_type=jpg`,
-      filterImageResults: args.filterImageResults || false,
-    });
+    if (this.useFakeResponse) {
+      return await import("../__tests__/fixtures/imgurResponse").then(
+        (mod: any) => {
+          return extractImageResults(mod.fakeResponse.data);
+        }
+      );
+    } else {
+      return await this.imgurBaseApi({
+        endPoint: `${EP_GALLERY}/search/${args.sort || "viral"}/all/${
+          args.page || 1
+        }?q=${args.searchQuery}&q_size_px=small&q_type=jpg`,
+        filterImageResults: args.filterImageResults || false,
+      });
+    }
   }
 
   /**
@@ -89,13 +102,21 @@ class ImgurAPI {
 
   /**
    * getGalleryTags
-   * 
+   *
    * Gets a list of the default gallery tags
-   * 
-   * @returns 
+   *
+   * @returns
    */
   public async getGalleryTags() {
-    return await this.imgurBaseApi({ endPoint: EP_GALLERY_TAGS });
+    if (this.useFakeResponse) {
+      return await import("../__tests__/fixtures/galleryTags").then(
+        (mod: any) => {
+          return mod.fakeGalleryTags.data;
+        }
+      );
+    } else {
+      return await this.imgurBaseApi({ endPoint: EP_GALLERY_TAGS });
+    }
   }
 
   /**

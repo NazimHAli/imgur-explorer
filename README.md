@@ -1,19 +1,20 @@
-# ReactJS Imgur
+# ReactJS Image Gallery
 
-ReactJS + [imgur](https://imgur.com/) built with WebPack 5 in TypeScript. Using a few components and styling from [material-ui](https://github.com/mui-org/material-ui) for the first iteration. The bundle size is much larger than anticipated. Even after implementing [mui best practices](https://mui.com/guides/minimizing-bundle-size/) like lazy-loading, code splitting...etc the total bundle size is 2.2MBs.
+ReactJS + [imgur](https://imgur.com/) built with WebPack 5 in TypeScript. Using a few components and styling from [material-ui](https://github.com/mui-org/material-ui) for the first iteration. If you don't want to register or use the free imgur API, the app will default to the hard-coded responses. It's also useful for faster local development.
 
-[![Dependecy Status](https://david-dm.org/NazimHAli/reactjs-imgur.svg)](https://david-dm.org/NazimHAli/reactjs-imgur)  
-[![devDependencies Status](https://david-dm.org/NazimHAli/reactjs-imgur/dev-status.svg)](https://david-dm.org/NazimHAli/reactjs-imgur?type=dev)
+The bundle size is 347K, larger than anticipated. Even after implementing [mui best practices](https://mui.com/guides/minimizing-bundle-size/) like lazy-loading, code splitting...etc. After analyzing the bundle, realized that the standard React package has increased in size. 
 
-### Screenshot & [demo](https://react-imgur.vercel.app/)
+[![Dependecy Status](https://david-dm.org/NazimHAli/reactjs-image-gallery.svg)](https://david-dm.org/NazimHAli/reactjs-image-gallery)  
+[![devDependencies Status](https://david-dm.org/NazimHAli/reactjs-image-gallery/dev-status.svg)](https://david-dm.org/NazimHAli/reactjs-image-gallery?type=dev)
+
+### Screenshot & [demo](https://react-image-gallery-five.vercel.app/)
 ![image](https://user-images.githubusercontent.com/26750288/135739652-14d970c5-4054-4339-9b0b-3d4ef1a5bfcb.png)
 
 ## Quick start
 
 ```bash
-yarn install
+yarn
 yarn start
-yarn test
 ```
 
 ## Build
@@ -23,10 +24,11 @@ yarn build
 yarn serve
 ```
 
-## Goals
+## Use imgur API
 
-1. Use main concepts of ReactJS
-2. Have fun :D
+1. [Free registration](https://api.imgur.com/oauth2/addclient)
+2. Pass the client ID as an environemnt variable
+    - ```imgurClientId=xxxxx yarn start```
 
 ## Features
 
@@ -38,8 +40,8 @@ yarn serve
 
 ## TODO
 
--   [ ] Add search capabilities
--   [ ] Add explore by categories
+-   [x] Add search capabilities
+-   [x] Add explore by categories
 -   [ ] Add more unit tests
 -   [ ] Add integration tests
 -   [ ] Add performance tests
