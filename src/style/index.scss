@@ -9,10 +9,10 @@ body {
 }
 
 .item-img {
-  max-height: 15rem;
-  height: 100%;
-  margin: 0 auto;
   display: block;
+  margin: 0 auto;
+  max-height: 15rem;
+  max-width: 100%;
 }
 
 .lazy-img {
@@ -24,6 +24,11 @@ body {
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
+  > div {
+    display: grid;
+    align-content: space-between;
+  }
 }
 
 .header-toolbar {

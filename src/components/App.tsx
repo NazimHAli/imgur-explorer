@@ -23,7 +23,7 @@ function App() {
     numItemsPerRequest: 12,
     stopLazyLoading: false,
     requestArgs: {
-      filter: false,
+      filter: true,
       newSearch: true,
       page: 1,
       query: "meow",
