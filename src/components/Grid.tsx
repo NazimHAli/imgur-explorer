@@ -137,9 +137,17 @@ function Grid() {
           ))}
         </Box>
 
-        {data && !data?.length && <p>No results :(</p>}
+        {data && !data?.length && (
+          <Alert
+            variant="filled"
+            severity="info"
+            sx={{ mx: "auto", maxWidth: 500 }}
+          >
+            No search results found :(
+          </Alert>
+        )}
 
-        {data && !data?.length && !state.stopLazyLoading && (
+        {data && data?.length && !state.stopLazyLoading && (
           <Box ref={ioElementRef} style={{ width: "100%", height: "20px" }}>
             bottom
           </Box>
