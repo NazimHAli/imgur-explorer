@@ -15,7 +15,7 @@ import("../utils/visibilityUtils").then((mod) => {
 });
 
 function Grid() {
-  const [data, setData] = React.useState([]);
+  const [data, setData] = React.useState(null);
   const [showLoading, setShowLoading] = React.useState(true);
   const [state, setState] = React.useState({
     hasNextPage: false,
@@ -137,7 +137,9 @@ function Grid() {
           ))}
         </Box>
 
-        {!state.stopLazyLoading && (
+        {data && !data?.length && <p>No results :(</p>}
+
+        {data && !data?.length && !state.stopLazyLoading && (
           <Box ref={ioElementRef} style={{ width: "100%", height: "20px" }}>
             bottom
           </Box>
