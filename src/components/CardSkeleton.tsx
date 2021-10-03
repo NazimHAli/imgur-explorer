@@ -8,6 +8,7 @@ import {
   IconButton,
   CardContent,
   Typography,
+  Divider,
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import BaseImage from "./Image";
@@ -37,6 +38,7 @@ function Media(props: MediaProps) {
   return (
     <Card>
       <CardHeader
+        sx={{ height: "20%" }}
         avatar={
           isLoading ? (
             <Skeleton
@@ -46,7 +48,9 @@ function Media(props: MediaProps) {
               height={40}
             />
           ) : (
-            <Avatar alt="account avatar">{item?.account_url?.slice(0, 1).toUpperCase()}</Avatar>
+            <Avatar alt="account avatar">
+              {item?.account_url?.slice(0, 1).toUpperCase()}
+            </Avatar>
           )
         }
         action={
@@ -83,8 +87,9 @@ function Media(props: MediaProps) {
           variant="rectangular"
         />
       )}
-      {imgBase}
-      <CardContent>
+      <div className="card-img-container">{imgBase}</div>
+      <CardContent sx={{ height: "20%" }}>
+        <Divider variant="middle" sx={{ my: 1 }}/>
         {isLoading ? (
           <React.Fragment>
             <Skeleton

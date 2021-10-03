@@ -7,8 +7,6 @@ export default function LoadingResults({ open = false }) {
       sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
       open={open}
       onClick={() => !!open}
-      transitionDuration={1000}
-      invisible={true}
     >
       <CircularProgress color="inherit" />
     </Backdrop>
