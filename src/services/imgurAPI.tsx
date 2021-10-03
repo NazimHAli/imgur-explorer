@@ -4,6 +4,7 @@ const imgurClientId = process.env.imgurClientId;
 const BASE = "https://api.imgur.com/3";
 const EP_GALLERY = `${BASE}/gallery`;
 const EP_GALLERY_HOT = `${EP_GALLERY}/hot`;
+const EP_GALLERY_TAGS = `${BASE}/tags`;
 
 interface Args {
   endPoint: RequestInfo;
@@ -13,7 +14,6 @@ interface Args {
 
 class ImgurAPI {
   private static instance: ImgurAPI;
-  private constructor() {}
 
   /**
    * getInstance
@@ -85,6 +85,17 @@ class ImgurAPI {
    */
   public async getGalleryImages() {
     return await this.imgurBaseApi({ endPoint: EP_GALLERY_HOT });
+  }
+
+  /**
+   * getGalleryTags
+   * 
+   * Gets a list of the default gallery tags
+   * 
+   * @returns 
+   */
+  public async getGalleryTags() {
+    return await this.imgurBaseApi({ endPoint: EP_GALLERY_TAGS });
   }
 
   /**

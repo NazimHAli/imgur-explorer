@@ -73,7 +73,7 @@ export default function Header({ query, handleOnSubmit }) {
     <Box
       sx={{
         display: "grid",
-        gridColumn: { xs: "2/12", sm: "4/10" },
+        gridColumn: { xs: "2/13", sm: "4/11" },
         gridTemplateColumns: "1fr auto",
       }}
     >
@@ -100,7 +100,7 @@ export default function Header({ query, handleOnSubmit }) {
   );
 
   const toolbarProfile = (
-    <Box sx={{ display: { xs: "none", md: "flex", gridColumnEnd: 12 } }}>
+    <Box sx={{ display: { xs: "none", md: "flex", gridColumnEnd: 13 } }}>
       <IconButton size="large" aria-label="show 1 new mails" color="inherit">
         <Badge badgeContent={1} color="error">
           <MailIcon />

@@ -1,12 +1,10 @@
 import React from "react";
 
-import { Alert, Box, Container } from "@mui/material";
+import { Alert } from "@mui/material";
 import { intersectionObserverHook } from "../hooks/intersectionObserverHook";
-import LoadingResults from "./LoadingResults";
+import { BaseContent } from "./BaseContent";
 
 const CardSkeleton = React.lazy(() => import("./CardSkeleton"));
-const GridSearchSort = React.lazy(() => import("./GridSearchSort"));
-const Header = React.lazy(() => import("./Header"));
 
 let lazyLoadImg;
 
@@ -14,7 +12,7 @@ import("../utils/visibilityUtils").then((mod) => {
   lazyLoadImg = new mod.LazyLoadImages();
 });
 
-function Grid() {
+function App() {
   const [data, setData] = React.useState(null);
   const [showLoading, setShowLoading] = React.useState(true);
   const [state, setState] = React.useState({
@@ -58,9 +56,9 @@ function Grid() {
   }, [isIOelementVisible]);
 
   const isItemLoaded = (index) => !state.hasNextPage || index < data.length;
-  const submitSearchRequest = async (args) => {
+  const submitSearchRequest = (args) => {
     setShowLoading(true);
-    import("../services/imgurAPI").then(async (mod) => {
+    import("../services/imgurAPI").then((mod) => {
       const imgurClient = mod.ImgurAPI.getInstance();
 
       const filter = args.filter || state.requestArgs.filter;
@@ -111,49 +109,13 @@ function Grid() {
     return <CardSkeleton key={`${index}`} cRef={imageRef} item={item} />;
   };
 
-  return (
-    <>
-      <LoadingResults open={showLoading} />
-      <Header
-        query={state.requestArgs.query}
-        handleOnSubmit={submitSearchRequest}
-      />
-      <Container maxWidth="xl">
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "flex-end",
-            my: 2,
-          }}
-        >
-          <GridSearchSort handleSortChange={submitSearchRequest} />
-        </Box>
-
-        <Box className="container-img">
-          {Array.from(
-            data ? data.slice(0, state.nextIdx + state.numItemsPerRequest) : []
-          ).map((image: any, imgIdx) => (
-            <RenderCard key={imgIdx} item={image} index={imgIdx} />
-          ))}
-        </Box>
-
-        {data && !data?.length && (
-          <Alert
-            variant="filled"
-            severity="info"
-            sx={{ mx: "auto", maxWidth: 500 }}
-          >
-            No search results found :(
-          </Alert>
-        )}
-
-        {data && data?.length && !state.stopLazyLoading && (
-          <Box ref={ioElementRef} style={{ width: "100%", height: "20px" }}>
-            bottom
-          </Box>
-        )}
-      </Container>
-    </>
+  return BaseContent(
+    showLoading,
+    state,
+    submitSearchRequest,
+    data,
+    RenderCard,
+    ioElementRef
   );
 
   function _handleNoResults(): any {
@@ -177,4 +139,4 @@ function Grid() {
   }
 }
 
-export default Grid;
+export default App;

@@ -4,7 +4,7 @@ import * as ReactDOM from "react-dom";
 import "./style/index.scss";
 
 const CssBaseline = React.lazy(() => import("./intermediates/muiCssBaseline"));
-const Grid = React.lazy(() => import("./components/Grid"));
+const Grid = React.lazy(() => import("./components/App"));
 
 const darkTheme = createTheme({
   palette: {
