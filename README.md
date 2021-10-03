@@ -7,8 +7,9 @@ The bundle size is 347K, larger than anticipated. Even after implementing [mui b
 [![Dependecy Status](https://david-dm.org/NazimHAli/reactjs-image-gallery.svg)](https://david-dm.org/NazimHAli/reactjs-image-gallery)  
 [![devDependencies Status](https://david-dm.org/NazimHAli/reactjs-image-gallery/dev-status.svg)](https://david-dm.org/NazimHAli/reactjs-image-gallery?type=dev)
 
-### Screenshot & [demo](https://react-image-gallery-five.vercel.app/)
-![image](https://user-images.githubusercontent.com/26750288/135739652-14d970c5-4054-4339-9b0b-3d4ef1a5bfcb.png)
+### [Live Demo](https://react-image-gallery-five.vercel.app/)
+![image](https://user-images.githubusercontent.com/26750288/135773516-5bf69971-7c8a-4e2a-8182-8c6240f7b436.png)
+
 
 ## Quick start
 
