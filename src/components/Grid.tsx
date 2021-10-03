@@ -128,6 +128,7 @@ function Grid() {
         >
           <GridSearchSort handleSortChange={submitSearchRequest} />
         </Box>
+
         <Box className="container-img">
           {Array.from(
             data ? data.slice(0, state.nextIdx + state.numItemsPerRequest) : []
@@ -135,6 +136,7 @@ function Grid() {
             <RenderCard key={imgIdx} item={image} index={imgIdx} />
           ))}
         </Box>
+
         {!state.stopLazyLoading && (
           <Box ref={ioElementRef} style={{ width: "100%", height: "20px" }}>
             bottom
