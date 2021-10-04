@@ -4,8 +4,8 @@ ReactJS + [imgur](https://imgur.com/) built with WebPack 5 in TypeScript. Using 
 
 The bundle size is 347K, larger than anticipated. Even after implementing [mui best practices](https://mui.com/guides/minimizing-bundle-size/) like lazy-loading, code splitting...etc. After analyzing the bundle, realized that the standard React package has increased in size. 
 
-[![Dependecy Status](https://david-dm.org/NazimHAli/reactjs-image-gallery.svg)](https://david-dm.org/NazimHAli/reactjs-image-gallery)  
-[![devDependencies Status](https://david-dm.org/NazimHAli/reactjs-image-gallery/dev-status.svg)](https://david-dm.org/NazimHAli/reactjs-image-gallery?type=dev)
+[![Dependecy Status](https://david-dm.org/NazimHAli/react-image-gallery.svg)](https://david-dm.org/NazimHAli/reactjs-image-gallery)  
+[![devDependencies Status](https://david-dm.org/NazimHAli/react-image-gallery/dev-status.svg)](https://david-dm.org/NazimHAli/reactjs-image-gallery?type=dev)
 
 ### [Live Demo](https://react-image-gallery-five.vercel.app/)
 ![image](https://user-images.githubusercontent.com/26750288/135773516-5bf69971-7c8a-4e2a-8182-8c6240f7b436.png)
