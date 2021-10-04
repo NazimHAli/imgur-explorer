@@ -2,10 +2,10 @@ import { useState, useRef, useEffect, MutableRefObject } from "react";
 
 /**
  * intersectionObserverHook
- * 
- * @param ref 
- * @param options 
- * @param forward 
+ *
+ * @param ref
+ * @param options
+ * @param forward
  * @returns boolean
  */
 export const intersectionObserverHook = (
@@ -24,8 +24,10 @@ export const intersectionObserverHook = (
   };
 
   useEffect(() => {
-    setElement(ref.current);
-  }, [ref]);
+    if (!element && ref.current) {
+      setElement(ref.current);
+    }
+  }, [ref.current]);
 
   useEffect(() => {
     if (!element) {
