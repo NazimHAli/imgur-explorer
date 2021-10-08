@@ -1,4 +1,4 @@
-import "@/styles/search-box.scss";
+import "~styles/search-box.scss";
 import { useRef } from "react";
 
 function Header({ dispatchState }) {
@@ -19,7 +19,7 @@ function Header({ dispatchState }) {
       <div className="header_logo">LOGO</div>
       <div className="search-box">
         <button className="btn-search" onClick={handleSubmit}>
-          <i className="gg-search"></i>
+          <i className="search-icon"></i>
         </button>
         <form onSubmit={handleSubmit}>
           <input type="search" className="input-search" placeholder="Search for it" ref={inputRef} />

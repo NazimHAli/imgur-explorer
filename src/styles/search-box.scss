@@ -39,7 +39,7 @@
   }
 }
 
-.gg-search {
+.search-icon {
   box-sizing: border-box;
   position: relative;
   display: block;
@@ -50,18 +50,19 @@
   border-radius: 100%;
   margin-left: -4px;
   margin-top: -4px;
-}
 
-.gg-search::after {
-  content: "";
-  display: block;
-  box-sizing: border-box;
-  position: absolute;
-  border-radius: 3px;
-  width: 2px;
-  height: 8px;
-  background: currentColor;
-  transform: rotate(-45deg);
-  top: 10px;
-  left: 12px;
+  &::after {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 3px;
+    width: 2px;
+    height: 8px;
+    background: currentColor;
+    transform: rotate(-45deg);
+    top: 10px;
+    left: 12px;
+  }
+
 }

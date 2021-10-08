@@ -14,58 +14,35 @@ $breakpoints: (
 @mixin breakpoint($from: false, $until: false, $and: false, $media-type: all) {
   $min-width: 0;
   $max-width: 0;
-  $query: "";
+  $bk-final-query-str: "";
 
   @if $from {
-    @if type-of($from) == number {
-      $min-width: $from;
-    } @else {
-      $min-width: map-get($breakpoints, $from);
-    }
+    $min-width: map-get($breakpoints, $from);
   }
 
   @if $until {
-    @if type-of($until) == number {
-      $max-width: $until - 1em;
-    } @else {
-      $max-width: map-get($breakpoints, $until) - 1em;
-    }
+    $max-width: map-get($breakpoints, $until) - 1em;
   }
 
   @if $min-width != 0 {
-    $query: "#{$query} and (min-width: #{$min-width})";
+    $bk-final-query-str: "#{$bk-final-query-str} and (min-width: #{$min-width})";
   }
+  
   @if $max-width != 0 {
-    $query: "#{$query} and (max-width: #{$max-width})";
+    $bk-final-query-str: "#{$bk-final-query-str} and (max-width: #{$max-width})";
   }
+
   @if $and {
-    $query: "#{$query} and (#{$and})";
+    $bk-final-query-str: "#{$bk-final-query-str} and (#{$and})";
   }
 
-  @if ($media-type == "all" and $query != "") {
+  @if ($media-type == "all" and $bk-final-query-str != "") {
     $media-type: "";
-    $query: str-slice(unquote($query), 6);
+    $bk-final-query-str: str-slice(unquote($bk-final-query-str), 6);
   }
 
-  @media #{$media-type + $query} {
+  @media #{$media-type + $bk-final-query-str} {
     @content;
-  }
-}
-
-/*
- *
- * Clearfix
- *
-*/
-
-@mixin clearfix() {
-  &:before,
-  &:after {
-    content: "";
-    display: table;
-  }
-  &:after {
-    clear: both;
   }
 }
 
@@ -77,59 +54,6 @@ $breakpoints: (
 
 @mixin box-sizing($box-model) {
   box-sizing: $box-model;
-}
-
-/*
- *
- * Border Radius
- *
-*/
-
-@mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-  border-radius: $radius;
-  background-clip: padding-box; /* stops bg color from leaking outside the border: */
-}
-
-@mixin border-top-radius($radius) {
-  -webkit-border-top-right-radius: $radius;
-  border-top-right-radius: $radius;
-  -webkit-border-top-left-radius: $radius;
-  border-top-left-radius: $radius;
-  background-clip: padding-box;
-}
-@mixin border-right-radius($radius) {
-  -webkit-border-bottom-right-radius: $radius;
-  border-bottom-right-radius: $radius;
-  -webkit-border-top-right-radius: $radius;
-  border-top-right-radius: $radius;
-  background-clip: padding-box;
-}
-@mixin border-bottom-radius($radius) {
-  -webkit-border-bottom-right-radius: $radius;
-  border-bottom-right-radius: $radius;
-  -webkit-border-bottom-left-radius: $radius;
-  border-bottom-left-radius: $radius;
-  background-clip: padding-box;
-}
-@mixin border-left-radius($radius) {
-  -webkit-border-bottom-left-radius: $radius;
-  border-bottom-left-radius: $radius;
-  -webkit-border-top-left-radius: $radius;
-  border-top-left-radius: $radius;
-  background-clip: padding-box;
-}
-
-/*
- *
- * Opacity
- *
-*/
-
-@mixin opacity($opacity) {
-  opacity: $opacity;
-  $opacity-ie: $opacity * 100;
-  filter: alpha(opacity=$opacity-ie); //IE8
 }
 
 /*
@@ -169,46 +93,9 @@ $breakpoints: (
 
 /*
  *
- * Line Height
- *
-*/
-
-@mixin line-height($height: 12, $base: 16) {
-  line-height: $height + px;
-  line-height: ($height / $base) * 1rem;
-}
-
-/*
- *
  * Transition
  *
 */
-
-@function prefix($property, $prefixes: (webkit moz o ms)) {
-  $vendor-prefixed-properties: transform background-clip background-size;
-  $result: ();
-
-  @each $prefix in $prefixes {
-    @if index($vendor-prefixed-properties, $property) {
-      $property: -#{$prefix}-#{$property};
-    }
-    $result: append($result, $property);
-  }
-  @return $result;
-}
-
-@function trans-prefix($transition, $prefix: moz) {
-  $prefixed: ();
-
-  @each $trans in $transition {
-    $prop-name: nth($trans, 1);
-    $vendor-prop-name: prefix($prop-name, $prefix);
-    $prop-vals: nth($trans, 2);
-    $prefixed: append($prefixed, ($vendor-prop-name $prop-vals), comma);
-  }
-
-  @return $prefixed;
-}
 
 @mixin transition($values...) {
   $transitions: ();
