@@ -51,7 +51,9 @@ function App() {
     <Suspense fallback={<span></span>}>
       <Header dispatchState={dispatchState} />
       {state.isLoading && <LoadingAnimation />}
-      {state.items.length > 0 && <Gallery state={state} />}
+      {!state.isLoading && state.items.length > 0 && (
+        <Gallery images={state.items} />
+      )}
       {!state.items.length && !state.isLoading && <NoResults />}
       <Footer />
     </Suspense>

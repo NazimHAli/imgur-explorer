@@ -15,7 +15,7 @@ function imgRefCallback() {
 }
 
 /**
- * Gallery component that renders items
+ * Gallery component that renders images
  *
  * A callback is passed to each card and used
  * by the IntersectionObserver to load images
@@ -24,13 +24,13 @@ function imgRefCallback() {
  * @returns
  */
 
-function Gallery({ state }) {
+function Gallery({ images }) {
   const cardImgRef = imgRefCallback();
 
   return (
     <div className="masonry">
-      {Array.from(state.items).map((image: any, imgIdx) => (
-        <Card item={image} key={imgIdx} imgRef={cardImgRef} />
+      {Array.from(images).map((image: any) => (
+        <Card item={image} key={image.id} imgRef={cardImgRef} />
       ))}
     </div>
   );
