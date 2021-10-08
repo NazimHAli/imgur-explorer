@@ -1,6 +1,6 @@
 import "~styles/loading-animation.scss";
 
-export const LoadingAnimation = () => {
+const LoadingAnimation = () => {
   return (
     <div className="loading-container">
       <div className="mosaic-loader">
@@ -24,3 +24,5 @@ export const LoadingAnimation = () => {
     </div>
   );
 };
+
+export default LoadingAnimation;

@@ -1,5 +1,5 @@
-import "~styles/search-box.scss";
 import { useRef } from "react";
+import "~styles/search-box.scss";
 
 function Header({ dispatchState }) {
   const handleSubmit = (event) => {

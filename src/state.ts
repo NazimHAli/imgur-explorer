@@ -13,12 +13,12 @@ const initialState = {
 /**
  * The reducer function updates the state
  * based on dispatched events
- * 
+ *
  * It's used by the shared state
- * 
- * @param state 
- * @param action 
- * @returns 
+ *
+ * @param state
+ * @param action
+ * @returns
  */
 function stateReducer(state: typeof initialState, action) {
   switch (action.type) {

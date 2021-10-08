@@ -1,4 +1,4 @@
-export default function NoResults() {
+function NoResults() {
   console.log("NoResults");
 
   return (
@@ -7,3 +7,5 @@ export default function NoResults() {
     </section>
   );
 }
+
+export default NoResults;

@@ -1,11 +1,11 @@
-import { useReducer, useEffect } from "react";
+import { lazy, Suspense, useEffect, useReducer } from "react";
+import { initialState, stateReducer } from "../state";
 
-import Footer from "@/components/Footer";
-import Gallery from "@/components/Gallery";
-import Header from "@/components/Header";
-import { LoadingAnimation } from "@/components/LoadingAnimation";
-import { stateReducer, initialState } from "./state";
-import NoResults from "./NoResults";
+const Gallery = lazy(() => import("@/components/Gallery"));
+const Header = lazy(() => import("@/components/Header"));
+const LoadingAnimation = lazy(() => import("@/components/LoadingAnimation"));
+const NoResults = lazy(() => import("@/components/NoResults"));
+const Footer = lazy(() => import("@/components/Footer"));
 
 function App() {
   const [state, dispatchState] = useReducer(stateReducer, initialState);
@@ -25,17 +25,15 @@ function App() {
    */
 
   useEffect(() => {
-    console.log("MOUNTED: useEffect");
-    // document.body.style.overflow = "hidden";
     dispatchState({ type: "setIsLoading", loading: true });
 
     if (!state.items.length) {
       getData({ query: "hello" });
     }
 
+    // Simulate slow load
     setTimeout(() => {
       dispatchState({ type: "setIsLoading", loading: false });
-      // document.body.style.overflow = "";
     }, 1000);
   }, []);
 
@@ -50,13 +48,13 @@ function App() {
   }, [state.requestArgs.query]);
 
   return (
-    <>
+    <Suspense fallback={<span></span>}>
       <Header dispatchState={dispatchState} />
       {state.isLoading && <LoadingAnimation />}
       {state.items.length > 0 && <Gallery state={state} />}
       {!state.items.length && !state.isLoading && <NoResults />}
       <Footer />
-    </>
+    </Suspense>
   );
 }
 

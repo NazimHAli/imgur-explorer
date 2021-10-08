@@ -1,8 +1,8 @@
-import Card from "@/components/Card";
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
-import { useCallback } from "react";
-
+import { lazy, useCallback } from "react";
 import "~styles/masonry.scss";
+
+const Card = lazy(()=> import("@/components/Card"));
 
 const imgObserver = new ObserveElementsInView();
 
