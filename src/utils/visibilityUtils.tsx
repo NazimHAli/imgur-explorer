@@ -19,21 +19,15 @@ class ObserveElementsInView {
         return;
       }
 
-      if (entry.target.childNodes.length) {
-        entry.target.childNodes.forEach(
-          (el: { src: any; dataset: { srcset: any } }) => {
-            el.src = el.dataset.srcset;
-          }
-        );
-      } else {
-        entry.target.src = entry.target.dataset.srcset;
-      }
+      entry.target.src = entry.target.dataset.srcset;
+      delete entry.target.dataset.srcset;
+
       entry.target.style.opacity = 100;
       observer.unobserve(entry.target);
     });
   }
 
-  public observeElements(elements: any[]) {
+  public observeElements(elements) {
     elements.forEach((element: Element) => {
       this.rootObserver.observe(element);
       element.setAttribute("observed", "");

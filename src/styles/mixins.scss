@@ -1,0 +1,229 @@
+/*
+ *
+ * Breakpoints
+ *
+*/
+
+$breakpoints: (
+  sm: 34em,
+  md: 48em,
+  lg: 62em,
+  xl: 75em,
+);
+
+@mixin breakpoint($from: false, $until: false, $and: false, $media-type: all) {
+  $min-width: 0;
+  $max-width: 0;
+  $query: "";
+
+  @if $from {
+    @if type-of($from) == number {
+      $min-width: $from;
+    } @else {
+      $min-width: map-get($breakpoints, $from);
+    }
+  }
+
+  @if $until {
+    @if type-of($until) == number {
+      $max-width: $until - 1em;
+    } @else {
+      $max-width: map-get($breakpoints, $until) - 1em;
+    }
+  }
+
+  @if $min-width != 0 {
+    $query: "#{$query} and (min-width: #{$min-width})";
+  }
+  @if $max-width != 0 {
+    $query: "#{$query} and (max-width: #{$max-width})";
+  }
+  @if $and {
+    $query: "#{$query} and (#{$and})";
+  }
+
+  @if ($media-type == "all" and $query != "") {
+    $media-type: "";
+    $query: str-slice(unquote($query), 6);
+  }
+
+  @media #{$media-type + $query} {
+    @content;
+  }
+}
+
+/*
+ *
+ * Clearfix
+ *
+*/
+
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+/*
+ *
+ * Box Sizing
+ *
+*/
+
+@mixin box-sizing($box-model) {
+  box-sizing: $box-model;
+}
+
+/*
+ *
+ * Border Radius
+ *
+*/
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+  background-clip: padding-box; /* stops bg color from leaking outside the border: */
+}
+
+@mixin border-top-radius($radius) {
+  -webkit-border-top-right-radius: $radius;
+  border-top-right-radius: $radius;
+  -webkit-border-top-left-radius: $radius;
+  border-top-left-radius: $radius;
+  background-clip: padding-box;
+}
+@mixin border-right-radius($radius) {
+  -webkit-border-bottom-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+  -webkit-border-top-right-radius: $radius;
+  border-top-right-radius: $radius;
+  background-clip: padding-box;
+}
+@mixin border-bottom-radius($radius) {
+  -webkit-border-bottom-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+  -webkit-border-bottom-left-radius: $radius;
+  border-bottom-left-radius: $radius;
+  background-clip: padding-box;
+}
+@mixin border-left-radius($radius) {
+  -webkit-border-bottom-left-radius: $radius;
+  border-bottom-left-radius: $radius;
+  -webkit-border-top-left-radius: $radius;
+  border-top-left-radius: $radius;
+  background-clip: padding-box;
+}
+
+/*
+ *
+ * Opacity
+ *
+*/
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+/*
+ *
+ * Center Block
+ *
+*/
+
+@mixin center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*
+ *
+ * Text overflow
+ *
+*/
+
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*
+ *
+ * Font Size
+ *
+*/
+
+@mixin font-size($size: 12, $base: 16) {
+  font-size: $size + px;
+  font-size: ($size / $base) * 1rem;
+}
+
+/*
+ *
+ * Line Height
+ *
+*/
+
+@mixin line-height($height: 12, $base: 16) {
+  line-height: $height + px;
+  line-height: ($height / $base) * 1rem;
+}
+
+/*
+ *
+ * Transition
+ *
+*/
+
+@function prefix($property, $prefixes: (webkit moz o ms)) {
+  $vendor-prefixed-properties: transform background-clip background-size;
+  $result: ();
+
+  @each $prefix in $prefixes {
+    @if index($vendor-prefixed-properties, $property) {
+      $property: -#{$prefix}-#{$property};
+    }
+    $result: append($result, $property);
+  }
+  @return $result;
+}
+
+@function trans-prefix($transition, $prefix: moz) {
+  $prefixed: ();
+
+  @each $trans in $transition {
+    $prop-name: nth($trans, 1);
+    $vendor-prop-name: prefix($prop-name, $prefix);
+    $prop-vals: nth($trans, 2);
+    $prefixed: append($prefixed, ($vendor-prop-name $prop-vals), comma);
+  }
+
+  @return $prefixed;
+}
+
+@mixin transition($values...) {
+  $transitions: ();
+
+  @each $declaration in $values {
+    $prop: nth($declaration, 1);
+    $prop-opts: ();
+    $length: length($declaration);
+
+    @for $i from 2 through $length {
+      $prop-opts: append($prop-opts, nth($declaration, $i));
+    }
+
+    $trans: ($prop, $prop-opts);
+    $transitions: append($transitions, $trans, comma);
+  }
+  transition: $values;
+}

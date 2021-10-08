@@ -1,4 +1,6 @@
 node_modules
+.DS_Store
 dist
-.vscode
+dist-ssr
+*.local
 .env

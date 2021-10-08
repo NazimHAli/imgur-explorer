@@ -1,9 +1,10 @@
-import { arrToMatrix, extractImageResults } from "../utils/dataUtils";
+import { arrToMatrix, extractImageResults } from "@/utils/dataUtils";
 
-const imgurClientId = process.env.imgurClientId;
+const imgurClientId = import.meta.env.PUBLIC_IMGUR_CLIENT_ID;
 const BASE = "https://api.imgur.com/3";
 const EP_GALLERY = `${BASE}/gallery`;
 const EP_GALLERY_HOT = `${EP_GALLERY}/hot`;
+const EP_GALLERY_TAGS = `${BASE}/tags`;
 
 interface Args {
   endPoint: RequestInfo;
@@ -13,7 +14,11 @@ interface Args {
 
 class ImgurAPI {
   private static instance: ImgurAPI;
-  private constructor() {}
+  useFakeResponse: boolean;
+
+  constructor() {
+    this.useFakeResponse = !imgurClientId;
+  }
 
   /**
    * getInstance
@@ -36,10 +41,8 @@ class ImgurAPI {
    * @returns
    */
   private async imgurBaseApi(args: Args) {
-    const clientId = imgurClientId;
-
     const myHeaders = new Headers({
-      Authorization: `Client-ID ${clientId}`,
+      Authorization: `Client-ID ${imgurClientId}`,
     });
 
     args.requestOptions = {
@@ -53,7 +56,7 @@ class ImgurAPI {
       const result = await response.json();
 
       if (args.filterImageResults) {
-        return this.filterImageResults(result.data);
+        return extractImageResults(result.data);
       }
 
       return result.data;
@@ -71,15 +74,21 @@ class ImgurAPI {
    * @param filterImageResults
    * @returns
    */
-  public async submitGallerySearch(
-    searchQuery: string,
-    page = 1 as number,
-    filterImageResults = false as boolean
-  ) {
-    return await this.imgurBaseApi({
-      endPoint: `${EP_GALLERY}/search/time/all/${page}?q=${searchQuery}&q_size_px=small&q_type=jpg`,
-      filterImageResults: filterImageResults,
-    });
+  public async submitGallerySearch(args) {
+    if (this.useFakeResponse) {
+      return await import("@/__tests__/fixtures/imgurResponse").then(
+        (mod: any) => {
+          return extractImageResults(mod.fakeResponse.data);
+        }
+      );
+    } else {
+      return await this.imgurBaseApi({
+        endPoint: `${EP_GALLERY}/search/${args.sort || "viral"}/all/${
+          args.page || 1
+        }?q=${args.searchQuery}&q_size_px=small&q_type=jpg`,
+        filterImageResults: args.filterImageResults || false,
+      });
+    }
   }
 
   /**
@@ -89,6 +98,25 @@ class ImgurAPI {
    */
   public async getGalleryImages() {
     return await this.imgurBaseApi({ endPoint: EP_GALLERY_HOT });
+  }
+
+  /**
+   * getGalleryTags
+   *
+   * Gets a list of the default gallery tags
+   *
+   * @returns
+   */
+  public async getGalleryTags() {
+    if (this.useFakeResponse) {
+      return await import("../__tests__/fixtures/galleryTags").then(
+        (mod: any) => {
+          return mod.fakeGalleryTags.data;
+        }
+      );
+    } else {
+      return await this.imgurBaseApi({ endPoint: EP_GALLERY_TAGS });
+    }
   }
 
   /**
