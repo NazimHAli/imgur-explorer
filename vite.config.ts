@@ -7,9 +7,9 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: "@import '@/styles/mixins';"
-      }
-    }
+        additionalData: "@import '@/styles/mixins';",
+      },
+    },
   },
   envPrefix: "PUBLIC_",
   plugins: [react()],
@@ -18,5 +18,5 @@ export default defineConfig({
       "@": path.resolve(".", "src"),
       "~styles": path.resolve(".", "src/styles/"),
     },
-  }
+  },
 });

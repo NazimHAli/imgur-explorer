@@ -2,7 +2,7 @@ import { ObserveElementsInView } from "@/utils/visibilityUtils";
 import { lazy, useCallback } from "react";
 import "~styles/masonry.scss";
 
-const Card = lazy(()=> import("@/components/Card"));
+const Card = lazy(() => import("@/components/Card"));
 
 const imgObserver = new ObserveElementsInView();
 

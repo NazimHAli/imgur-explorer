@@ -22,7 +22,12 @@ function Header({ dispatchState }) {
           <i className="search-icon"></i>
         </button>
         <form onSubmit={handleSubmit}>
-          <input type="search" className="input-search" placeholder="Search for it" ref={inputRef} />
+          <input
+            type="search"
+            className="input-search"
+            placeholder="Search for it"
+            ref={inputRef}
+          />
         </form>
       </div>
       <div className="profile">PROFILE</div>

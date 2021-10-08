@@ -1040,7 +1040,7 @@ export const fakeGalleryTags = {
         background_is_animated: false,
         thumbnail_is_animated: false,
         is_promoted: false,
-        description: "Things to make you go \"hmm.\" ",
+        description: 'Things to make you go "hmm." ',
         logo_hash: null,
         logo_destination_url: null,
         description_annotations: {},

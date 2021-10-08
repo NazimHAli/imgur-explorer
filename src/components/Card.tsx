@@ -10,7 +10,9 @@ function Card({ item, imgRef }) {
           <p>User: {item?.account_url}</p>
           <p>Favourites: {item?.favorite_count}</p>
           <p>Comments: {item?.comment_count}</p>
-          <p>Ups: {item?.ups}  Downs: {item?.downs}</p>
+          <p>
+            Ups: {item?.ups} Downs: {item?.downs}
+          </p>
         </span>
       </figcaption>
     </figure>
