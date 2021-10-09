@@ -44,9 +44,15 @@ yarn serve
 
 ## TODO
 
--   [x] Add search capabilities
--   [x] Add explore by categories
--   [ ] Add more unit tests
--   [ ] Add integration tests
--   [ ] Add performance tests
--   [ ] Add accessibility tests
+### Features
+  - [x] Search
+  - [x] Sort results
+  - [WIP] Explore by categories
+  - [ ] Explore tags
+  - [ ] Profile login
+  - [ ] Upload images
+
+### Tests
+  - [ ] ~70% unit test coverage
+  - [ ] Cypress performance & integration tests
+  - [ ] Accessibility tests
