@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useReducer } from "react";
 import { initialState, stateReducer } from "../state";
+import { handleGetData } from "@/services/imgurAPI";
 
 const Gallery = lazy(() => import("@/components/Gallery"));
 const Header = lazy(() => import("@/components/Header"));
@@ -61,35 +62,3 @@ function App() {
 }
 
 export default App;
-
-function handleGetData(dispatchState, state) {
-  return (args = {} as any) => {
-    dispatchState({ type: "setIsLoading", loading: true });
-
-    import("@/services/imgurAPI").then((mod) => {
-      const imgurClient = mod.ImgurAPI.getInstance();
-      const filter = args.filter || state.requestArgs.filter;
-      const page = args.page || state.requestArgs.page;
-      const query = args.query || state.requestArgs.query;
-      const sort = args.sort || state.requestArgs.sort;
-      const newSearch = args.newSearch || state.requestArgs.newSearch;
-
-      imgurClient
-        .submitGallerySearch({
-          searchQuery: query,
-          pageNumber: page,
-          filterImageResults: filter,
-          sort: sort,
-        })
-        .then((response) => {
-          dispatchState({
-            type: "setItems",
-            items: newSearch ? response : state.items.concat(response),
-          });
-        })
-        .finally(() => {
-          dispatchState({ type: "setIsLoading", loading: false });
-        });
-    });
-  };
-}

@@ -12,7 +12,7 @@ function Header({ dispatchState }): JSX.Element {
     event.preventDefault();
   }
 
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <header className="header">

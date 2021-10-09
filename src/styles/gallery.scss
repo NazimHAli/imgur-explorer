@@ -8,9 +8,8 @@
   overflow: hidden;
 
   &:hover {
-    figcaption {
+    .info {
       transform: translateY(0rem);
-      opacity: 1;
     }
   }
 

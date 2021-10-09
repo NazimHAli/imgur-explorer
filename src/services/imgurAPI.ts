@@ -1,4 +1,4 @@
-import { arrToMatrix, extractImageResults } from "@/utils/dataUtils";
+import { extractImageResults } from "@/utils/dataUtils";
 
 const imgurClientId = import.meta.env.PUBLIC_IMGUR_CLIENT_ID;
 const BASE = "https://api.imgur.com/3";
@@ -98,7 +98,7 @@ class ImgurAPI {
   }
 
   /**
-   * getGalleryImages
+   * Get 'hot' results from gallery search example
    *
    * @returns
    */
@@ -107,8 +107,6 @@ class ImgurAPI {
   }
 
   /**
-   * getGalleryTags
-   *
    * Gets a list of the default gallery tags
    *
    * @returns
@@ -124,21 +122,47 @@ class ImgurAPI {
       return await this.imgurBaseApi({ endPoint: EP_GALLERY_TAGS });
     }
   }
-
-  /**
-   * filterImageResults
-   *
-   * Filter image results
-   * Convert the array to a matrix of arrays
-   * for easier loading in grids/galleries
-   *
-   * @param response
-   * @returns
-   */
-  private filterImageResults(response: any[]) {
-    const cleanedData = extractImageResults(response);
-    return arrToMatrix(cleanedData, 4);
-  }
 }
 
-export { ImgurAPI };
+/**
+ * Helper function that dynamically imports the class if not available
+ * Provides search argument construction logic so that it can be
+ * imported into any file if needed
+ *
+ * @param dispatchState
+ * @param state
+ * @returns
+ */
+function handleGetData(dispatchState, state): (args?: any) => void {
+  return (args = {} as any) => {
+    dispatchState({ type: "setIsLoading", loading: true });
+
+    import("@/services/imgurAPI").then((mod) => {
+      const imgurClient = mod.ImgurAPI.getInstance();
+      const filter = args.filter || state.requestArgs.filter;
+      const page = args.page || state.requestArgs.page;
+      const query = args.query || state.requestArgs.query;
+      const sort = args.sort || state.requestArgs.sort;
+      const newSearch = args.newSearch || state.requestArgs.newSearch;
+
+      imgurClient
+        .submitGallerySearch({
+          searchQuery: query,
+          pageNumber: page,
+          filterImageResults: filter,
+          sort: sort,
+        })
+        .then((response) => {
+          dispatchState({
+            type: "setItems",
+            items: newSearch ? response : state.items.concat(response),
+          });
+        })
+        .finally(() => {
+          dispatchState({ type: "setIsLoading", loading: false });
+        });
+    });
+  };
+}
+
+export { handleGetData, ImgurAPI };
