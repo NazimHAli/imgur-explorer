@@ -1,7 +1,7 @@
 export type Item = {
   id: string;
   account_url: string;
-  images: Array<{ link: string }>;
+  images: Array<{ link: string; width: string; height: string }>;
   ups: number;
   downs: number;
   favorite_count: number;

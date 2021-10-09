@@ -9,6 +9,8 @@ function Card(props: { item: Item; imgRef: Ref<HTMLImageElement> }) {
       <img
         src=""
         alt=""
+        width={item?.images[0]?.width}
+        height={item?.images[0]?.height}
         data-srcset={item?.images[0]?.link}
         ref={props.imgRef}
       />
