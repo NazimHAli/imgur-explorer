@@ -12,7 +12,7 @@ The bundle size is 347K, larger than anticipated. Even after implementing [mui b
 
 [![CodeQL](https://github.com/NazimHAli/react-image-gallery/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/NazimHAli/react-image-gallery/actions/workflows/codeql-analysis.yml)
 
-### [Live Demo](https://react-image-gallery-nazimali.vercel.app/)
+### [Live Demo](https://react-image-gallery-master.vercel.app/)
 ![image](https://user-images.githubusercontent.com/26750288/135773516-5bf69971-7c8a-4e2a-8182-8c6240f7b436.png)
 
 
@@ -45,10 +45,4 @@ yarn serve
 -   [Material UI](https://github.com/mui-org/material-ui)
 
 ## TODO
-
--   [x] Add search capabilities
--   [x] Add explore by categories
--   [ ] Add more unit tests
--   [ ] Add integration tests
--   [ ] Add performance tests
--   [ ] Add accessibility tests
+#### Moved to [next-version](https://github.com/NazimHAli/react-image-gallery/tree/next-version)
