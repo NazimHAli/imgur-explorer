@@ -1,6 +1,4 @@
 /**
- * arrToMatrix
- *
  * Converts an array to a list of arrays (matrix)
  *
  * @param arr
@@ -14,8 +12,6 @@ function arrToMatrix(arr: string | any[], size: number): (string | any[])[] {
 }
 
 /**
- * checkNumberIfFloat
- *
  * Determine if a number is a float
  *
  * @param num
@@ -26,8 +22,6 @@ function checkNumberIfFloat(num: number): boolean {
 }
 
 /**
- * extractImageResults
- *
  * Validate and extract image results from the response
  *
  * @param response
