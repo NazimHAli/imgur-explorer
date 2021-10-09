@@ -149,7 +149,7 @@ function handleGetData(
     items: State["items"];
     requestArgs: State["requestArgs"];
   }
-) {
+): (args?: State["requestArgs"]) => void {
   return (args = {} as State["requestArgs"]) => {
     dispatchState({ type: "setIsLoading", loading: true });
 
