@@ -6,14 +6,6 @@ const Card = lazy(() => import("@/components/Card"));
 
 const imgObserver = new ObserveElementsInView();
 
-function imgRefCallback() {
-  return useCallback((node) => {
-    if (node !== null) {
-      imgObserver.observeElements([node]);
-    }
-  }, []);
-}
-
 /**
  * Gallery component that renders images
  *
@@ -25,7 +17,11 @@ function imgRefCallback() {
  */
 
 function Gallery({ images }) {
-  const cardImgRef = imgRefCallback();
+  const cardImgRef = useCallback((node) => {
+    if (node !== null) {
+      imgObserver.observeElements([node]);
+    }
+  }, []);
 
   return (
     <div className="masonry">
