@@ -20,7 +20,10 @@ const initialState = {
  * @param action
  * @returns
  */
-function stateReducer(state: typeof initialState, action) {
+function stateReducer(
+  state: typeof initialState,
+  action: { type: any; loading: any; items: any; query: any }
+) {
   switch (action.type) {
     case "setIsLoading":
       return {

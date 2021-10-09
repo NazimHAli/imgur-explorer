@@ -16,7 +16,7 @@ const imgObserver = new ObserveElementsInView();
  * @returns
  */
 
-function Gallery({ images }) {
+function Gallery({ images }): JSX.Element {
   const cardImgRef = useCallback((node) => {
     if (node !== null) {
       imgObserver.observeElements([node]);

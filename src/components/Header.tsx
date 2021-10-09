@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import "~styles/search-box.scss";
 
-function Header({ dispatchState }) {
-  function _handleSubmit(event) {
+function Header({ dispatchState }): JSX.Element {
+  function _handleSubmit(event: { preventDefault: () => void }) {
     if (inputRef.current && inputRef.current.value.length) {
       dispatchState({
         type: "submitSearchRequest",

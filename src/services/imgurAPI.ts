@@ -74,7 +74,13 @@ class ImgurAPI {
    * @param filterImageResults
    * @returns
    */
-  public async submitGallerySearch(args) {
+  public async submitGallerySearch(args: {
+    searchQuery: string;
+    pageNumber?: number;
+    filterImageResults: boolean;
+    sort: string;
+    page?: number;
+  }) {
     if (this.useFakeResponse) {
       return await import("@/__tests__/fixtures/imgurResponse").then(
         (mod: any) => {
@@ -129,7 +135,7 @@ class ImgurAPI {
    * @param response
    * @returns
    */
-  private filterImageResults(response) {
+  private filterImageResults(response: any[]) {
     const cleanedData = extractImageResults(response);
     return arrToMatrix(cleanedData, 4);
   }

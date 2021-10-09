@@ -11,33 +11,35 @@ class ObserveElementsInView {
   }
 
   private handleIntersect(
-    entries: any[],
-    observer: { unobserve: (arg0: any) => void }
+    entries: IntersectionObserverEntry[],
+    observer: IntersectionObserver
   ): void {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) {
         return;
       }
 
-      entry.target.src = entry.target.dataset.srcset;
-      delete entry.target.dataset.srcset;
-
-      entry.target.style.opacity = 100;
+      setImageSrc(entry);
       observer.unobserve(entry.target);
     });
   }
 
-  public observeElements(elements): void {
+  public observeElements(elements: Element[]): void {
     elements.forEach((element: Element) => {
       this.rootObserver.observe(element);
-      element.setAttribute("observed", "");
     });
   }
 }
 
-function isElementInView(element: {
-  getBoundingClientRect: () => any;
-}): boolean {
+function setImageSrc(entry: IntersectionObserverEntry) {
+  entry.target.setAttribute(
+    "src",
+    entry.target.getAttribute("data-srcset") || ""
+  );
+  entry.target.setAttribute("style", "opacity: 100");
+}
+
+function isElementInView(element: Element): boolean {
   if (!element) {
     return false;
   }
