@@ -140,13 +140,13 @@ class ImgurAPI {
  */
 function handleGetData(
   dispatchState: {
-    (value: {
-      type: string | null;
-      loading: boolean;
-      items: object[];
-      query: string;
+    (): void;
+    (arg0: {
+      type?: string;
+      loading?: boolean;
+      items?: any;
+      requestError?: boolean;
     }): void;
-    (arg0: { type: string; loading?: boolean; items?: State["items"] }): void;
   },
   state: {
     isLoading?: boolean;
@@ -177,14 +177,19 @@ function handleGetData(
             dispatchState({
               type: "setItems",
               items: newSearch ? response : state.items.concat(response),
+              requestError: false,
             });
           })
-          .catch(() => {})
+          .catch(() => {
+            dispatchState({ requestError: true });
+          })
           .finally(() => {
             dispatchState({ type: "setIsLoading", loading: false });
           });
       })
-      .catch(() => {});
+      .catch(() => {
+        dispatchState({ requestError: true });
+      });
   };
 }
 

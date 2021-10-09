@@ -11,6 +11,7 @@ export type Item = {
 
 export type State = {
   isLoading: boolean;
+  requestError: boolean;
   items: Array<Item>;
   requestArgs: {
     filter?: boolean;
@@ -21,8 +22,16 @@ export type State = {
   };
 };
 
+export type Action = {
+  type: string | null;
+  loading?: State["isLoading"];
+  items?: State["items"];
+  query?: State["requestArgs"]["query"];
+};
+
 const initialState: State = {
   isLoading: true,
+  requestError: false,
   items: [],
   requestArgs: {
     filter: true,
@@ -31,13 +40,6 @@ const initialState: State = {
     query: "",
     sort: "viral",
   },
-};
-
-export type Action = {
-  type: string | null;
-  loading?: State["isLoading"];
-  items?: State["items"];
-  query?: State["requestArgs"]["query"];
 };
 
 /**
