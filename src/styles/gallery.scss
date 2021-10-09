@@ -1,0 +1,48 @@
+.card {
+  border: solid 1px #00000036;
+  display: grid;
+  justify-items: center;
+  height: 20rem;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  &:hover {
+    figcaption {
+      transform: translateY(0rem);
+      opacity: 1;
+    }
+  }
+
+  img {
+    opacity: 0;
+    @include transition(all ease-in-out 500ms);
+  }
+
+  .info {
+    bottom: 0;
+    display: block;
+    font-size: 0.5rem;
+    padding: 0.5rem;
+    position: absolute;
+    text-overflow: ellipsis;
+    width: 100%;
+    overflow: hidden;
+    background-color: #212121c2;
+    transform: translateY(7.5rem);
+
+    @include transition(all ease-in-out 200ms);
+
+    > span {
+      display: inline-block;
+      overflow: hidden;
+    }
+  }
+}
+
+.gallery-container {
+  @extend .content-container;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  grid-gap: 1rem;
+}

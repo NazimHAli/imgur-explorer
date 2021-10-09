@@ -1,6 +1,6 @@
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
 import { lazy, useCallback } from "react";
-import "~styles/masonry.scss";
+import "@/styles/gallery.scss";
 
 const Card = lazy(() => import("@/components/Card"));
 
@@ -24,7 +24,7 @@ function Gallery({ images }): JSX.Element {
   }, []);
 
   return (
-    <div className="masonry">
+    <div className="gallery-container">
       {Array.from(images).map((image: any) => (
         <Card item={image} key={image.id} imgRef={cardImgRef} />
       ))}
