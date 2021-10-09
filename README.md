@@ -19,7 +19,7 @@ If you don't want to register and use the free imgur API, it will use mocked dat
 
 ```bash
 yarn
-yarn start
+yarn dev
 ```
 
 ## Build
