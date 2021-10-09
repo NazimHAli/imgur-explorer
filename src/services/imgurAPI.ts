@@ -89,10 +89,14 @@ class ImgurAPI {
         }
       );
     } else {
+      const searchString = args.searchQuery
+        ? `?q=${args.searchQuery}&q_size_px=small&q_type=jpg`
+        : "?q_size_px=small&q_type=jpg";
+
       return await this.imgurBaseApi({
         endPoint: `${EP_GALLERY}/search/${args.sort || "viral"}/all/${
           args.page || 1
-        }?q=${args.searchQuery}&q_size_px=small&q_type=jpg`,
+        }?q=${searchString}`,
         filterImageResults: args.filterImageResults || false,
       });
     }
