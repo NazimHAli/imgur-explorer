@@ -66,7 +66,7 @@ function handleGetData(dispatchState, state) {
   return (args = {} as any) => {
     dispatchState({ type: "setIsLoading", loading: true });
 
-    import("@/services/imgurAPI").then(async (mod) => {
+    import("@/services/imgurAPI").then((mod) => {
       const imgurClient = mod.ImgurAPI.getInstance();
       const filter = args.filter || state.requestArgs.filter;
       const page = args.page || state.requestArgs.page;
@@ -74,7 +74,7 @@ function handleGetData(dispatchState, state) {
       const sort = args.sort || state.requestArgs.sort;
       const newSearch = args.newSearch || state.requestArgs.newSearch;
 
-      await imgurClient
+      imgurClient
         .submitGallerySearch({
           searchQuery: query,
           pageNumber: page,
