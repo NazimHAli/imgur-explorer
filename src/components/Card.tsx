@@ -1,6 +1,15 @@
 import { Item } from "@/state";
 import { Ref } from "react";
 
+function itemCounts(item: Item) {
+  return (
+    <>
+      <span>Faves:</span> {item?.favorite_count} <span>Ups:</span> {item?.ups}
+      <span>Downs:</span> {item?.downs}
+    </>
+  );
+}
+
 function Card(props: { item: Item; imgRef: Ref<HTMLImageElement> }) {
   const { item } = props;
 
@@ -23,10 +32,7 @@ function Card(props: { item: Item; imgRef: Ref<HTMLImageElement> }) {
           <li>
             <span>Comments</span> {item?.comment_count}
           </li>
-          <li>
-            <span>Faves:</span> {item?.favorite_count} <span>Ups:</span>{" "}
-            {item?.ups} <span>Downs:</span> {item?.downs}
-          </li>
+          <li>{itemCounts(item)}</li>
         </ol>
       </span>
     </div>
