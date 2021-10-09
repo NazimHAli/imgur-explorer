@@ -4,8 +4,7 @@ import { Ref } from "react";
 function itemCounts(item: Item) {
   return (
     <>
-      <span>Faves:</span> {item?.favorite_count} <span>Ups:</span> {item?.ups}
-      <span>Downs:</span> {item?.downs}
+      <span>Ups:</span> {item?.ups} <span>Downs:</span> {item?.downs}
     </>
   );
 }
@@ -28,6 +27,9 @@ function Card(props: { item: Item; imgRef: Ref<HTMLImageElement> }) {
         <ol className="card__counts">
           <li>
             <span>User</span> {item?.account_url}
+          </li>
+          <li>
+            <span>Faves</span> {item?.favorite_count}
           </li>
           <li>
             <span>Comments</span> {item?.comment_count}

@@ -1,0 +1,70 @@
+.gallery-container {
+  @include container;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  grid-gap: 1rem;
+}
+
+.card {
+  border: solid 1px #00000036;
+  display: grid;
+  justify-items: center;
+  height: 20rem;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  &:hover {
+    .card__info {
+      transform: translateY(0);
+    }
+
+    .card__counts {
+      opacity: 1;
+    }
+
+    .card__title {
+      @include truncate-lines(5);
+    }
+  }
+
+  & img {
+    opacity: 0;
+    @include transition(opacity ease-in-out 500ms);
+  }
+
+  &__info {
+    display: block;
+    padding: 0.5rem;
+    position: absolute;
+    bottom: 0;
+    text-overflow: ellipsis;
+    width: 100%;
+    overflow: hidden;
+    background-color: #212121c4;
+    transform: translateY(50%);
+
+    @include transition(transform ease-in-out 200ms);
+  }
+
+  &__counts {
+    opacity: 0;
+    @include transition(opacity ease-in-out 500ms);
+    list-style: none;
+    padding-left: 0.5rem;
+    font-size: small;
+
+    li {
+      overflow: hidden;
+      @include truncate-lines(1);
+
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+
+  &__title {
+    @include truncate-lines(2);
+  }
+}
