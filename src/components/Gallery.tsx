@@ -18,6 +18,8 @@ const imgObserver = new ObserveElementsInView();
  */
 
 function Gallery(props: { items: State["items"] }): JSX.Element {
+  const { items } = props;
+
   const cardImgRef = useCallback((node) => {
     if (node !== null) {
       imgObserver.observeElements([node]);
@@ -26,7 +28,7 @@ function Gallery(props: { items: State["items"] }): JSX.Element {
 
   return (
     <div className="gallery-container">
-      {Array.from(props.items).map(
+      {Array.from(items).map(
         (image): JSX.Element => (
           <Card item={image} key={image.id} imgRef={cardImgRef} />
         )
