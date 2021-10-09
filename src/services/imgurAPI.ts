@@ -96,7 +96,7 @@ class ImgurAPI {
       return await this.imgurBaseApi({
         endPoint: `${EP_GALLERY}/search/${args.sort || "viral"}/all/${
           args.page || 1
-        }?q=${searchString}`,
+        }${searchString}`,
         filterImageResults: args.filterImageResults || false,
       });
     }
