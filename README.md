@@ -47,7 +47,7 @@ yarn serve
 ### Features
   - [x] Search
   - [x] Sort results
-  - [WIP] Explore by categories
+  - [ ] WIP - Explore by categories
   - [ ] Explore tags
   - [ ] Profile login
   - [ ] Upload images
