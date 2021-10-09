@@ -76,10 +76,10 @@ class ImgurAPI {
    * @returns
    */
   public async submitGallerySearch(args: {
-    searchQuery: string;
+    searchQuery?: string;
     pageNumber?: number;
-    filterImageResults: boolean;
-    sort: string;
+    filterImageResults?: boolean;
+    sort?: string;
     page?: number;
   }) {
     if (this.useFakeResponse) {
@@ -142,9 +142,13 @@ function handleGetData(
       items: object[];
       query: string;
     }): void;
-    (arg0: { type: string; loading?: boolean; items?: any }): void;
+    (arg0: { type: string; loading?: boolean; items?: State["items"] }): void;
   },
-  state: { isLoading?: boolean; items: any; requestArgs: any }
+  state: {
+    isLoading?: boolean;
+    items: State["items"];
+    requestArgs: State["requestArgs"];
+  }
 ) {
   return (args = {} as State["requestArgs"]) => {
     dispatchState({ type: "setIsLoading", loading: true });
