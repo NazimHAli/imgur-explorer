@@ -1,4 +1,4 @@
-import "~styles/loading-animation.scss";
+import "@/styles/component/loading-animation.scss";
 
 const LoadingAnimation = () => {
   return (

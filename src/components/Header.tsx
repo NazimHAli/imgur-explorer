@@ -1,6 +1,6 @@
 import { Action } from "@/state";
 import { useRef } from "react";
-import "~styles/search-box.scss";
+import "@/styles/layout/header.scss";
 
 function Header(props: { dispatchState: (arg0: Action) => void }): JSX.Element {
   function _handleSubmit(event: { preventDefault: () => void }) {

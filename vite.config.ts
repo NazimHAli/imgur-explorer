@@ -7,7 +7,8 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: "@import '@/styles/mixins'; @import '@/styles/base';",
+        additionalData:
+          "@import '@/styles/utils/mixins'; @import '@/styles/base';",
       },
     },
   },
@@ -16,7 +17,6 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(".", "src"),
-      "~styles": path.resolve(".", "src/styles/"),
     },
   },
 });

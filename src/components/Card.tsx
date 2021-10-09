@@ -14,14 +14,20 @@ function Card(props: { item: Item; imgRef: Ref<HTMLImageElement> }) {
         data-srcset={item?.images[0]?.link}
         ref={props.imgRef}
       />
-      <span className="info">
-        <h3>{item?.title}</h3>
-        <p>User: {item?.account_url}</p>
-        <p>Favourites: {item?.favorite_count}</p>
-        <p>Comments: {item?.comment_count}</p>
-        <p>
-          Ups: {item?.ups} Downs: {item?.downs}
-        </p>
+      <span className="card__info">
+        <h3 className="card__title">{item?.title}</h3>
+        <ol className="card__counts">
+          <li>
+            <span>User</span> {item?.account_url}
+          </li>
+          <li>
+            <span>Comments</span> {item?.comment_count}
+          </li>
+          <li>
+            <span>Faves:</span> {item?.favorite_count} <span>Ups:</span>{" "}
+            {item?.ups} <span>Downs:</span> {item?.downs}
+          </li>
+        </ol>
       </span>
     </div>
   );

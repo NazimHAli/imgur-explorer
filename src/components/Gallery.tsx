@@ -1,7 +1,8 @@
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
 import { lazy, useCallback } from "react";
 import { State } from "@/state";
-import "@/styles/gallery.scss";
+
+import "@/styles/component/gallery.scss";
 
 const Card = lazy(() => import("@/components/Card"));
 

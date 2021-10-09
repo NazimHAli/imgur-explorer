@@ -1,3 +1,5 @@
+import "@/styles/layout/footer.scss";
+
 function Footer() {
   return (
     <footer className="footer">

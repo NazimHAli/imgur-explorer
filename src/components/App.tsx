@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useReducer } from "react";
-import { initialState, stateReducer } from "../state";
+import { initialState, stateReducer } from "@/state";
 import { handleGetData } from "@/services/imgurAPI";
 
 const Gallery = lazy(() => import("@/components/Gallery"));

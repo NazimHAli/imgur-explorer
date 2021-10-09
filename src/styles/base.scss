@@ -8,9 +8,8 @@ $base-bg-color: #c51162;
 
 body {
   margin: 0;
-  color: beige;
+  color: #fff;
   font-family: "Montserrat";
-  font-size-adjust: 1;
 }
 
 img {
@@ -20,58 +19,7 @@ img {
   display: inline-block;
 }
 
-.header {
-  background-color: $base-bg-color;
-  height: 10rem;
-  padding: 1rem;
-  display: grid;
-  align-content: center;
-  margin-bottom: 3rem;
-
-  @include transition(all ease-in-out 500ms);
-
-  @include breakpoint($from: "md") {
-    grid-template-columns: 1fr 6fr 1fr;
-  }
-
-  @include breakpoint($from: "lg") {
-    grid-template-columns: 1fr 2fr 1fr;
-  }
-
-  @include breakpoint($until: "md") {
-    grid-template-rows: 1fr 2fr;
-  }
-
-  &_logo {
-    @include breakpoint($until: "md") {
-      text-align: center;
-    }
-  }
-}
-
-.footer {
-  background-color: $base-bg-color;
-  height: 10rem;
-  padding: 1rem;
-  margin-top: 3rem;
-}
-
-.profile {
-  text-align: right;
-
-  @include breakpoint($until: "md") {
-    display: none;
-  }
-}
-
-.content-container {
-  max-width: 90rem;
-  margin: 0 auto;
-}
-
-.no-results {
-  @extend .content-container;
-  height: 20rem;
-  text-align: center;
-  padding-top: 1rem;
+.test {
+  color: black;
+  @include vertical-center();
 }
