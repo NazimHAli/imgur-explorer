@@ -2,7 +2,7 @@ import { useRef } from "react";
 import "~styles/search-box.scss";
 
 function Header({ dispatchState }) {
-  const handleSubmit = (event) => {
+  function handleSubmit(event) {
     if (inputRef.current && inputRef.current.value.length) {
       dispatchState({
         type: "submitSearchRequest",
@@ -10,7 +10,7 @@ function Header({ dispatchState }) {
       });
     }
     event.preventDefault();
-  };
+  }
 
   const inputRef = useRef(null);
 
