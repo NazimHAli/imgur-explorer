@@ -1,4 +1,4 @@
-import { State } from "@/state";
+import { Action, State } from "@/state";
 import { extractImageResults } from "@/utils/dataUtils";
 
 const imgurClientId = import.meta.env.PUBLIC_IMGUR_CLIENT_ID;
@@ -140,7 +140,7 @@ class ImgurAPI {
  */
 function handleGetData(
   dispatchState: {
-    (): void;
+    (value: Action): void;
     (arg0: {
       type?: string;
       loading?: boolean;

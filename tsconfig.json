@@ -10,6 +10,8 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "resolveJsonModule": true,
     "skipLibCheck": false,
     "strict": true,
