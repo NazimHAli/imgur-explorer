@@ -13,7 +13,7 @@ class ObserveElementsInView {
   private handleIntersect(
     entries: any[],
     observer: { unobserve: (arg0: any) => void }
-  ) {
+  ): void {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) {
         return;
@@ -27,7 +27,7 @@ class ObserveElementsInView {
     });
   }
 
-  public observeElements(elements) {
+  public observeElements(elements): void {
     elements.forEach((element: Element) => {
       this.rootObserver.observe(element);
       element.setAttribute("observed", "");
@@ -35,7 +35,9 @@ class ObserveElementsInView {
   }
 }
 
-function isElementInView(element: { getBoundingClientRect: () => any }) {
+function isElementInView(element: {
+  getBoundingClientRect: () => any;
+}): boolean {
   if (!element) {
     return false;
   }
