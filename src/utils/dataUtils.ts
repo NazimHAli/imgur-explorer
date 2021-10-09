@@ -7,7 +7,7 @@
  * @param size
  * @returns array
  */
-function arrToMatrix(arr: string | any[], size: number) {
+function arrToMatrix(arr: string | any[], size: number): (string | any[])[] {
   return Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
     arr.slice(i * size, i * size + size)
   );
@@ -21,7 +21,7 @@ function arrToMatrix(arr: string | any[], size: number) {
  * @param num
  * @returns boolean
  */
-function checkNumberIfFloat(num: number) {
+function checkNumberIfFloat(num: number): boolean {
   return Number(num) === num && num % 1 !== 0;
 }
 
@@ -33,7 +33,7 @@ function checkNumberIfFloat(num: number) {
  * @param response
  * @returns array
  */
-function extractImageResults(response: any[]) {
+function extractImageResults(response: any[]): any[] {
   let resultImages: any[] = [];
   if (!response.length) {
     return resultImages;

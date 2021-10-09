@@ -17,7 +17,7 @@ class ImgurAPI {
   useFakeResponse: boolean;
 
   constructor() {
-    this.useFakeResponse = !imgurClientId;
+    this.useFakeResponse = imgurClientId === undefined;
   }
 
   /**

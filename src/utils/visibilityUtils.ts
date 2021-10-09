@@ -1,3 +1,11 @@
+function setImageSrc(entry: IntersectionObserverEntry) {
+  entry.target.setAttribute(
+    "src",
+    entry.target.getAttribute("data-srcset") || ""
+  );
+  entry.target.setAttribute("style", "opacity: 100");
+}
+
 class ObserveElementsInView {
   rootObserver: IntersectionObserver;
   activeElementIDs: Set<unknown>;
@@ -29,14 +37,6 @@ class ObserveElementsInView {
       this.rootObserver.observe(element);
     });
   }
-}
-
-function setImageSrc(entry: IntersectionObserverEntry) {
-  entry.target.setAttribute(
-    "src",
-    entry.target.getAttribute("data-srcset") || ""
-  );
-  entry.target.setAttribute("style", "opacity: 100");
 }
 
 function isElementInView(element: Element): boolean {
