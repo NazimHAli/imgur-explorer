@@ -1,15 +1,17 @@
 # ReactJS Image Gallery
 
-ReactJS + [imgur](https://imgur.com/) built with WebPack 5 in TypeScript. Using a few components and styling from [material-ui](https://github.com/mui-org/material-ui) for the first iteration. If you don't want to register or use the free imgur API, the app will default to the hard-coded responses. It's also useful for faster local development.
+##### Refactoring the entire app in the [next-version branch](https://github.com/NazimHAli/react-image-gallery/tree/next-version). Replaced Webpack with vitejs and using vanilla styling, components instead of a component library.
 
-The bundle size is 347K, larger than anticipated. Even after implementing [mui best practices](https://mui.com/guides/minimizing-bundle-size/) like lazy-loading, code splitting...etc. After analyzing the bundle, realized that the standard React package has increased in size.
+ReactJS + [imgur API](https://imgur.com/) + [vitejs bundler](https://github.com/vitejs/vite) in TypeScript.
 
-[![DeepSource](https://deepsource.io/gh/NazimHAli/react-image-gallery.svg/?label=active+issues&show_trend=true&token=aO_Hx9m4iDxMopueaxAigoGd)](https://deepsource.io/gh/NazimHAli/react-image-gallery)
-[![DeepSource](https://deepsource.io/gh/NazimHAli/react-image-gallery.svg/?label=resolved+issues&show_trend=true&token=aO_Hx9m4iDxMopueaxAigoGd)](https://deepsource.io/gh/NazimHAli/react-image-gallery)
+##### Mocked Data From API
+If you don't want to register and use the free imgur API, it will use mocked data/saved responses from the API. It's also useful for faster local development so you don't have to make new requests with every HMR update.
 
-### [Live Demo](https://react-image-gallery-five.vercel.app/)
+[![CodeQL](https://github.com/NazimHAli/react-image-gallery/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/NazimHAli/react-image-gallery/actions/workflows/codeql-analysis.yml)
 
-![image](https://user-images.githubusercontent.com/26750288/135773516-5bf69971-7c8a-4e2a-8182-8c6240f7b436.png)
+### [Live Demo](https://react-image-gallery-next.vercel.app/)
+![image](https://user-images.githubusercontent.com/26750288/136664356-709cee1c-9eca-4959-b44a-4bd7444c31a4.png)
+
 
 ## Quick start
 
@@ -29,21 +31,20 @@ yarn serve
 
 1. [Free registration](https://api.imgur.com/oauth2/addclient)
 2. Pass the client ID as an environemnt variable
-   - `imgurClientId=xxxxx yarn start`
+    - ```imgurClientId=xxxxx yarn start```
 
 ## Features
 
-- ReactJS with TypeScript
-- WebPack 5
-- Lazy loading & code splitting
-- [imgur API](https://api.imgur.com/)
-- [Material UI](https://github.com/mui-org/material-ui)
+-   ReactJS with TypeScript
+-   ViteJS
+-   Lazy loading & code splitting
+-   [imgur API](https://api.imgur.com/)
 
 ## TODO
 
-- [x] Add search capabilities
-- [x] Add explore by categories
-- [ ] Add more unit tests
-- [ ] Add integration tests
-- [ ] Add performance tests
-- [ ] Add accessibility tests
+-   [x] Add search capabilities
+-   [x] Add explore by categories
+-   [ ] Add more unit tests
+-   [ ] Add integration tests
+-   [ ] Add performance tests
+-   [ ] Add accessibility tests
