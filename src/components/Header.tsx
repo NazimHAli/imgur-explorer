@@ -2,7 +2,7 @@ import { useRef } from "react";
 import "~styles/search-box.scss";
 
 function Header({ dispatchState }) {
-  function handleSubmit(event) {
+  function _handleSubmit(event) {
     if (inputRef.current && inputRef.current.value.length) {
       dispatchState({
         type: "submitSearchRequest",
@@ -18,10 +18,10 @@ function Header({ dispatchState }) {
     <header className="header">
       <div className="header_logo">LOGO</div>
       <div className="search-box">
-        <button className="btn-search" onClick={handleSubmit}>
+        <button className="btn-search" onClick={_handleSubmit}>
           <i className="search-icon"></i>
         </button>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={_handleSubmit}>
           <input
             type="search"
             className="input-search"
