@@ -26,16 +26,15 @@ function App() {
    */
 
   useEffect(() => {
-    dispatchState({ type: "setIsLoading", loading: true });
-
     if (!state.items.length) {
       getData({ query: "hello" });
     }
 
     // Simulate slow load
-    setTimeout(() => {
-      dispatchState({ type: "setIsLoading", loading: false });
-    }, 1000);
+    setTimeout(
+      () => dispatchState({ type: "setIsLoading", loading: false }),
+      1000
+    );
   }, []);
 
   /**
@@ -53,7 +52,7 @@ function App() {
       <Header dispatchState={dispatchState} />
       {state.isLoading && <LoadingAnimation />}
       {!state.isLoading && state.items.length > 0 && (
-        <Gallery images={state.items} />
+        <Gallery items={state.items} />
       )}
       {!state.items.length && !state.isLoading && <NoResults />}
       <Footer />

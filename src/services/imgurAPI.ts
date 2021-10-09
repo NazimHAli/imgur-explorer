@@ -133,7 +133,18 @@ class ImgurAPI {
  * @param state
  * @returns
  */
-function handleGetData(dispatchState, state): (args?: any) => void {
+function handleGetData(
+  dispatchState: {
+    (value: {
+      type: string | null;
+      loading: boolean;
+      items: object[];
+      query: string;
+    }): void;
+    (arg0: { type: string; loading?: boolean; items?: any }): void;
+  },
+  state: { isLoading?: boolean; items: any; requestArgs: any }
+) {
   return (args = {} as any) => {
     dispatchState({ type: "setIsLoading", loading: true });
 

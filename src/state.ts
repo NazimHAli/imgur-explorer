@@ -1,4 +1,27 @@
-const initialState = {
+export type Item = {
+  id: string;
+  account_url: string;
+  images: Array<{ link: string }>;
+  ups: number;
+  downs: number;
+  favorite_count: number;
+  comment_count: number;
+  title: string;
+};
+
+export type State = {
+  isLoading: boolean;
+  items: Array<Item>;
+  requestArgs: {
+    filter: boolean;
+    newSearch: boolean;
+    page: number;
+    query: string;
+    sort: string;
+  };
+};
+
+const initialState: State = {
   isLoading: true,
   items: [],
   requestArgs: {
@@ -8,6 +31,13 @@ const initialState = {
     query: "",
     sort: "viral",
   },
+};
+
+export type Action = {
+  type: string | null;
+  loading?: State["isLoading"];
+  items?: State["items"];
+  query?: State["requestArgs"]["query"];
 };
 
 /**
@@ -20,10 +50,7 @@ const initialState = {
  * @param action
  * @returns
  */
-function stateReducer(
-  state: typeof initialState,
-  action: { type: any; loading: any; items: any; query: any }
-) {
+function stateReducer(state: State, action: Action) {
   switch (action.type) {
     case "setIsLoading":
       return {

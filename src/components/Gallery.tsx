@@ -1,5 +1,6 @@
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
 import { lazy, useCallback } from "react";
+import { State } from "@/state";
 import "@/styles/gallery.scss";
 
 const Card = lazy(() => import("@/components/Card"));
@@ -16,7 +17,7 @@ const imgObserver = new ObserveElementsInView();
  * @returns
  */
 
-function Gallery({ images }): JSX.Element {
+function Gallery(props: { items: State["items"] }): JSX.Element {
   const cardImgRef = useCallback((node) => {
     if (node !== null) {
       imgObserver.observeElements([node]);
@@ -25,9 +26,11 @@ function Gallery({ images }): JSX.Element {
 
   return (
     <div className="gallery-container">
-      {Array.from(images).map((image: any) => (
-        <Card item={image} key={image.id} imgRef={cardImgRef} />
-      ))}
+      {Array.from(props.items).map(
+        (image): JSX.Element => (
+          <Card item={image} key={image.id} imgRef={cardImgRef} />
+        )
+      )}
     </div>
   );
 }
