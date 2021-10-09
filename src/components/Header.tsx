@@ -18,19 +18,10 @@ function Header({ dispatchState }) {
     <header className="header">
       <div className="header_logo">LOGO</div>
       <div className="search-box">
-        <button
-          className="btn-search"
-          onClick={(event) => {
-            _handleSubmit(event);
-          }}
-        >
+        <button className="btn-search" onClick={_handleSubmit}>
           <i className="search-icon"></i>
         </button>
-        <form
-          onSubmit={(event) => {
-            _handleSubmit(event);
-          }}
-        >
+        <form onSubmit={_handleSubmit}>
           <input
             type="search"
             className="input-search"
