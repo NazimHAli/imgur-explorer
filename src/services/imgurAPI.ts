@@ -1,3 +1,4 @@
+import { State } from "@/state";
 import { extractImageResults } from "@/utils/dataUtils";
 
 const imgurClientId = import.meta.env.PUBLIC_IMGUR_CLIENT_ID;
@@ -145,7 +146,7 @@ function handleGetData(
   },
   state: { isLoading?: boolean; items: any; requestArgs: any }
 ) {
-  return (args = {} as any) => {
+  return (args = {} as State["requestArgs"]) => {
     dispatchState({ type: "setIsLoading", loading: true });
 
     import("@/services/imgurAPI").then((mod) => {

@@ -13,11 +13,11 @@ export type State = {
   isLoading: boolean;
   items: Array<Item>;
   requestArgs: {
-    filter: boolean;
-    newSearch: boolean;
-    page: number;
-    query: string;
-    sort: string;
+    filter?: boolean;
+    newSearch?: boolean;
+    page?: number;
+    query?: string;
+    sort?: string;
   };
 };
 
