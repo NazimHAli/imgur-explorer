@@ -157,31 +157,34 @@ function handleGetData(
   return (args = {} as State["requestArgs"]) => {
     dispatchState({ type: "setIsLoading", loading: true });
 
-    import("@/services/imgurAPI").then((mod) => {
-      const imgurClient = mod.ImgurAPI.getInstance();
-      const filter = args.filter || state.requestArgs.filter;
-      const page = args.page || state.requestArgs.page;
-      const query = args.query || state.requestArgs.query;
-      const sort = args.sort || state.requestArgs.sort;
-      const newSearch = args.newSearch || state.requestArgs.newSearch;
+    import("@/services/imgurAPI")
+      .then((mod) => {
+        const imgurClient = mod.ImgurAPI.getInstance();
+        const filter = args.filter || state.requestArgs.filter;
+        const page = args.page || state.requestArgs.page;
+        const query = args.query || state.requestArgs.query;
+        const sort = args.sort || state.requestArgs.sort;
+        const newSearch = args.newSearch || state.requestArgs.newSearch;
 
-      imgurClient
-        .submitGallerySearch({
-          searchQuery: query,
-          pageNumber: page,
-          filterImageResults: filter,
-          sort: sort,
-        })
-        .then((response) => {
-          dispatchState({
-            type: "setItems",
-            items: newSearch ? response : state.items.concat(response),
+        imgurClient
+          .submitGallerySearch({
+            searchQuery: query,
+            pageNumber: page,
+            filterImageResults: filter,
+            sort: sort,
+          })
+          .then((response) => {
+            dispatchState({
+              type: "setItems",
+              items: newSearch ? response : state.items.concat(response),
+            });
+          })
+          .catch(() => {})
+          .finally(() => {
+            dispatchState({ type: "setIsLoading", loading: false });
           });
-        })
-        .finally(() => {
-          dispatchState({ type: "setIsLoading", loading: false });
-        });
-    });
+      })
+      .catch(() => {});
   };
 }
 
