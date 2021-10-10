@@ -12,9 +12,12 @@ The bundle size is 347K, larger than anticipated. Even after implementing [mui b
 
 [![CodeQL](https://github.com/NazimHAli/react-image-gallery/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/NazimHAli/react-image-gallery/actions/workflows/codeql-analysis.yml)
 
-### [Live Demo](https://react-image-gallery-master.vercel.app/)
+### [Master - Live Demo](https://react-image-gallery-master.vercel.app/)
 ![image](https://user-images.githubusercontent.com/26750288/135773516-5bf69971-7c8a-4e2a-8182-8c6240f7b436.png)
 
+### [Next Version - Live Demo](https://react-image-gallery-next.vercel.app/)
+
+![image](https://user-images.githubusercontent.com/26750288/136707348-2f777355-4657-47ea-a428-b1f2f77c51eb.png)
 
 ## Quick start
 
