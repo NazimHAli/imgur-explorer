@@ -49,6 +49,7 @@ $breakpoints: (
 @mixin container {
   max-width: 90rem;
   margin: 0 auto;
+  clear: both;
 }
 
 /*

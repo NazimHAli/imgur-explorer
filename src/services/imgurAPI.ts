@@ -67,21 +67,7 @@ class ImgurAPI {
     }
   }
 
-  /**
-   * submitGallerySearch
-   *
-   * @param searchQuery
-   * @param page
-   * @param filterImageResults
-   * @returns
-   */
-  public async submitGallerySearch(args: {
-    searchQuery?: string;
-    pageNumber?: number;
-    filterImageResults?: boolean;
-    sort?: string;
-    page?: number;
-  }) {
+  public async submitGallerySearch(requestArgs: State["requestArgs"]) {
     if (this.useFakeResponse) {
       return await import("@/__tests__/fixtures/imgurResponse").then(
         (mod: any) => {
@@ -89,15 +75,20 @@ class ImgurAPI {
         }
       );
     } else {
-      const searchString = args.searchQuery
-        ? `?q=${args.searchQuery}&q_size_px=small&q_type=jpg`
+      const searchString = requestArgs.query
+        ? `?q=${requestArgs.query}&q_size_px=small&q_type=jpg`
         : "?q_size_px=small&q_type=jpg";
 
+      const epPrefix = `${EP_GALLERY}/search/`;
+      const epSort = `${requestArgs.sort}/`;
+      const epWindow = `${
+        requestArgs.sort === "top" ? requestArgs.window : "all"
+      }/`;
+      const epPage = `${requestArgs.page || 1}${searchString}`;
+
       return await this.imgurBaseApi({
-        endPoint: `${EP_GALLERY}/search/${args.sort || "viral"}/all/${
-          args.page || 1
-        }${searchString}`,
-        filterImageResults: args.filterImageResults || false,
+        endPoint: `${epPrefix}${epSort}${epWindow}${epPage}`,
+        filterImageResults: requestArgs.filter || false,
       });
     }
   }
@@ -160,19 +151,10 @@ function handleGetData(
     import("@/services/imgurAPI")
       .then((mod) => {
         const imgurClient = mod.ImgurAPI.getInstance();
-        const filter = args.filter || state.requestArgs.filter;
-        const page = args.page || state.requestArgs.page;
-        const query = args.query || state.requestArgs.query;
-        const sort = args.sort || state.requestArgs.sort;
         const newSearch = args.newSearch || state.requestArgs.newSearch;
 
         imgurClient
-          .submitGallerySearch({
-            searchQuery: query,
-            pageNumber: page,
-            filterImageResults: filter,
-            sort: sort,
-          })
+          .submitGallerySearch(state.requestArgs)
           .then((response) => {
             dispatchState({
               type: "setItems",

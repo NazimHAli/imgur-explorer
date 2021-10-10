@@ -14,19 +14,22 @@ export type State = {
   requestError: boolean;
   items: Array<Item>;
   requestArgs: {
-    filter?: boolean;
+    filter: boolean;
     newSearch?: boolean;
-    page?: number;
-    query?: string;
-    sort?: string;
+    page: number;
+    query: string;
+    sort: string;
+    window?: string;
   };
 };
 
 export type Action = {
   type: string | null;
-  loading?: State["isLoading"];
-  items?: State["items"];
-  query?: State["requestArgs"]["query"];
+  loading: State["isLoading"];
+  items: State["items"];
+  query: State["requestArgs"]["query"];
+  sort: State["requestArgs"]["sort"];
+  window: State["requestArgs"]["window"];
 };
 
 const initialState: State = {
@@ -37,8 +40,9 @@ const initialState: State = {
     filter: true,
     newSearch: true,
     page: 1,
-    query: "",
+    query: "hello",
     sort: "viral",
+    window: "all", // day | week | month | year | all
   },
 };
 
@@ -52,7 +56,7 @@ const initialState: State = {
  * @param action
  * @returns
  */
-function stateReducer(state: State, action: Action) {
+function stateReducer(state: State, action: Action): State {
   switch (action.type) {
     case "setIsLoading":
       return {
@@ -67,12 +71,25 @@ function stateReducer(state: State, action: Action) {
       };
 
     case "submitSearchRequest":
+      let updatedArgs = {
+        ...state.requestArgs,
+      };
+
+      if (action?.query) {
+        updatedArgs = { ...updatedArgs, query: action.query };
+      }
+
+      if (action?.sort) {
+        updatedArgs = { ...updatedArgs, sort: action.sort };
+      }
+
+      if (action?.window) {
+        updatedArgs = { ...updatedArgs, window: action.window };
+      }
+
       return {
         ...state,
-        requestArgs: {
-          ...state.requestArgs,
-          query: action.query,
-        },
+        requestArgs: updatedArgs,
       };
 
     default:

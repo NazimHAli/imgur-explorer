@@ -47,4 +47,12 @@ function extractImageResults(response: any[]): any[] {
   return resultImages;
 }
 
-export { arrToMatrix, checkNumberIfFloat, extractImageResults };
+function capitalize(str: string | undefined) {
+  if (typeof str === "string") {
+    return str.replace(/^\w/, (c) => c.toUpperCase());
+  } else {
+    return "";
+  }
+}
+
+export { arrToMatrix, capitalize, checkNumberIfFloat, extractImageResults };
