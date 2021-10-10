@@ -1,7 +1,5 @@
 # ReactJS Image Gallery
 
-##### Refactoring the entire app in the [next-version branch](https://github.com/NazimHAli/react-image-gallery/tree/next-version). Replaced Webpack with vitejs and using vanilla styling, components instead of a component library.
-
 ReactJS + [imgur API](https://imgur.com/) + [vitejs bundler](https://github.com/vitejs/vite) in TypeScript.
 
 ##### Mocked Data From API
