@@ -31,8 +31,8 @@ yarn serve
 ## Use imgur API
 
 1. [Free registration](https://api.imgur.com/oauth2/addclient)
-2. Pass the client ID as an environemnt variable
-   - `imgurClientId=xxxxx yarn start`
+2. Pass the client ID as an environemnt variable (can be in .env or through CLI)
+   - `PUBLIC_IMGUR_CLIENT_ID=xxxxx yarn dev`
 
 ## Features
 
