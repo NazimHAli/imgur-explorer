@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --host 10.0.0.211 --port 3001",
-    "build": "vite build",
-    "lint": "prettier -c .",
+    "build": "yarn lint && vite build",
+    "lint": "tsc && prettier -c .",
     "lint:fix": "yarn lint --write",
     "serve": "vite preview --host 10.0.0.211 --port 3001",
     "postinstall": "husky install",
