@@ -41,7 +41,7 @@ const initialState: State = {
     filter: true,
     newSearch: true,
     page: 1,
-    query: "cute",
+    query: "meow",
     sort: "viral",
     window: "all",
   },

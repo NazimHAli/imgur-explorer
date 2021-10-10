@@ -37,7 +37,10 @@ function App() {
 
   return (
     <Suspense fallback={<span></span>}>
-      <Header dispatchState={dispatchState} />
+      <Header
+        dispatchState={dispatchState}
+        defaultQuery={state.requestArgs.query}
+      />
       <SearchToolBar dispatchState={dispatchState} state={state} />
       {state.isLoading && <LoadingAnimation />}
       {!state.isLoading && state.items.length > 0 && (

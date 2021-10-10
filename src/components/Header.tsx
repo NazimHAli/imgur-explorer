@@ -1,8 +1,10 @@
-import { Action } from "@/state";
 import { useRef } from "react";
 import "@/styles/layout/header.scss";
 
-function Header(props: { dispatchState: (arg0: Action) => void }): JSX.Element {
+function Header(props: {
+  dispatchState: (arg0: { type: string; query: string }) => void;
+  defaultQuery: string | number | readonly string[] | undefined;
+}): JSX.Element {
   function _handleSubmit(event: { preventDefault: () => void }) {
     if (inputRef.current && inputRef.current.value.length) {
       props.dispatchState({
@@ -27,6 +29,7 @@ function Header(props: { dispatchState: (arg0: Action) => void }): JSX.Element {
             type="search"
             className="input-search"
             placeholder="Search for it"
+            defaultValue={props.defaultQuery}
             ref={inputRef}
           />
         </form>
