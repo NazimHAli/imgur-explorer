@@ -16,8 +16,6 @@ function App() {
    * Dynamically imports the the imgur API class
    * - Constructs search arguments
    * - Dispatches event to update state.items
-   *
-   * @param args
    */
 
   const getData = handleGetData(dispatchState, state);
