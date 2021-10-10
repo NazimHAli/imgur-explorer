@@ -62,13 +62,14 @@ function stateReducer(state: State, action: Action): State {
     case "setIsLoading":
       return {
         ...state,
-        isLoading: action.loading || state.isLoading,
+        isLoading:
+          action?.loading !== undefined ? action.loading : state.isLoading,
       };
 
     case "setItems":
       return {
         ...state,
-        items: action.items || state.items,
+        items: action?.items?.length ? action.items : state.items,
       };
 
     case "requestError":
