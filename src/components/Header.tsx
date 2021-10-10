@@ -19,11 +19,9 @@ function Header(props: {
 
   return (
     <header className="header">
-      <div className="header__logo">
-        <a href="/">
-          <img src="/src/assets/gallery.svg" alt="Logo" />
-        </a>
-      </div>
+      <a href="/" className="header__logo">
+        <img src="/src/assets/gallery.svg" alt="Logo" />
+      </a>
       <div className="search-box">
         <button className="btn-search" type="submit" onClick={_handleSubmit}>
           <i className="search-icon"></i>
