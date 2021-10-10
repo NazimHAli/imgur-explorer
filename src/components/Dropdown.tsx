@@ -1,5 +1,4 @@
 import { Action, State } from "@/state";
-import "@/styles/component/dropdown.scss";
 import { capitalize } from "@/utils/dataUtils";
 
 function Dropdown(props: {

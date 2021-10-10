@@ -7,7 +7,7 @@ const Header = lazy(() => import("@/components/Header"));
 const LoadingAnimation = lazy(() => import("@/components/LoadingAnimation"));
 const NoResults = lazy(() => import("@/components/NoResults"));
 const Footer = lazy(() => import("@/components/Footer"));
-const Dropdown = lazy(() => import("@/components/Dropdown"));
+const SearchToolBar = lazy(() => import("@/components/SearchToolBar"));
 
 function App() {
   const [state, dispatchState] = useReducer(stateReducer, initialState);
@@ -38,19 +38,8 @@ function App() {
   return (
     <Suspense fallback={<span></span>}>
       <Header dispatchState={dispatchState} />
+      <SearchToolBar dispatchState={dispatchState} state={state} />
       {state.isLoading && <LoadingAnimation />}
-      <Dropdown
-        actionArg="sort"
-        options={["Top", "Viral", "Trending"]}
-        dispatchState={dispatchState}
-        requestArgs={state.requestArgs}
-      />
-      <Dropdown
-        actionArg="window"
-        options={["All", "Day", "Week", "Month", "Year"]}
-        dispatchState={dispatchState}
-        requestArgs={state.requestArgs}
-      />
       {!state.isLoading && state.items.length > 0 && (
         <Gallery items={state.items} />
       )}
