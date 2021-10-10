@@ -19,7 +19,11 @@ function Header(props: {
 
   return (
     <header className="header">
-      <div className="header_logo">LOGO</div>
+      <div className="header__logo">
+        <a href="/">
+          <img src="/src/assets/gallery.svg" alt="Logo" />
+        </a>
+      </div>
       <div className="search-box">
         <button className="btn-search" type="submit" onClick={_handleSubmit}>
           <i className="search-icon"></i>
@@ -34,7 +38,9 @@ function Header(props: {
           />
         </form>
       </div>
-      <div className="profile">PROFILE</div>
+      <div className="header__profile">
+        <img src="/src/assets/profile.svg" alt="Profile" />
+      </div>
     </header>
   );
 }
