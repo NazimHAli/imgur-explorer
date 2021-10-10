@@ -47,7 +47,7 @@ function extractImageResults(response: any[]): any[] {
   return resultImages;
 }
 
-function capitalize(str: string | undefined) {
+function capitalize(str: string | undefined): string {
   if (typeof str === "string") {
     return str.replace(/^\w/, (c) => c.toUpperCase());
   } else {

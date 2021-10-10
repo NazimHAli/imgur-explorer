@@ -14,7 +14,7 @@ function Dropdown(props: {
     target: { value: string };
     preventDefault: () => void;
   }) => {
-    let dispatchArgs: Action = {
+    const dispatchArgs: Action = {
       type: "submitSearchRequest",
     };
 
@@ -35,7 +35,7 @@ function Dropdown(props: {
       <select
         id="drop-down"
         disabled={actionArg === "window" && requestArgs.sort !== "top"}
-        onChange={handleOnChange}
+        onBlur={handleOnChange}
         defaultValue={capitalize(requestArgs.sort)}
       >
         {options.map((item) => (

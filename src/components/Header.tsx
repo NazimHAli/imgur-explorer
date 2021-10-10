@@ -19,7 +19,7 @@ function Header(props: { dispatchState: (arg0: Action) => void }): JSX.Element {
     <header className="header">
       <div className="header_logo">LOGO</div>
       <div className="search-box">
-        <button className="btn-search" onClick={_handleSubmit}>
+        <button className="btn-search" type="submit" onClick={_handleSubmit}>
           <i className="search-icon"></i>
         </button>
         <form onSubmit={_handleSubmit}>

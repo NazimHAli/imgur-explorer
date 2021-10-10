@@ -19,7 +19,7 @@ export type State = {
     page: number;
     query: string;
     sort: string;
-    window?: string;
+    window: string;
   };
 };
 
