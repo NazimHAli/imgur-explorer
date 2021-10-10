@@ -9,10 +9,7 @@ function Dropdown(props: {
 }) {
   const { options, actionArg, dispatchState, requestArgs } = props;
 
-  const handleOnChange = (event: {
-    target: { value: string };
-    preventDefault: () => void;
-  }) => {
+  const handleOnChange = (event: { target: HTMLSelectElement }) => {
     const dispatchArgs: Action = {
       type: "submitSearchRequest",
     };
@@ -24,8 +21,6 @@ function Dropdown(props: {
     }
 
     dispatchState(dispatchArgs);
-
-    event.preventDefault();
   };
 
   return (
@@ -34,7 +29,7 @@ function Dropdown(props: {
       <select
         id="drop-down"
         disabled={actionArg === "window" && requestArgs.sort !== "top"}
-        onBlur={handleOnChange}
+        onChange={handleOnChange}
         defaultValue={capitalize(requestArgs.sort)}
       >
         {options.map((item) => (
