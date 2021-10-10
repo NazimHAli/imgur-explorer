@@ -1,7 +1,12 @@
-import Dropdown from "./Dropdown";
+import { Action, State } from "@/state";
 import "@/styles/component/search-toolbar.scss";
+import { Dispatch } from "react";
+import Dropdown from "./Dropdown";
 
-function SearchToolBar(props: { dispatchState: any; state: any }) {
+function SearchToolBar(props: {
+  dispatchState: Dispatch<Action>;
+  state: State;
+}) {
   const { dispatchState, state } = props;
 
   return (
