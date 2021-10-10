@@ -8,6 +8,8 @@ function Dropdown(props: {
   requestArgs: State["requestArgs"];
 }): JSX.Element {
   const { options, actionArg, dispatchState, requestArgs } = props;
+  const selectedValue = capitalize(requestArgs[actionArg]);
+  const renderListItems = options.length > 0;
 
   const handleOnClick = (event: {
     currentTarget: { getAttribute: (arg0: string) => string };
@@ -17,15 +19,20 @@ function Dropdown(props: {
     dispatchState(dispatchArgs);
   };
 
-  const enableListItems = options.length > 0;
-  const listItems = enableListItems && (
+  const listItems = renderListItems && (
     <ul
       id="drop-down"
       className="dropdown__content"
-      defaultValue={capitalize(requestArgs[actionArg])}
+      defaultValue={selectedValue}
+      style={{ maxHeight: `${options.length * 3}rem` }}
     >
       {options.map((item) => (
-        <li key={item} value={item} onClick={handleOnClick}>
+        <li
+          key={item}
+          value={item}
+          onClick={handleOnClick}
+          className={item === selectedValue ? "selected" : ""}
+        >
           {item}
         </li>
       ))}
@@ -34,8 +41,8 @@ function Dropdown(props: {
 
   return (
     <div className="dropdown">
-      <button className="dropdown__button" disabled={!enableListItems}>
-        {capitalize(actionArg)}: {capitalize(requestArgs[actionArg])}
+      <button className="dropdown__button" disabled={!renderListItems}>
+        {capitalize(actionArg)}: {selectedValue}
       </button>
       {listItems}
     </div>

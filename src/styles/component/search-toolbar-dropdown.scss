@@ -7,7 +7,7 @@
 
   &:hover {
     .dropdown__content {
-      height: 10rem;
+      height: 20rem;
     }
   }
 
@@ -21,6 +21,7 @@
     padding: 11px 16px;
     transition: all ease-in-out 0.2s;
     width: inherit;
+    text-align: left;
 
     &:disabled {
       cursor: not-allowed;
@@ -32,7 +33,7 @@
     }
 
     @include breakpoint($from: "md") {
-      width: 10rem;
+      width: 12rem;
     }
   }
 
@@ -50,13 +51,20 @@
 
     li {
       display: block;
-      color: #000000;
+      color: #000;
       padding: 1rem;
       text-decoration: none;
+      cursor: pointer;
 
       &:hover {
-        color: #ffffff;
-        background-color: #00a4bd;
+        color: #fff;
+        background-color: #bdc3c7;
+      }
+
+      &.selected {
+        background-color: #212121;
+        color: #fff;
+        cursor: not-allowed;
       }
     }
   }

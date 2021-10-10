@@ -41,9 +41,9 @@ const initialState: State = {
     filter: true,
     newSearch: true,
     page: 1,
-    query: "hello",
+    query: "cute",
     sort: "viral",
-    window: "all", // day | week | month | year | all
+    window: "all",
   },
 };
 
