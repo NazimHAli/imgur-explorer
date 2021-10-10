@@ -4,6 +4,7 @@
 
 .input-search {
   border-style: none;
+  color: #2c3e50;
   font-size: 18px;
   height: 3rem;
   outline: none;
@@ -11,7 +12,6 @@
   padding: 10px;
   transition: all 0.5s ease-in-out;
   width: 100%;
-  color: #2c3e50;
 
   &:focus {
     color: #000;
@@ -30,8 +30,7 @@
   pointer-events: painted;
   position: absolute;
   width: 3rem;
-
-  @include transition(all ease-in-out 0.2s);
+  transition: all ease-in-out 0.2s;
 
   &:hover {
     background-color: #000;
@@ -43,11 +42,13 @@
   box-sizing: border-box;
   position: relative;
   display: block;
-  transform: scale(var(--ggs, 1));
+
   width: 16px;
   height: 16px;
+
   border: 2px solid;
   border-radius: 100%;
+
   margin-left: -4px;
   margin-top: -4px;
 
@@ -57,10 +58,12 @@
     box-sizing: border-box;
     position: absolute;
     border-radius: 3px;
+
     width: 2px;
     height: 8px;
     background: currentColor;
     transform: rotate(-45deg);
+
     top: 10px;
     left: 12px;
   }

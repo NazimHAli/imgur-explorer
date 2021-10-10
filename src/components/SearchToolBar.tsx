@@ -9,6 +9,9 @@ function SearchToolBar(props: {
 }) {
   const { dispatchState, state } = props;
 
+  // imgur API only allows 'window' options if sort == 'top'
+  const enablewindow = state.requestArgs.sort === "top";
+
   return (
     <div className="search-toolbar">
       <Dropdown
@@ -19,7 +22,7 @@ function SearchToolBar(props: {
       />
       <Dropdown
         actionArg="window"
-        options={["All", "Day", "Week", "Month", "Year"]}
+        options={enablewindow ? ["All", "Day", "Week", "Month", "Year"] : []}
         dispatchState={dispatchState}
         requestArgs={state.requestArgs}
       />

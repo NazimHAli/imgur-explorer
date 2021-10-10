@@ -30,7 +30,7 @@
 
   & img {
     opacity: 0;
-    @include transition(opacity ease-in-out 500ms);
+    transition: opacity ease-in-out 500ms;
   }
 
   &__info {
@@ -44,12 +44,12 @@
     background-color: #212121c4;
     transform: translateY(50%);
 
-    @include transition(transform ease-in-out 200ms);
+    transition: transform ease-in-out 200ms;
   }
 
   &__counts {
     opacity: 0;
-    @include transition(opacity ease-in-out 500ms);
+    transition: opacity ease-in-out 500ms;
     list-style: none;
     padding-left: 0.5rem;
     font-size: small;

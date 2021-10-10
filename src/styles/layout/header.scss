@@ -8,7 +8,7 @@
   align-content: center;
   margin-bottom: 3rem;
 
-  @include transition(all ease-in-out 500ms);
+  transition: all ease-in-out 500ms;
 
   @include breakpoint($from: "md") {
     grid-template-columns: 1fr 6fr 1fr;

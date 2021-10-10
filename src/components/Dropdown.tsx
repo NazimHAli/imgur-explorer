@@ -6,40 +6,55 @@ function Dropdown(props: {
   actionArg: string;
   dispatchState: React.Dispatch<Action>;
   requestArgs: State["requestArgs"];
-}) {
+}): JSX.Element {
   const { options, actionArg, dispatchState, requestArgs } = props;
 
-  const handleOnChange = (event: { target: HTMLSelectElement }) => {
-    const dispatchArgs: Action = {
-      type: "submitSearchRequest",
-    };
-
-    if (actionArg === "sort") {
-      dispatchArgs["sort"] = event.target.value.toLowerCase();
-    } else if (actionArg === "window") {
-      dispatchArgs["window"] = event.target.value.toLowerCase();
-    }
+  const handleOnClick = (event: {
+    currentTarget: { getAttribute: (arg0: string) => string };
+  }) => {
+    const dispatchArgs: Action = getDispatchArgs(actionArg, event);
 
     dispatchState(dispatchArgs);
   };
 
+  const enableListItems = options.length > 0;
+  const listItems = enableListItems && (
+    <ul
+      id="drop-down"
+      className="dropdown__content"
+      defaultValue={capitalize(requestArgs[actionArg])}
+    >
+      {options.map((item) => (
+        <li key={item} value={item} onClick={handleOnClick}>
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+
   return (
     <div className="dropdown">
-      <label htmlFor="drop-down">{capitalize(actionArg)}</label>
-      <select
-        id="drop-down"
-        disabled={actionArg === "window" && requestArgs.sort !== "top"}
-        onChange={handleOnChange}
-        defaultValue={capitalize(requestArgs.sort)}
-      >
-        {options.map((item) => (
-          <option key={item} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
+      <button className="dropdown__button" disabled={!enableListItems}>
+        {capitalize(actionArg)}: {capitalize(requestArgs[actionArg])}
+      </button>
+      {listItems}
     </div>
   );
 }
 
 export default Dropdown;
+
+function getDispatchArgs(
+  actionArg: string,
+  event: { currentTarget: { getAttribute: (arg0: string) => string } }
+) {
+  const dispatchArgs: Action = {
+    type: "submitSearchRequest",
+  };
+
+  dispatchArgs[actionArg] = event.currentTarget
+    .getAttribute("value")
+    .toLowerCase();
+
+  return dispatchArgs;
+}

@@ -1,0 +1,63 @@
+.dropdown {
+  color: #343a40;
+  display: block;
+  position: relative;
+  width: 100%;
+  float: right;
+
+  &:hover {
+    .dropdown__content {
+      height: 10rem;
+    }
+  }
+
+  @include breakpoint($from: "md") {
+    width: max-content;
+  }
+
+  &__button {
+    border: solid 1px #515050;
+    display: block;
+    padding: 11px 16px;
+    transition: all ease-in-out 0.2s;
+    width: inherit;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: black;
+      color: white;
+    }
+
+    @include breakpoint($from: "md") {
+      width: 10rem;
+    }
+  }
+
+  &__content {
+    background-color: white;
+    box-shadow: 0px 0px 5px -2px #000000;
+    height: 0;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    transition: all ease-in-out 0.2s;
+    width: 100%;
+    z-index: 1;
+
+    li {
+      display: block;
+      color: #000000;
+      padding: 1rem;
+      text-decoration: none;
+
+      &:hover {
+        color: #ffffff;
+        background-color: #00a4bd;
+      }
+    }
+  }
+}
