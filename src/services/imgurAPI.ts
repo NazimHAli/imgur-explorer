@@ -1,5 +1,6 @@
 import { Action, State } from "@/state";
 import { extractImageResults } from "@/utils/dataUtils";
+import { Dispatch } from "react";
 
 const imgurClientId = import.meta.env.PUBLIC_IMGUR_CLIENT_ID;
 const BASE = "https://api.imgur.com/3";
@@ -130,20 +131,8 @@ class ImgurAPI {
  * @returns
  */
 function handleGetData(
-  dispatchState: {
-    (value: Action): void;
-    (arg0: {
-      type?: string;
-      loading?: boolean;
-      items?: any;
-      requestError?: boolean;
-    }): void;
-  },
-  state: {
-    isLoading?: boolean;
-    items: State["items"];
-    requestArgs: State["requestArgs"];
-  }
+  dispatchState: Dispatch<Action>,
+  state: State
 ): (args?: State["requestArgs"]) => void {
   return (args = {} as State["requestArgs"]) => {
     dispatchState({ type: "setIsLoading", loading: true });
@@ -163,14 +152,14 @@ function handleGetData(
             });
           })
           .catch(() => {
-            dispatchState({ requestError: true });
+            dispatchState({ type: "requestError", requestError: true });
           })
           .finally(() => {
             dispatchState({ type: "setIsLoading", loading: false });
           });
       })
       .catch(() => {
-        dispatchState({ requestError: true });
+        dispatchState({ type: "requestError", requestError: true });
       });
   };
 }

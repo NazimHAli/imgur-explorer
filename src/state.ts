@@ -25,11 +25,12 @@ export type State = {
 
 export type Action = {
   type: string | null;
-  loading: State["isLoading"];
-  items: State["items"];
-  query: State["requestArgs"]["query"];
-  sort: State["requestArgs"]["sort"];
-  window: State["requestArgs"]["window"];
+  loading?: State["isLoading"];
+  items?: State["items"];
+  query?: State["requestArgs"]["query"];
+  requestError?: boolean;
+  sort?: State["requestArgs"]["sort"];
+  window?: State["requestArgs"]["window"];
 };
 
 const initialState: State = {
@@ -61,13 +62,20 @@ function stateReducer(state: State, action: Action): State {
     case "setIsLoading":
       return {
         ...state,
-        isLoading: action.loading,
+        isLoading: action.loading || state.isLoading,
       };
 
     case "setItems":
       return {
         ...state,
-        items: action.items,
+        items: action.items || state.items,
+      };
+
+    case "requestError":
+      return {
+        ...state,
+        requestError: true,
+        items: [],
       };
 
     case "submitSearchRequest":
