@@ -45,7 +45,7 @@ function handleIntersectEntry(entry, observer): void {
   observer.unobserve(entry.target);
 }
 
-function isElementInView(element: { getBoundingClientRect: () => any }) {
+function isElementInView(element: HTMLElement): boolean {
   if (!element) {
     return false;
   }

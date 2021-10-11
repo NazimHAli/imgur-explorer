@@ -2,15 +2,12 @@ import React from "react";
 
 import { Alert } from "@mui/material";
 import { intersectionObserverHook } from "../hooks/intersectionObserverHook";
-import { BaseContent } from "./BaseContent";
+import { LazyLoadImages } from "../utils/visibilityUtils";
 
+const BaseContent = React.lazy(() => import("./BaseContent"));
 const CardSkeleton = React.lazy(() => import("./CardSkeleton"));
 
-let lazyLoadImg;
-
-import("../utils/visibilityUtils").then((mod) => {
-  lazyLoadImg = new mod.LazyLoadImages();
-});
+let lazyLoadImg = new LazyLoadImages();
 
 function App() {
   const [data, setData] = React.useState(null);
@@ -48,7 +45,6 @@ function App() {
       futureIdx < data?.length;
 
     if (loadMore) {
-      document.scrollingElement.scrollTop += 400;
       setState(() => ({ ...state, nextIdx: futureIdx }));
     } else if (futureIdx >= data?.length) {
       setState(() => ({ ...state, stopLazyLoading: true }));
@@ -56,7 +52,7 @@ function App() {
   }, [isIOelementVisible]);
 
   const isItemLoaded = (index) => !state.hasNextPage || index < data.length;
-  const submitSearchRequest = (args) => {
+  const submitSearchRequest = (args: typeof state["requestArgs"]) => {
     setShowLoading(true);
     import("../services/imgurAPI").then((mod) => {
       const imgurClient = mod.ImgurAPI.getInstance();
@@ -109,20 +105,24 @@ function App() {
     return <CardSkeleton key={`${index}`} cRef={imageRef} item={item} />;
   };
 
-  return BaseContent(
-    showLoading,
-    state,
-    submitSearchRequest,
-    data,
-    RenderCard,
-    ioElementRef
+  return (
+    <>
+      <BaseContent
+        showLoading={showLoading}
+        state={state}
+        submitSearchRequest={submitSearchRequest}
+        data={data}
+        RenderCard={RenderCard}
+        ioElementRef={ioElementRef}
+      />
+    </>
   );
 
   function _handleNoResults(): any {
     let content;
 
     if (state.isNextPageLoading) {
-      content = <p>...</p>;
+      content = <p></p>;
     } else {
       content = (
         <Alert

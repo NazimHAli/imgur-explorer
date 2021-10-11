@@ -1,10 +1,10 @@
-import * as React from "react";
 import { Card, CardActionArea, CardContent, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 
 export default function GalleryTags() {
-  const [galleryTags, setGalleryTags]: any = React.useState({});
+  const [galleryTags, setGalleryTags]: any = useState({});
 
-  React.useEffect(() => {
+  useEffect(() => {
     const gd = () => {
       import("../services/imgurAPI").then((mod) => {
         const imgurClient = mod.ImgurAPI.getInstance();

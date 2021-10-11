@@ -1,6 +1,6 @@
 import { createTheme, ThemeProvider } from "@mui/material";
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import React, { Suspense } from "react";
+import { render } from "react-dom";
 import "./style/index.scss";
 
 const CssBaseline = React.lazy(() => import("./intermediates/muiCssBaseline"));
@@ -12,12 +12,12 @@ const darkTheme = createTheme({
   },
 });
 
-ReactDOM.render(
-  <React.Suspense fallback={<div>...</div>}>
+render(
+  <Suspense fallback={<div>...</div>}>
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <Grid />
     </ThemeProvider>
-  </React.Suspense>,
+  </Suspense>,
   document.getElementById("root")
 );

@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { AccountCircle } from "@mui/icons-material";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -14,15 +12,18 @@ import {
   TextField,
   Toolbar,
 } from "@mui/material";
+import React, { useState } from "react";
 
 export default function Header({ query, handleOnSubmit }) {
-  const [curQuery, setCurQuery] = React.useState(query);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [curQuery, setCurQuery] = useState(query);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null);
 
   const isMenuOpen = Boolean(anchorEl);
 
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+  const handleProfileMenuOpen = (event: {
+    currentTarget: React.SetStateAction<HTMLElement>;
+  }) => {
     setAnchorEl(event.currentTarget);
   };
 

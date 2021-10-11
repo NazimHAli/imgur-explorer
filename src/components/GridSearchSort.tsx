@@ -1,4 +1,3 @@
-import * as React from "react";
 import {
   SelectChangeEvent,
   FormControl,
@@ -6,6 +5,7 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
+import React, { useState } from "react";
 
 const SORT_MAP = {
   0: "time",
@@ -14,8 +14,8 @@ const SORT_MAP = {
 };
 
 function GridSearchSort({ handleSortChange }) {
-  const [sortOption, setSortOption] = React.useState<string | number>(1);
-  const [open, setOpen] = React.useState(false);
+  const [sortOption, setSortOption] = useState<string | number>(1);
+  const [open, setOpen] = useState(false);
 
   const handleChange = (event: SelectChangeEvent<typeof sortOption>) => {
     setSortOption(event.target.value);
