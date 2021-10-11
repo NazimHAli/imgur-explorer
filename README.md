@@ -10,7 +10,7 @@ If you don't want to register and use the free imgur API, it will use mocked dat
 [![DeepSource](https://deepsource.io/gh/NazimHAli/react-image-gallery.svg/?label=resolved+issues&show_trend=true&token=aO_Hx9m4iDxMopueaxAigoGd)](https://deepsource.io/gh/NazimHAli/react-image-gallery)
 [![CodeQL](https://github.com/NazimHAli/react-image-gallery/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/NazimHAli/react-image-gallery/actions/workflows/codeql-analysis.yml)
 
-### [Live Demo](https://react-image-gallery-next.vercel.app/)
+### [Live Demo](https://react-image-gallery-master.vercel.app/)
 
 ![image](https://user-images.githubusercontent.com/26750288/136809770-79221fcc-ce56-42d0-8138-32214c5dae85.png)
 
