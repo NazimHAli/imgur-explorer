@@ -12,7 +12,7 @@ If you don't want to register and use the free imgur API, it will use mocked dat
 
 ### [Live Demo](https://react-image-gallery-next.vercel.app/)
 
-![image](https://user-images.githubusercontent.com/26750288/136707348-2f777355-4657-47ea-a428-b1f2f77c51eb.png)
+![image](https://user-images.githubusercontent.com/26750288/136809770-79221fcc-ce56-42d0-8138-32214c5dae85.png)
 
 ## Quick start
 
@@ -47,7 +47,7 @@ yarn serve
 
 - [x] Search
 - [x] Sort results
-- [ ] WIP - Explore by categories
+- [x] Explore by categories
 - [ ] Explore tags
 - [ ] Profile login
 - [ ] Upload images
