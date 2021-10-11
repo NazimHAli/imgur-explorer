@@ -6,28 +6,14 @@ const GridSearchSort = React.lazy(() => import("./GridSearchSort"));
 const Header = React.lazy(() => import("./Header"));
 const LoadingResults = React.lazy(() => import("./LoadingResults"));
 
-export function BaseContent(
-  showLoading: boolean,
-  state: {
-    hasNextPage: boolean;
-    isInterSecting: boolean;
-    isNextPageLoading: boolean;
-    nextIdx: number;
-    numItemsPerRequest: number;
-    stopLazyLoading: boolean;
-    requestArgs: {
-      filter: boolean;
-      newSearch: boolean;
-      page: number;
-      query: string;
-      sort: string;
-    };
-  },
-  submitSearchRequest: (args: any) => void,
-  data: any,
-  RenderCard: ({ item, index }: { item: any; index: any }) => any,
-  ioElementRef: React.MutableRefObject<undefined>
-) {
+function BaseContent({
+  showLoading,
+  state,
+  submitSearchRequest,
+  data,
+  RenderCard,
+  ioElementRef,
+}) {
   return (
     <>
       <LoadingResults open={showLoading} />
@@ -57,7 +43,7 @@ export function BaseContent(
           {Array.from(
             data ? data.slice(0, state.nextIdx + state.numItemsPerRequest) : []
           ).map((image: any, imgIdx) => (
-            <RenderCard key={imgIdx} item={image} index={imgIdx} />
+            <RenderCard key={image?.id} item={image} index={imgIdx} />
           ))}
         </Box>
 
@@ -81,3 +67,5 @@ export function BaseContent(
     </>
   );
 }
+
+export default BaseContent;

@@ -1,5 +1,5 @@
 import { Backdrop, CircularProgress } from "@mui/material";
-import * as React from "react";
+import React from "react";
 
 export default function LoadingResults({ open = false }) {
   return (

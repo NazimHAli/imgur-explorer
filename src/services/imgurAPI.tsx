@@ -1,4 +1,4 @@
-import { arrToMatrix, extractImageResults } from "../utils/dataUtils";
+import { extractImageResults } from "../utils/dataUtils";
 
 const imgurClientId = process.env.imgurClientId;
 const BASE = "https://api.imgur.com/3";
@@ -117,21 +117,6 @@ class ImgurAPI {
     } else {
       return await this.imgurBaseApi({ endPoint: EP_GALLERY_TAGS });
     }
-  }
-
-  /**
-   * filterImageResults
-   *
-   * Filter image results
-   * Convert the array to a matrix of arrays
-   * for easier loading in grids/galleries
-   *
-   * @param response
-   * @returns
-   */
-  private filterImageResults(response) {
-    const cleanedData = extractImageResults(response);
-    return arrToMatrix(cleanedData, 4);
   }
 }
 

@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import {
   Card,
   CardHeader,
@@ -12,6 +10,7 @@ import {
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import BaseImage from "./Image";
+import React, { useState, useEffect, Fragment } from "react";
 
 interface MediaProps {
   cRef: any;
@@ -21,9 +20,9 @@ interface MediaProps {
 
 function Media(props: MediaProps) {
   const { cRef, item, loading } = props;
-  const [isLoading, setIsLoading] = React.useState(loading);
+  const [isLoading, setIsLoading] = useState(loading);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const showImg = setTimeout(() => {
       setIsLoading(false);
     }, 250);
@@ -89,16 +88,16 @@ function Media(props: MediaProps) {
       )}
       <div className="card-img-container">{imgBase}</div>
       <CardContent sx={{ height: "20%" }}>
-        <Divider variant="middle" sx={{ my: 1 }}/>
+        <Divider variant="middle" sx={{ my: 1 }} />
         {isLoading ? (
-          <React.Fragment>
+          <Fragment>
             <Skeleton
               animation="pulse"
               height={10}
               style={{ marginBottom: 6 }}
             />
             <Skeleton animation="pulse" height={10} width="80%" />
-          </React.Fragment>
+          </Fragment>
         ) : (
           <Typography
             variant="body2"
