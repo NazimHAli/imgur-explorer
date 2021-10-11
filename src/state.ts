@@ -13,7 +13,7 @@ export type State = {
   isLoading: boolean;
   requestError: boolean;
   items: Array<Item>;
-  tagObject: { galleries?: [] };
+  tagObject: { galleries?: []; tags?: [] };
   requestArgs: {
     filter: boolean;
     newSearch?: boolean;

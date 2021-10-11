@@ -8,7 +8,7 @@ const LoadingAnimation = lazy(() => import("@/components/LoadingAnimation"));
 const NoResults = lazy(() => import("@/components/NoResults"));
 const Footer = lazy(() => import("@/components/Footer"));
 const SearchToolBar = lazy(() => import("@/components/SearchToolBar"));
-const ExploreTags = lazy(() => import("@/components/ExploreTags"));
+const ExploreGalleries = lazy(() => import("@/components/ExploreGalleries"));
 
 function App() {
   const [state, dispatchState] = useReducer(stateReducer, initialState);
@@ -41,7 +41,7 @@ function App() {
         dispatchState={dispatchState}
         defaultQuery={state.requestArgs.query}
       />
-      <ExploreTags tagObject={state.tagObject} />
+      <ExploreGalleries tagObject={state.tagObject} />
       <SearchToolBar dispatchState={dispatchState} state={state} />
       {state.isLoading && <LoadingAnimation />}
       {!state.isLoading && state.items.length > 0 && (

@@ -91,7 +91,7 @@ class ImgurAPI {
   }
 
   /**
-   * Gets a list of the default gallery tags
+   * Get list of default gallery tags
    *
    * @returns
    */

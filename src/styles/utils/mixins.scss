@@ -46,10 +46,19 @@ $breakpoints: (
   }
 }
 
-@mixin container {
-  max-width: 90rem;
+@mixin container($max-width: 90rem) {
+  max-width: $max-width;
   margin: 0 auto;
   clear: both;
+}
+
+@mixin cssgrid($min, $gap: false) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($min, 1fr));
+
+  @if $gap {
+    grid-gap: $gap;
+  }
 }
 
 @mixin box-sizing($box-model) {

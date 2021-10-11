@@ -1,8 +1,6 @@
 .gallery-container {
   @include container;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-  grid-gap: 1rem;
+  @include cssgrid($min: 15rem, $gap: 1rem);
 }
 
 .card {
@@ -17,6 +15,7 @@
   &:hover {
     .card__info {
       transform: translateY(0);
+      background-color: #dc0065;
     }
 
     .card__counts {
@@ -41,10 +40,10 @@
     text-overflow: ellipsis;
     width: 100%;
     overflow: hidden;
-    background-color: #212121c4;
+    background-color: #222;
     transform: translateY(50%);
 
-    transition: transform ease-in-out 200ms;
+    transition: all ease-in-out 200ms;
   }
 
   &__counts {

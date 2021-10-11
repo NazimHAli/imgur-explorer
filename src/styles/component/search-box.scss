@@ -32,8 +32,11 @@
   width: 3rem;
   transition: all ease-in-out 0.2s;
 
+  background-color: #000;
+  color: white;
+
   &:hover {
-    background-color: #000;
+    background-color: #333;
     color: #fff;
   }
 }
