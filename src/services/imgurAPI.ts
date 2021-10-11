@@ -5,7 +5,6 @@ import { Dispatch } from "react";
 const imgurClientId = import.meta.env.PUBLIC_IMGUR_CLIENT_ID;
 const BASE = "https://api.imgur.com/3";
 const EP_GALLERY = `${BASE}/gallery`;
-const EP_GALLERY_HOT = `${EP_GALLERY}/hot`;
 const EP_GALLERY_TAGS = `${BASE}/tags`;
 
 interface Args {
@@ -23,25 +22,18 @@ class ImgurAPI {
   }
 
   /**
-   * getInstance
+   * Get or create an instance
    *
    * @returns
    */
   public static getInstance(): ImgurAPI {
-    if (!ImgurAPI.instance) {
+    if (ImgurAPI.instance === undefined) {
       ImgurAPI.instance = new ImgurAPI();
     }
 
     return ImgurAPI.instance;
   }
 
-  /**
-   * imgurBaseApi
-   *
-   * @param endPoint
-   * @param requestOptions
-   * @returns
-   */
   private async imgurBaseApi(args: Args) {
     const myHeaders = new Headers({
       Authorization: `Client-ID ${imgurClientId}`,
@@ -53,54 +45,49 @@ class ImgurAPI {
       headers: myHeaders,
     };
 
-    try {
-      const response = await fetch(args.endPoint, args.requestOptions);
-      const result = await response.json();
+    const response = await fetch(args.endPoint, args.requestOptions);
+    const result = await response.json();
 
-      if (args.filterImageResults) {
-        return extractImageResults(result.data);
-      }
-
-      return result.data;
-    } catch (error) {
-      console.log("error", error);
-      return [];
+    if (args.filterImageResults) {
+      return extractImageResults(result.data);
     }
+
+    return result.data;
   }
 
-  public async submitGallerySearch(requestArgs: State["requestArgs"]) {
+  public getGallerySearchResults(requestArgs: State["requestArgs"]) {
     if (this.useFakeResponse) {
-      return await import("@/__tests__/fixtures/imgurResponse").then(
-        (mod: any) => {
-          return extractImageResults(mod.fakeResponse.data);
-        }
-      );
-    } else {
-      const searchString = requestArgs.query
-        ? `?q=${requestArgs.query}&q_size_px=small&q_type=jpg`
-        : "?q_size_px=small&q_type=jpg";
-
-      const epPrefix = `${EP_GALLERY}/search/`;
-      const epSort = `${requestArgs.sort}/`;
-      const epWindow = `${
-        requestArgs.sort === "top" ? requestArgs.window : "all"
-      }/`;
-      const epPage = `${requestArgs.page || 1}${searchString}`;
-
-      return await this.imgurBaseApi({
-        endPoint: `${epPrefix}${epSort}${epWindow}${epPage}`,
-        filterImageResults: requestArgs.filter || false,
+      return import("@/__tests__/fixtures/imgurResponse").then((mod: any) => {
+        return extractImageResults(mod.fakeResponse.data);
       });
+    } else {
+      return this.getLiveResultsFromAPI(requestArgs);
     }
   }
 
-  /**
-   * Get 'hot' results from gallery search example
-   *
-   * @returns
-   */
-  public async getGalleryImages() {
-    return await this.imgurBaseApi({ endPoint: EP_GALLERY_HOT });
+  private getLiveResultsFromAPI(requestArgs: State["requestArgs"]) {
+    const endPointURL = this.constructEndpointURL(requestArgs);
+
+    return this.imgurBaseApi({
+      endPoint: endPointURL,
+      filterImageResults: requestArgs.filter || false,
+    });
+  }
+
+  private constructEndpointURL(requestArgs: State["requestArgs"]) {
+    // Search query
+    const searchString = requestArgs.query
+      ? `?q=${requestArgs.query}&q_size_px=small&q_type=jpg`
+      : "?q_size_px=small&q_type=jpg";
+
+    // Filters
+    const sortParam = `${requestArgs.sort}/`;
+    const windowParam = `${
+      requestArgs.sort === "top" ? requestArgs.window : "all"
+    }/`;
+    const pageParam = `${requestArgs.page || 1}${searchString}`;
+
+    return `${EP_GALLERY}/search/${sortParam}${windowParam}${pageParam}`;
   }
 
   /**
@@ -110,7 +97,7 @@ class ImgurAPI {
    */
   public async getGalleryTags() {
     if (this.useFakeResponse) {
-      return await import("../__tests__/fixtures/galleryTags").then(
+      return await import("@/__tests__/fixtures/galleryTags").then(
         (mod: any) => {
           return mod.fakeGalleryTags.data;
         }
@@ -119,49 +106,59 @@ class ImgurAPI {
       return await this.imgurBaseApi({ endPoint: EP_GALLERY_TAGS });
     }
   }
+
+  public methodDispatcher(method: string, requestArgs: State["requestArgs"]) {
+    if (method == "search") {
+      return this.getGallerySearchResults(requestArgs);
+    } else {
+      return this.getGalleryTags();
+    }
+  }
 }
 
 /**
- * Helper function that dynamically imports the class if not available
- * Provides search argument construction logic so that it can be
- * imported into any file if needed
+ * Helper function to handle service requests
+ * and dispatch state updates
  *
  * @param dispatchState
  * @param state
+ * @param method
  * @returns
  */
-function handleGetData(
+function handleServiceRequests(
   dispatchState: Dispatch<Action>,
-  state: State
-): (args?: State["requestArgs"]) => void {
-  return (args = {} as State["requestArgs"]) => {
-    dispatchState({ type: "setIsLoading", loading: true });
+  state: State,
+  method = "search"
+): void {
+  dispatchState({ type: "setIsLoading", loading: true });
 
-    import("@/services/imgurAPI")
-      .then((mod) => {
-        const imgurClient = mod.ImgurAPI.getInstance();
-        const newSearch = args.newSearch || state.requestArgs.newSearch;
+  const { requestArgs } = state;
+  const imgurClient = ImgurAPI.getInstance();
 
-        imgurClient
-          .submitGallerySearch(state.requestArgs)
-          .then((response) => {
-            dispatchState({
-              type: "setItems",
-              items: newSearch ? response : state.items.concat(response),
-              requestError: false,
-            });
-          })
-          .catch(() => {
-            dispatchState({ type: "requestError", requestError: true });
-          })
-          .finally(() => {
-            dispatchState({ type: "setIsLoading", loading: false });
-          });
-      })
-      .catch(() => {
-        dispatchState({ type: "requestError", requestError: true });
-      });
-  };
+  imgurClient
+    .methodDispatcher(method, requestArgs)
+    .then((response) => {
+      if (method === "search") {
+        dispatchState({
+          type: "setItems",
+          items: requestArgs.newSearch
+            ? response
+            : state.items.concat(response),
+          requestError: false,
+        });
+      } else {
+        dispatchState({
+          type: "setTags",
+          tagObject: response,
+          requestError: false,
+        });
+      }
+
+      dispatchState({ type: "setIsLoading", loading: false });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
-export { handleGetData, ImgurAPI };
+export { handleServiceRequests };

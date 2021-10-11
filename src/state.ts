@@ -13,6 +13,7 @@ export type State = {
   isLoading: boolean;
   requestError: boolean;
   items: Array<Item>;
+  tagObject: { galleries?: [] };
   requestArgs: {
     filter: boolean;
     newSearch?: boolean;
@@ -30,6 +31,7 @@ export type Action = {
   query?: State["requestArgs"]["query"];
   requestError?: boolean;
   sort?: State["requestArgs"]["sort"];
+  tagObject?: State["tagObject"];
   window?: State["requestArgs"]["window"];
 };
 
@@ -45,6 +47,7 @@ const initialState: State = {
     sort: "viral",
     window: "all",
   },
+  tagObject: {},
 };
 
 /**
@@ -70,6 +73,12 @@ function stateReducer(state: State, action: Action): State {
       return {
         ...state,
         items: action?.items?.length ? action.items : state.items,
+      };
+
+    case "setTags":
+      return {
+        ...state,
+        tagObject: action?.tagObject || {},
       };
 
     case "requestError":
