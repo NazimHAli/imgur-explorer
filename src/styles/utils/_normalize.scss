@@ -3,6 +3,8 @@
 /* Document
    ========================================================================== */
 
+/*! purgecss start ignore */
+
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
@@ -344,3 +346,5 @@ template {
 [hidden] {
   display: none;
 }
+
+/*! purgecss end ignore */
