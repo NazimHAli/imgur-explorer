@@ -11,8 +11,9 @@ If you don't want to register and use the free imgur API, it will use mocked dat
 [![CodeQL](https://github.com/NazimHAli/react-image-gallery/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/NazimHAli/react-image-gallery/actions/workflows/codeql-analysis.yml)
 
 ##### Google PageSpeed Scores (need to automate to add a badege for live scores)
-- Mobile [93/100](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Freact-image-gallery-master.vercel.app%2F&tab=mobile)  
-- Desktop [99/100](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Freact-image-gallery-master.vercel.app%2F&tab=desktop)  
+
+- Mobile [93/100](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Freact-image-gallery-master.vercel.app%2F&tab=mobile)
+- Desktop [99/100](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Freact-image-gallery-master.vercel.app%2F&tab=desktop)
 
 ### [Live Demo](https://react-image-gallery-master.vercel.app/)
 

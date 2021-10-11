@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "allowJs": false,
+    "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": false,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "module": "ESNext",
+    "module": "es2020",
     "moduleResolution": "Node",
     "noEmit": true,
     "noUnusedLocals": true,
@@ -22,5 +22,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*"]
+  "exclude": ["./src/__tests__/**/*.ts", "./src/__tests__/**/*.tsx"],
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"]
 }
