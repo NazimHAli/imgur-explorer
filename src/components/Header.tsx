@@ -23,7 +23,7 @@ function Header(props: {
   return (
     <header className="header">
       <a href="/" className="header__logo">
-        <img src={galleryIcon} alt="Logo" />
+        <img src={galleryIcon} alt="Logo" width="64" height="64" />
       </a>
       <div className="search-box">
         <button className="btn-search" type="submit" onClick={_handleSubmit}>
@@ -40,7 +40,7 @@ function Header(props: {
         </form>
       </div>
       <div className="header__profile">
-        <img src={profileIcon} alt="Profile" />
+        <img src={profileIcon} alt="Profile" width="46" height="46" />
       </div>
     </header>
   );
