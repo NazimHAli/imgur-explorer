@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
-import Card from "../../components/Card";
+import GalleryCard from "../../components/GalleryCard";
 import { fakeResponse } from "../fixtures/imgurResponse";
 
 describe("Card", () => {
-  test("Card rendered", () => {
+  test("GalleryCard rendered", () => {
     const mockItem = fakeResponse.data[0];
     const item = {
       id: mockItem.id,
@@ -24,7 +24,7 @@ describe("Card", () => {
 
     render(
       <div data-testid="card">
-        <Card item={item} imgRef={() => {}} />
+        <GalleryCard item={item} imgRef={() => {}} />
       </div>
     );
 
