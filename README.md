@@ -1,29 +1,24 @@
 # ReactJS Image Gallery
 
-##### Refactoring the entire app in the [next-version branch](https://github.com/NazimHAli/react-image-gallery/tree/next-version). Replaced Webpack with vitejs and using vanilla styling, components instead of a component library.
-
-ReactJS + [imgur API](https://imgur.com/) built with WebPack 5 in TypeScript. Using a few components and styling from [material-ui](https://github.com/mui-org/material-ui) for the first iteration.
+ReactJS + [imgur API](https://imgur.com/) + [vitejs bundler](https://github.com/vitejs/vite) in TypeScript.
 
 ##### Mocked Data From API
+
 If you don't want to register and use the free imgur API, it will use mocked data/saved responses from the API. It's also useful for faster local development so you don't have to make new requests with every HMR update.
 
-##### Bundle
-The bundle size is 347K, larger than anticipated. Even after implementing [mui best practices](https://mui.com/guides/minimizing-bundle-size/) like lazy-loading, code splitting...etc. After analyzing the bundle, realized that the standard React package has increased in size. 
-
+[![DeepSource](https://deepsource.io/gh/NazimHAli/react-image-gallery.svg/?label=active+issues&show_trend=true&token=aO_Hx9m4iDxMopueaxAigoGd)](https://deepsource.io/gh/NazimHAli/react-image-gallery)
+[![DeepSource](https://deepsource.io/gh/NazimHAli/react-image-gallery.svg/?label=resolved+issues&show_trend=true&token=aO_Hx9m4iDxMopueaxAigoGd)](https://deepsource.io/gh/NazimHAli/react-image-gallery)
 [![CodeQL](https://github.com/NazimHAli/react-image-gallery/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/NazimHAli/react-image-gallery/actions/workflows/codeql-analysis.yml)
 
-### [Master - Live Demo](https://react-image-gallery-master.vercel.app/)
-![image](https://user-images.githubusercontent.com/26750288/135773516-5bf69971-7c8a-4e2a-8182-8c6240f7b436.png)
+### [Live Demo](https://react-image-gallery-next.vercel.app/)
 
-### [Next Version - Live Demo](https://react-image-gallery-next.vercel.app/)
-
-![image](https://user-images.githubusercontent.com/26750288/136707348-2f777355-4657-47ea-a428-b1f2f77c51eb.png)
+![image](https://user-images.githubusercontent.com/26750288/136809770-79221fcc-ce56-42d0-8138-32214c5dae85.png)
 
 ## Quick start
 
 ```bash
 yarn
-yarn start
+yarn dev
 ```
 
 ## Build
@@ -36,16 +31,29 @@ yarn serve
 ## Use imgur API
 
 1. [Free registration](https://api.imgur.com/oauth2/addclient)
-2. Pass the client ID as an environemnt variable
-    - ```imgurClientId=xxxxx yarn start```
+2. Pass the client ID as an environemnt variable (can be in .env or through CLI)
+   - `PUBLIC_IMGUR_CLIENT_ID=xxxxx yarn dev`
 
 ## Features
 
--   ReactJS with TypeScript
--   WebPack 5
--   Lazy loading & code splitting
--   [imgur API](https://api.imgur.com/)
--   [Material UI](https://github.com/mui-org/material-ui)
+- ReactJS with TypeScript
+- ViteJS
+- Lazy loading & code splitting
+- [imgur API](https://api.imgur.com/)
 
 ## TODO
-#### Moved to [next-version](https://github.com/NazimHAli/react-image-gallery/tree/next-version)
+
+### Features
+
+- [x] Search
+- [x] Sort results
+- [x] Explore by categories
+- [ ] Explore tags
+- [ ] Profile login
+- [ ] Upload images
+
+### Tests
+
+- [ ] ~70% unit test coverage
+- [ ] Cypress performance & integration tests
+- [ ] Accessibility tests

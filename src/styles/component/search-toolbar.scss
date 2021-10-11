@@ -1,0 +1,12 @@
+@import "@/styles/component/search-toolbar-dropdown.scss";
+
+.search-toolbar {
+  @include container;
+  @include center-element;
+  margin-bottom: 1rem;
+  grid-gap: 1rem;
+
+  @include breakpoint($from: "md") {
+    justify-content: right;
+  }
+}

@@ -1,6 +1,6 @@
 version = 1
 
-test_patterns = ["src/__tests__/**/*.tsx"]
+test_patterns = ["src/__tests__/**/*.ts(x)"]
 
 [[analyzers]]
 name = "javascript"
