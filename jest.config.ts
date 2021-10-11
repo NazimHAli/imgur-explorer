@@ -18,7 +18,6 @@ export default () => {
     //   },
     // },
     preset: "ts-jest",
-    roots: ["<rootDir>"],
     resetModules: true,
     transform: {
       "^.+\\.(ts|tsx)": "ts-jest",
