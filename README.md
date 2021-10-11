@@ -9,6 +9,7 @@ If you don't want to register and use the free imgur API, it will use mocked dat
 [![DeepSource](https://deepsource.io/gh/NazimHAli/react-image-gallery.svg/?label=active+issues&show_trend=true&token=aO_Hx9m4iDxMopueaxAigoGd)](https://deepsource.io/gh/NazimHAli/react-image-gallery)
 [![DeepSource](https://deepsource.io/gh/NazimHAli/react-image-gallery.svg/?label=resolved+issues&show_trend=true&token=aO_Hx9m4iDxMopueaxAigoGd)](https://deepsource.io/gh/NazimHAli/react-image-gallery)
 [![CodeQL](https://github.com/NazimHAli/react-image-gallery/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/NazimHAli/react-image-gallery/actions/workflows/codeql-analysis.yml)
+[![Unit Tests](https://github.com/NazimHAli/react-image-gallery/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/NazimHAli/react-image-gallery/actions/workflows/unit-tests.yml)
 
 ##### Google PageSpeed Scores (need to automate to add a badege for live scores)
 
