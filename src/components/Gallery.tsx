@@ -4,7 +4,7 @@ import { State } from "@/state";
 
 import "@/styles/component/gallery.scss";
 
-const Card = lazy(() => import("@/components/Card"));
+const GalleryCard = lazy(() => import("@/components/GalleryCard"));
 
 const imgObserver = new ObserveElementsInView();
 
@@ -31,7 +31,7 @@ function Gallery(props: { items: State["items"] }): JSX.Element {
     <div className="gallery-container">
       {Array.from(items).map(
         (image): JSX.Element => (
-          <Card item={image} key={image.id} imgRef={cardImgRef} />
+          <GalleryCard item={image} key={image.id} imgRef={cardImgRef} />
         )
       )}
     </div>

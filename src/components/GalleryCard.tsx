@@ -9,7 +9,7 @@ function itemCounts(item: Item) {
   );
 }
 
-function Card(props: { item: Item; imgRef: Ref<HTMLImageElement> }) {
+function GalleryCard(props: { item: Item; imgRef: Ref<HTMLImageElement> }) {
   const { imgRef, item } = props;
 
   return (
@@ -41,4 +41,4 @@ function Card(props: { item: Item; imgRef: Ref<HTMLImageElement> }) {
   );
 }
 
-export default Card;
+export default GalleryCard;

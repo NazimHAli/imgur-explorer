@@ -1,7 +1,22 @@
 import { Action, State } from "@/state";
 import { capitalize } from "@/utils/dataUtils";
 
-function Dropdown(props: {
+function getDispatchArgs(
+  actionArg: string,
+  event: { currentTarget: { getAttribute: (arg0: string) => string } }
+) {
+  const dispatchArgs: Action = {
+    type: "submitSearchRequest",
+  };
+
+  dispatchArgs[actionArg] = event.currentTarget
+    .getAttribute("value")
+    .toLowerCase();
+
+  return dispatchArgs;
+}
+
+function SearchToolBarDropdown(props: {
   options: string[];
   actionArg: string;
   dispatchState: React.Dispatch<Action>;
@@ -49,19 +64,4 @@ function Dropdown(props: {
   );
 }
 
-export default Dropdown;
-
-function getDispatchArgs(
-  actionArg: string,
-  event: { currentTarget: { getAttribute: (arg0: string) => string } }
-) {
-  const dispatchArgs: Action = {
-    type: "submitSearchRequest",
-  };
-
-  dispatchArgs[actionArg] = event.currentTarget
-    .getAttribute("value")
-    .toLowerCase();
-
-  return dispatchArgs;
-}
+export default SearchToolBarDropdown;

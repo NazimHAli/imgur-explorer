@@ -1,4 +1,4 @@
-function NoResults(): JSX.Element {
+function GalleryNoResults(): JSX.Element {
   return (
     <section className="no-results">
       <h2>No results found :p</h2>
@@ -6,4 +6,4 @@ function NoResults(): JSX.Element {
   );
 }
 
-export default NoResults;
+export default GalleryNoResults;

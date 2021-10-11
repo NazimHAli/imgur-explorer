@@ -2,13 +2,13 @@ import { lazy, Suspense, useEffect, useReducer } from "react";
 import { initialState, stateReducer } from "@/state";
 import { handleServiceRequests } from "@/services/imgurAPI";
 
+const ExploreGalleries = lazy(() => import("@/components/ExploreGalleries"));
+const Footer = lazy(() => import("@/components/Footer"));
 const Gallery = lazy(() => import("@/components/Gallery"));
+const GalleryNoResults = lazy(() => import("@/components/GalleryNoResults"));
 const Header = lazy(() => import("@/components/Header"));
 const LoadingAnimation = lazy(() => import("@/components/LoadingAnimation"));
-const NoResults = lazy(() => import("@/components/NoResults"));
-const Footer = lazy(() => import("@/components/Footer"));
 const SearchToolBar = lazy(() => import("@/components/SearchToolBar"));
-const ExploreGalleries = lazy(() => import("@/components/ExploreGalleries"));
 
 function App() {
   const [state, dispatchState] = useReducer(stateReducer, initialState);
@@ -47,7 +47,7 @@ function App() {
       {!state.isLoading && state.items.length > 0 && (
         <Gallery items={state.items} />
       )}
-      {!state.items.length && !state.isLoading && <NoResults />}
+      {!state.items.length && !state.isLoading && <GalleryNoResults />}
       <Footer />
     </Suspense>
   );

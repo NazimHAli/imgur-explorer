@@ -1,7 +1,7 @@
 import { Action, State } from "@/state";
 import "@/styles/component/search-toolbar.scss";
 import { Dispatch } from "react";
-import Dropdown from "./Dropdown";
+import SearchToolBarDropdown from "./SearchToolBarDropdown";
 
 function SearchToolBar(props: {
   dispatchState: Dispatch<Action>;
@@ -14,13 +14,13 @@ function SearchToolBar(props: {
 
   return (
     <div className="search-toolbar">
-      <Dropdown
+      <SearchToolBarDropdown
         actionArg="sort"
         options={["Top", "Viral", "Trending"]}
         dispatchState={dispatchState}
         requestArgs={state.requestArgs}
       />
-      <Dropdown
+      <SearchToolBarDropdown
         actionArg="window"
         options={enablewindow ? ["All", "Day", "Week", "Month", "Year"] : []}
         dispatchState={dispatchState}

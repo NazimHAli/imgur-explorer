@@ -6,17 +6,18 @@ import profileIcon from "@/assets/profile.svg";
 
 function Header(props: {
   dispatchState: (arg0: { type: string; query: string }) => void;
-  defaultQuery: string | number | readonly string[] | undefined;
+  defaultQuery: string;
 }): JSX.Element {
-  const { defaultQuery } = props;
+  const { defaultQuery, dispatchState } = props;
 
   function _handleSubmit(event: { preventDefault: () => void }) {
     if (inputRef.current && inputRef.current.value.length) {
-      props.dispatchState({
+      dispatchState({
         type: "submitSearchRequest",
         query: inputRef.current.value,
       });
     }
+
     event.preventDefault();
   }
 
