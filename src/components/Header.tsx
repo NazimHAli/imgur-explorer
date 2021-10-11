@@ -1,6 +1,9 @@
 import { useRef } from "react";
 import "@/styles/layout/header.scss";
 
+import galleryIcon from "@/assets/gallery.svg";
+import profileIcon from "@/assets/profile.svg";
+
 function Header(props: {
   dispatchState: (arg0: { type: string; query: string }) => void;
   defaultQuery: string | number | readonly string[] | undefined;
@@ -20,7 +23,7 @@ function Header(props: {
   return (
     <header className="header">
       <a href="/" className="header__logo">
-        <img src="/src/assets/gallery.svg" alt="Logo" />
+        <img src={galleryIcon} alt="Logo" />
       </a>
       <div className="search-box">
         <button className="btn-search" type="submit" onClick={_handleSubmit}>
@@ -37,7 +40,7 @@ function Header(props: {
         </form>
       </div>
       <div className="header__profile">
-        <img src="/src/assets/profile.svg" alt="Profile" />
+        <img src={profileIcon} alt="Profile" />
       </div>
     </header>
   );

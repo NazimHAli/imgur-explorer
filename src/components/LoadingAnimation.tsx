@@ -1,6 +1,6 @@
 import "@/styles/component/loading-animation.scss";
 
-const LoadingAnimation = () => {
+function LoadingAnimation(): JSX.Element {
   return (
     <div className="loading-container">
       <div className="mosaic-loader">
@@ -23,6 +23,6 @@ const LoadingAnimation = () => {
       </div>
     </div>
   );
-};
+}
 
 export default LoadingAnimation;

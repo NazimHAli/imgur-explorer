@@ -6,7 +6,7 @@ import Dropdown from "./Dropdown";
 function SearchToolBar(props: {
   dispatchState: Dispatch<Action>;
   state: State;
-}) {
+}): JSX.Element {
   const { dispatchState, state } = props;
 
   // imgur API only allows 'window' options if sort == 'top'
