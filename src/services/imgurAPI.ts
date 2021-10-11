@@ -75,12 +75,12 @@ class ImgurAPI {
   }
 
   private constructEndpointURL(requestArgs: State["requestArgs"]) {
-    // Search query
+    // Query
     const searchString = requestArgs.query
       ? `?q=${requestArgs.query}&q_size_px=small&q_type=jpg`
       : "?q_size_px=small&q_type=jpg";
 
-    // Filters
+    // Parameters
     const sortParam = `${requestArgs.sort}/`;
     const windowParam = `${
       requestArgs.sort === "top" ? requestArgs.window : "all"
@@ -116,6 +116,28 @@ class ImgurAPI {
   }
 }
 
+function _dispatchResponse(
+  method: string,
+  dispatchState: Dispatch<Action>,
+  requestArgs: State["requestArgs"],
+  response: any,
+  items: State["items"]
+): void {
+  if (method === "search") {
+    dispatchState({
+      type: "setItems",
+      items: requestArgs.newSearch ? response : items.concat(response),
+      requestError: false,
+    });
+  } else {
+    dispatchState({
+      type: "setTags",
+      tagObject: response,
+      requestError: false,
+    });
+  }
+}
+
 /**
  * Helper function to handle service requests
  * and dispatch state updates
@@ -132,32 +154,19 @@ function handleServiceRequests(
 ): void {
   dispatchState({ type: "setIsLoading", loading: true });
 
-  const { requestArgs } = state;
+  const { items, requestArgs } = state;
   const imgurClient = ImgurAPI.getInstance();
 
   imgurClient
     .methodDispatcher(method, requestArgs)
     .then((response) => {
-      if (method === "search") {
-        dispatchState({
-          type: "setItems",
-          items: requestArgs.newSearch
-            ? response
-            : state.items.concat(response),
-          requestError: false,
-        });
-      } else {
-        dispatchState({
-          type: "setTags",
-          tagObject: response,
-          requestError: false,
-        });
-      }
+      _dispatchResponse(method, dispatchState, requestArgs, response, items);
 
       dispatchState({ type: "setIsLoading", loading: false });
     })
     .catch((error) => {
-      console.error(error);
+      // TODO: Add logging
+      error;
     });
 }
 

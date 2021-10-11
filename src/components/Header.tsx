@@ -8,6 +8,8 @@ function Header(props: {
   dispatchState: (arg0: { type: string; query: string }) => void;
   defaultQuery: string | number | readonly string[] | undefined;
 }): JSX.Element {
+  const { defaultQuery } = props;
+
   function _handleSubmit(event: { preventDefault: () => void }) {
     if (inputRef.current && inputRef.current.value.length) {
       props.dispatchState({
@@ -34,7 +36,7 @@ function Header(props: {
             type="search"
             className="input-search"
             placeholder="Search for it"
-            defaultValue={props.defaultQuery}
+            defaultValue={defaultQuery}
             ref={inputRef}
           />
         </form>

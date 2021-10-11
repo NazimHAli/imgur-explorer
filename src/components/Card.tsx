@@ -10,7 +10,7 @@ function itemCounts(item: Item) {
 }
 
 function Card(props: { item: Item; imgRef: Ref<HTMLImageElement> }) {
-  const { item } = props;
+  const { imgRef, item } = props;
 
   return (
     <div className="card">
@@ -20,7 +20,7 @@ function Card(props: { item: Item; imgRef: Ref<HTMLImageElement> }) {
         width={item?.images[0]?.width}
         height={item?.images[0]?.height}
         data-srcset={item?.images[0]?.link}
-        ref={props.imgRef}
+        ref={imgRef}
       />
       <span className="card__info">
         <h3 className="card__title">{item?.title}</h3>
