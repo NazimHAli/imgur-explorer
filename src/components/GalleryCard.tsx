@@ -1,42 +1,44 @@
 import { Item } from "@/state";
 import { Ref } from "react";
-
-function itemCounts(item: Item) {
-  return (
-    <>
-      <span>Ups:</span> {item?.ups} <span>Downs:</span> {item?.downs}
-    </>
-  );
-}
+import { MessageSquare, ThumbsUp, Eye } from "react-feather";
 
 function GalleryCard(props: { item: Item; imgRef: Ref<HTMLImageElement> }) {
   const { imgRef, item } = props;
 
+  const imageInfo = (
+    <div className="card_badges">
+      <h4 className="card__title">{item?.title}</h4>
+
+      <div className="card_badges_icons">
+        <span>
+          <ThumbsUp width="15" height="15" />
+          {item?.ups}
+        </span>
+        <span>
+          <MessageSquare width="15" height="15" />
+          {item?.comment_count}
+        </span>
+        <span>
+          <Eye width="15" height="15" />
+          <span>{item?.views}</span>
+        </span>
+      </div>
+    </div>
+  );
+
   return (
-    <div className="card">
-      <img
-        src=""
-        alt={item?.title}
-        width={item?.images[0]?.width}
-        height={item?.images[0]?.height}
-        data-srcset={item?.images[0]?.link}
-        ref={imgRef}
-      />
-      <span className="card__info">
-        <h3 className="card__title">{item?.title}</h3>
-        <ol className="card__counts">
-          <li>
-            <span>User</span> {item?.account_url}
-          </li>
-          <li>
-            <span>Faves</span> {item?.favorite_count}
-          </li>
-          <li>
-            <span>Comments</span> {item?.comment_count}
-          </li>
-          <li>{itemCounts(item)}</li>
-        </ol>
+    <div className="card_badge_container">
+      <span className="img-container">
+        <img
+          src=""
+          alt={item?.title}
+          width={item?.images[0]?.width}
+          height={item?.images[0]?.height}
+          data-srcset={item?.images[0]?.link}
+          ref={imgRef}
+        />
       </span>
+      {imageInfo}
     </div>
   );
 }

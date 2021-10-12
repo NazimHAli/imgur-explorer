@@ -1,19 +1,18 @@
 export type Item = {
-  id: string;
   account_url: string;
-  images: Array<{ link: string; width: string; height: string }>;
-  ups: number;
+  comment_count: number;
   downs: number;
   favorite_count: number;
-  comment_count: number;
+  id: string;
+  images: Array<{ link: string; width: string; height: string }>;
   title: string;
+  ups: number;
+  views: number;
 };
 
 export type State = {
   isLoading: boolean;
-  requestError: boolean;
   items: Array<Item>;
-  tagObject: { galleries?: []; tags?: [] };
   requestArgs: {
     filter: boolean;
     newSearch?: boolean;
@@ -22,22 +21,23 @@ export type State = {
     sort: string;
     window: string;
   };
+  requestError: boolean;
+  tagObject: { galleries?: []; tags?: [] };
 };
 
 export type Action = {
-  type: string | null;
-  loading?: State["isLoading"];
   items?: State["items"];
+  loading?: State["isLoading"];
   query?: State["requestArgs"]["query"];
   requestError?: boolean;
   sort?: State["requestArgs"]["sort"];
   tagObject?: State["tagObject"];
+  type: string | null;
   window?: State["requestArgs"]["window"];
 };
 
 const initialState: State = {
   isLoading: true,
-  requestError: false,
   items: [],
   requestArgs: {
     filter: true,
@@ -47,6 +47,7 @@ const initialState: State = {
     sort: "viral",
     window: "all",
   },
+  requestError: false,
   tagObject: {},
 };
 

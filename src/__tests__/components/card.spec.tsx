@@ -20,6 +20,7 @@ describe("Card", () => {
       favorite_count: mockItem.favorite_count,
       comment_count: mockItem.comment_count,
       title: mockItem.title,
+      views: mockItem.views,
     };
 
     render(
