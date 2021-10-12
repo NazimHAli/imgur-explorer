@@ -2,30 +2,6 @@ import { State } from "@/types";
 import "@/styles/component/explore-galleries.scss";
 import { MouseEventHandler } from "react";
 
-function ExploreGalleries(props: {
-  dispatchState: any;
-  galleryTags: State["galleryTags"];
-}) {
-  const { dispatchState, galleryTags } = props;
-  const handleClick = (event: any) => {
-    dispatchState({
-      type: "setTagName",
-      tagName: event.target.dataset.tag,
-    });
-    event.preventDefault();
-  };
-
-  return (
-    <div className="explore-galleries">
-      <h4>Tags</h4>
-      {renderTags(galleryTags, handleClick)}
-
-      <h2>Explore Galleries</h2>
-      {renderGallery(galleryTags)}
-    </div>
-  );
-}
-
 function renderGallery(galleryTags: State["galleryTags"]): JSX.Element {
   return (
     <ul className="explore-galleries__list">
@@ -57,6 +33,31 @@ function renderTags(
         )
       )}
     </ul>
+  );
+}
+
+function ExploreGalleries(props: {
+  dispatchState: any;
+  galleryTags: State["galleryTags"];
+}) {
+  const { dispatchState, galleryTags } = props;
+
+  const handleClick = (event: any) => {
+    dispatchState({
+      type: "setTagName",
+      tagName: event.target.dataset.tag,
+    });
+    event.preventDefault();
+  };
+
+  return (
+    <div className="explore-galleries">
+      <h4>Tags</h4>
+      {renderTags(galleryTags, handleClick)}
+
+      <h2>Explore Galleries</h2>
+      {renderGallery(galleryTags)}
+    </div>
   );
 }
 

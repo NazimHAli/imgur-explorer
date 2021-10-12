@@ -18,6 +18,7 @@ function Header(props: {
   defaultQuery: string;
 }): JSX.Element {
   const { defaultQuery, dispatchState } = props;
+  const inputRef = useRef<HTMLInputElement>(null);
 
   function _handleSubmit(event: { preventDefault: () => void }) {
     const isValid =
@@ -34,8 +35,6 @@ function Header(props: {
 
     event.preventDefault();
   }
-
-  const inputRef = useRef<HTMLInputElement>(null);
 
   handleClearQuery(defaultQuery, inputRef);
 
