@@ -27,7 +27,9 @@ const initialState: State = {
  * @param action
  */
 function stateReducer(state: State, action: Action): State {
-  let updatedArgs;
+  let updatedArgs = {
+    ...state.requestArgs,
+  };
 
   switch (action.type) {
     case "setIsLoading":
@@ -45,7 +47,7 @@ function stateReducer(state: State, action: Action): State {
 
     case "setTagName":
       updatedArgs = {
-        ...state.requestArgs,
+        ...updatedArgs,
         query: "",
         tagName: action?.tagName ? action.tagName : "",
       };
@@ -70,7 +72,7 @@ function stateReducer(state: State, action: Action): State {
 
     case "submitSearchRequest":
       updatedArgs = {
-        ...state.requestArgs,
+        ...updatedArgs,
         tagName: "",
       };
 

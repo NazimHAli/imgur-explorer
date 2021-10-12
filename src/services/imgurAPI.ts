@@ -7,12 +7,6 @@ const BASE = "https://api.imgur.com/3";
 const EP_GALLERY = `${BASE}/gallery`;
 const EP_GALLERY_TAGS = `${BASE}/tags`;
 
-const METHOD_MAP = {
-  search: "setItems",
-  tags: "setTags",
-  tagName: "setTag",
-};
-
 interface Args {
   endPoint: RequestInfo;
   requestOptions?: RequestInit;
