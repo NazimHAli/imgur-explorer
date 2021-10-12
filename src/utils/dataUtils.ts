@@ -1,5 +1,3 @@
-import { Item } from "@/types";
-
 /**
  * Converts an array to a list of arrays (matrix)
  *
@@ -32,7 +30,7 @@ function checkNumberIfFloat(num: number): boolean {
  * @param images
  * @param newSize
  */
-function updateImageSize(images: Array<Item>, newSize = "m"): Array<Item> {
+function updateImageSize(images: any[], newSize = "m") {
   for (let index = 0; index < images.length; index++) {
     images[index].images[0].link = images[index].images[0].link.replace(
       ".jpg",
@@ -96,4 +94,5 @@ export {
   extractImageResults,
   genRandomColor,
   truncateText,
+  updateImageSize,
 };
