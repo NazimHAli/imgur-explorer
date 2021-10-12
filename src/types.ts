@@ -24,7 +24,7 @@ export type State = {
     window: string;
   };
   requestError: boolean;
-  selectedTag: {};
+  selectedTag: Object;
 };
 
 export type Action = {

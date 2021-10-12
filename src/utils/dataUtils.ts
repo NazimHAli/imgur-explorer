@@ -1,3 +1,5 @@
+import { Item } from "@/types";
+
 /**
  * Converts an array to a list of arrays (matrix)
  *
@@ -22,6 +24,26 @@ function checkNumberIfFloat(num: number): boolean {
 }
 
 /**
+ * Updates the image URL to use a new size. Default
+ * it sets 'm' as medium.
+ *
+ * TODO: Update logic to check more image types
+ *
+ * @param images
+ * @param newSize
+ */
+function updateImageSize(images: Array<Item>, newSize = "m"): Array<Item> {
+  for (let index = 0; index < images.length; index++) {
+    images[index].images[0].link = images[index].images[0].link.replace(
+      ".jpg",
+      `${newSize}.jpg`
+    );
+  }
+
+  return images;
+}
+
+/**
  * Validate and extract image results from the response
  *
  * @param response
@@ -35,6 +57,7 @@ function extractImageResults(response: any[]): any[] {
   }
 
   const rawImageResults = response.filter((res: { images: any }) => res.images);
+
   resultImages = rawImageResults.filter(
     (res: { images: { link: string; type: string | string[] }[] }) => {
       return (
@@ -45,7 +68,7 @@ function extractImageResults(response: any[]): any[] {
     }
   );
 
-  return resultImages;
+  return updateImageSize(resultImages);
 }
 
 function capitalize(str: string | undefined): string {

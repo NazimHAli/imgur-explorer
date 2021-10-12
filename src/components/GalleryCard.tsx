@@ -30,10 +30,9 @@ function GalleryCard(props: { item: Item; imgRef: Ref<HTMLImageElement> }) {
     <div className="card_badge_container">
       <span className="img-container">
         <img
-          src=""
           alt={item?.title}
-          width={item?.images[0]?.width}
-          height={item?.images[0]?.height}
+          width={320}
+          height={320}
           data-srcset={item?.images[0]?.link}
           ref={imgRef}
         />
