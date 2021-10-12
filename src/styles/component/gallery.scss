@@ -78,6 +78,16 @@
   position: relative;
   width: 100%;
 
+  &:hover {
+    .card_badges {
+      background-color: #222;
+    }
+
+    .card_badges_icons {
+      opacity: 1;
+    }
+  }
+
   .img-container {
     height: 75%;
     display: block;
@@ -99,6 +109,7 @@
   height: 25%;
   padding-bottom: 0.25rem;
   grid-template-rows: 3fr 2fr;
+  transition: all ease-in-out 0.5s;
 
   .card_badges_icons {
     display: flex;
