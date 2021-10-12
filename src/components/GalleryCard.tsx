@@ -1,4 +1,5 @@
-import { Item } from "@/state";
+import { Item } from "@/types";
+import { truncateText } from "@/utils/dataUtils";
 import { Ref } from "react";
 import { MessageSquare, ThumbsUp, Eye } from "react-feather";
 
@@ -7,8 +8,7 @@ function GalleryCard(props: { item: Item; imgRef: Ref<HTMLImageElement> }) {
 
   const imageInfo = (
     <div className="card_badges">
-      <h4 className="card__title">{item?.title}</h4>
-
+      <h4 className="card__title">{truncateText(item?.title, 20)}</h4>
       <div className="card_badges_icons">
         <span>
           <ThumbsUp width="15" height="15" />

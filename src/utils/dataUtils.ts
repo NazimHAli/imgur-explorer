@@ -29,6 +29,7 @@ function checkNumberIfFloat(num: number): boolean {
  */
 function extractImageResults(response: any[]): any[] {
   let resultImages: any[] = [];
+
   if (!response.length) {
     return resultImages;
   }
@@ -55,6 +56,12 @@ function capitalize(str: string | undefined): string {
   }
 }
 
+function truncateText(text: string, maxCharacters: number): string {
+  return text.length > maxCharacters
+    ? text.slice(0, maxCharacters - 1) + "…"
+    : text;
+}
+
 function genRandomColor(): string {
   return Math.floor(Math.random() * 16777215).toString(16);
 }
@@ -65,4 +72,5 @@ export {
   checkNumberIfFloat,
   extractImageResults,
   genRandomColor,
+  truncateText,
 };

@@ -1,4 +1,4 @@
-import { Action, State } from "@/state";
+import { Action, State } from "@/types";
 import "@/styles/component/search-toolbar.scss";
 import { Dispatch } from "react";
 import SearchToolBarDropdown from "./SearchToolBarDropdown";
@@ -10,13 +10,14 @@ function SearchToolBar(props: {
   const { dispatchState, state } = props;
 
   // imgur API only allows 'window' options if sort == 'top'
+  const enableSort = state.requestArgs.query.length > 0;
   const enablewindow = state.requestArgs.sort === "top";
 
   return (
     <div className="search-toolbar">
       <SearchToolBarDropdown
         actionArg="sort"
-        options={["Top", "Viral", "Trending"]}
+        options={enableSort ? ["Top", "Viral", "Trending"] : []}
         dispatchState={dispatchState}
         requestArgs={state.requestArgs}
       />

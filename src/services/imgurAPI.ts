@@ -1,4 +1,4 @@
-import { Action, State } from "@/state";
+import { Action, State } from "@/types";
 import { extractImageResults } from "@/utils/dataUtils";
 import { Dispatch } from "react";
 
@@ -109,9 +109,11 @@ class ImgurAPI {
     }
   }
 
-  private async getGalleryTagMetadata(requestArgs: State["requestArgs"]) {
-    return await this.imgurBaseApi({
-      endPoint: `${EP_GALLERY}/t/${requestArgs.tagName}/${requestArgs.sort}/${requestArgs.window}/${requestArgs.page}`,
+  private getGalleryTagMetadata(requestArgs: State["requestArgs"]) {
+    const endPoint = `${EP_GALLERY}/t/${requestArgs.tagName}/${requestArgs.sort}/${requestArgs.window}/${requestArgs.page}`;
+
+    return this.imgurBaseApi({
+      endPoint: endPoint,
     });
   }
 
@@ -136,11 +138,26 @@ function _dispatchResponse(
   response: any,
   items: State["items"]
 ): void {
-  dispatchState({
-    type: METHOD_MAP[method],
-    items: requestArgs.newSearch ? response : items.concat(response),
-    requestError: false,
-  });
+  if (method === "tags") {
+    dispatchState({
+      type: "setTags",
+      galleryTags: response,
+      items: response.items,
+      requestError: false,
+    });
+  } else if (method === "tagName") {
+    dispatchState({
+      type: "setItems",
+      items: extractImageResults(response.items),
+      requestError: false,
+    });
+  } else {
+    dispatchState({
+      type: "setItems",
+      items: requestArgs.newSearch ? response : items.concat(response),
+      requestError: false,
+    });
+  }
 }
 
 /**

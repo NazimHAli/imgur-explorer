@@ -1,41 +1,4 @@
-export type Item = {
-  account_url: string;
-  comment_count: number;
-  downs: number;
-  favorite_count: number;
-  id: string;
-  images: Array<{ link: string; width: string; height: string }>;
-  title: string;
-  ups: number;
-  views: number;
-};
-
-export type State = {
-  isLoading: boolean;
-  items: Array<Item>;
-  requestArgs: {
-    filter: boolean;
-    newSearch?: boolean;
-    page: number;
-    query: string;
-    sort: string;
-    tagName: string;
-    window: string;
-  };
-  requestError: boolean;
-  galleryTags: { galleries?: []; tags?: [] };
-};
-
-export type Action = {
-  items?: State["items"];
-  loading?: State["isLoading"];
-  query?: State["requestArgs"]["query"];
-  requestError?: boolean;
-  sort?: State["requestArgs"]["sort"];
-  galleryTags?: State["galleryTags"];
-  type: string | null;
-  window?: State["requestArgs"]["window"];
-};
+import { State, Action } from "./types";
 
 const initialState: State = {
   isLoading: true,
@@ -46,11 +9,12 @@ const initialState: State = {
     page: 1,
     query: "meow",
     sort: "viral",
-    tagName: "cats",
+    tagName: "",
     window: "all",
   },
   requestError: false,
   galleryTags: {},
+  selectedTag: {},
 };
 
 /**
@@ -61,9 +25,10 @@ const initialState: State = {
  *
  * @param state
  * @param action
- * @returns
  */
 function stateReducer(state: State, action: Action): State {
+  let updatedArgs;
+
   switch (action.type) {
     case "setIsLoading":
       return {
@@ -78,10 +43,22 @@ function stateReducer(state: State, action: Action): State {
         items: action?.items?.length ? action.items : state.items,
       };
 
+    case "setTagName":
+      updatedArgs = {
+        ...state.requestArgs,
+        query: "",
+        tagName: action?.tagName ? action.tagName : "",
+      };
+      return {
+        ...state,
+        requestArgs: updatedArgs,
+      };
+
     case "setTags":
       return {
         ...state,
         galleryTags: action?.galleryTags || {},
+        items: action?.items?.length ? action.items : state.items,
       };
 
     case "requestError":
@@ -92,8 +69,9 @@ function stateReducer(state: State, action: Action): State {
       };
 
     case "submitSearchRequest":
-      let updatedArgs = {
+      updatedArgs = {
         ...state.requestArgs,
+        tagName: "",
       };
 
       if (action?.query) {

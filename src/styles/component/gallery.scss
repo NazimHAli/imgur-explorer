@@ -21,10 +21,6 @@
     .card__counts {
       opacity: 1;
     }
-
-    .card__title {
-      @include truncate-lines(5);
-    }
   }
 
   & img {
@@ -55,8 +51,6 @@
 
     li {
       overflow: hidden;
-      @include truncate-lines(1);
-
       span {
         font-weight: bold;
       }
@@ -64,7 +58,6 @@
   }
 
   &__title {
-    @include truncate-lines(1);
     text-align: center;
     padding: 0.5rem;
     font-size: 0.85rem;
@@ -99,6 +92,8 @@
     max-height: 100%;
     margin: 0 auto;
     width: auto;
+    opacity: 0;
+    transition: opacity ease-in-out 500ms;
   }
 }
 

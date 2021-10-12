@@ -20,14 +20,12 @@ function App() {
    */
 
   useEffect(() => {
-    if (state.requestArgs.query.length) {
+    if (state.requestArgs.tagName.length) {
+      handleServiceRequests(dispatchState, state, "tagName");
+    } else if (state.requestArgs.query.length) {
       handleServiceRequests(dispatchState, state);
     }
-  }, [
-    state.requestArgs.query,
-    state.requestArgs.sort,
-    state.requestArgs.window,
-  ]);
+  }, [state.requestArgs]);
 
   useEffect(() => {
     if (Object.keys(state.galleryTags).length === 0) {
@@ -41,7 +39,10 @@ function App() {
         dispatchState={dispatchState}
         defaultQuery={state.requestArgs.query}
       />
-      <ExploreGalleries galleryTags={state.galleryTags} />
+      <ExploreGalleries
+        dispatchState={dispatchState}
+        galleryTags={state.galleryTags}
+      />
       <SearchToolBar dispatchState={dispatchState} state={state} />
       {state.isLoading && <LoadingAnimation />}
       {!state.isLoading && state.items.length > 0 && (

@@ -1,4 +1,4 @@
-import { Action, State } from "@/state";
+import { Action, State } from "@/types";
 import { capitalize } from "@/utils/dataUtils";
 
 function getDispatchArgs(
