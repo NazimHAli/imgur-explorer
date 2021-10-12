@@ -19,10 +19,11 @@ export type State = {
     page: number;
     query: string;
     sort: string;
+    tagName: string;
     window: string;
   };
   requestError: boolean;
-  tagObject: { galleries?: []; tags?: [] };
+  galleryTags: { galleries?: []; tags?: [] };
 };
 
 export type Action = {
@@ -31,7 +32,7 @@ export type Action = {
   query?: State["requestArgs"]["query"];
   requestError?: boolean;
   sort?: State["requestArgs"]["sort"];
-  tagObject?: State["tagObject"];
+  galleryTags?: State["galleryTags"];
   type: string | null;
   window?: State["requestArgs"]["window"];
 };
@@ -45,10 +46,11 @@ const initialState: State = {
     page: 1,
     query: "meow",
     sort: "viral",
+    tagName: "cats",
     window: "all",
   },
   requestError: false,
-  tagObject: {},
+  galleryTags: {},
 };
 
 /**
@@ -79,7 +81,7 @@ function stateReducer(state: State, action: Action): State {
     case "setTags":
       return {
         ...state,
-        tagObject: action?.tagObject || {},
+        galleryTags: action?.galleryTags || {},
       };
 
     case "requestError":

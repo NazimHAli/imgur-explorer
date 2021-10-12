@@ -30,7 +30,7 @@ function App() {
   ]);
 
   useEffect(() => {
-    if (Object.keys(state.tagObject).length === 0) {
+    if (Object.keys(state.galleryTags).length === 0) {
       handleServiceRequests(dispatchState, state, "tags");
     }
   }, []);
@@ -41,7 +41,7 @@ function App() {
         dispatchState={dispatchState}
         defaultQuery={state.requestArgs.query}
       />
-      <ExploreGalleries tagObject={state.tagObject} />
+      <ExploreGalleries galleryTags={state.galleryTags} />
       <SearchToolBar dispatchState={dispatchState} state={state} />
       {state.isLoading && <LoadingAnimation />}
       {!state.isLoading && state.items.length > 0 && (

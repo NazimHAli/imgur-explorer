@@ -7,6 +7,12 @@ const BASE = "https://api.imgur.com/3";
 const EP_GALLERY = `${BASE}/gallery`;
 const EP_GALLERY_TAGS = `${BASE}/tags`;
 
+const METHOD_MAP = {
+  search: "setItems",
+  tags: "setTags",
+  tagName: "setTag",
+};
+
 interface Args {
   endPoint: RequestInfo;
   requestOptions?: RequestInit;
@@ -22,9 +28,7 @@ class ImgurAPI {
   }
 
   /**
-   * Get or create an instance
-   *
-   * @returns
+   * Get or create API instance
    */
   public static getInstance(): ImgurAPI {
     if (ImgurAPI.instance === undefined) {
@@ -92,10 +96,8 @@ class ImgurAPI {
 
   /**
    * Get list of default gallery tags
-   *
-   * @returns
    */
-  public async getGalleryTags() {
+  private async getGalleryTags() {
     if (this.useFakeResponse) {
       return await import("@/__tests__/fixtures/galleryTags").then(
         (mod: any) => {
@@ -107,11 +109,22 @@ class ImgurAPI {
     }
   }
 
+  private async getGalleryTagMetadata(requestArgs: State["requestArgs"]) {
+    return await this.imgurBaseApi({
+      endPoint: `${EP_GALLERY}/t/${requestArgs.tagName}/${requestArgs.sort}/${requestArgs.window}/${requestArgs.page}`,
+    });
+  }
+
   public methodDispatcher(method: string, requestArgs: State["requestArgs"]) {
-    if (method == "search") {
-      return this.getGallerySearchResults(requestArgs);
-    } else {
-      return this.getGalleryTags();
+    switch (method) {
+      case "search":
+        return this.getGallerySearchResults(requestArgs);
+      case "tags":
+        return this.getGalleryTags();
+      case "tagName":
+        return this.getGalleryTagMetadata(requestArgs);
+      default:
+        return this.getGallerySearchResults(requestArgs);
     }
   }
 }
@@ -123,19 +136,11 @@ function _dispatchResponse(
   response: any,
   items: State["items"]
 ): void {
-  if (method === "search") {
-    dispatchState({
-      type: "setItems",
-      items: requestArgs.newSearch ? response : items.concat(response),
-      requestError: false,
-    });
-  } else {
-    dispatchState({
-      type: "setTags",
-      tagObject: response,
-      requestError: false,
-    });
-  }
+  dispatchState({
+    type: METHOD_MAP[method],
+    items: requestArgs.newSearch ? response : items.concat(response),
+    requestError: false,
+  });
 }
 
 /**
@@ -145,7 +150,6 @@ function _dispatchResponse(
  * @param dispatchState
  * @param state
  * @param method
- * @returns
  */
 function handleServiceRequests(
   dispatchState: Dispatch<Action>,
