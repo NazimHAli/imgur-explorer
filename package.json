@@ -3,7 +3,7 @@
   "license": "MIT",
   "version": "0.0.0",
   "scripts": {
-    "dev": "yarn lint:watch & vite --host 10.0.0.211 --port 3001",
+    "dev": "vite --host 10.0.0.211 --port 3001",
     "build": "yarn lint && vite build",
     "lint": "prettier -c .",
     "lint:fix": "yarn lint --write",
@@ -16,13 +16,16 @@
     "postpublish": "pinst --enable"
   },
   "dependencies": {
+    "feather-icons": "^4.28.0",
     "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react-dom": "^17.0.0",
+    "react-feather": "^2.0.9"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^4.0.3",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.2",
+    "@types/feather-icons": "^4.7.0",
     "@types/jest": "^27.0.2",
     "@types/node": "^16.10.3",
     "@types/prop-types": "^15.7.4",

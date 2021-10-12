@@ -1,43 +1,7 @@
-export type Item = {
-  id: string;
-  account_url: string;
-  images: Array<{ link: string; width: string; height: string }>;
-  ups: number;
-  downs: number;
-  favorite_count: number;
-  comment_count: number;
-  title: string;
-};
-
-export type State = {
-  isLoading: boolean;
-  requestError: boolean;
-  items: Array<Item>;
-  tagObject: { galleries?: []; tags?: [] };
-  requestArgs: {
-    filter: boolean;
-    newSearch?: boolean;
-    page: number;
-    query: string;
-    sort: string;
-    window: string;
-  };
-};
-
-export type Action = {
-  type: string | null;
-  loading?: State["isLoading"];
-  items?: State["items"];
-  query?: State["requestArgs"]["query"];
-  requestError?: boolean;
-  sort?: State["requestArgs"]["sort"];
-  tagObject?: State["tagObject"];
-  window?: State["requestArgs"]["window"];
-};
+import { State, Action } from "./types";
 
 const initialState: State = {
   isLoading: true,
-  requestError: false,
   items: [],
   requestArgs: {
     filter: true,
@@ -45,9 +9,12 @@ const initialState: State = {
     page: 1,
     query: "meow",
     sort: "viral",
+    tagName: "",
     window: "all",
   },
-  tagObject: {},
+  requestError: false,
+  galleryTags: {},
+  selectedTag: {},
 };
 
 /**
@@ -58,9 +25,12 @@ const initialState: State = {
  *
  * @param state
  * @param action
- * @returns
  */
 function stateReducer(state: State, action: Action): State {
+  let updatedArgs = {
+    ...state.requestArgs,
+  };
+
   switch (action.type) {
     case "setIsLoading":
       return {
@@ -75,10 +45,22 @@ function stateReducer(state: State, action: Action): State {
         items: action?.items?.length ? action.items : state.items,
       };
 
+    case "setTagName":
+      updatedArgs = {
+        ...updatedArgs,
+        query: "",
+        tagName: action?.tagName ? action.tagName : "",
+      };
+      return {
+        ...state,
+        requestArgs: updatedArgs,
+      };
+
     case "setTags":
       return {
         ...state,
-        tagObject: action?.tagObject || {},
+        galleryTags: action?.galleryTags || {},
+        items: action?.items?.length ? action.items : state.items,
       };
 
     case "requestError":
@@ -89,8 +71,9 @@ function stateReducer(state: State, action: Action): State {
       };
 
     case "submitSearchRequest":
-      let updatedArgs = {
-        ...state.requestArgs,
+      updatedArgs = {
+        ...updatedArgs,
+        tagName: "",
       };
 
       if (action?.query) {

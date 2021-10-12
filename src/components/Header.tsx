@@ -1,17 +1,32 @@
-import { useRef } from "react";
+import { RefObject, useRef } from "react";
 import "@/styles/layout/header.scss";
 
 import galleryIcon from "@/assets/gallery.svg";
 import profileIcon from "@/assets/profile.svg";
+
+function handleClearQuery(
+  defaultQuery: string,
+  inputRef: RefObject<HTMLInputElement>
+) {
+  if (defaultQuery === "" && inputRef.current) {
+    inputRef.current.value = defaultQuery;
+  }
+}
 
 function Header(props: {
   dispatchState: (arg0: { type: string; query: string }) => void;
   defaultQuery: string;
 }): JSX.Element {
   const { defaultQuery, dispatchState } = props;
+  const inputRef = useRef<HTMLInputElement>(null);
 
   function _handleSubmit(event: { preventDefault: () => void }) {
-    if (inputRef.current && inputRef.current.value.length) {
+    const isValid =
+      inputRef.current &&
+      inputRef.current.value.length &&
+      inputRef.current.value !== defaultQuery;
+
+    if (isValid) {
       dispatchState({
         type: "submitSearchRequest",
         query: inputRef.current.value,
@@ -21,7 +36,7 @@ function Header(props: {
     event.preventDefault();
   }
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  handleClearQuery(defaultQuery, inputRef);
 
   return (
     <header className="header">

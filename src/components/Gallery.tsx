@@ -1,6 +1,6 @@
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
 import { lazy, useCallback } from "react";
-import { State } from "@/state";
+import { State } from "@/types";
 
 import "@/styles/component/gallery.scss";
 

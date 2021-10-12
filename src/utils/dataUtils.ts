@@ -22,6 +22,26 @@ function checkNumberIfFloat(num: number): boolean {
 }
 
 /**
+ * Updates the image URL to use a new size. Default
+ * it sets 'm' as medium.
+ *
+ * TODO: Update logic to check more image types
+ *
+ * @param images
+ * @param newSize
+ */
+function updateImageSize(images: any[], newSize = "m") {
+  for (let index = 0; index < images.length; index++) {
+    images[index].images[0].link = images[index].images[0].link.replace(
+      ".jpg",
+      `${newSize}.jpg`
+    );
+  }
+
+  return images;
+}
+
+/**
  * Validate and extract image results from the response
  *
  * @param response
@@ -29,11 +49,13 @@ function checkNumberIfFloat(num: number): boolean {
  */
 function extractImageResults(response: any[]): any[] {
   let resultImages: any[] = [];
+
   if (!response.length) {
     return resultImages;
   }
 
   const rawImageResults = response.filter((res: { images: any }) => res.images);
+
   resultImages = rawImageResults.filter(
     (res: { images: { link: string; type: string | string[] }[] }) => {
       return (
@@ -44,7 +66,7 @@ function extractImageResults(response: any[]): any[] {
     }
   );
 
-  return resultImages;
+  return updateImageSize(resultImages);
 }
 
 function capitalize(str: string | undefined): string {
@@ -53,6 +75,12 @@ function capitalize(str: string | undefined): string {
   } else {
     return "";
   }
+}
+
+function truncateText(text: string, maxCharacters: number): string {
+  return text.length > maxCharacters
+    ? text.slice(0, maxCharacters - 1) + "…"
+    : text;
 }
 
 function genRandomColor(): string {
@@ -65,4 +93,6 @@ export {
   checkNumberIfFloat,
   extractImageResults,
   genRandomColor,
+  truncateText,
+  updateImageSize,
 };
