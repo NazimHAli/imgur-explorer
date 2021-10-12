@@ -1,3 +1,7 @@
+type selectedTag = {
+  items?: Array<object>;
+};
+
 export type Item = {
   account_url: string;
   comment_count: number;
@@ -24,7 +28,7 @@ export type State = {
     window: string;
   };
   requestError: boolean;
-  selectedTag: Object;
+  selectedTag: selectedTag;
 };
 
 export type Action = {
