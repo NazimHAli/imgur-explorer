@@ -13,8 +13,8 @@ If you don't want to register and use the free imgur API, it will use mocked dat
 
 ##### Google PageSpeed Scores (need to automate to add a badege for live scores)
 
-- Mobile [93/100](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fimgur-explorer-master.vercel.app%2F&tab=mobile)
-- Desktop [99/100](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fimgur-explorer-master.vercel.app%2F&tab=desktop)
+- Mobile [93/100](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fimgur-explorer.vercel.app%2F&tab=mobile)
+- Desktop [99/100](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fimgur-explorer.vercel.app%2F&tab=desktop)
 
 ### [Live Demo](https://imgur-explorer.vercel.app/)
 
