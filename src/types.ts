@@ -2,6 +2,17 @@ type selectedTag = {
   items?: Array<object>;
 };
 
+export type TypeGallery = {
+  description: string;
+  id: string;
+  name: string;
+};
+
+export type TypeTag = {
+  display_name: string;
+  name: string;
+};
+
 export type Item = {
   account_url: string;
   comment_count: number;
