@@ -1,3 +1,5 @@
+import "@/styles/layout/no-results.scss";
+
 function GalleryNoResults(): JSX.Element {
   return (
     <section className="no-results">

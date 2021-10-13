@@ -51,7 +51,7 @@ function App() {
       )}
 
       {/* No results */}
-      {!state.items.length && !state.isLoading && <GalleryNoResults />}
+      {state.items.length === 0 && !state.isLoading && <GalleryNoResults />}
       <Footer />
     </Suspense>
   );
