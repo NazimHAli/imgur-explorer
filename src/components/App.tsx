@@ -43,7 +43,12 @@ function App() {
       <SearchToolBar dispatchState={dispatchState} state={state} />
 
       {/* Loading */}
-      {state.isLoading && <LoadingAnimation />}
+      {state.isLoading && (
+        <>
+          <LoadingAnimation />
+          <div className="full-vh" />
+        </>
+      )}
 
       {/* Render results */}
       {!state.isLoading && state.items.length > 0 && (
