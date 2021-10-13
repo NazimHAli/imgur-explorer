@@ -31,11 +31,15 @@ function checkNumberIfFloat(num: number): boolean {
  * @param newSize
  */
 function updateImageSize(images: any[], newSize = "m") {
+  const imgSuffix = `${newSize}.jpg`;
+
   for (let index = 0; index < images.length; index++) {
-    images[index].images[0].link = images[index].images[0].link.replace(
-      ".jpg",
-      `${newSize}.jpg`
-    );
+    if (!images[index].images[0].link.endsWith(imgSuffix)) {
+      images[index].images[0].link = images[index].images[0].link.replace(
+        ".jpg",
+        imgSuffix
+      );
+    }
   }
 
   return images;

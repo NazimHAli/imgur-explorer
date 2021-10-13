@@ -1,6 +1,6 @@
 .no-results {
   @include container;
-  height: 20rem;
+  min-height: 100vh;
   text-align: center;
   padding-top: 1rem;
 }

@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect, useReducer } from "react";
 import { initialState, stateReducer } from "@/state";
 import { handleServiceRequests } from "@/services/imgurAPI";
 
-const ExploreGalleries = lazy(() => import("@/components/ExploreGalleries"));
+const Explore = lazy(() => import("@/components/Explore"));
 const Footer = lazy(() => import("@/components/Footer"));
 const Gallery = lazy(() => import("@/components/Gallery"));
 const GalleryNoResults = lazy(() => import("@/components/GalleryNoResults"));
@@ -39,16 +39,24 @@ function App() {
         dispatchState={dispatchState}
         defaultQuery={state.requestArgs.query}
       />
-      <ExploreGalleries
-        dispatchState={dispatchState}
-        galleryTags={state.galleryTags}
-      />
+      <Explore dispatchState={dispatchState} galleryTags={state.galleryTags} />
       <SearchToolBar dispatchState={dispatchState} state={state} />
-      {state.isLoading && <LoadingAnimation />}
+
+      {/* Loading */}
+      {state.isLoading && (
+        <>
+          <LoadingAnimation />
+          <div className="full-vh" />
+        </>
+      )}
+
+      {/* Render results */}
       {!state.isLoading && state.items.length > 0 && (
         <Gallery items={state.items} />
       )}
-      {!state.items.length && !state.isLoading && <GalleryNoResults />}
+
+      {/* No results */}
+      {state.items.length === 0 && !state.isLoading && <GalleryNoResults />}
       <Footer />
     </Suspense>
   );
