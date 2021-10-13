@@ -44,7 +44,12 @@ function Header(props: {
         <img src={galleryIcon} alt="Logo" width="64" height="64" />
       </a>
       <div className="search-box">
-        <button className="btn-search" type="submit" onClick={_handleSubmit}>
+        <button
+          className="btn-search"
+          type="submit"
+          name="Submit search button"
+          onClick={_handleSubmit}
+        >
           <i className="search-icon"></i>
         </button>
         <form onSubmit={_handleSubmit}>
