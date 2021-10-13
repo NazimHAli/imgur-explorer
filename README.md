@@ -18,7 +18,7 @@ If you don't want to register and use the free imgur API, it will use mocked dat
 
 ### [Live Demo](https://react-image-gallery-master.vercel.app/)
 
-![image](https://user-images.githubusercontent.com/26750288/136809770-79221fcc-ce56-42d0-8138-32214c5dae85.png)
+![image](https://user-images.githubusercontent.com/26750288/137044824-b6e36bdd-c04f-4c7e-b999-db78740e21ef.png)
 
 ## Quick start
 
