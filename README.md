@@ -54,7 +54,7 @@ yarn serve
 - [x] Search
 - [x] Sort results
 - [x] Explore by categories
-- [ ] Explore tags
+- [x] Explore tags
 - [ ] Profile login
 - [ ] Upload images
 
