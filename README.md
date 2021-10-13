@@ -1,10 +1,10 @@
-# ReactJS Image Gallery
+# Imgur Explorer
 
-ReactJS + [imgur API](https://imgur.com/) + [vitejs bundler](https://github.com/vitejs/vite) in TypeScript.
+ReactJS + [Imgur API](https://imgur.com/) + [vitejs bundler](https://github.com/vitejs/vite) in TypeScript.
 
 ##### Mocked Data From API
 
-If you don't want to register and use the free imgur API, it will use mocked data/saved responses from the API. It's also useful for faster local development so you don't have to make new requests with every HMR update.
+If you don't want to register and use the free Imgur API, it will use mocked data/saved responses from the API. It's also useful for faster local development so you don't have to make new requests with every HMR update.
 
 [![DeepSource](https://deepsource.io/gh/NazimHAli/imgur-explorer.svg/?label=active+issues&show_trend=true&token=aO_Hx9m4iDxMopueaxAigoGd)](https://deepsource.io/gh/NazimHAli/imgur-explorer)
 [![DeepSource](https://deepsource.io/gh/NazimHAli/imgur-explorer.svg/?label=resolved+issues&show_trend=true&token=aO_Hx9m4iDxMopueaxAigoGd)](https://deepsource.io/gh/NazimHAli/imgur-explorer)
@@ -34,7 +34,7 @@ yarn build
 yarn serve
 ```
 
-## Use imgur API
+## Imgur API
 
 1. [Free registration](https://api.imgur.com/oauth2/addclient)
 2. Pass the client ID as an environemnt variable (can be in .env or through CLI)
