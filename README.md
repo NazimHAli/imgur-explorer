@@ -16,7 +16,7 @@ If you don't want to register and use the free imgur API, it will use mocked dat
 - Mobile [93/100](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Freact-image-gallery-master.vercel.app%2F&tab=mobile)
 - Desktop [99/100](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Freact-image-gallery-master.vercel.app%2F&tab=desktop)
 
-### [Live Demo](https://react-image-gallery-master.vercel.app/)
+### [Live Demo](https://imgur-explorer.vercel.app/)
 
 ![image](https://user-images.githubusercontent.com/26750288/137044824-b6e36bdd-c04f-4c7e-b999-db78740e21ef.png)
 
