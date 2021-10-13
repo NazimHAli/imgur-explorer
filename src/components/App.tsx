@@ -42,12 +42,15 @@ function App() {
       <Explore dispatchState={dispatchState} galleryTags={state.galleryTags} />
       <SearchToolBar dispatchState={dispatchState} state={state} />
 
+      {/* Loading */}
       {state.isLoading && <LoadingAnimation />}
 
+      {/* Render results */}
       {!state.isLoading && state.items.length > 0 && (
         <Gallery items={state.items} />
       )}
 
+      {/* No results */}
       {!state.items.length && !state.isLoading && <GalleryNoResults />}
       <Footer />
     </Suspense>
