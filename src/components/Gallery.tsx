@@ -28,7 +28,7 @@ function Gallery(props: { items: State["items"] }): JSX.Element {
   }, []);
 
   return (
-    <div className="gallery-container">
+    <div className="container mx-auto grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
       {Array.from(items).map(
         (image): JSX.Element => (
           <GalleryCard item={image} key={image.id} imgRef={cardImgRef} />

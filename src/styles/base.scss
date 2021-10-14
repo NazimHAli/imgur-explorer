@@ -1,21 +1,3 @@
-*,
-*:after,
-*:before {
-  @include box-sizing(border-box);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-ul,
-ol {
-  margin: 0;
-  padding: 0;
-}
-
 $base-bg-color: #c51162;
 $base-color2: #ff0080;
 

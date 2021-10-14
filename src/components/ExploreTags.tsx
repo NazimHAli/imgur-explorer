@@ -1,5 +1,4 @@
 import { State, TypeTag } from "@/types";
-import "@/styles/component/explore-galleries.scss";
 import { MouseEventHandler } from "react";
 
 function renderTags(
@@ -7,17 +6,20 @@ function renderTags(
   handleClick: MouseEventHandler<HTMLAnchorElement> | undefined
 ) {
   return (
-    <ul className="explore-tags-list">
+    <>
       {Array.from(galleryTags?.tags ? galleryTags.tags.slice(0, 8) : []).map(
         (tag: TypeTag) => (
-          <li key={tag?.display_name}>
+          <li
+            key={tag?.display_name}
+            className="p-4 bg-gray-100 hover:bg-yellow-300 transition-colors duration-500"
+          >
             <a href="#" data-tag={tag?.name} onClick={handleClick}>
               {tag?.display_name}
             </a>
           </li>
         )
       )}
-    </ul>
+    </>
   );
 }
 
@@ -36,10 +38,12 @@ function ExploreTags(props: {
   };
 
   return (
-    <>
+    <div className="text-black">
       <h4>Tags</h4>
-      {renderTags(galleryTags, handleClick)}
-    </>
+      <ul className="grid grid-cols-2 gap-1 md:grid-cols-4 lg:grid-cols-8">
+        {renderTags(galleryTags, handleClick)}
+      </ul>
+    </div>
   );
 }
 

@@ -11,7 +11,7 @@ function Explore(props: {
   const { dispatchState, galleryTags } = props;
 
   return (
-    <div className="explore-galleries">
+    <div className="container mx-auto grid grid-flow-rows">
       <ExploreTags dispatchState={dispatchState} galleryTags={galleryTags} />
       <ExploreGalleries galleryTags={galleryTags} />
     </div>
