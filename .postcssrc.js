@@ -5,9 +5,9 @@ module.exports = (ctx) => ({
     tailwindcss: {},
     "postcss-import": {},
     "postcss-nested": {},
-    // "@fullhuman/postcss-purgecss": {
-    //   content: ["./**/*.html", "./src/**/*.tsx", "./src/**/*.ts"],
-    // },
+    "@fullhuman/postcss-purgecss": {
+      content: ["./**/*.html", "./src/**/*.tsx", "./src/**/*.ts"],
+    },
     cssnano: ctx.env === "production" ? {} : false,
   },
 });
