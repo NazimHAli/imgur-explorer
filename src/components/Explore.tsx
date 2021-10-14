@@ -1,5 +1,5 @@
 import { State } from "@/types";
-import "@/styles/component/explore-galleries.scss";
+import "@/styles/component/explore.scss";
 
 import ExploreTags from "./ExploreTags";
 import ExploreGalleries from "./ExploreGalleries";
@@ -11,7 +11,7 @@ function Explore(props: {
   const { dispatchState, galleryTags } = props;
 
   return (
-    <div className="container mx-auto grid grid-flow-rows">
+    <div className="explore">
       <ExploreTags dispatchState={dispatchState} galleryTags={galleryTags} />
       <ExploreGalleries galleryTags={galleryTags} />
     </div>

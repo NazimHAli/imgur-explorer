@@ -7,7 +7,7 @@ function GalleryCard(props: { item: Item; imgRef: Ref<HTMLImageElement> }) {
   const { imgRef, item } = props;
 
   const imageInfo = (
-    <div className="card_badges">
+    <div className="card_badges text-white">
       <h4 className="card__title">{truncateText(item?.title, 20)}</h4>
       <div className="card_badges_icons">
         <span>

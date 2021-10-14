@@ -46,11 +46,11 @@ $breakpoints: (
   }
 }
 
-@mixin container($max-width: 90rem) {
-  max-width: $max-width;
-  margin: 0 auto;
-  clear: both;
-}
+// @mixin container($max-width: 90rem) {
+//   max-width: $max-width;
+//   margin: 0 auto;
+//   clear: both;
+// }
 
 @mixin cssgrid($min, $gap: false) {
   display: grid;

@@ -14,7 +14,7 @@ function SearchToolBar(props: {
   const enablewindow = enableSort && state.requestArgs.sort === "top";
 
   return (
-    <div className="container mx-auto my-4 flex flex-row gap-1 md:justify-end">
+    <div className="search-toolbar">
       <SearchToolBarDropdown
         actionArg="sort"
         options={enableSort ? ["Top", "Viral", "Trending"] : []}

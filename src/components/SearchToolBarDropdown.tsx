@@ -39,7 +39,6 @@ function SearchToolBarDropdown(props: {
       id="drop-down"
       className="dropdown__content"
       defaultValue={selectedValue}
-      style={{ maxHeight: `${options.length * 3}rem` }}
     >
       {options.map((item) => (
         <li

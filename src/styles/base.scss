@@ -1,10 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 $base-bg-color: #c51162;
 $base-color2: #ff0080;
-
-body {
-  color: #fff;
-  font-family: "Montserrat";
-}
 
 img {
   max-width: 100%;
