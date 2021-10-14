@@ -51,9 +51,7 @@ function App() {
       )}
 
       {/* Render results */}
-      {!state.isLoading && state.items.length > 0 && (
-        <Gallery items={state.items} />
-      )}
+      {state.items.length > 0 && <Gallery items={state.items} />}
 
       {/* No results */}
       {state.items.length === 0 && !state.isLoading && <GalleryNoResults />}
