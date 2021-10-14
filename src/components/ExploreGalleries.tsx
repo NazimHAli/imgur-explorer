@@ -3,7 +3,7 @@ import "@/styles/component/explore-galleries.scss";
 
 function renderGallery(galleryTags: State["galleryTags"]): JSX.Element {
   return (
-    <ul className="explore-galleries__list">
+    <ul className="container mx-auto grid grid-cols-2 gap-1 md:grid-cols-4">
       {Array.from(galleryTags?.galleries ? galleryTags.galleries : []).map(
         (gallery: TypeGallery) => (
           <li key={gallery?.id} className="explore-galleries__list_item">

@@ -11,10 +11,10 @@ function SearchToolBar(props: {
 
   // imgur API only allows 'window' options if sort == 'top'
   const enableSort = state.requestArgs.query.length > 0;
-  const enablewindow = state.requestArgs.sort === "top";
+  const enablewindow = enableSort && state.requestArgs.sort === "top";
 
   return (
-    <div className="container mx-auto grid grid-flow-col gap-4 auto-cols-max place-content-center md:place-content-end">
+    <div className="container mx-auto my-4 flex flex-row gap-1 md:justify-end">
       <SearchToolBarDropdown
         actionArg="sort"
         options={enableSort ? ["Top", "Viral", "Trending"] : []}
