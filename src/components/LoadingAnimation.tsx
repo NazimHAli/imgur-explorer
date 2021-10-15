@@ -1,5 +1,3 @@
-import "@/styles/component/loading-animation.scss";
-
 function LoadingAnimation(): JSX.Element {
   return (
     <div className="loading-container">

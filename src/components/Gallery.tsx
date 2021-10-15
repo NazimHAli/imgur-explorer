@@ -2,8 +2,6 @@ import { ObserveElementsInView } from "@/utils/visibilityUtils";
 import { lazy, useCallback } from "react";
 import { State } from "@/types";
 
-import "@/styles/component/gallery.scss";
-
 const GalleryCard = lazy(() => import("@/components/GalleryCard"));
 
 const imgObserver = new ObserveElementsInView();

@@ -1,5 +1,4 @@
 import { RefObject, useRef } from "react";
-import "@/styles/layout/header.scss";
 
 import galleryIcon from "@/assets/gallery.svg";
 import profileIcon from "@/assets/profile.svg";

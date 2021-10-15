@@ -1,5 +1,4 @@
 import { Action, State } from "@/types";
-import "@/styles/component/search-toolbar.scss";
 import { Dispatch } from "react";
 import SearchToolBarDropdown from "./SearchToolBarDropdown";
 

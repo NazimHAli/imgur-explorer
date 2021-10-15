@@ -1,5 +1,4 @@
 import { State } from "@/types";
-import "@/styles/component/explore.scss";
 
 import ExploreTags from "./ExploreTags";
 import ExploreGalleries from "./ExploreGalleries";
