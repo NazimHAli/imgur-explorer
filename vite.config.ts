@@ -12,6 +12,7 @@ export default defineConfig({
       },
     },
   },
+  root: "./src",
   envPrefix: "PUBLIC_",
   plugins: [react()],
   resolve: {

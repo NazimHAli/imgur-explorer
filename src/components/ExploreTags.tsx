@@ -36,7 +36,7 @@ function ExploreTags(props: {
 
   return (
     <div className="text-black">
-      <h4>Tags</h4>
+      <h2 className="explore_title">Tags</h2>
       <ul className="explore_tags">{renderTags(galleryTags, handleClick)}</ul>
     </div>
   );

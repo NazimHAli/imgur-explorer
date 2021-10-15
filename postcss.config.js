@@ -1,18 +1,19 @@
 const purgecss = require("@fullhuman/postcss-purgecss");
 const cssnano = require("cssnano");
+const isProd = process.env.NODE_ENV === "production";
 
 module.exports = {
   plugins: [
     require("postcss-import"),
     require("tailwindcss/nesting"),
     require("tailwindcss"),
-    process.env.NODE_ENV === "production" ? require("autoprefixer") : null,
-    process.env.NODE_ENV === "production"
-      ? cssnano({ preset: "default" })
+    isProd ? require("autoprefixer") : null,
+    isProd ? cssnano({ preset: "default" }) : null,
+    isProd
+      ? purgecss({
+          content: ["./**/*.html", "./src/**/*.tsx", "./src/**/*.ts"],
+          defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
+        })
       : null,
-    purgecss({
-      content: ["./**/*.html", "./src/**/*.tsx", "./src/**/*.ts"],
-      defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
-    }),
   ],
 };

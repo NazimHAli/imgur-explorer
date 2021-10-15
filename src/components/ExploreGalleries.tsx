@@ -5,7 +5,7 @@ function renderGallery(galleryTags: State["galleryTags"]): JSX.Element {
     <ul className="explore_galleries">
       {Array.from(galleryTags?.galleries ? galleryTags.galleries : []).map(
         (gallery: TypeGallery) => (
-          <li key={gallery?.id} className="explore-galleries__list_item">
+          <li key={gallery?.id} className="flex flex-col">
             <h3>{gallery?.name}</h3>
             <p>{gallery?.description}</p>
           </li>
@@ -20,7 +20,7 @@ function ExploreGalleries(props: { galleryTags: State["galleryTags"] }) {
 
   return (
     <>
-      <h2>Explore Galleries</h2>
+      <h2 className="explore_title">Explore Galleries</h2>
       {renderGallery(galleryTags)}
     </>
   );
