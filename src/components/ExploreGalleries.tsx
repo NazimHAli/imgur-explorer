@@ -2,16 +2,20 @@ import { State, TypeGallery } from "@/types";
 
 function renderGallery(galleryTags: State["galleryTags"]): JSX.Element {
   return (
-    <ul className="explore_galleries">
+    <div className="explore_galleries">
       {Array.from(galleryTags?.galleries ? galleryTags.galleries : []).map(
         (gallery: TypeGallery) => (
-          <li key={gallery?.id} className="flex flex-col">
+          <a
+            key={gallery?.id}
+            className="flex flex-col gallery_item"
+            href="#explore"
+          >
             <h3>{gallery?.name}</h3>
             <p>{gallery?.description}</p>
-          </li>
+          </a>
         )
       )}
-    </ul>
+    </div>
   );
 }
 
@@ -20,7 +24,9 @@ function ExploreGalleries(props: { galleryTags: State["galleryTags"] }) {
 
   return (
     <>
-      <h2 className="explore_title">Explore Galleries</h2>
+      <h2 id="explore" className="explore_title">
+        Explore Galleries
+      </h2>
       {renderGallery(galleryTags)}
     </>
   );

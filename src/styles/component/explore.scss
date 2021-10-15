@@ -8,6 +8,8 @@
 .explore_title {
   @apply font-extrabold;
   @apply leading-10;
+  @apply text-2xl;
+  @apply my-4;
 }
 
 .explore_galleries {
@@ -18,7 +20,7 @@
   @apply md:grid-cols-4;
   @apply mx-auto;
 
-  > li {
+  .gallery_item {
     @apply list-none;
     @apply bg-indigo-800;
     @apply text-white;
@@ -27,6 +29,7 @@
     @apply hover:bg-purple-900;
     @apply transition-colors;
     @apply duration-500;
+    @apply select-none;
 
     h3 {
       @apply font-bold;
