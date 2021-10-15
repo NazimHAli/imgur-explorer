@@ -11,7 +11,7 @@ module.exports = {
     isProd ? cssnano({ preset: "default" }) : null,
     isProd
       ? purgecss({
-          content: ["./**/*.html", "./src/**/*.tsx", "./src/**/*.ts"],
+          content: ["./*.html", "./src/**/*.tsx", "./src/**/*.ts"],
           defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
         })
       : null,
