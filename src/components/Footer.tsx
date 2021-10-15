@@ -11,10 +11,10 @@ function Footer() {
   ];
 
   return (
-    <footer className=" body-font footer">
-      <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+    <footer className="footer">
+      <div className="footer__content">
         <FooterRight />
-        <div className="flex-grow flex flex-wrap md:pr-20 -mb-10 md:text-left text-center order-first">
+        <div className="footer__content__sections">
           <FooterSection sectionLinks={sectionLinks} />
           <FooterSection sectionLinks={sectionLinks} />
           <FooterSection sectionLinks={sectionLinks} />

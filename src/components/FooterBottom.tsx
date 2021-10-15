@@ -1,6 +1,6 @@
 function LeftSide() {
   return (
-    <p className=" text-sm text-center sm:text-left">
+    <p className="footer__bottom__left">
       © 2021 Meows ||
       <a
         href="https://twitter.com/none"
@@ -36,10 +36,10 @@ function FooterIcon() {
 
 function FooterBottom() {
   return (
-    <div className="bg-gray-100 text-black">
-      <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+    <div className="footer__bottom">
+      <div className="footer__bottom__container">
         <LeftSide />
-        <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
+        <span className="footer__bottom__center">
           <a className="">
             <FooterIcon />
           </a>

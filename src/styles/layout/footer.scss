@@ -2,4 +2,69 @@
   background-color: $base-color2;
   margin-top: 3rem;
   @apply text-white;
+
+  &__content {
+    @apply container;
+    @apply flex-col;
+    @apply flex-wrap;
+    @apply flex;
+    @apply lg:items-start;
+    @apply md:flex-nowrap;
+    @apply md:flex-row;
+    @apply md:items-center;
+    @apply mx-auto;
+    @apply px-5;
+    @apply py-24;
+
+    &__sections {
+      @apply -mb-10;
+      @apply flex-grow;
+      @apply flex-wrap;
+      @apply flex;
+      @apply md:pr-20;
+      @apply order-first;
+    }
+
+    &__right {
+      @apply w-64;
+      @apply flex-shrink-0;
+      @apply md:mx-0;
+      @apply mx-auto;
+      @apply text-center;
+      @apply md:text-left;
+      @apply md:mt-0;
+      @apply mt-10;
+    }
+  }
+
+  &__bottom {
+    @apply bg-gray-100;
+    @apply text-black;
+
+    &__container {
+      @apply container;
+      @apply mx-auto;
+      @apply py-4;
+      @apply px-5;
+      @apply flex;
+      @apply flex-wrap;
+      @apply flex-col;
+      @apply sm:flex-row;
+    }
+
+    &__left {
+      @apply text-sm;
+      @apply text-center;
+      @apply sm:text-left;
+    }
+
+    &__center {
+      @apply inline-flex;
+      @apply sm:ml-auto;
+      @apply sm:mt-0;
+      @apply mt-2;
+      @apply justify-center;
+      @apply sm:justify-start;
+    }
+  }
 }

@@ -1,7 +1,10 @@
 function FooterRight() {
   return (
-    <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left md:mt-0 mt-10">
-      <a className="flex title-font font-medium items-center md:justify-start justify-center">
+    <div className="footer__content__right">
+      <a
+        className="flex title-font font-medium items-center md:justify-start justify-center"
+        href="#explore"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
