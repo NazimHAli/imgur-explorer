@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+
 import GalleryCard from "../../components/GalleryCard";
 import { fakeResponse } from "../fixtures/imgurResponse";
 

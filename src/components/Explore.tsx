@@ -1,7 +1,7 @@
 import { State } from "@/types";
 
-import ExploreTags from "./ExploreTags";
 import ExploreGalleries from "./ExploreGalleries";
+import ExploreTags from "./ExploreTags";
 
 function Explore(props: {
   dispatchState: any;

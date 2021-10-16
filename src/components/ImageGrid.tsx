@@ -1,6 +1,6 @@
+import { State } from "@/types";
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
 import { lazy, useCallback } from "react";
-import { State } from "@/types";
 
 const ImageGridCard = lazy(() => import("@/components/ImageGridCard"));
 

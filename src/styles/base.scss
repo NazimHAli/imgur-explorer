@@ -19,7 +19,6 @@ img {
 .hide-sr {
   display: none;
 }
-
 .data-badge[data-count]:after {
   content: attr(data-count);
   position: relative;

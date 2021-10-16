@@ -1,6 +1,6 @@
-import { lazy, Suspense, useEffect, useReducer } from "react";
-import { initialState, stateReducer } from "@/state";
 import { handleServiceRequests } from "@/services/imgurAPI";
+import { initialState, stateReducer } from "@/state";
+import { lazy, Suspense, useEffect, useReducer } from "react";
 
 const Explore = lazy(() => import("@/components/Explore"));
 const Footer = lazy(() => import("@/components/Footer"));
