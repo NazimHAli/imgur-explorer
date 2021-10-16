@@ -4,7 +4,6 @@
   @apply text-white;
 
   &__content {
-    @apply container;
     @apply flex-col;
     @apply flex-wrap;
     @apply flex;
@@ -49,7 +48,6 @@
     @apply text-black;
 
     &__container {
-      @apply container;
       @apply mx-auto;
       @apply py-4;
       @apply px-5;
@@ -77,6 +75,8 @@
 }
 
 .footer-section {
+  @apply text-center;
+  @apply md:text-justify;
   @apply w-2/4;
   @apply lg:w-1/4;
   @apply px-4;

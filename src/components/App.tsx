@@ -1,4 +1,4 @@
-import { handleServiceRequests } from "@/services/imgurAPI";
+import { handleImgurServiceRequests } from "@/services/handleImgurServiceRequests";
 import { initialState, stateReducer } from "@/state";
 import { lazy, Suspense, useEffect, useReducer } from "react";
 
@@ -23,15 +23,15 @@ function App() {
 
   useEffect(() => {
     if (state.requestArgs.tagName.length) {
-      handleServiceRequests(dispatchState, state, "tagName");
+      handleImgurServiceRequests(dispatchState, state, "tagName");
     } else if (state.requestArgs.query.length) {
-      handleServiceRequests(dispatchState, state);
+      handleImgurServiceRequests(dispatchState, state);
     }
   }, [state.requestArgs]);
 
   useEffect(() => {
     if (Object.keys(state.galleryTags).length === 0) {
-      handleServiceRequests(dispatchState, state, "tags");
+      handleImgurServiceRequests(dispatchState, state, "tags");
     }
   }, []);
 
