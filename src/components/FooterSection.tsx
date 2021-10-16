@@ -4,13 +4,13 @@ function FooterSection({ sectionLinks }) {
       <h2 className="title-font font-medium tracking-widest text-lg mb-3">
         CATEGORIES
       </h2>
-      <nav className="list-none mb-10">
+      <ul className="list-none mb-10">
         {sectionLinks.map((linkName) => (
           <li key={linkName}>
             <a href="#explore">{linkName}</a>
           </li>
         ))}
-      </nav>
+      </ul>
     </div>
   );
 }
