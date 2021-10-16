@@ -4,7 +4,7 @@ export const fetchData = async (url: RequestInfo) => {
     const response_1 = await response.json();
     return response_1.results;
   } catch (error) {
-    console.error(`Fetch problem: ${error.message}`);
-    return Promise.reject([]);
+    console.error(`Fetch problem: ${error}`);
+    return Promise.reject({ statue: 400 });
   }
 };

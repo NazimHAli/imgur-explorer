@@ -1,10 +1,9 @@
 .image-grid {
-  @apply container;
+  @apply max-w-screen-2xl;
   @apply gap-1;
   @apply grid-cols-2;
   @apply grid;
   @apply lg:grid-cols-4;
-  @apply md:grid-cols-3;
   @apply mx-auto;
   @apply text-white;
   @apply xl:grid-cols-5;

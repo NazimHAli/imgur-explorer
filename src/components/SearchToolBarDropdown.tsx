@@ -49,7 +49,7 @@ function SearchToolBarDropdown(props: {
     </>
   );
 
-  return <div className="ddtw">{listItems}</div>;
+  return <div className="search-toolbar__dropdown">{listItems}</div>;
 }
 
 export default SearchToolBarDropdown;

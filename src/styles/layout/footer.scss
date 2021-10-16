@@ -13,7 +13,6 @@
     @apply md:flex-row;
     @apply md:items-center;
     @apply mx-auto;
-    @apply px-5;
     @apply py-24;
 
     &__sections {
@@ -34,6 +33,14 @@
       @apply md:text-left;
       @apply md:mt-0;
       @apply mt-10;
+
+      &__link {
+        @apply flex;
+        @apply font-medium;
+        @apply items-center;
+        @apply md:justify-start;
+        @apply justify-center;
+      }
     }
   }
 
@@ -66,5 +73,18 @@
       @apply justify-center;
       @apply sm:justify-start;
     }
+  }
+}
+
+.footer-section {
+  @apply w-2/4;
+  @apply lg:w-1/4;
+  @apply px-4;
+
+  &__title {
+    @apply font-medium;
+    @apply tracking-widest;
+    @apply text-lg;
+    @apply mb-3;
   }
 }

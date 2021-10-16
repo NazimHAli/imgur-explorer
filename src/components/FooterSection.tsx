@@ -1,6 +1,8 @@
-function FooterSection({ sectionLinks }) {
+function FooterSection(props: { sectionLinks: string[] }) {
+  const { sectionLinks } = props;
+
   return (
-    <div className="lg:w-1/4 md:w-1/2 w-full px-4">
+    <div className="footer-section">
       <h2 className="title-font font-medium tracking-widest text-lg mb-3">
         CATEGORIES
       </h2>

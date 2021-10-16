@@ -1,5 +1,5 @@
 .explore {
-  @apply container;
+  @apply max-w-screen-2xl;
   @apply mx-auto;
   @apply grid;
   @apply grid-flow-row;
@@ -28,12 +28,13 @@
   }
 
   &__galleries {
-    @apply container;
+    @apply max-w-screen-2xl;
     @apply gap-1;
     @apply grid-cols-2;
     @apply grid;
     @apply md:grid-cols-4;
     @apply mx-auto;
+    @apply w-full;
 
     &__item {
       @apply list-none;

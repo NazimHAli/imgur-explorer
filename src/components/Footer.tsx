@@ -3,7 +3,7 @@ import FooterRight from "./FooterRight";
 import FooterSection from "./FooterSection";
 
 function Footer() {
-  const sectionLinks = [
+  const sectionLinks: string[] = [
     "First Link",
     "Second Link",
     "Third Link",

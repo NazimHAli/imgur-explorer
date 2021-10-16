@@ -1,9 +1,17 @@
 .search-toolbar {
-  @apply container;
+  @apply max-w-screen-2xl;
   @apply mx-auto;
   @apply my-4;
   @apply flex;
   @apply flex-row;
   @apply gap-1;
   @apply md:justify-end;
+
+  &__dropdown {
+    @apply w-40;
+    @apply border-solid;
+    @apply border-gray-200;
+    @apply border-2;
+    @apply p-2;
+  }
 }
