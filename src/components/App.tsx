@@ -4,9 +4,11 @@ import { handleServiceRequests } from "@/services/imgurAPI";
 
 const Explore = lazy(() => import("@/components/Explore"));
 const Footer = lazy(() => import("@/components/Footer"));
-const Gallery = lazy(() => import("@/components/Gallery"));
-const GalleryNoResults = lazy(() => import("@/components/GalleryNoResults"));
 const Header = lazy(() => import("@/components/Header"));
+const ImageGrid = lazy(() => import("@/components/ImageGrid"));
+const ImageGridNoResults = lazy(
+  () => import("@/components/ImageGridNoResults")
+);
 const LoadingAnimation = lazy(() => import("@/components/LoadingAnimation"));
 const SearchToolBar = lazy(() => import("@/components/SearchToolBar"));
 
@@ -51,10 +53,10 @@ function App() {
       )}
 
       {/* Render results */}
-      {state.items.length > 0 && <Gallery items={state.items} />}
+      {state.items.length > 0 && <ImageGrid items={state.items} />}
 
       {/* No results */}
-      {state.items.length === 0 && !state.isLoading && <GalleryNoResults />}
+      {state.items.length === 0 && !state.isLoading && <ImageGridNoResults />}
       <Footer />
     </Suspense>
   );

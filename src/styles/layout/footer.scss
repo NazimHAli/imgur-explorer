@@ -1,6 +1,6 @@
 .footer {
   background-color: $base-color2;
-  margin-top: 3rem;
+  @apply mt-12;
   @apply text-white;
 
   &__content {

@@ -1,4 +1,4 @@
-function GalleryNoResults(): JSX.Element {
+function ImageGridNoResults(): JSX.Element {
   return (
     <section className="no-results">
       <h2>No results found :p</h2>
@@ -6,4 +6,4 @@ function GalleryNoResults(): JSX.Element {
   );
 }
 
-export default GalleryNoResults;
+export default ImageGridNoResults;

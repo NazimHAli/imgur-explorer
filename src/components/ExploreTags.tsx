@@ -14,7 +14,7 @@ function renderTags(
             href="#explore-tags"
             data-tag={tag?.name}
             onClick={handleClick}
-            className="tag_li"
+            className="explore__tags__item"
           >
             {tag?.display_name}
           </a>
@@ -40,10 +40,12 @@ function ExploreTags(props: {
 
   return (
     <div className="text-black">
-      <h2 id="explore-tags" className="explore_title">
+      <h2 id="explore-tags" className="explore__title">
         Tags
       </h2>
-      <div className="explore_tags">{renderTags(galleryTags, handleClick)}</div>
+      <div className="explore__tags">
+        {renderTags(galleryTags, handleClick)}
+      </div>
     </div>
   );
 }

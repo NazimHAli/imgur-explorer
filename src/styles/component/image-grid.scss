@@ -1,0 +1,68 @@
+.image-grid {
+  @apply container;
+  @apply gap-1;
+  @apply grid-cols-2;
+  @apply grid;
+  @apply lg:grid-cols-4;
+  @apply md:grid-cols-3;
+  @apply mx-auto;
+  @apply text-white;
+  @apply xl:grid-cols-5;
+}
+
+.card {
+  border: solid 1px #00000036;
+  @apply h-80;
+  @apply overflow-hidden;
+  @apply relative;
+  @apply w-full;
+
+  &:hover {
+    .card-info {
+      background-color: #222;
+    }
+
+    .card_badges_icons {
+      @apply opacity-100;
+    }
+  }
+
+  &__img {
+    @apply block;
+    @apply h-3/4;
+
+    img {
+      @apply block;
+      @apply max-h-full;
+      @apply mx-auto;
+      @apply w-auto;
+      @apply opacity-0;
+      @apply transition-opacity;
+      @apply duration-500;
+    }
+  }
+}
+
+.card-info {
+  @apply bg-gray-800;
+  @apply duration-500;
+  @apply grid;
+  @apply h-1/4;
+  @apply pb-1;
+  @apply text-white;
+  @apply transition-all;
+  grid-template-rows: 3fr 2fr;
+
+  &__title {
+    @apply p-2;
+    @apply text-center;
+    @apply text-sm;
+  }
+
+  &__icons {
+    @apply flex;
+    @apply items-center;
+    @apply justify-evenly;
+    @apply opacity-70;
+  }
+}

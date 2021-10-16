@@ -3,13 +3,13 @@ import { truncateText } from "@/utils/dataUtils";
 import { Ref } from "react";
 import { MessageSquare, ThumbsUp, Eye } from "react-feather";
 
-function GalleryCard(props: { item: Item; imgRef: Ref<HTMLImageElement> }) {
+function ImageGridCard(props: { item: Item; imgRef: Ref<HTMLImageElement> }) {
   const { imgRef, item } = props;
 
   const imageInfo = (
-    <div className="card_badges text-white">
-      <h4 className="card__title">{truncateText(item?.title, 20)}</h4>
-      <div className="card_badges_icons">
+    <div className="card-info">
+      <h4 className="card-info__title">{truncateText(item?.title, 20)}</h4>
+      <div className="card-info__icons">
         <span>
           <ThumbsUp width="15" height="15" />
           {item?.ups}
@@ -27,8 +27,8 @@ function GalleryCard(props: { item: Item; imgRef: Ref<HTMLImageElement> }) {
   );
 
   return (
-    <div className="card_badge_container">
-      <span className="img-container">
+    <div className="card">
+      <span className="card__img">
         <img
           alt={item?.title}
           width={320}
@@ -42,4 +42,4 @@ function GalleryCard(props: { item: Item; imgRef: Ref<HTMLImageElement> }) {
   );
 }
 
-export default GalleryCard;
+export default ImageGridCard;
