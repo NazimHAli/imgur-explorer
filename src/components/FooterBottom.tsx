@@ -2,12 +2,7 @@ function LeftSide() {
   return (
     <p className="footer__bottom__left">
       © 2021 Meows ||
-      <a
-        href="https://twitter.com/none"
-        rel="noopener noreferrer"
-        className=" ml-1"
-        target="_blank"
-      >
+      <a href="#explore" className=" ml-1">
         @none
       </a>
     </p>
@@ -40,16 +35,16 @@ function FooterBottom() {
       <div className="footer__bottom__container">
         <LeftSide />
         <span className="footer__bottom__center">
-          <a className="">
+          <a href="#explore">
             <FooterIcon />
           </a>
-          <a className="ml-3 ">
+          <a href="#explore" className="ml-3 ">
             <FooterIcon />
           </a>
-          <a className="ml-3 ">
+          <a href="#explore" className="ml-3 ">
             <FooterIcon />
           </a>
-          <a className="ml-3 ">
+          <a href="#explore" className="ml-3 ">
             <FooterIcon />
           </a>
         </span>

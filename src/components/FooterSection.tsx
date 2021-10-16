@@ -7,7 +7,7 @@ function FooterSection({ sectionLinks }) {
       <nav className="list-none mb-10">
         {sectionLinks.map((linkName) => (
           <li key={linkName}>
-            <a className=" ">{linkName}</a>
+            <a href="#explore">{linkName}</a>
           </li>
         ))}
       </nav>
