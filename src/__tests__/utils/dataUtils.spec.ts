@@ -1,5 +1,5 @@
-import { truncateText, updateImageSize } from "../../utils/dataUtils";
-import { fakeResponse } from "../fixtures/imgurResponse";
+import { fakeResponse } from "@/__tests__/fixtures/imgurResponse";
+import { truncateText, updateImageSize } from "@/utils/dataUtils";
 
 describe("truncateText", () => {
   let text, result;
