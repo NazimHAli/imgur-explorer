@@ -16,7 +16,7 @@
     "skipLibCheck": false,
     "strict": true,
     "target": "ESNext",
-    "types": ["vite/client"],
+    "types": ["vite/client", "jest"],
     "useDefineForClassFields": true,
     "baseUrl": ".",
     "paths": {
