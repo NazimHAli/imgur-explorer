@@ -1,7 +1,7 @@
-import { MutableRefObject, useEffect, useState } from "react";
+import { RefObject, useEffect, useState } from "react";
 
-const useIntersectObserver = (
-  ref: MutableRefObject<undefined>,
+const useIntersectionObserver = (
+  ref: RefObject<HTMLElement>,
   options: IntersectionObserverInit = {}
 ): IntersectionObserverEntry | null | void => {
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
@@ -27,4 +27,4 @@ const useIntersectObserver = (
   return entry;
 };
 
-export { useIntersectObserver };
+export { useIntersectionObserver };

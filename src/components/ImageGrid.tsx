@@ -1,5 +1,5 @@
 import { State } from "@/types";
-import { useIntersectObserver } from "@/utils/intersectionHook";
+import { useIntersectionObserver } from "@/utils/useIntersectionObserver";
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
 import { lazy, useCallback, useEffect, useRef, useState } from "react";
 
@@ -10,7 +10,7 @@ const imgObserver = new ObserveElementsInView();
 function ImageGrid(props: {
   items: State["items"];
   dispatchState;
-  requestArgs;
+  requestArgs: State["requestArgs"];
 }): JSX.Element {
   const { items, dispatchState, requestArgs } = props;
   const [idxsToLoad, setidxsToLoad] = useState([0, 1, 2, 3, 4]);
@@ -21,25 +21,13 @@ function ImageGrid(props: {
   }, []);
 
   const offsetY = 0;
-  const ioRef = useRef();
-  const entry = useIntersectObserver(ioRef);
+  const ioRef = useRef<HTMLElement>(null);
+  const entry = useIntersectionObserver(ioRef);
   const shouldLoadNewItems = !!entry?.isIntersecting;
 
   useEffect(() => {
     if (shouldLoadNewItems && idxsToLoad.length < items.length) {
-      const newIdxs = [
-        ...idxsToLoad,
-        idxsToLoad.length + 1,
-        idxsToLoad.length + 2,
-        idxsToLoad.length + 3,
-        idxsToLoad.length + 4,
-        idxsToLoad.length + 5,
-        idxsToLoad.length + 6,
-        idxsToLoad.length + 7,
-        idxsToLoad.length + 8,
-        idxsToLoad.length + 9,
-        idxsToLoad.length + 10,
-      ];
+      const newIdxs = [...Array(idxsToLoad.length + 10).keys()];
 
       if (items.length - newIdxs.length <= 20) {
         dispatchState({
@@ -47,18 +35,12 @@ function ImageGrid(props: {
           page: requestArgs.page + 1,
           newSearch: false,
         });
-        console.log(
-          `New request: p${requestArgs.page + 1} newIdxs: ${newIdxs.length}`
-        );
+        console.log(`Req. p${requestArgs.page + 1} newIdxs: ${newIdxs.length}`);
       }
 
       if (newIdxs.length <= items.length) {
         setidxsToLoad(newIdxs);
-        console.log(
-          "Loading more items",
-          { shouldLoadNewItems },
-          newIdxs.length
-        );
+        console.log("Loading items", { shouldLoadNewItems }, newIdxs.length);
       }
     }
     return () => {};
