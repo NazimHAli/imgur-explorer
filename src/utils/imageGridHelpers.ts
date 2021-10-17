@@ -2,7 +2,7 @@ import { imgObserver } from "@/components/ImageGrid";
 import { Action, State } from "@/types";
 import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
 
-function setImageLazyLoad(
+function HandleImageLazyLoad(
   state: State,
   setidxsToLoad: Dispatch<SetStateAction<number[]>>
 ) {
@@ -20,7 +20,7 @@ function setImageLazyLoad(
   return cardImgRef;
 }
 
-function handleNewItems(
+function HandleNewItems(
   shouldLoadNewItems: boolean,
   idxsToLoad: number[],
   state: State,
@@ -47,4 +47,4 @@ function handleNewItems(
   }, [shouldLoadNewItems]);
 }
 
-export { handleNewItems, setImageLazyLoad };
+export { HandleNewItems, HandleImageLazyLoad };

@@ -1,5 +1,5 @@
 import { Action, State } from "@/types";
-import { handleNewItems, setImageLazyLoad } from "@/utils/imageGridHelpers";
+import { HandleNewItems, HandleImageLazyLoad } from "@/utils/imageGridHelpers";
 import { useIntersectionObserver } from "@/utils/useIntersectionObserver";
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
 import { Dispatch, lazy, useRef, useState } from "react";
@@ -18,13 +18,13 @@ function ImageGrid(props: {
   const { state, dispatchState } = props;
   const [idxsToLoad, setidxsToLoad] = useState([0, 1, 2, 3, 4]);
 
-  const cardImgRef = setImageLazyLoad(state, setidxsToLoad);
+  const cardImgRef = HandleImageLazyLoad(state, setidxsToLoad);
 
   const elementObserverRef = useRef<HTMLElement>(null);
   const entry = useIntersectionObserver(elementObserverRef);
   const shouldLoadNewItems = !!entry?.isIntersecting;
 
-  handleNewItems(
+  HandleNewItems(
     shouldLoadNewItems,
     idxsToLoad,
     state,
