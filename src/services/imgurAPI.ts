@@ -49,7 +49,11 @@ class ImgurAPI {
     const response = await fetch(args.endPoint, args.requestOptions);
     const result = await response.json();
 
-    if (this.requestArgs.filter && !result.data?.galleries) {
+    if (
+      this.requestArgs.filter &&
+      !result.data?.galleries &&
+      !this.requestArgs.tagName.length
+    ) {
       return extractImageResults(result.data);
     }
 
