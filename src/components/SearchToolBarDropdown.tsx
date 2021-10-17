@@ -1,21 +1,22 @@
 import { Action, State } from "@/types";
 import { capitalize } from "@/utils/dataUtils";
-import { Dispatch } from "react";
+import { Dispatch, FormEvent } from "react";
 
 function getDispatchArgs(
   actionArg: string,
-  event: { preventDefault?: any; target?: any }
+  event: FormEvent<HTMLSelectElement>
 ) {
   const dispatchArgs: Action = {
     type: "submitSearchRequest",
   };
 
-  const res = event.target.value.toLowerCase();
+  const element = event.target as HTMLSelectElement;
+  const displayValue = element.value.toLowerCase();
 
   if (actionArg === "sort") {
-    dispatchArgs.sort = res;
+    dispatchArgs.sort = displayValue;
   } else if (actionArg === "window") {
-    dispatchArgs.window = res;
+    dispatchArgs.window = displayValue;
   }
 
   return dispatchArgs;
@@ -34,11 +35,10 @@ function SearchToolBarDropdown(props: {
       : capitalize(requestArgs.window);
   const renderListItems = options.length > 0;
 
-  const handleOnClick = (event: { preventDefault: any; target?: any }) => {
+  const handleOnClick = (event: FormEvent<HTMLSelectElement>) => {
     const dispatchArgs: Action = getDispatchArgs(actionArg, event);
 
     dispatchState(dispatchArgs);
-    event.preventDefault();
   };
 
   const listItems = renderListItems && (
