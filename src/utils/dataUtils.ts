@@ -7,7 +7,7 @@ import { State } from "@/types";
  * @param size
  * @returns array
  */
-function arrToMatrix(arr: State["items"], size: number): any[][] {
+function arrToMatrix(arr: State["items"], size: number): Array<State["items"]> {
   return Array.from({ length: Math.ceil(arr.length / size) }, (_v, i) =>
     arr.slice(i * size, i * size + size)
   );
