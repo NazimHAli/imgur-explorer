@@ -53,7 +53,7 @@ function ImageGrid(props: {
         )}
       </div>
       {state.isLoading && <LazyLoadingSpinner />}
-      <span ref={elementObserverRef} className="block w-4 h-4"></span>
+      <span ref={elementObserverRef} className="block w-4 h-4 mt-4"></span>
     </div>
   );
 }
