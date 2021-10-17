@@ -43,7 +43,6 @@ function HandleNewItems(
         setidxsToLoad(newIdxs);
       }
     }
-    return () => {};
   }, [shouldLoadNewItems]);
 }
 
