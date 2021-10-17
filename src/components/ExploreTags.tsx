@@ -1,5 +1,5 @@
-import { State, TypeTag } from "@/types";
-import { MouseEventHandler } from "react";
+import { Action, State, TypeTag } from "@/types";
+import { Dispatch, MouseEvent, MouseEventHandler } from "react";
 
 function renderTags(
   galleryTags: State["galleryTags"],
@@ -25,15 +25,18 @@ function renderTags(
 }
 
 function ExploreTags(props: {
-  dispatchState: any;
+  dispatchState: Dispatch<Action>;
   galleryTags: State["galleryTags"];
 }) {
   const { dispatchState, galleryTags } = props;
 
-  const handleClick = (event: any) => {
+  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    const element = event.target as HTMLSelectElement;
+    const tagName = element.dataset.tag;
+
     dispatchState({
       type: "setTagName",
-      tagName: event.target.dataset.tag,
+      tagName: tagName,
     });
     event.preventDefault();
   };
