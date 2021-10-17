@@ -1,6 +1,5 @@
-import { Action, State } from "@/types";
+import { State } from "@/types";
 import { extractImageResults } from "@/utils/dataUtils";
-import { Dispatch } from "react";
 
 const imgurClientId = import.meta.env.PUBLIC_IMGUR_CLIENT_ID;
 const BASE = "https://api.imgur.com/3";
@@ -16,6 +15,7 @@ interface Args {
 class ImgurAPI {
   private static instance: ImgurAPI;
   useFakeResponse: boolean;
+  requestArgs!: State["requestArgs"];
 
   constructor() {
     this.useFakeResponse = imgurClientId === undefined;
@@ -24,10 +24,12 @@ class ImgurAPI {
   /**
    * Get or create API instance
    */
-  public static getInstance(): ImgurAPI {
+  public static getInstance(requestArgs: State["requestArgs"]): ImgurAPI {
     if (ImgurAPI.instance === undefined) {
       ImgurAPI.instance = new ImgurAPI();
     }
+
+    ImgurAPI.instance.requestArgs = requestArgs;
 
     return ImgurAPI.instance;
   }
@@ -53,39 +55,23 @@ class ImgurAPI {
     return result.data;
   }
 
-  public getGallerySearchResults(requestArgs: State["requestArgs"]) {
+  public getGallerySearchResults() {
     if (this.useFakeResponse) {
       return import("@/__tests__/fixtures/imgurResponse").then((mod: any) => {
         return extractImageResults(mod.fakeResponse.data);
       });
     } else {
-      return this.getLiveResultsFromAPI(requestArgs);
+      return this.getLiveResultsFromAPI();
     }
   }
 
-  private getLiveResultsFromAPI(requestArgs: State["requestArgs"]) {
-    const endPointURL = this.constructEndpointURL(requestArgs);
+  private getLiveResultsFromAPI() {
+    const endPointURL = this.constructSearchEndPointURL();
 
     return this.imgurBaseApi({
       endPoint: endPointURL,
-      filterImageResults: requestArgs.filter || false,
+      filterImageResults: this.requestArgs.filter || false,
     });
-  }
-
-  private constructEndpointURL(requestArgs: State["requestArgs"]) {
-    // Query
-    const searchString = requestArgs.query
-      ? `?q=${requestArgs.query}&q_size_px=small&q_type=jpg`
-      : "?q_size_px=small&q_type=jpg";
-
-    // Parameters
-    const sortParam = `${requestArgs.sort}/`;
-    const windowParam = `${
-      requestArgs.sort === "top" ? requestArgs.window : "all"
-    }/`;
-    const pageParam = `${requestArgs.page || 1}${searchString}`;
-
-    return `${EP_GALLERY}/search/${sortParam}${windowParam}${pageParam}`;
   }
 
   /**
@@ -103,86 +89,65 @@ class ImgurAPI {
     }
   }
 
-  private getGalleryTagMetadata(requestArgs: State["requestArgs"]) {
-    const endPoint = `${EP_GALLERY}/t/${requestArgs.tagName}/${requestArgs.sort}/${requestArgs.window}/${requestArgs.page}`;
+  private getGalleryTagMetadata() {
+    const endPoint = `${EP_GALLERY}/t/${this.requestArgs.tagName}/${this.requestArgs.sort}/${this.requestArgs.window}/${this.requestArgs.page}`;
 
     return this.imgurBaseApi({
       endPoint: endPoint,
     });
   }
 
-  public methodDispatcher(method: string, requestArgs: State["requestArgs"]) {
+  public testEndPoint() {
+    const endPoint = `${BASE}/hot/time/today/${this.requestArgs.page}`;
+
+    return this.imgurBaseApi({
+      endPoint: endPoint,
+    });
+  }
+
+  public methodDispatcher(method: string) {
     switch (method) {
+      case "test":
+        return this.testEndPoint();
       case "search":
-        return this.getGallerySearchResults(requestArgs);
+        return this.getGallerySearchResults();
       case "tags":
         return this.getGalleryTags();
       case "tagName":
-        return this.getGalleryTagMetadata(requestArgs);
+        return this.getGalleryTagMetadata();
       default:
-        return this.getGallerySearchResults(requestArgs);
+        return this.getGallerySearchResults();
     }
   }
-}
 
-function _dispatchResponse(
-  method: string,
-  dispatchState: Dispatch<Action>,
-  requestArgs: State["requestArgs"],
-  response: any,
-  items: State["items"]
-): void {
-  if (method === "tags") {
-    dispatchState({
-      type: "setTags",
-      galleryTags: response,
-      items: response.items,
-      requestError: false,
-    });
-  } else if (method === "tagName") {
-    dispatchState({
-      type: "setItems",
-      items: extractImageResults(response.items),
-      requestError: false,
-    });
-  } else {
-    dispatchState({
-      type: "setItems",
-      items: requestArgs.newSearch ? response : items.concat(response),
-      requestError: false,
-    });
+  private constructSearchEndPointURL() {
+    // Query
+    const searchString = this.getSearchString();
+
+    // Parameters
+    const sortParam = `${this.requestArgs.sort}/`;
+    const windowParam = `${this.getWindow()}/`;
+    const pageParam = `${this.requestArgs.page}${searchString}`;
+
+    return `${EP_GALLERY}/search/${sortParam}${windowParam}${pageParam}`;
+  }
+
+  private getSearchString() {
+    let searchString = "";
+    const imgSize = "q_size_px=small&q_type=jpg";
+
+    if (this.requestArgs.query) {
+      searchString = `?q=${this.requestArgs.query}&${imgSize}`;
+    } else {
+      searchString = "?${imgSize}";
+    }
+
+    return searchString;
+  }
+
+  private getWindow(): string {
+    return this.requestArgs.sort === "top" ? this.requestArgs.window : "all";
   }
 }
 
-/**
- * Helper function to handle service requests
- * and dispatch state updates
- *
- * @param dispatchState
- * @param state
- * @param method
- */
-function handleServiceRequests(
-  dispatchState: Dispatch<Action>,
-  state: State,
-  method = "search"
-): void {
-  dispatchState({ type: "setIsLoading", loading: true });
-
-  const { items, requestArgs } = state;
-  const imgurClient = ImgurAPI.getInstance();
-
-  imgurClient
-    .methodDispatcher(method, requestArgs)
-    .then((response) => {
-      _dispatchResponse(method, dispatchState, requestArgs, response, items);
-
-      dispatchState({ type: "setIsLoading", loading: false });
-    })
-    .catch((error) => {
-      // TODO: Add logging
-      error;
-    });
-}
-
-export { handleServiceRequests };
+export { ImgurAPI };

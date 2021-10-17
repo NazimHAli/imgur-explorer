@@ -1,8 +1,6 @@
-import { RefObject, useRef } from "react";
-import "@/styles/layout/header.scss";
-
 import galleryIcon from "@/assets/gallery.svg";
 import profileIcon from "@/assets/profile.svg";
+import { RefObject, useRef } from "react";
 
 function handleClearQuery(
   defaultQuery: string,

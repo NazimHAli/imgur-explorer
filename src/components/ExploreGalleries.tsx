@@ -1,18 +1,21 @@
 import { State, TypeGallery } from "@/types";
-import "@/styles/component/explore-galleries.scss";
 
 function renderGallery(galleryTags: State["galleryTags"]): JSX.Element {
   return (
-    <ul className="explore-galleries__list">
+    <div className="explore__galleries">
       {Array.from(galleryTags?.galleries ? galleryTags.galleries : []).map(
         (gallery: TypeGallery) => (
-          <li key={gallery?.id} className="explore-galleries__list_item">
+          <a
+            key={gallery?.id}
+            className="explore__galleries__item"
+            href="#explore"
+          >
             <h3>{gallery?.name}</h3>
             <p>{gallery?.description}</p>
-          </li>
+          </a>
         )
       )}
-    </ul>
+    </div>
   );
 }
 
@@ -21,7 +24,9 @@ function ExploreGalleries(props: { galleryTags: State["galleryTags"] }) {
 
   return (
     <>
-      <h2>Explore Galleries</h2>
+      <h2 id="explore" className="explore__title">
+        Explore Galleries
+      </h2>
       {renderGallery(galleryTags)}
     </>
   );

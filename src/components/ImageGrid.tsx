@@ -1,10 +1,8 @@
+import { State } from "@/types";
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
 import { lazy, useCallback } from "react";
-import { State } from "@/types";
 
-import "@/styles/component/gallery.scss";
-
-const GalleryCard = lazy(() => import("@/components/GalleryCard"));
+const ImageGridCard = lazy(() => import("@/components/ImageGridCard"));
 
 const imgObserver = new ObserveElementsInView();
 
@@ -18,7 +16,7 @@ const imgObserver = new ObserveElementsInView();
  * @returns
  */
 
-function Gallery(props: { items: State["items"] }): JSX.Element {
+function ImageGrid(props: { items: State["items"] }): JSX.Element {
   const { items } = props;
 
   const cardImgRef = useCallback((node) => {
@@ -28,14 +26,14 @@ function Gallery(props: { items: State["items"] }): JSX.Element {
   }, []);
 
   return (
-    <div className="gallery-container">
+    <div className="image-grid">
       {Array.from(items).map(
         (image): JSX.Element => (
-          <GalleryCard item={image} key={image.id} imgRef={cardImgRef} />
+          <ImageGridCard item={image} key={image.id} imgRef={cardImgRef} />
         )
       )}
     </div>
   );
 }
 
-export default Gallery;
+export default ImageGrid;

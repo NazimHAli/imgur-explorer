@@ -1,17 +1,12 @@
 import { Action, State } from "@/types";
 import { capitalize } from "@/utils/dataUtils";
 
-function getDispatchArgs(
-  actionArg: string,
-  event: { currentTarget: { getAttribute: (arg0: string) => string } }
-) {
+function getDispatchArgs(actionArg: string, event) {
   const dispatchArgs: Action = {
     type: "submitSearchRequest",
   };
 
-  dispatchArgs[actionArg] = event.currentTarget
-    .getAttribute("value")
-    .toLowerCase();
+  dispatchArgs[actionArg] = event.target.value.toLowerCase();
 
   return dispatchArgs;
 }
@@ -26,42 +21,35 @@ function SearchToolBarDropdown(props: {
   const selectedValue = capitalize(requestArgs[actionArg]);
   const renderListItems = options.length > 0;
 
-  const handleOnClick = (event: {
-    currentTarget: { getAttribute: (arg0: string) => string };
-  }) => {
+  const handleOnClick = (event: { preventDefault: any; target?: any }) => {
     const dispatchArgs: Action = getDispatchArgs(actionArg, event);
 
     dispatchState(dispatchArgs);
+    event.preventDefault();
   };
 
   const listItems = renderListItems && (
-    <ul
-      id="drop-down"
-      className="dropdown__content"
-      defaultValue={selectedValue}
-      style={{ maxHeight: `${options.length * 3}rem` }}
-    >
-      {options.map((item) => (
-        <li
-          key={item}
-          value={item}
-          onClick={handleOnClick}
-          className={item === selectedValue ? "selected" : ""}
-        >
-          {item}
-        </li>
-      ))}
-    </ul>
+    <>
+      <label htmlFor={actionArg} className="select-none">
+        {capitalize(actionArg)}:
+      </label>
+
+      <select
+        name={actionArg}
+        id={actionArg}
+        onChange={handleOnClick}
+        value={selectedValue}
+      >
+        {options.map((item) => (
+          <option value={item} key={item}>
+            {item}
+          </option>
+        ))}
+      </select>
+    </>
   );
 
-  return (
-    <div className="dropdown">
-      <button className="dropdown__button" disabled={!renderListItems}>
-        {capitalize(actionArg)}: {selectedValue}
-      </button>
-      {listItems}
-    </div>
-  );
+  return <div className="search-toolbar__dropdown">{listItems}</div>;
 }
 
 export default SearchToolBarDropdown;

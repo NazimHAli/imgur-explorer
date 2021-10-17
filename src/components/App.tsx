@@ -1,12 +1,14 @@
-import { lazy, Suspense, useEffect, useReducer } from "react";
+import { handleImgurServiceRequests } from "@/services/handleImgurServiceRequests";
 import { initialState, stateReducer } from "@/state";
-import { handleServiceRequests } from "@/services/imgurAPI";
+import { lazy, Suspense, useEffect, useReducer } from "react";
 
 const Explore = lazy(() => import("@/components/Explore"));
 const Footer = lazy(() => import("@/components/Footer"));
-const Gallery = lazy(() => import("@/components/Gallery"));
-const GalleryNoResults = lazy(() => import("@/components/GalleryNoResults"));
 const Header = lazy(() => import("@/components/Header"));
+const ImageGrid = lazy(() => import("@/components/ImageGrid"));
+const ImageGridNoResults = lazy(
+  () => import("@/components/ImageGridNoResults")
+);
 const LoadingAnimation = lazy(() => import("@/components/LoadingAnimation"));
 const SearchToolBar = lazy(() => import("@/components/SearchToolBar"));
 
@@ -21,15 +23,15 @@ function App() {
 
   useEffect(() => {
     if (state.requestArgs.tagName.length) {
-      handleServiceRequests(dispatchState, state, "tagName");
+      handleImgurServiceRequests(dispatchState, state, "tagName");
     } else if (state.requestArgs.query.length) {
-      handleServiceRequests(dispatchState, state);
+      handleImgurServiceRequests(dispatchState, state);
     }
   }, [state.requestArgs]);
 
   useEffect(() => {
     if (Object.keys(state.galleryTags).length === 0) {
-      handleServiceRequests(dispatchState, state, "tags");
+      handleImgurServiceRequests(dispatchState, state, "tags");
     }
   }, []);
 
@@ -51,10 +53,10 @@ function App() {
       )}
 
       {/* Render results */}
-      {state.items.length > 0 && <Gallery items={state.items} />}
+      {state.items.length > 0 && <ImageGrid items={state.items} />}
 
       {/* No results */}
-      {state.items.length === 0 && !state.isLoading && <GalleryNoResults />}
+      {state.items.length === 0 && !state.isLoading && <ImageGridNoResults />}
       <Footer />
     </Suspense>
   );

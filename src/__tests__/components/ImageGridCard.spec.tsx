@@ -1,9 +1,9 @@
+import { fakeResponse } from "@/__tests__/fixtures/imgurResponse";
+import ImageGridCard from "@/components/ImageGridCard";
 import { render, screen } from "@testing-library/react";
-import GalleryCard from "../../components/GalleryCard";
-import { fakeResponse } from "../fixtures/imgurResponse";
 
-describe("Card", () => {
-  test("GalleryCard rendered", () => {
+describe("ImageGridCard", () => {
+  test("ImageGridCard rendered", () => {
     const mockItem = fakeResponse.data[0];
     const item = {
       id: mockItem.id,
@@ -25,7 +25,7 @@ describe("Card", () => {
 
     render(
       <div data-testid="card">
-        <GalleryCard item={item} imgRef={() => {}} />
+        <ImageGridCard item={item} imgRef={() => {}} />
       </div>
     );
 

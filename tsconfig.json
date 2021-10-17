@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": false,
+    "checkJs": true,
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
@@ -16,12 +16,12 @@
     "skipLibCheck": false,
     "strict": true,
     "target": "ESNext",
+    "types": ["vite/client", "jest", "node"],
     "useDefineForClassFields": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     }
   },
-  "exclude": ["./src/**/*.spec.ts*"],
   "include": ["./src/**/*.ts", "./src/**/*.tsx"]
 }

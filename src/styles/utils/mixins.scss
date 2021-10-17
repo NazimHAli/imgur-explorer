@@ -46,12 +46,6 @@ $breakpoints: (
   }
 }
 
-@mixin container($max-width: 90rem) {
-  max-width: $max-width;
-  margin: 0 auto;
-  clear: both;
-}
-
 @mixin cssgrid($min, $gap: false) {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax($min, 1fr));
@@ -100,13 +94,6 @@ $breakpoints: (
   transform: translateY(-50%);
 }
 
-/*
-@include keyframes(background) {
-  0% {background: white;}
-  50% {background: lightblue;
-  100% {background: royalblue;}
-}
-*/
 @mixin keyframes($name) {
   @-webkit-keyframes #{$name} {
     @content;
