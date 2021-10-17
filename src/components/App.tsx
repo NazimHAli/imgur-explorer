@@ -53,11 +53,17 @@ function App() {
       )}
 
       {/* Render results */}
-      {state.items.length > 0 && <ImageGrid items={state.items} />}
+      {state.items.length > 0 && (
+        <ImageGrid
+          dispatchState={dispatchState}
+          requestArgs={state.requestArgs}
+          items={state.items}
+        />
+      )}
 
       {/* No results */}
       {state.items.length === 0 && !state.isLoading && <ImageGridNoResults />}
-      <Footer />
+      {state.finishedLazyLoading && <Footer />}
     </Suspense>
   );
 }

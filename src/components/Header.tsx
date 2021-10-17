@@ -12,7 +12,11 @@ function handleClearQuery(
 }
 
 function Header(props: {
-  dispatchState: (arg0: { type: string; query: string }) => void;
+  dispatchState: (arg0: {
+    type: string;
+    query: string;
+    newSearch: boolean;
+  }) => void;
   defaultQuery: string;
 }): JSX.Element {
   const { defaultQuery, dispatchState } = props;
@@ -28,6 +32,7 @@ function Header(props: {
       dispatchState({
         type: "submitSearchRequest",
         query: inputRef.current.value,
+        newSearch: true,
       });
     }
 
