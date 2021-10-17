@@ -1,6 +1,7 @@
 import galleryIcon from "@/assets/gallery.svg";
 import profileIcon from "@/assets/profile.svg";
-import { RefObject, useRef } from "react";
+import { Action } from "@/types";
+import { Dispatch, RefObject, useRef } from "react";
 
 function handleClearQuery(
   defaultQuery: string,
@@ -12,11 +13,7 @@ function handleClearQuery(
 }
 
 function Header(props: {
-  dispatchState: (arg0: {
-    type: string;
-    query: string;
-    newSearch: boolean;
-  }) => void;
+  dispatchState: Dispatch<Action>;
   defaultQuery: string;
 }): JSX.Element {
   const { defaultQuery, dispatchState } = props;

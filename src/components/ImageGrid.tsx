@@ -1,46 +1,59 @@
-import { State } from "@/types";
+import { Action, State } from "@/types";
 import { useIntersectionObserver } from "@/utils/useIntersectionObserver";
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
-import { lazy, useCallback, useEffect, useRef, useState } from "react";
+import {
+  Dispatch,
+  lazy,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 const ImageGridCard = lazy(() => import("@/components/ImageGridCard"));
+const LazyLoadingSpinner = lazy(
+  () => import("@/components/LazyLoadingSpinner")
+);
 
 const imgObserver = new ObserveElementsInView();
 
 function ImageGrid(props: {
-  items: State["items"];
-  dispatchState;
-  requestArgs: State["requestArgs"];
+  state: State;
+  dispatchState: Dispatch<Action>;
 }): JSX.Element {
-  const { items, dispatchState, requestArgs } = props;
+  const { state, dispatchState } = props;
   const [idxsToLoad, setidxsToLoad] = useState([0, 1, 2, 3, 4]);
+
+  useEffect(() => {
+    if (state.requestArgs.newSearch) {
+      setidxsToLoad([0, 1, 2, 3, 4]);
+    }
+  }, [state.requestArgs.newSearch]);
+
   const cardImgRef = useCallback((node) => {
     if (node !== null) {
       imgObserver.observeElements([node]);
     }
   }, []);
 
-  const offsetY = 0;
-  const ioRef = useRef<HTMLElement>(null);
-  const entry = useIntersectionObserver(ioRef);
+  const elementObserverRef = useRef<HTMLElement>(null);
+  const entry = useIntersectionObserver(elementObserverRef);
   const shouldLoadNewItems = !!entry?.isIntersecting;
 
   useEffect(() => {
-    if (shouldLoadNewItems && idxsToLoad.length < items.length) {
+    if (shouldLoadNewItems && idxsToLoad.length < state.items.length) {
       const newIdxs = [...Array(idxsToLoad.length + 10).keys()];
 
-      if (items.length - newIdxs.length <= 20) {
+      if (state.items.length - newIdxs.length <= 20) {
         dispatchState({
           type: "submitSearchRequest",
-          page: requestArgs.page + 1,
+          page: state.requestArgs.page + 1,
           newSearch: false,
         });
-        console.log(`Req. p${requestArgs.page + 1} newIdxs: ${newIdxs.length}`);
       }
 
-      if (newIdxs.length <= items.length) {
+      if (newIdxs.length <= state.items.length) {
         setidxsToLoad(newIdxs);
-        console.log("Loading items", { shouldLoadNewItems }, newIdxs.length);
       }
     }
     return () => {};
@@ -52,23 +65,22 @@ function ImageGrid(props: {
         className="image-grid"
         style={{
           willChange: "transform",
-          transform: `translateY(${offsetY}px)`,
+          transform: "translateY(0px)",
         }}
       >
         {idxsToLoad.map(
-          (idx): JSX.Element => (
-            <ImageGridCard
-              item={items[idx]}
-              key={items[idx].id}
-              imgRef={cardImgRef}
-            />
-          )
+          (idx) =>
+            state.items[idx] && (
+              <ImageGridCard
+                item={state.items[idx]}
+                key={state.items[idx].id}
+                imgRef={cardImgRef}
+              />
+            )
         )}
       </div>
-      <span
-        ref={ioRef}
-        style={{ display: "block", width: "1px", height: "1px" }}
-      ></span>
+      {state.isLoading && <LazyLoadingSpinner />}
+      <span ref={elementObserverRef} className="block w-4 h-4"></span>
     </div>
   );
 }

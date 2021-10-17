@@ -1,5 +1,6 @@
 import { Action, State } from "@/types";
 import { capitalize } from "@/utils/dataUtils";
+import { Dispatch } from "react";
 
 function getDispatchArgs(actionArg: string, event) {
   const dispatchArgs: Action = {
@@ -14,7 +15,7 @@ function getDispatchArgs(actionArg: string, event) {
 function SearchToolBarDropdown(props: {
   options: string[];
   actionArg: string;
-  dispatchState: React.Dispatch<Action>;
+  dispatchState: Dispatch<Action>;
   requestArgs: State["requestArgs"];
 }): JSX.Element {
   const { options, actionArg, dispatchState, requestArgs } = props;

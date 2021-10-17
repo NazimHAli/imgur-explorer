@@ -54,11 +54,7 @@ function App() {
 
       {/* Render results */}
       {state.items.length > 0 && (
-        <ImageGrid
-          dispatchState={dispatchState}
-          requestArgs={state.requestArgs}
-          items={state.items}
-        />
+        <ImageGrid dispatchState={dispatchState} state={state} />
       )}
 
       {/* No results */}

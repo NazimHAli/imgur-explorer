@@ -52,6 +52,7 @@ function stateReducer(state: State, action: Action): State {
         query: "",
         tagName: action?.tagName ? action.tagName : "",
         page: 1,
+        newSearch: true,
       };
       return {
         ...state,
