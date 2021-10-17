@@ -62,7 +62,7 @@ class ImgurAPI {
 
   public getGallerySearchResults() {
     if (this.useFakeResponse) {
-      return import("@/__tests__/fixtures/imgurResponse").then((mod: any) => {
+      return import("@/__tests__/fixtures/imgurResponse").then((mod) => {
         return extractImageResults(mod.fakeResponse.data);
       });
     } else {
@@ -83,11 +83,9 @@ class ImgurAPI {
    */
   private async getGalleryTags() {
     if (this.useFakeResponse) {
-      return await import("@/__tests__/fixtures/galleryTags").then(
-        (mod: any) => {
-          return mod.fakeGalleryTags.data;
-        }
-      );
+      return await import("@/__tests__/fixtures/galleryTags").then((mod) => {
+        return mod.fakeGalleryTags.data;
+      });
     } else {
       return await this.imgurBaseApi({ endPoint: EP_GALLERY_TAGS });
     }

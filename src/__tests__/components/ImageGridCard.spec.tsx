@@ -25,7 +25,12 @@ describe("ImageGridCard", () => {
 
     render(
       <div data-testid="card">
-        <ImageGridCard item={item} imgRef={() => {}} />
+        <ImageGridCard
+          item={item}
+          imgRef={() => {
+            null;
+          }}
+        />
       </div>
     );
 

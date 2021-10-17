@@ -8,7 +8,7 @@ function _dispatchResponse(
   method: string,
   dispatchState: Dispatch<Action>,
   requestArgs: State["requestArgs"],
-  response: any,
+  response,
   items: State["items"]
 ): void {
   if (method === "test") {
