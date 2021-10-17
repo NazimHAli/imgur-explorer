@@ -1,7 +1,8 @@
 import { State } from "@/types";
 import { extractImageResults } from "@/utils/dataUtils";
 
-const imgurClientId = import.meta.env.PUBLIC_IMGUR_CLIENT_ID;
+const imgurClientId: string | undefined | boolean = import.meta.env
+  .PUBLIC_IMGUR_CLIENT_ID;
 const BASE = "https://api.imgur.com/3";
 const EP_GALLERY = `${BASE}/gallery`;
 const EP_GALLERY_TAGS = `${BASE}/tags`;
