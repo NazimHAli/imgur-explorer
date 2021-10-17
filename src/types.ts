@@ -1,5 +1,5 @@
 type selectedTag = {
-  items?: Array<object>;
+  items?: Array<string>;
 };
 
 export type TypeGallery = {
