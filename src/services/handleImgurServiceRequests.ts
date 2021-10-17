@@ -59,14 +59,15 @@ function handleImgurServiceRequests(
     .methodDispatcher(method)
     .then((response) => {
       _dispatchResponse(method, dispatchState, requestArgs, response, items);
-
-      if (state.requestArgs.newSearch) {
-        dispatchState({ type: "setIsLoading", loading: false });
-      }
     })
     .catch((error) => {
       // TODO: Add logging
       error;
+    })
+    .finally(() => {
+      if (state.requestArgs.newSearch) {
+        dispatchState({ type: "setIsLoading", loading: false });
+      }
     });
 }
 
