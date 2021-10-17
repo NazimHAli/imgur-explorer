@@ -19,7 +19,7 @@ export type Item = {
   downs: number;
   favorite_count: number;
   id: string;
-  images: Array<{ link: string; width: string; height: string }>;
+  images: Array<{ link: string; width: number; height: number; type?: string }>;
   title: string;
   ups: number;
   views: number;

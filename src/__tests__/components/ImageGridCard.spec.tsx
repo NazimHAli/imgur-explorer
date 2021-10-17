@@ -11,8 +11,8 @@ describe("ImageGridCard", () => {
       images: [
         {
           link: `${mockItem.images[0].link}`,
-          width: `${mockItem.images[0].width}`,
-          height: `${mockItem.images[0].height}`,
+          width: mockItem.images[0].width,
+          height: mockItem.images[0].height,
         },
       ],
       ups: mockItem.ups,
