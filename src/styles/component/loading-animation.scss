@@ -120,6 +120,7 @@ $colors: (
   @apply mx-auto;
   @apply max-w-xs;
   @apply justify-items-center;
+  @apply mt-4;
 
   &__spinner {
     @apply animate-spin;
