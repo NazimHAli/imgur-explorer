@@ -2,6 +2,7 @@ import { State, Action } from "./types";
 
 const initialState: State = {
   isLoading: true,
+  finishedLazyLoading: false,
   items: [],
   requestArgs: {
     filter: true,
@@ -50,6 +51,8 @@ function stateReducer(state: State, action: Action): State {
         ...updatedArgs,
         query: "",
         tagName: action?.tagName ? action.tagName : "",
+        page: 1,
+        newSearch: true,
       };
       return {
         ...state,
@@ -76,6 +79,10 @@ function stateReducer(state: State, action: Action): State {
         tagName: "",
       };
 
+      if (action?.page) {
+        updatedArgs = { ...updatedArgs, page: action.page };
+      }
+
       if (action?.query) {
         updatedArgs = { ...updatedArgs, query: action.query };
       }
@@ -86,6 +93,10 @@ function stateReducer(state: State, action: Action): State {
 
       if (action?.window) {
         updatedArgs = { ...updatedArgs, window: action.window };
+      }
+
+      if (action.newSearch !== undefined) {
+        updatedArgs = { ...updatedArgs, newSearch: action.newSearch };
       }
 
       return {

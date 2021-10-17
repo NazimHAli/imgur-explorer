@@ -8,10 +8,8 @@ function setImageSrc(entry: IntersectionObserverEntry) {
 
 class ObserveElementsInView {
   rootObserver: IntersectionObserver;
-  activeElementIDs: Set<unknown>;
 
   constructor() {
-    this.activeElementIDs = new Set();
     this.rootObserver = new IntersectionObserver(this.handleIntersect, {
       root: null,
       rootMargin: "0px",

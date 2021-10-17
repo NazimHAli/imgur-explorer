@@ -1,3 +1,5 @@
+import { State } from "@/types";
+
 /**
  * Converts an array to a list of arrays (matrix)
  *
@@ -5,7 +7,7 @@
  * @param size
  * @returns array
  */
-function arrToMatrix(arr: string | any[], size: number): (string | any[])[] {
+function arrToMatrix(arr: State["items"], size: number): Array<State["items"]> {
   return Array.from({ length: Math.ceil(arr.length / size) }, (_v, i) =>
     arr.slice(i * size, i * size + size)
   );
@@ -30,7 +32,7 @@ function checkNumberIfFloat(num: number): boolean {
  * @param images
  * @param newSize
  */
-function updateImageSize(images: any[], newSize = "m") {
+function updateImageSize(images: State["items"], newSize = "m") {
   const imgSuffix = `${newSize}.jpg`;
 
   for (let index = 0; index < images.length; index++) {
@@ -51,29 +53,25 @@ function updateImageSize(images: any[], newSize = "m") {
  * @param response
  * @returns array
  */
-function extractImageResults(response: any[]): any[] {
-  let resultImages: any[] = [];
+function extractImageResults(response: State["items"]) {
+  let resultImages: State["items"] = [];
 
   if (!response.length) {
     return resultImages;
   }
 
-  const rawImageResults = response.filter((res: { images: any }) => res.images);
+  const rawImageResults = response.filter((res) => res.images);
 
-  resultImages = rawImageResults.filter(
-    (res: { images: { link: string; type: string | string[] }[] }) => {
-      return (
-        res.images &&
-        res.images[0].link &&
-        res.images[0]?.type.includes("image")
-      );
-    }
-  );
+  resultImages = rawImageResults.filter((res) => {
+    return (
+      res.images && res.images[0].link && res.images[0]?.type?.includes("image")
+    );
+  });
 
   return updateImageSize(resultImages);
 }
 
-function capitalize(str: string | undefined): string {
+function capitalize(str: string): string {
   if (typeof str === "string") {
     return str.replace(/^\w/, (c) => c.toUpperCase());
   } else {

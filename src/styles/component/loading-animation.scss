@@ -114,3 +114,20 @@ $colors: (
   top: 0;
   z-index: 1;
 }
+
+.lazy-load {
+  @apply grid;
+  @apply mx-auto;
+  @apply max-w-xs;
+  @apply justify-items-center;
+  @apply mt-4;
+
+  &__spinner {
+    @apply animate-spin;
+    @apply -m-1;
+    @apply mr-3;
+    @apply h-10;
+    @apply w-10;
+    @apply text-black;
+  }
+}

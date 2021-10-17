@@ -48,7 +48,7 @@ class ImgurAPI {
     const response = await fetch(args.endPoint, args.requestOptions);
     const result = await response.json();
 
-    if (args.filterImageResults) {
+    if (this.requestArgs.filter && !result.data?.galleries) {
       return extractImageResults(result.data);
     }
 
@@ -70,7 +70,6 @@ class ImgurAPI {
 
     return this.imgurBaseApi({
       endPoint: endPointURL,
-      filterImageResults: this.requestArgs.filter || false,
     });
   }
 

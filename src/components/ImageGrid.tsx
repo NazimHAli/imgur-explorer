@@ -1,37 +1,59 @@
-import { State } from "@/types";
+import { Action, State } from "@/types";
+import { HandleNewItems, HandleImageLazyLoad } from "@/utils/imageGridHelpers";
+import { useIntersectionObserver } from "@/utils/useIntersectionObserver";
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
-import { lazy, useCallback } from "react";
+import { Dispatch, lazy, useRef, useState } from "react";
 
 const ImageGridCard = lazy(() => import("@/components/ImageGridCard"));
+const LazyLoadingSpinner = lazy(
+  () => import("@/components/LazyLoadingSpinner")
+);
 
-const imgObserver = new ObserveElementsInView();
+export const imgObserver = new ObserveElementsInView();
 
-/**
- * Gallery component that renders images
- *
- * A callback is passed to each card and used
- * by the IntersectionObserver to load images
- * after they appear in the viewport
- *
- * @returns
- */
+function ImageGrid(props: {
+  state: State;
+  dispatchState: Dispatch<Action>;
+}): JSX.Element {
+  const { state, dispatchState } = props;
+  const [idxsToLoad, setidxsToLoad] = useState([0, 1, 2, 3, 4]);
 
-function ImageGrid(props: { items: State["items"] }): JSX.Element {
-  const { items } = props;
+  const cardImgRef = HandleImageLazyLoad(state, setidxsToLoad);
 
-  const cardImgRef = useCallback((node) => {
-    if (node !== null) {
-      imgObserver.observeElements([node]);
-    }
-  }, []);
+  const elementObserverRef = useRef<HTMLElement>(null);
+  const entry = useIntersectionObserver(elementObserverRef);
+  const shouldLoadNewItems = !!entry?.isIntersecting;
+
+  HandleNewItems(
+    shouldLoadNewItems,
+    idxsToLoad,
+    state,
+    dispatchState,
+    setidxsToLoad
+  );
 
   return (
-    <div className="image-grid">
-      {Array.from(items).map(
-        (image): JSX.Element => (
-          <ImageGridCard item={image} key={image.id} imgRef={cardImgRef} />
-        )
-      )}
+    <div className="grid-viewport">
+      <div
+        className="image-grid"
+        style={{
+          willChange: "transform",
+          transform: "translateY(0px)",
+        }}
+      >
+        {idxsToLoad.map(
+          (idx) =>
+            state.items[idx] && (
+              <ImageGridCard
+                item={state.items[idx]}
+                key={state.items[idx].id}
+                imgRef={cardImgRef}
+              />
+            )
+        )}
+      </div>
+      {state.isLoading && <LazyLoadingSpinner />}
+      <span ref={elementObserverRef} className="block w-px h-px"></span>
     </div>
   );
 }

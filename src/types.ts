@@ -19,7 +19,7 @@ export type Item = {
   downs: number;
   favorite_count: number;
   id: string;
-  images: Array<{ link: string; width: string; height: string }>;
+  images: Array<{ link: string; width: number; height: number; type?: string }>;
   title: string;
   ups: number;
   views: number;
@@ -27,6 +27,7 @@ export type Item = {
 
 export type State = {
   galleryTags: { galleries?: []; tags?: [] };
+  finishedLazyLoading: boolean;
   isLoading: boolean;
   items: Array<Item>;
   requestArgs: {
@@ -45,7 +46,10 @@ export type State = {
 export type Action = {
   galleryTags?: State["galleryTags"];
   items?: State["items"];
+  finishedLazyLoading?: State["finishedLazyLoading"];
   loading?: State["isLoading"];
+  newSearch?: State["requestArgs"]["newSearch"];
+  page?: State["requestArgs"]["page"];
   query?: State["requestArgs"]["query"];
   requestError?: boolean;
   tagName?: State["requestArgs"]["tagName"];
