@@ -1,5 +1,10 @@
 import { State } from "@/types";
 
+function isValidImageType(text: string): boolean {
+  const pattern = /\.(jpg|png)\b/;
+  return pattern.exec(text) !== null;
+}
+
 /**
  * Converts an array to a list of arrays (matrix)
  *
@@ -33,14 +38,16 @@ function checkNumberIfFloat(num: number): boolean {
  * @param newSize
  */
 function updateImageSize(images: State["items"], newSize = "m") {
-  const imgSuffix = `${newSize}.jpg`;
+  const imgJPG = `${newSize}.jpg`;
+  const imgPNG = `${newSize}.png`;
 
   for (let index = 0; index < images.length; index++) {
-    if (!images[index].images[0].link.endsWith(imgSuffix)) {
-      images[index].images[0].link = images[index].images[0].link.replace(
-        ".jpg",
-        imgSuffix
-      );
+    const img = images[index].images[0].link;
+
+    if (!img.endsWith(imgJPG) && !img.endsWith(imgPNG)) {
+      images[index].images[0].link = img.endsWith(".jpg")
+        ? img.replace(".jpg", imgJPG)
+        : img.replace(".png", imgPNG);
     }
   }
 
@@ -63,9 +70,7 @@ function extractImageResults(response: State["items"]) {
   const rawImageResults = response.filter((res) => res.images);
 
   resultImages = rawImageResults.filter((res) => {
-    return (
-      res.images && res.images[0].link && res.images[0]?.type?.includes("image")
-    );
+    return res.images && isValidImageType(res.images[0].link);
   });
 
   return updateImageSize(resultImages);
