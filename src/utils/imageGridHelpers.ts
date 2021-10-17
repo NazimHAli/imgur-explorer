@@ -5,7 +5,7 @@ import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
 function HandleImageLazyLoad(
   state: State,
   setidxsToLoad: Dispatch<SetStateAction<number[]>>
-): (node: any) => void {
+) {
   useEffect(() => {
     if (state.requestArgs.newSearch) {
       setidxsToLoad([0, 1, 2, 3, 4]);
@@ -25,7 +25,7 @@ function HandleNewItems(
   idxsToLoad: number[],
   state: State,
   dispatchState: Dispatch<Action>,
-  setidxsToLoad: SetStateAction<any>
+  setidxsToLoad: Dispatch<SetStateAction<number[]>>
 ): void {
   useEffect(() => {
     if (shouldLoadNewItems && idxsToLoad.length < state.items.length) {
