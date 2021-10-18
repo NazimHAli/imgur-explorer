@@ -12,15 +12,15 @@ function ImageGridCard(props: { item: Item; imgRef: Ref<HTMLImageElement> }) {
       <div className="card-info__icons">
         <span>
           <ThumbsUp width="15" height="15" />
-          {item?.ups}
+          {item?.ups?.toLocaleString()}
         </span>
         <span>
           <MessageSquare width="15" height="15" />
-          {item?.comment_count}
+          {item?.comment_count?.toLocaleString()}
         </span>
         <span>
           <Eye width="15" height="15" />
-          <span>{item?.views}</span>
+          <span>{item?.views?.toLocaleString()}</span>
         </span>
       </div>
     </div>

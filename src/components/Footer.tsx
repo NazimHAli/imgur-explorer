@@ -29,7 +29,7 @@ function Footer(props: { finishedLazyLoading: State["finishedLazyLoading"] }) {
     </footer>
   );
 
-  return finishedLazyLoading && elements;
+  return <>{finishedLazyLoading && elements}</>;
 }
 
 export default Footer;

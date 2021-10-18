@@ -108,7 +108,9 @@ function stateReducer(state: State, action: Action): State {
       return {
         ...state,
         requestArgs: updatedArgs,
-        finishedLazyLoading: action?.newSearch ? false : true,
+        finishedLazyLoading: action?.newSearch
+          ? false
+          : state.finishedLazyLoading,
       };
 
     default:
