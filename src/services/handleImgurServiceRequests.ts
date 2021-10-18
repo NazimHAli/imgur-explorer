@@ -31,6 +31,7 @@ function _dispatchResponse(
       type: "setItems",
       items: requestArgs.newSearch ? response : items.concat(response),
       requestError: false,
+      finishedLazyLoading: response?.length === 0 ? true : false,
     });
   }
 }

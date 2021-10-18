@@ -7,6 +7,7 @@
   @apply mx-auto;
   @apply text-white;
   @apply xl:grid-cols-5;
+  @apply mt-6;
 }
 
 .card {
@@ -17,8 +18,13 @@
   @apply w-full;
 
   &:hover {
+    .card__img {
+      @apply h-3/4;
+    }
+
     .card-info {
       background-color: #222;
+      transform: translateY(0rem);
     }
 
     .card_badges_icons {
@@ -28,7 +34,9 @@
 
   &__img {
     @apply block;
-    @apply h-3/4;
+    @apply h-full;
+    @apply transition-all;
+    @apply duration-500;
 
     img {
       @apply block;
@@ -36,7 +44,7 @@
       @apply mx-auto;
       @apply w-auto;
       @apply opacity-0;
-      @apply transition-opacity;
+      @apply transition-all;
       @apply duration-500;
     }
   }
@@ -51,6 +59,7 @@
   @apply text-white;
   @apply transition-all;
   grid-template-rows: 3fr 2fr;
+  transform: translateY(5rem);
 
   &__title {
     @apply p-2;

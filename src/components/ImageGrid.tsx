@@ -34,13 +34,7 @@ function ImageGrid(props: {
 
   return (
     <div className="grid-viewport">
-      <div
-        className="image-grid"
-        style={{
-          willChange: "transform",
-          transform: "translateY(0px)",
-        }}
-      >
+      <div className="image-grid">
         {idxsToLoad.map(
           (idx) =>
             state.items[idx] && (
