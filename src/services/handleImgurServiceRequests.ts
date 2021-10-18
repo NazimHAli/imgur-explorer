@@ -25,7 +25,6 @@ function _dispatchResponse(
       type: "setItems",
       items: extractImageResults(response.items),
       requestError: false,
-      finishedLazyLoading: true,
     });
   } else {
     dispatchState({
