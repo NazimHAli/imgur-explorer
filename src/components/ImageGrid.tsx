@@ -22,10 +22,10 @@ function ImageGrid(props: {
 
   const elementObserverRef = useRef<HTMLElement>(null);
   const entry = useIntersectionObserver(elementObserverRef);
-  const shouldLoadNewItems = !!entry?.isIntersecting;
+  const isIntersecting = entry?.isIntersecting || false;
 
   HandleNewItems(
-    shouldLoadNewItems,
+    isIntersecting,
     idxsToLoad,
     state,
     dispatchState,
@@ -40,7 +40,7 @@ function ImageGrid(props: {
             state.items[idx] && (
               <ImageGridCard
                 item={state.items[idx]}
-                key={state.items[idx].id}
+                key={idx + state.items[idx].id}
                 imgRef={cardImgRef}
               />
             )
