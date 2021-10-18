@@ -4,7 +4,7 @@ const useIntersectionObserver = (
   ref: RefObject<HTMLElement>
 ): IntersectionObserverEntry | null | void => {
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
-  let options = {
+  const options = {
     rootElement: document.documentElement,
     rootMargin: "35%",
   };
