@@ -35,7 +35,7 @@ function ExploreTags(props: {
   const { dispatchState, galleryTags } = props;
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    const element = event.target as HTMLSelectElement;
+    const element = event.currentTarget;
     const tagName = element.dataset.tag;
 
     dispatchState({

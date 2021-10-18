@@ -11,6 +11,7 @@ export type TypeGallery = {
 export type TypeTag = {
   display_name: string;
   name: string;
+  total_items?: number;
 };
 
 export type Item = {
