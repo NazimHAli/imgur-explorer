@@ -77,11 +77,12 @@ function extractImageResults(response: State["items"]) {
 }
 
 function capitalize(str: string): string {
-  if (typeof str === "string") {
-    return str.replace(/^\w/, (c) => c.toUpperCase());
-  } else {
+  if (!str?.length) {
     return "";
   }
+
+  const wordsToCapitalize = (match: string) => match.toUpperCase();
+  return str.replace(/(^\w{1})|(\s{1}\w{1})/g, wordsToCapitalize);
 }
 
 function truncateText(text: string, maxCharacters: number): string {

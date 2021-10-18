@@ -1,4 +1,5 @@
 import { Action, State, TypeTag } from "@/types";
+import { capitalize } from "@/utils/dataUtils";
 import { Dispatch, MouseEvent, MouseEventHandler } from "react";
 
 function renderTags(
@@ -7,7 +8,7 @@ function renderTags(
 ) {
   return (
     <>
-      {Array.from(galleryTags?.tags ? galleryTags.tags.slice(0, 8) : []).map(
+      {Array.from(galleryTags?.tags ? galleryTags.tags.slice(0, 9) : []).map(
         (tag: TypeTag) => (
           <a
             key={tag?.display_name}
@@ -16,7 +17,10 @@ function renderTags(
             onClick={handleClick}
             className="explore__tags__item"
           >
-            {tag?.display_name}
+            <p className="text-lg font-medium">
+              {capitalize(tag?.display_name)}
+            </p>
+            <span>{tag?.total_items?.toLocaleString()} Posts</span>
           </a>
         )
       )}
@@ -44,7 +48,7 @@ function ExploreTags(props: {
   return (
     <div className="text-black">
       <h2 id="explore-tags" className="explore__title">
-        Tags
+        Explore Tags
       </h2>
       <div className="explore__tags">
         {renderTags(galleryTags, handleClick)}
