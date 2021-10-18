@@ -14,24 +14,22 @@ function Footer(props: { finishedLazyLoading: State["finishedLazyLoading"] }) {
     "Fourth Link",
   ];
 
-  return (
-    <>
-      {finishedLazyLoading && (
-        <footer className="footer">
-          <div className="footer__content">
-            <FooterRight />
-            <div className="footer__content__sections">
-              <FooterSection sectionLinks={sectionLinks} />
-              <FooterSection sectionLinks={sectionLinks} />
-              <FooterSection sectionLinks={sectionLinks} />
-              <FooterSection sectionLinks={sectionLinks} />
-            </div>
-          </div>
-          <FooterBottom />
-        </footer>
-      )}
-    </>
+  const elements = (
+    <footer className="footer">
+      <div className="footer__content">
+        <FooterRight />
+        <div className="footer__content__sections">
+          <FooterSection sectionLinks={sectionLinks} />
+          <FooterSection sectionLinks={sectionLinks} />
+          <FooterSection sectionLinks={sectionLinks} />
+          <FooterSection sectionLinks={sectionLinks} />
+        </div>
+      </div>
+      <FooterBottom />
+    </footer>
   );
+
+  return finishedLazyLoading && elements;
 }
 
 export default Footer;

@@ -20,6 +20,7 @@ function HandleImageLazyLoad(
   return cardImgRef;
 }
 
+// TODO: Refactor & cleanup the mess
 function HandleNewItems(
   shouldLoadNewItems: boolean,
   idxsToLoad: number[],
@@ -28,11 +29,12 @@ function HandleNewItems(
   setidxsToLoad: Dispatch<SetStateAction<number[]>>
 ): void {
   useEffect(() => {
-    if (
+    const checkForNewItems =
       shouldLoadNewItems &&
       !state.finishedLazyLoading &&
-      idxsToLoad.length < state.items.length
-    ) {
+      idxsToLoad.length < state.items.length;
+
+    if (checkForNewItems) {
       const newIdxs = [...Array(idxsToLoad.length + 10).keys()];
 
       if (state.items.length - newIdxs.length <= 20) {
