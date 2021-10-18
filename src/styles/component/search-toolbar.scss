@@ -8,7 +8,8 @@
   @apply md:justify-end;
 
   &__dropdown {
-    @apply w-40;
+    @apply w-full;
+    @apply md:w-40;
     @apply border-solid;
     @apply border-gray-200;
     @apply border-2;
