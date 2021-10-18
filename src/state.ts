@@ -44,6 +44,9 @@ function stateReducer(state: State, action: Action): State {
       return {
         ...state,
         items: action?.items?.length ? action.items : state.items,
+        finishedLazyLoading: action?.finishedLazyLoading
+          ? true
+          : state.finishedLazyLoading,
       };
 
     case "setTagName":
