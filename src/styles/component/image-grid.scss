@@ -7,6 +7,7 @@
   @apply mx-auto;
   @apply text-white;
   @apply xl:grid-cols-5;
+  @apply mt-6;
 }
 
 .card {
@@ -20,6 +21,7 @@
     .card__img {
       @apply h-3/4;
     }
+
     .card-info {
       background-color: #222;
       transform: translateY(0rem);

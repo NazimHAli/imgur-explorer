@@ -42,7 +42,9 @@ function App() {
         defaultQuery={state.requestArgs.query}
       />
       <Explore dispatchState={dispatchState} galleryTags={state.galleryTags} />
-      <SearchToolBar dispatchState={dispatchState} state={state} />
+      {state.requestArgs.query.length > 0 && (
+        <SearchToolBar dispatchState={dispatchState} state={state} />
+      )}
 
       {/* Loading */}
       {state.isLoading && (
@@ -59,6 +61,8 @@ function App() {
 
       {/* No results */}
       {state.items.length === 0 && !state.isLoading && <ImageGridNoResults />}
+
+      {/* Hide footer */}
       {state.finishedLazyLoading && <Footer />}
     </Suspense>
   );
