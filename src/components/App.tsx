@@ -63,7 +63,7 @@ function App() {
       {state.items.length === 0 && !state.isLoading && <ImageGridNoResults />}
 
       {/* Hide footer */}
-      {state.finishedLazyLoading && <Footer />}
+      <Footer finishedLazyLoading={state.finishedLazyLoading} />
     </Suspense>
   );
 }

@@ -1,12 +1,5 @@
 function LeftSide() {
-  return (
-    <p className="footer__bottom__left">
-      © 2021 Meows ||
-      <a href="#explore" className="ml-1">
-        @none
-      </a>
-    </p>
-  );
+  return <p className="footer__bottom__left">© 2021 Meows</p>;
 }
 
 function FooterIcon() {
