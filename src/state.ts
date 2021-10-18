@@ -24,6 +24,8 @@ const initialState: State = {
  *
  * It's used by the shared state
  *
+ * TODO: Replace/refactor with better state management
+ *
  * @param state
  * @param action
  */
@@ -60,6 +62,7 @@ function stateReducer(state: State, action: Action): State {
       return {
         ...state,
         requestArgs: updatedArgs,
+        finishedLazyLoading: false,
       };
 
     case "setTags":
@@ -105,6 +108,7 @@ function stateReducer(state: State, action: Action): State {
       return {
         ...state,
         requestArgs: updatedArgs,
+        finishedLazyLoading: action?.newSearch ? false : true,
       };
 
     default:
