@@ -78,19 +78,16 @@ function Header(props: {
                 ? state["galleryTags"].tags.slice(0, 10)
                 : []
             ).map((tag: TypeTag) => (
-              <>
-                <a
-                  key={tag?.display_name}
-                  href="#explore-tags"
-                  data-tag={tag?.name}
-                >
-                  <p className="text-lg font-medium">
-                    {capitalize(tag?.display_name)}
-                  </p>
-                  <span>{tag?.total_items?.toLocaleString()} Posts</span>
-                </a>
-                {/* <span>|</span> */}
-              </>
+              <a
+                key={tag?.display_name}
+                href="#explore-tags"
+                data-tag={tag?.name}
+              >
+                <p className="text-lg font-medium">
+                  {capitalize(tag?.display_name)}
+                </p>
+                <span>{tag?.total_items?.toLocaleString()} Posts</span>
+              </a>
             ))}
           </div>
         </div>
