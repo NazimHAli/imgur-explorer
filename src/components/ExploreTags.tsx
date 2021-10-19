@@ -48,7 +48,7 @@ function ExploreTags(props: {
   return (
     <>
       <h2 id="explore-tags" className="header__tags__title">
-        Explore
+        Explore Tags
       </h2>
       <div className="explore__tags">
         {renderTags(galleryTags, handleClick)}

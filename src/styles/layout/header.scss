@@ -48,20 +48,18 @@
     @apply bg-gray-900;
 
     &__container {
-      @apply flex;
       @apply flex-col;
-      @apply lg:flex-row;
+      @apply flex;
+      @apply items-center;
       @apply max-w-screen-2xl;
       @apply mx-auto;
-      @apply w-full;
-      @apply items-center;
-      @apply text-white;
       @apply py-6;
+      @apply text-white;
+      @apply w-full;
     }
 
     &__title {
       @apply text-3xl;
-      @apply p-2;
     }
 
     &__items {
