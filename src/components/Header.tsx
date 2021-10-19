@@ -41,46 +41,66 @@ function Header(props: {
 
   handleClearQuery(defaultQuery, inputRef);
 
+  const logo = (
+    <a href="/" className="header__logo">
+      <img src={galleryIcon} alt="Logo" width="64" height="64" />
+    </a>
+  );
+
+  const searchButton = (
+    <button
+      className="btn-search"
+      type="submit"
+      name="Submit search button"
+      onClick={_handleSubmit}
+    >
+      <i className="search-icon"></i>
+    </button>
+  );
+
+  const searchForm = (
+    <form onSubmit={_handleSubmit}>
+      <input
+        type="search"
+        className="input-search"
+        placeholder="Search for it"
+        defaultValue={defaultQuery}
+        ref={inputRef}
+      />
+    </form>
+  );
+
+  const profile = (
+    <div className="header__profile">
+      <img src={profileIcon} alt="Profile" width="46" height="46" />
+    </div>
+  );
+
+  const searchBox = (
+    <div className="search-box">
+      {searchButton}
+      {searchForm}
+    </div>
+  );
+
+  const tagsContainer = (
+    <div className="header__tags__container">
+      <ExploreTags
+        dispatchState={dispatchState}
+        galleryTags={state.galleryTags}
+      />
+    </div>
+  );
+
   return (
     <header className="header">
       <div className="header__top">
-        <a href="/" className="header__logo">
-          <img src={galleryIcon} alt="Logo" width="64" height="64" />
-        </a>
-
-        <div className="search-box">
-          <button
-            className="btn-search"
-            type="submit"
-            name="Submit search button"
-            onClick={_handleSubmit}
-          >
-            <i className="search-icon"></i>
-          </button>
-          <form onSubmit={_handleSubmit}>
-            <input
-              type="search"
-              className="input-search"
-              placeholder="Search for it"
-              defaultValue={defaultQuery}
-              ref={inputRef}
-            />
-          </form>
-        </div>
-
-        <div className="header__profile">
-          <img src={profileIcon} alt="Profile" width="46" height="46" />
-        </div>
+        {logo}
+        {searchBox}
+        {profile}
       </div>
 
-      <div className="header__tags">
-        <div className="header__tags__container">
-          <ExploreTags
-            dispatchState={dispatchState}
-            galleryTags={state.galleryTags}
-          />
-        </div>
-      </div>
+      <div className="header__tags">{tagsContainer}</div>
     </header>
   );
 }
