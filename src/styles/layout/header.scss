@@ -55,6 +55,7 @@
       @apply max-w-screen-2xl;
       @apply mx-auto;
       @apply w-full;
+      @apply items-center;
     }
 
     &__title {
@@ -66,7 +67,7 @@
 
     &__items {
       @apply gap-1;
-      @apply grid-cols-3;
+      @apply grid-cols-4;
       @apply grid;
       @apply md:grid-cols-10;
       @apply text-white;
