@@ -69,7 +69,8 @@
       @apply gap-1;
       @apply grid-cols-4;
       @apply grid;
-      @apply md:grid-cols-10;
+      @apply md:grid-cols-5;
+      @apply lg:grid-cols-10;
       @apply text-white;
       @apply p-2;
     }
@@ -82,6 +83,9 @@
       @apply hover:text-black;
       @apply transition-colors;
       @apply overflow-hidden;
+      @apply flex;
+      @apply flex-col;
+      @apply justify-between;
     }
   }
 }
