@@ -1,14 +1,16 @@
 .explore {
+  @apply grid-flow-row;
+  @apply grid;
   @apply max-w-screen-2xl;
   @apply mx-auto;
-  @apply grid;
-  @apply grid-flow-row;
 
   &__title {
     @apply font-extrabold;
     @apply leading-10;
-    @apply text-2xl;
     @apply my-6;
+    @apply text-2xl;
+    @apply justify-self-center;
+    @apply md:justify-self-auto;
   }
 
   &__tags {
