@@ -56,11 +56,13 @@
       @apply mx-auto;
       @apply w-full;
       @apply items-center;
+      @apply text-white;
+      @apply py-6;
     }
 
     &__title {
       @apply text-3xl;
-      @apply text-yellow-200;
+      @apply text-yellow-100;
       @apply text-center;
       @apply p-2;
     }
@@ -71,7 +73,6 @@
       @apply grid;
       @apply md:grid-cols-5;
       @apply lg:grid-cols-10;
-      @apply text-white;
       @apply p-2;
     }
 

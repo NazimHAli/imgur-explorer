@@ -13,9 +13,10 @@
 
   &__tags {
     @apply gap-1;
-    @apply grid-cols-3;
+    @apply grid-cols-4;
     @apply grid;
-    @apply md:grid-cols-9;
+    @apply md:grid-cols-5;
+    @apply lg:grid-cols-10;
 
     &__item {
       @apply bg-gray-100;

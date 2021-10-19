@@ -1,8 +1,9 @@
 import galleryIcon from "@/assets/gallery.svg";
 import profileIcon from "@/assets/profile.svg";
-import { Action, State, TypeTag } from "@/types";
-import { capitalize } from "@/utils/dataUtils";
+import { Action, State } from "@/types";
 import { Dispatch, RefObject, useRef } from "react";
+
+import ExploreTags from "./ExploreTags";
 
 function handleClearQuery(
   defaultQuery: string,
@@ -46,6 +47,7 @@ function Header(props: {
         <a href="/" className="header__logo">
           <img src={galleryIcon} alt="Logo" width="64" height="64" />
         </a>
+
         <div className="search-box">
           <button
             className="btn-search"
@@ -65,31 +67,18 @@ function Header(props: {
             />
           </form>
         </div>
+
         <div className="header__profile">
           <img src={profileIcon} alt="Profile" width="46" height="46" />
         </div>
       </div>
+
       <div className="header__tags">
         <div className="header__tags__container">
-          <h4 className="header__tags__title">Tags</h4>
-          <div className="header__tags__items">
-            {Array.from(
-              state["galleryTags"]?.tags
-                ? state["galleryTags"].tags.slice(0, 10)
-                : []
-            ).map((tag: TypeTag) => (
-              <a
-                key={tag?.display_name}
-                href="#explore-tags"
-                data-tag={tag?.name}
-              >
-                <p className="text-lg font-medium">
-                  {capitalize(tag?.display_name)}
-                </p>
-                <span>{tag?.total_items?.toLocaleString()} Posts</span>
-              </a>
-            ))}
-          </div>
+          <ExploreTags
+            dispatchState={dispatchState}
+            galleryTags={state.galleryTags}
+          />
         </div>
       </div>
     </header>

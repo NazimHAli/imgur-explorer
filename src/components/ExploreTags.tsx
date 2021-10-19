@@ -8,7 +8,7 @@ function renderTags(
 ) {
   return (
     <>
-      {Array.from(galleryTags?.tags ? galleryTags.tags.slice(0, 9) : []).map(
+      {Array.from(galleryTags?.tags ? galleryTags.tags.slice(0, 10) : []).map(
         (tag: TypeTag) => (
           <a
             key={tag?.display_name}
@@ -46,14 +46,14 @@ function ExploreTags(props: {
   };
 
   return (
-    <div className="text-black">
-      <h2 id="explore-tags" className="explore__title">
-        Explore Tags
+    <>
+      <h2 id="explore-tags" className="header__tags__title">
+        Explore
       </h2>
       <div className="explore__tags">
         {renderTags(galleryTags, handleClick)}
       </div>
-    </div>
+    </>
   );
 }
 
