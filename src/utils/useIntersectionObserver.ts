@@ -1,10 +1,13 @@
 import { RefObject, useEffect, useState } from "react";
 
 const useIntersectionObserver = (
-  ref: RefObject<HTMLElement>,
-  options: IntersectionObserverInit = {}
+  ref: RefObject<HTMLElement>
 ): IntersectionObserverEntry | null | void => {
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
+  const options = {
+    rootElement: document.documentElement,
+    rootMargin: "35%",
+  };
 
   useEffect(() => {
     if (!ref.current) {

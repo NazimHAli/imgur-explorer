@@ -22,7 +22,7 @@ function HandleImageLazyLoad(
 
 // TODO: Refactor & cleanup the mess
 function HandleNewItems(
-  shouldLoadNewItems: boolean,
+  isIntersecting: boolean,
   idxsToLoad: number[],
   state: State,
   dispatchState: Dispatch<Action>,
@@ -30,7 +30,7 @@ function HandleNewItems(
 ): void {
   useEffect(() => {
     const checkForNewItems =
-      shouldLoadNewItems &&
+      isIntersecting &&
       !state.finishedLazyLoading &&
       idxsToLoad.length < state.items.length;
 
@@ -51,7 +51,7 @@ function HandleNewItems(
         dispatchState({ type: "setItems", finishedLazyLoading: true });
       }
     }
-  }, [shouldLoadNewItems]);
+  }, [isIntersecting]);
 }
 
 export { HandleNewItems, HandleImageLazyLoad };

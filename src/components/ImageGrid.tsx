@@ -22,10 +22,10 @@ function ImageGrid(props: {
 
   const elementObserverRef = useRef<HTMLElement>(null);
   const entry = useIntersectionObserver(elementObserverRef);
-  const shouldLoadNewItems = !!entry?.isIntersecting;
+  const isIntersecting = entry?.isIntersecting || false;
 
   HandleNewItems(
-    shouldLoadNewItems,
+    isIntersecting,
     idxsToLoad,
     state,
     dispatchState,

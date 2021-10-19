@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "vite --host 10.0.0.211 --port 3001",
     "build": "yarn lint && vite build",
-    "lint": "prettier -c . && eslint --config .eslintrc.js ./src",
-    "lint:fix": "prettier -c . --write",
+    "lint": "yarn lint:pre && yarn lint:es",
+    "lint:es": "eslint --config .eslintrc.js ./src",
+    "lint:pre": "prettier -c .",
+    "lint:fix": "yarn lint:pre --write && yarn lint:es --fix",
     "lint:watch": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}",
     "serve": "vite preview --host 10.0.0.211 --port 3001",
     "test": "jest",
