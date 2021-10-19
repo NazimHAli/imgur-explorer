@@ -1,29 +1,33 @@
 .header {
   background-color: $base-color2;
-  height: 12rem;
-  padding: 1rem;
-  display: grid;
-  align-content: center;
-  margin-bottom: 1rem;
 
-  transition: all ease-in-out 500ms;
+  &__top {
+    height: 12rem;
+    padding: 1rem;
+    display: grid;
+    align-content: center;
 
-  @include breakpoint($from: "md") {
-    grid-template-columns: 1fr 6fr 1fr;
-  }
+    transition: all ease-in-out 500ms;
 
-  @include breakpoint($from: "lg") {
-    grid-template-columns: 1fr 2fr 1fr;
-  }
+    @include breakpoint($from: "md") {
+      grid-template-columns: 1fr 6fr 1fr;
+    }
 
-  @include breakpoint($until: "md") {
-    grid-template-rows: 1fr 2fr;
+    @include breakpoint($from: "lg") {
+      grid-template-columns: 1fr 2fr 1fr;
+    }
+
+    @include breakpoint($until: "md") {
+      grid-template-rows: 1fr 2fr;
+    }
   }
 
   &__logo,
   &__profile {
-    filter: invert(100%);
     justify-self: center;
+    img {
+      filter: invert(100%);
+    }
   }
 
   &__logo {
@@ -36,10 +40,39 @@
   }
 
   &__profile {
-    justify-self: center;
-
     @include breakpoint($until: "md") {
       display: none;
+    }
+  }
+
+  &__tags {
+    @apply bg-gray-900;
+
+    &__container {
+      @apply flex;
+      @apply flex-col;
+      @apply lg:flex-row;
+      @apply max-w-screen-2xl;
+      @apply mx-auto;
+      @apply w-full;
+    }
+
+    &__title {
+      @apply text-3xl;
+      @apply text-yellow-200;
+      @apply text-center;
+      @apply p-2;
+    }
+
+    &__items {
+      @apply flex;
+      @apply flex-wrap;
+      @apply text-white;
+      @apply p-2;
+    }
+
+    a {
+      @apply p-2;
     }
   }
 }

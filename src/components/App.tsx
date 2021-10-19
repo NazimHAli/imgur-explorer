@@ -40,6 +40,7 @@ function App() {
       <Header
         dispatchState={dispatchState}
         defaultQuery={state.requestArgs.query}
+        state={state}
       />
       <Explore dispatchState={dispatchState} galleryTags={state.galleryTags} />
       {state.requestArgs.query.length > 0 && (

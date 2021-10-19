@@ -30,3 +30,11 @@ img {
 .full-vh {
   min-height: 100vh;
 }
+
+.scroll-hidden {
+  scrollbar-width: none;
+  ::-webkit-scrollbar {
+    height: 0px;
+    background: transparent; /* make scrollbar transparent */
+  }
+}
