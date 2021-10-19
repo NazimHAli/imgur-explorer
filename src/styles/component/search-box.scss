@@ -32,7 +32,7 @@
   width: 3rem;
   transition: all ease-in-out 0.2s;
 
-  background-color: #000;
+  @apply bg-gray-900;
   color: white;
 
   &:hover {

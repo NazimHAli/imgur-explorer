@@ -1,18 +1,12 @@
-import { Action, State } from "@/types";
-import { Dispatch } from "react";
+import { State } from "@/types";
 
 import ExploreGalleries from "./ExploreGalleries";
-import ExploreTags from "./ExploreTags";
 
-function Explore(props: {
-  dispatchState: Dispatch<Action>;
-  galleryTags: State["galleryTags"];
-}) {
-  const { dispatchState, galleryTags } = props;
+function Explore(props: { galleryTags: State["galleryTags"] }) {
+  const { galleryTags } = props;
 
   return (
     <div className="explore">
-      <ExploreTags dispatchState={dispatchState} galleryTags={galleryTags} />
       <ExploreGalleries galleryTags={galleryTags} />
     </div>
   );
