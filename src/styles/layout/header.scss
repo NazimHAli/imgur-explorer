@@ -6,7 +6,6 @@
     padding: 1rem;
     display: grid;
     align-content: center;
-
     transition: all ease-in-out 500ms;
 
     @include breakpoint($from: "md") {
@@ -62,8 +61,6 @@
 
     &__title {
       @apply text-3xl;
-      @apply text-yellow-100;
-      @apply text-center;
       @apply p-2;
     }
 

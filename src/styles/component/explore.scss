@@ -17,6 +17,7 @@
     @apply grid;
     @apply md:grid-cols-5;
     @apply lg:grid-cols-10;
+    @inlude cssgrid(5rem);
 
     &__item {
       @apply bg-gray-100;
