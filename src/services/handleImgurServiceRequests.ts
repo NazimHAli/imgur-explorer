@@ -56,7 +56,7 @@ async function handleImgurServiceRequests(
   const res = await imgurClient.methodDispatcher(method);
   _dispatchResponse(method, dispatchState, requestArgs, res, items);
 
-  if (state.requestArgs.newSearch) {
+  if (state.requestArgs.newSearch && res) {
     dispatchState({ type: "setIsLoading", loading: false });
   }
 }
