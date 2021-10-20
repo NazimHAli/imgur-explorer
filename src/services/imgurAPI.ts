@@ -70,7 +70,7 @@ class ImgurAPI {
     return this.getLiveResultsFromAPI();
   }
 
-  private async getLiveResultsFromAPI() {
+  private getLiveResultsFromAPI() {
     const endPoint = this.constructSearchEndPointURL();
 
     return this.imgurBaseApi({ endPoint: endPoint });
@@ -83,9 +83,9 @@ class ImgurAPI {
     if (this.useFakeResponse) {
       const mod = await import("@/__tests__/fixtures/galleryTags");
       return mod.fakeGalleryTags.data;
-    } else {
-      return this.imgurBaseApi({ endPoint: EP_GALLERY_TAGS });
     }
+
+    return this.imgurBaseApi({ endPoint: EP_GALLERY_TAGS });
   }
 
   private getGalleryTagMetadata() {

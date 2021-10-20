@@ -41,7 +41,7 @@ function _dispatchResponse(
  * and dispatch state updates
  *
  */
-function handleImgurServiceRequests(
+async function handleImgurServiceRequests(
   dispatchState: Dispatch<Action>,
   state: State,
   method = "search"
@@ -53,7 +53,7 @@ function handleImgurServiceRequests(
   const { items, requestArgs } = state;
   const imgurClient = ImgurAPI.getInstance(requestArgs);
 
-  const res = imgurClient.methodDispatcher(method);
+  const res = await imgurClient.methodDispatcher(method);
   _dispatchResponse(method, dispatchState, requestArgs, res, items);
 
   if (state.requestArgs.newSearch) {
