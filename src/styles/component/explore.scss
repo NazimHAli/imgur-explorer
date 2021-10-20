@@ -15,12 +15,11 @@
 
   &__tags {
     @apply gap-1;
-    @apply grid-cols-4;
     @apply grid;
     @apply py-6;
+    @apply grid-cols-4;
     @apply md:grid-cols-5;
     @apply lg:grid-cols-10;
-    @inlude cssgrid(5rem);
 
     &__item {
       @apply bg-gray-100;
