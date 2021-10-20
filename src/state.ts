@@ -82,28 +82,9 @@ function stateReducer(state: State, action: Action): State {
     case "submitSearchRequest":
       updatedArgs = {
         ...updatedArgs,
+        ...action,
         tagName: "",
       };
-
-      if (action?.page) {
-        updatedArgs = { ...updatedArgs, page: action.page };
-      }
-
-      if (action?.query) {
-        updatedArgs = { ...updatedArgs, query: action.query };
-      }
-
-      if (action?.sort) {
-        updatedArgs = { ...updatedArgs, sort: action.sort };
-      }
-
-      if (action?.window) {
-        updatedArgs = { ...updatedArgs, window: action.window };
-      }
-
-      if (action.newSearch !== undefined) {
-        updatedArgs = { ...updatedArgs, newSearch: action.newSearch };
-      }
 
       return {
         ...state,
