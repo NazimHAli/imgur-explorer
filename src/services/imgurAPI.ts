@@ -136,12 +136,12 @@ class ImgurAPI {
 
   private getSearchString() {
     let searchString = "";
-    const imgSize = "q_size_px=small&q_type=jpg";
+    const imgSize = "q_size_px=medium&q_type=jpg";
 
     if (this.requestArgs.query) {
       searchString = `?q=${this.requestArgs.query}&${imgSize}`;
     } else {
-      searchString = "?${imgSize}";
+      searchString = `?${imgSize}`;
     }
 
     return searchString;
