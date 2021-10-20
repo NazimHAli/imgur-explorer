@@ -8,6 +8,7 @@ function getDispatchArgs(
 ) {
   const dispatchArgs: Action = {
     type: "submitSearchRequest",
+    newSearch: true,
   };
 
   const element = event.target as HTMLSelectElement;
@@ -39,6 +40,7 @@ function SearchToolBarDropdown(props: {
     const dispatchArgs: Action = getDispatchArgs(actionArg, event);
 
     dispatchState(dispatchArgs);
+    event.preventDefault();
   };
 
   const listItems = renderListItems && (

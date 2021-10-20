@@ -37,7 +37,7 @@ function checkNumberIfFloat(num: number): boolean {
  * @param images
  * @param newSize
  */
-function updateImageSize(images: State["items"], newSize = "m") {
+function updateImageSize(images: State["items"], newSize = "l") {
   const imgJPG = `${newSize}.jpg`;
   const imgPNG = `${newSize}.png`;
 
