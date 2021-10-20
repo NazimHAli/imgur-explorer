@@ -40,7 +40,7 @@ function ImageGrid(props: {
             state.items[idx] && (
               <ImageGridCard
                 item={state.items[idx]}
-                key={`${idx}-${state.items[idx].id}`}
+                key={`${idx || "0"}-${state.items[idx].id}`}
                 imgRef={cardImgRef}
               />
             )
