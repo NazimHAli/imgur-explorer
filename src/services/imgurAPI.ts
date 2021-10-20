@@ -26,12 +26,12 @@ class ImgurAPI {
    * Get or create API instance
    */
   public static getInstance(requestArgs: State["requestArgs"]): ImgurAPI {
+    // Create instance once
     if (ImgurAPI.instance === undefined) {
       ImgurAPI.instance = new ImgurAPI();
     }
 
     ImgurAPI.instance.requestArgs = requestArgs;
-
     return ImgurAPI.instance;
   }
 
@@ -47,35 +47,33 @@ class ImgurAPI {
     };
 
     const response = await fetch(args.endPoint, args.requestOptions);
-    const result = await response.json();
+    const responseJson = await response.json();
 
-    if (
+    const shouldFilter =
       this.requestArgs.filter &&
-      !result.data?.galleries &&
-      !this.requestArgs.tagName.length
-    ) {
-      return extractImageResults(result.data);
+      !responseJson.data?.galleries &&
+      !this.requestArgs.tagName.length;
+
+    if (shouldFilter) {
+      return extractImageResults(responseJson.data);
     }
 
-    return result.data;
+    return responseJson.data;
   }
 
-  public getGallerySearchResults() {
+  public async getGallerySearchResults() {
     if (this.useFakeResponse) {
-      return import("@/__tests__/fixtures/imgurResponse").then((mod) => {
-        return extractImageResults(mod.fakeResponse.data);
-      });
-    } else {
-      return this.getLiveResultsFromAPI();
+      const mod = await import("@/__tests__/fixtures/imgurResponse");
+      return extractImageResults(mod.fakeResponse.data);
     }
+
+    return this.getLiveResultsFromAPI();
   }
 
-  private getLiveResultsFromAPI() {
-    const endPointURL = this.constructSearchEndPointURL();
+  private async getLiveResultsFromAPI() {
+    const endPoint = this.constructSearchEndPointURL();
 
-    return this.imgurBaseApi({
-      endPoint: endPointURL,
-    });
+    return this.imgurBaseApi({ endPoint: endPoint });
   }
 
   /**
@@ -83,28 +81,23 @@ class ImgurAPI {
    */
   private async getGalleryTags() {
     if (this.useFakeResponse) {
-      return await import("@/__tests__/fixtures/galleryTags").then((mod) => {
-        return mod.fakeGalleryTags.data;
-      });
+      const mod = await import("@/__tests__/fixtures/galleryTags");
+      return mod.fakeGalleryTags.data;
     } else {
-      return await this.imgurBaseApi({ endPoint: EP_GALLERY_TAGS });
+      return this.imgurBaseApi({ endPoint: EP_GALLERY_TAGS });
     }
   }
 
   private getGalleryTagMetadata() {
     const endPoint = `${EP_GALLERY}/t/${this.requestArgs.tagName}/${this.requestArgs.sort}/${this.requestArgs.window}/${this.requestArgs.page}`;
 
-    return this.imgurBaseApi({
-      endPoint: endPoint,
-    });
+    return this.imgurBaseApi({ endPoint: endPoint });
   }
 
   public testEndPoint() {
     const endPoint = `${BASE}/hot/time/today/${this.requestArgs.page}`;
 
-    return this.imgurBaseApi({
-      endPoint: endPoint,
-    });
+    return this.imgurBaseApi({ endPoint: endPoint });
   }
 
   public methodDispatcher(method: string) {
@@ -122,7 +115,7 @@ class ImgurAPI {
     }
   }
 
-  private constructSearchEndPointURL() {
+  private constructSearchEndPointURL(): string {
     // Query
     const searchString = this.getSearchString();
 
@@ -134,7 +127,7 @@ class ImgurAPI {
     return `${EP_GALLERY}/search/${sortParam}${windowParam}${pageParam}`;
   }
 
-  private getSearchString() {
+  private getSearchString(): string {
     let searchString = "";
     const imgSize = "q_size_px=medium&q_type=jpg";
 
