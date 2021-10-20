@@ -80,6 +80,8 @@ function stateReducer(state: State, action: Action): State {
       };
 
     case "submitSearchRequest":
+      const doneLoading = action?.newSearch ? false : state.finishedLazyLoading;
+
       updatedArgs = {
         ...updatedArgs,
         ...action,
@@ -89,9 +91,7 @@ function stateReducer(state: State, action: Action): State {
       return {
         ...state,
         requestArgs: updatedArgs,
-        finishedLazyLoading: action?.newSearch
-          ? false
-          : state.finishedLazyLoading,
+        finishedLazyLoading: doneLoading,
       };
 
     default:
