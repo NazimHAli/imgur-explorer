@@ -13,7 +13,12 @@ module.exports = {
   },
   overrides: [
     {
-      files: ["src/components/*.ts*", "src/services/*.ts*", "src/utils/*.ts*"],
+      files: [
+        "src/components/*.ts*",
+        "src/services/*.ts*",
+        "src/utils/*.ts*",
+        "src/*.ts*",
+      ],
       rules: {
         "sort-keys-fix/sort-keys-fix": "warn",
       },
