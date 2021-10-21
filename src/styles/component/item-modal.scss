@@ -1,0 +1,26 @@
+.item-modal {
+  @apply bg-gray-400;
+  @apply w-11/12;
+  @apply h-5/6;
+  @apply mt-10;
+  @apply fixed;
+  @apply top-0;
+}
+
+.ReactModal__Overlay {
+  @apply p-4;
+
+  .card {
+    @apply h-full;
+    @apply mx-auto;
+    @apply bg-white;
+
+    img {
+      @apply mt-12;
+    }
+  }
+
+  .card-info {
+    grid-template-rows: 1fr 2fr;
+  }
+}

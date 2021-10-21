@@ -4,6 +4,8 @@ import { useIntersectionObserver } from "@/utils/useIntersectionObserver";
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
 import { Dispatch, lazy, useRef, useState } from "react";
 
+import ItemModal from "./ItemModal";
+
 const ImageGridCard = lazy(() => import("@/components/ImageGridCard"));
 const LazyLoadingSpinner = lazy(
   () => import("@/components/LazyLoadingSpinner")
@@ -17,6 +19,7 @@ function ImageGrid(props: {
 }): JSX.Element {
   const { state, dispatchState } = props;
   const [idxsToLoad, setidxsToLoad] = useState([0, 1, 2, 3, 4]);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   const cardImgRef = HandleImageLazyLoad(state, setidxsToLoad);
 
@@ -34,6 +37,13 @@ function ImageGrid(props: {
 
   return (
     <div className="grid-viewport">
+      {selectedCard && (
+        <ItemModal
+          contentElement={selectedCard}
+          setSelectedCard={setSelectedCard}
+        />
+      )}
+
       <div className="image-grid">
         {idxsToLoad.map(
           (idx) =>
@@ -42,6 +52,7 @@ function ImageGrid(props: {
                 item={state.items[idx]}
                 key={`${idx || "0"}-${state.items[idx].id}`}
                 imgRef={cardImgRef}
+                setSelectedCard={setSelectedCard}
               />
             )
         )}

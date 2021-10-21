@@ -1,10 +1,14 @@
 import { Item } from "@/types";
 import { truncateText } from "@/utils/dataUtils";
-import { Ref } from "react";
+import { Dispatch, ReactElement, Ref, SetStateAction } from "react";
 import { MessageSquare, ThumbsUp, Eye } from "react-feather";
 
-function ImageGridCard(props: { item: Item; imgRef: Ref<HTMLImageElement> }) {
-  const { imgRef, item } = props;
+function ImageGridCard(props: {
+  item: Item;
+  imgRef: Ref<HTMLImageElement>;
+  setSelectedCard: Dispatch<SetStateAction<ReactElement | null>>;
+}) {
+  const { imgRef, item, setSelectedCard } = props;
 
   const imageInfo = (
     <div className="card-info">
@@ -26,8 +30,13 @@ function ImageGridCard(props: { item: Item; imgRef: Ref<HTMLImageElement> }) {
     </div>
   );
 
-  return (
-    <div className="card">
+  const handleOnClick = (event) => {
+    setSelectedCard(cardEl);
+    event.preventDefault();
+  };
+
+  const cardEl = (
+    <a href="" className="card" onClick={handleOnClick}>
       <span className="card__img">
         <img
           alt={item?.title}
@@ -38,8 +47,10 @@ function ImageGridCard(props: { item: Item; imgRef: Ref<HTMLImageElement> }) {
         />
       </span>
       {imageInfo}
-    </div>
+    </a>
   );
+
+  return cardEl;
 }
 
 export default ImageGridCard;
