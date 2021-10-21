@@ -22,10 +22,23 @@ function App() {
    */
 
   useEffect(() => {
+    let method = "";
     if (state.requestArgs.tagName.length) {
-      handleImgurServiceRequests(dispatchState, state, "tagName");
-    } else if (state.requestArgs.query.length) {
-      handleImgurServiceRequests(dispatchState, state);
+      method = "tagName";
+    } else if (
+      state.requestArgs?.selectedItemID?.length &&
+      state.requestArgs.method === "comments"
+    ) {
+      method = "comments";
+    } else if (
+      state.requestArgs.query.length &&
+      state.requestArgs.method === "search"
+    ) {
+      method = "search";
+    }
+
+    if (method) {
+      handleImgurServiceRequests(dispatchState, state, method);
     }
   }, [state.requestArgs]);
 

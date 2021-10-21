@@ -19,8 +19,6 @@ function ImageGrid(props: {
 }): JSX.Element {
   const { state, dispatchState } = props;
   const [idxsToLoad, setidxsToLoad] = useState([0, 1, 2, 3, 4]);
-  const [selectedCard, setSelectedCard] = useState(undefined);
-
   const cardImgRef = HandleImageLazyLoad(state, setidxsToLoad);
 
   const elementObserverRef = useRef<HTMLElement>(null);
@@ -37,11 +35,8 @@ function ImageGrid(props: {
 
   return (
     <div className="grid-viewport">
-      {selectedCard && (
-        <ItemModal
-          contentElement={selectedCard}
-          setSelectedCard={setSelectedCard}
-        />
+      {state.selectedItemComments?.length > 0 && (
+        <ItemModal selectedItemComments={state.selectedItemComments} />
       )}
 
       <div className="image-grid">
@@ -52,7 +47,7 @@ function ImageGrid(props: {
                 item={state.items[idx]}
                 key={`${idx || "0"}-${state.items[idx].id}`}
                 imgRef={cardImgRef}
-                setSelectedCard={setSelectedCard}
+                dispatchState={dispatchState}
               />
             )
         )}

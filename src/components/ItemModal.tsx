@@ -1,38 +1,28 @@
-import {
-  Dispatch,
-  JSXElementConstructor,
-  ReactElement,
-  SetStateAction,
-} from "react";
 import Modal from "react-modal";
+
+import ItemModalComments from "./ItemModalComments";
 
 // Bind modal to appElement for accessibility
 Modal.setAppElement("#root");
 
-function ItemModal(props: {
-  contentElement;
-  setSelectedCard:
-    | Dispatch<
-        SetStateAction<
-          ReactElement<any, string | JSXElementConstructor<any>> | undefined
-        >
-      >
-    | Dispatch<SetStateAction<undefined>>;
-}) {
-  const { contentElement, setSelectedCard } = props;
+function ItemModal(props: { selectedItemComments: any }) {
+  const { selectedItemComments } = props;
 
   function closeModal() {
-    setSelectedCard(undefined);
+    // setSelectedCard(undefined);
   }
 
   return (
     <Modal
-      contentElement={() => contentElement}
       contentLabel="Example Modal"
-      isOpen={contentElement !== undefined}
+      isOpen={selectedItemComments.length > 0}
       onRequestClose={closeModal}
       preventScroll={true}
-    />
+    >
+      <>
+        <ItemModalComments comments={selectedItemComments} />
+      </>
+    </Modal>
   );
 }
 

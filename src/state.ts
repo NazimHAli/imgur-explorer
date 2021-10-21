@@ -4,11 +4,14 @@ const initialState: State = {
   isLoading: true,
   finishedLazyLoading: false,
   items: [],
+  selectedItemComments: [],
   requestArgs: {
     filter: true,
+    method: "search",
     newSearch: true,
     page: 1,
     query: "meow",
+    selectedItemID: "",
     sort: "viral",
     tagName: "",
     window: "all",
@@ -52,6 +55,30 @@ function setTags(state: State, action: Action): State {
     ...state,
     galleryTags: action?.galleryTags || {},
     items: action?.items?.length ? action.items : state.items,
+  };
+}
+
+function setSelectedItemComments(state: State, action: Action): State {
+  return {
+    ...state,
+    selectedItemComments: action?.selectedItemComments?.length
+      ? action.selectedItemComments
+      : state.selectedItemComments,
+    requestArgs: {
+      ...state["requestArgs"],
+      filter: false,
+      selectedItemID: "",
+    },
+  };
+}
+
+function setSearchRequestArgs(state: State, action: Action): State {
+  return {
+    ...state,
+    requestArgs: {
+      ...state["requestArgs"],
+      ...action,
+    },
   };
 }
 
@@ -112,6 +139,12 @@ function stateReducer(state: State, action: Action): State {
 
     case "setItems":
       return setItems(state, action);
+
+    case "selectedItemComments":
+      return setSelectedItemComments(state, action);
+
+    case "setSearchRequestArgs":
+      return setSearchRequestArgs(state, action);
 
     case "setTagName":
       return setTagName(updatedArgs, action, state);

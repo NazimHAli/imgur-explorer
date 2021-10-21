@@ -1,26 +1,14 @@
-import { Item } from "@/types";
+import { Action, Item } from "@/types";
 import { truncateText } from "@/utils/dataUtils";
-import {
-  Dispatch,
-  JSXElementConstructor,
-  ReactElement,
-  Ref,
-  SetStateAction,
-} from "react";
+import { Dispatch, Ref } from "react";
 import { MessageSquare, ThumbsUp, Eye } from "react-feather";
 
 function ImageGridCard(props: {
   item: Item;
   imgRef: Ref<HTMLImageElement>;
-  setSelectedCard:
-    | Dispatch<
-        SetStateAction<
-          ReactElement<any, string | JSXElementConstructor<any>> | undefined
-        >
-      >
-    | Dispatch<SetStateAction<undefined>>;
+  dispatchState: Dispatch<Action>;
 }) {
-  const { imgRef, item, setSelectedCard } = props;
+  const { imgRef, item, dispatchState } = props;
 
   const imageInfo = (
     <div className="card-info">
@@ -43,7 +31,12 @@ function ImageGridCard(props: {
   );
 
   const handleOnClick = (event: { preventDefault: () => void }) => {
-    setSelectedCard(cardEl);
+    dispatchState({
+      method: "comments",
+      type: "setSearchRequestArgs",
+      selectedItemID: item.id,
+      filter: false,
+    });
     event.preventDefault();
   };
 

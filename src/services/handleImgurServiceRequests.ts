@@ -13,6 +13,12 @@ function _dispatchResponse(
 ): void {
   if (method === "test") {
     return;
+  } else if (method === "comments") {
+    dispatchState({
+      type: "selectedItemComments",
+      selectedItemComments: response,
+      requestError: false,
+    });
   } else if (method === "tags") {
     dispatchState({
       type: "setTags",

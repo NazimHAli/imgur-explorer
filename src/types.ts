@@ -31,11 +31,14 @@ export type State = {
   finishedLazyLoading: boolean;
   isLoading: boolean;
   items: Array<Item>;
+  selectedItemComments?: Array<any>;
   requestArgs: {
     filter: boolean;
+    method: string;
     newSearch?: boolean;
     page: number;
     query: string;
+    selectedItemID?: string;
     sort: string;
     tagName: string;
     window: string;
@@ -47,9 +50,12 @@ export type State = {
 export type Action = {
   galleryTags?: State["galleryTags"];
   items?: State["items"];
+  selectedItemComments?: State["selectedItemComments"];
   finishedLazyLoading?: State["finishedLazyLoading"];
   loading?: State["isLoading"];
+  method?: State["requestArgs"]["method"];
   newSearch?: State["requestArgs"]["newSearch"];
+  requestArgs?: State["requestArgs"];
   page?: State["requestArgs"]["page"];
   query?: State["requestArgs"]["query"];
   requestError?: boolean;

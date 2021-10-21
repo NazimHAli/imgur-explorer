@@ -94,14 +94,29 @@ class ImgurAPI {
     return this.imgurBaseApi({ endPoint: endPoint });
   }
 
-  public testEndPoint() {
-    const endPoint = `${BASE}/hot/time/today/${this.requestArgs.page}`;
+  private getComments() {
+    const commentSort = "best"; // best, top, new
+    const imageId = this.requestArgs.selectedItemID;
+    const albumImageComments = `${EP_GALLERY}/${imageId}/comments/${commentSort}`;
 
-    return this.imgurBaseApi({ endPoint: endPoint });
+    return this.imgurBaseApi({ endPoint: albumImageComments });
+  }
+
+  public testEndPoint() {
+    // /3/gallery/{{galleryHash}}/comments/{{commentSort}}
+    const hotItems = `${BASE}/hot/time/today/${this.requestArgs.page}`;
+
+    const commentSort = "best"; // best, top, new
+    const imageId = "t7ROffF";
+    const albumImageComments = `${EP_GALLERY}/${imageId}/comments/${commentSort}`;
+
+    return this.imgurBaseApi({ endPoint: albumImageComments });
   }
 
   public methodDispatcher(method: string) {
     switch (method) {
+      case "comments":
+        return this.getComments();
       case "test":
         return this.testEndPoint();
       case "search":

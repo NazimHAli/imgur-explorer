@@ -95,12 +95,22 @@ function genRandomColor(): string {
   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
 
+function getDateString(datetime: number): string | null {
+  if (!datetime) {
+    return null;
+  }
+
+  const dt = Date(datetime);
+  return dt.toLocaleString().split("GMT")[0];
+}
+
 export {
   arrToMatrix,
   capitalize,
   checkNumberIfFloat,
   extractImageResults,
   genRandomColor,
+  getDateString,
   truncateText,
   updateImageSize,
 };

@@ -8,15 +8,15 @@
 }
 
 .ReactModal__Overlay {
-  @apply p-4;
-
   .card {
     @apply h-full;
     @apply mx-auto;
-    @apply bg-white;
+    @apply bg-gray-50;
+    @apply block;
+    @apply w-11/12;
 
     img {
-      @apply mt-12;
+      @apply mt-4;
     }
   }
 
