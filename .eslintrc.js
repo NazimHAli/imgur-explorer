@@ -3,7 +3,7 @@ module.exports = {
   parserOptions: {
     project: "./tsconfig.json",
   },
-  plugins: ["@typescript-eslint"],
+  plugins: ["@typescript-eslint", "sort-keys-fix"],
   extends: [
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
@@ -11,6 +11,14 @@ module.exports = {
   rules: {
     "react/react-in-jsx-scope": "off",
   },
+  overrides: [
+    {
+      files: ["src/components/*.ts*", "src/services/*.ts*", "src/utils/*.ts*"],
+      rules: {
+        "sort-keys-fix/sort-keys-fix": "warn",
+      },
+    },
+  ],
   settings: {
     react: {
       version: "detect",

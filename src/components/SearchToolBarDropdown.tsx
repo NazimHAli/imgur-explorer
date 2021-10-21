@@ -7,8 +7,8 @@ function getDispatchArgs(
   event: FormEvent<HTMLSelectElement>
 ) {
   const dispatchArgs: Action = {
-    type: "submitSearchRequest",
     newSearch: true,
+    type: "submitSearchRequest",
   };
 
   const element = event.target as HTMLSelectElement;

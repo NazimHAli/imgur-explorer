@@ -15,29 +15,29 @@ function _dispatchResponse(
     return;
   } else if (method === "comments") {
     dispatchState({
-      type: "selectedItemComments",
-      selectedItemComments: response,
       requestError: false,
+      selectedItemComments: response,
+      type: "selectedItemComments",
     });
   } else if (method === "tags") {
     dispatchState({
-      type: "setTags",
       galleryTags: response,
       items: response.items,
       requestError: false,
+      type: "setTags",
     });
   } else if (method === "tagName") {
     dispatchState({
-      type: "setItems",
       items: extractImageResults(response.items),
       requestError: false,
+      type: "setItems",
     });
   } else {
     dispatchState({
-      type: "setItems",
+      finishedLazyLoading: response?.length === 0 ? true : false,
       items: requestArgs.newSearch ? response : items.concat(response),
       requestError: false,
-      finishedLazyLoading: response?.length === 0 ? true : false,
+      type: "setItems",
     });
   }
 }
@@ -53,7 +53,7 @@ async function handleImgurServiceRequests(
   method = "search"
 ) {
   if (state.requestArgs.newSearch) {
-    dispatchState({ type: "setIsLoading", loading: true });
+    dispatchState({ loading: true, type: "setIsLoading" });
   }
 
   const { items, requestArgs } = state;
@@ -63,7 +63,7 @@ async function handleImgurServiceRequests(
   _dispatchResponse(method, dispatchState, requestArgs, res, items);
 
   if (state.requestArgs.newSearch && res) {
-    dispatchState({ type: "setIsLoading", loading: false });
+    dispatchState({ loading: false, type: "setIsLoading" });
   }
 }
 

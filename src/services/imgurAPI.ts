@@ -42,8 +42,8 @@ class ImgurAPI {
 
     args.requestOptions = {
       ...args.requestOptions,
-      method: "GET",
       headers: myHeaders,
+      method: "GET",
     };
 
     const response = await fetch(args.endPoint, args.requestOptions);

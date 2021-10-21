@@ -39,16 +39,16 @@ function HandleNewItems(
 
       if (state.items.length - newIdxs.length <= 20) {
         dispatchState({
-          type: "submitSearchRequest",
-          page: state.requestArgs.page + 1,
           newSearch: false,
+          page: state.requestArgs.page + 1,
+          type: "submitSearchRequest",
         });
       }
 
       if (newIdxs.length <= state.items.length) {
         setidxsToLoad(newIdxs);
       } else {
-        dispatchState({ type: "setItems", finishedLazyLoading: true });
+        dispatchState({ finishedLazyLoading: true, type: "setItems" });
       }
     }
   }, [isIntersecting]);

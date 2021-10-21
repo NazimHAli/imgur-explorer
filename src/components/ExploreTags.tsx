@@ -39,8 +39,8 @@ function ExploreTags(props: {
     const tagName = element.dataset.tag;
 
     dispatchState({
-      type: "setTagName",
       tagName: tagName,
+      type: "setTagName",
     });
     event.preventDefault();
   };

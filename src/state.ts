@@ -1,10 +1,10 @@
 import { State, Action } from "./types";
 
 const initialState: State = {
-  isLoading: true,
   finishedLazyLoading: false,
+  galleryTags: {},
+  isLoading: true,
   items: [],
-  selectedItemComments: [],
   requestArgs: {
     filter: true,
     method: "search",
@@ -17,17 +17,17 @@ const initialState: State = {
     window: "all",
   },
   requestError: false,
-  galleryTags: {},
+  selectedItemComments: [],
   selectedTag: {},
 };
 
 function setItems(state: State, action: Action): State {
   return {
     ...state,
-    items: action?.items ? action.items : state.items,
     finishedLazyLoading: action?.finishedLazyLoading
       ? true
       : state.finishedLazyLoading,
+    items: action?.items ? action.items : state.items,
   };
 }
 
@@ -38,15 +38,15 @@ function setTagName(
 ) {
   updatedArgs = {
     ...updatedArgs,
+    newSearch: true,
+    page: 1,
     query: "",
     tagName: action?.tagName ? action.tagName : "",
-    page: 1,
-    newSearch: true,
   };
   return {
     ...state,
-    requestArgs: updatedArgs,
     finishedLazyLoading: false,
+    requestArgs: updatedArgs,
   };
 }
 
@@ -61,14 +61,14 @@ function setTags(state: State, action: Action): State {
 function setSelectedItemComments(state: State, action: Action): State {
   return {
     ...state,
-    selectedItemComments: action?.selectedItemComments?.length
-      ? action.selectedItemComments
-      : state.selectedItemComments,
     requestArgs: {
       ...state["requestArgs"],
       filter: false,
       selectedItemID: "",
     },
+    selectedItemComments: action?.selectedItemComments?.length
+      ? action.selectedItemComments
+      : state.selectedItemComments,
   };
 }
 
@@ -85,8 +85,8 @@ function setSearchRequestArgs(state: State, action: Action): State {
 function setRequestError(state: State): State {
   return {
     ...state,
-    requestError: true,
     items: [],
+    requestError: true,
   };
 }
 
@@ -112,8 +112,8 @@ function submitSearchRequest(
 
   return {
     ...state,
-    requestArgs: updatedArgs,
     finishedLazyLoading: doneLoading,
+    requestArgs: updatedArgs,
   };
 }
 
