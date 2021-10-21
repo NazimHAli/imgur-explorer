@@ -7,21 +7,16 @@ const BASE = "https://api.imgur.com/3";
 const EP_GALLERY = `${BASE}/gallery`;
 const EP_GALLERY_TAGS = `${BASE}/tags`;
 
+const EP_ACCOUNT = `${BASE}/account/?account_id=`;
+
 interface Args {
   endPoint: RequestInfo;
-  requestOptions?: RequestInit;
   filterImageResults?: boolean;
+  requestOptions?: RequestInit;
 }
 
 class ImgurAPI {
   private static instance: ImgurAPI;
-  useFakeResponse: boolean;
-  requestArgs!: State["requestArgs"];
-
-  constructor() {
-    this.useFakeResponse = imgurClientId === undefined;
-  }
-
   /**
    * Get or create API instance
    */
@@ -34,6 +29,11 @@ class ImgurAPI {
     ImgurAPI.instance.requestArgs = requestArgs;
     return ImgurAPI.instance;
   }
+  constructor() {
+    this.useFakeResponse = imgurClientId === undefined;
+  }
+  useFakeResponse: boolean;
+  requestArgs!: State["requestArgs"];
 
   private async imgurBaseApi(args: Args) {
     const myHeaders = new Headers({
@@ -102,19 +102,24 @@ class ImgurAPI {
     return this.imgurBaseApi({ endPoint: albumImageComments });
   }
 
+  private getAccountInfo(account_id = 0) {
+    return this.imgurBaseApi({ endPoint: `${EP_ACCOUNT}=${account_id}` });
+  }
+
   public testEndPoint() {
     // /3/gallery/{{galleryHash}}/comments/{{commentSort}}
-    const hotItems = `${BASE}/hot/time/today/${this.requestArgs.page}`;
+    // const hotItems = `${BASE}/hot/time/today/${this.requestArgs.page}`;
 
-    const commentSort = "best"; // best, top, new
-    const imageId = "t7ROffF";
-    const albumImageComments = `${EP_GALLERY}/${imageId}/comments/${commentSort}`;
+    // /3/account/{{username}}
+    const albumImageComments = `${BASE}/account/?account_id=28489214&account_id=22608111`;
 
     return this.imgurBaseApi({ endPoint: albumImageComments });
   }
 
   public methodDispatcher(method: string) {
     switch (method) {
+      case "account":
+        return this.getAccountInfo();
       case "comments":
         return this.getComments();
       case "test":

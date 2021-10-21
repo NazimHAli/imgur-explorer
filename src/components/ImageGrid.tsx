@@ -14,8 +14,8 @@ const LazyLoadingSpinner = lazy(
 export const imgObserver = new ObserveElementsInView();
 
 function ImageGrid(props: {
-  state: State;
   dispatchState: Dispatch<Action>;
+  state: State;
 }): JSX.Element {
   const { state, dispatchState } = props;
   const [idxsToLoad, setidxsToLoad] = useState([0, 1, 2, 3, 4]);
@@ -35,7 +35,7 @@ function ImageGrid(props: {
 
   return (
     <div className="grid-viewport">
-      {state.selectedItemComments?.length > 0 && (
+      {state?.selectedItemComments.length > 0 && (
         <ItemModal selectedItemComments={state.selectedItemComments} />
       )}
 

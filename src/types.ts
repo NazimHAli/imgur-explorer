@@ -20,18 +20,17 @@ export type Item = {
   downs: number;
   favorite_count: number;
   id: string;
-  images: Array<{ link: string; width: number; height: number; type?: string }>;
+  images: Array<{ height: number; link: string; type?: string; width: number }>;
   title: string;
   ups: number;
   views: number;
 };
 
 export type State = {
-  galleryTags: { galleries?: []; tags?: [] };
   finishedLazyLoading: boolean;
+  galleryTags: { galleries?: []; tags?: [] };
   isLoading: boolean;
   items: Array<Item>;
-  selectedItemComments?: Array<any>;
   requestArgs: {
     filter: boolean;
     method: string;
@@ -44,23 +43,24 @@ export type State = {
     window: string;
   };
   requestError: boolean;
+  selectedItemComments?: Array<any>;
   selectedTag: selectedTag;
 };
 
 export type Action = {
+  finishedLazyLoading?: State["finishedLazyLoading"];
   galleryTags?: State["galleryTags"];
   items?: State["items"];
-  selectedItemComments?: State["selectedItemComments"];
-  finishedLazyLoading?: State["finishedLazyLoading"];
   loading?: State["isLoading"];
   method?: State["requestArgs"]["method"];
   newSearch?: State["requestArgs"]["newSearch"];
-  requestArgs?: State["requestArgs"];
   page?: State["requestArgs"]["page"];
   query?: State["requestArgs"]["query"];
+  requestArgs?: State["requestArgs"];
   requestError?: boolean;
-  tagName?: State["requestArgs"]["tagName"];
+  selectedItemComments?: State["selectedItemComments"];
   sort?: State["requestArgs"]["sort"];
+  tagName?: State["requestArgs"]["tagName"];
   type: string | null;
   window?: State["requestArgs"]["window"];
 };

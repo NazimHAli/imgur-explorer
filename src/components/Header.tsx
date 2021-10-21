@@ -15,8 +15,8 @@ function handleClearQuery(
 }
 
 function Header(props: {
-  dispatchState: Dispatch<Action>;
   defaultQuery: string;
+  dispatchState: Dispatch<Action>;
   state: State;
 }): JSX.Element {
   const { defaultQuery, dispatchState, state } = props;

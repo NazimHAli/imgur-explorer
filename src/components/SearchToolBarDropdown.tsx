@@ -24,9 +24,9 @@ function getDispatchArgs(
 }
 
 function SearchToolBarDropdown(props: {
-  options: string[];
   actionArg: string;
   dispatchState: Dispatch<Action>;
+  options: string[];
   requestArgs: State["requestArgs"];
 }): JSX.Element {
   const { options, actionArg, dispatchState, requestArgs } = props;

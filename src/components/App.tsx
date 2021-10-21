@@ -45,6 +45,7 @@ function App() {
   useEffect(() => {
     if (Object.keys(state.galleryTags).length === 0) {
       handleImgurServiceRequests(dispatchState, state, "tags");
+      handleImgurServiceRequests(dispatchState, state, "test");
     }
   }, []);
 

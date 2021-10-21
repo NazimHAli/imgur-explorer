@@ -4,9 +4,9 @@ import { Dispatch, Ref } from "react";
 import { MessageSquare, ThumbsUp, Eye } from "react-feather";
 
 function ImageGridCard(props: {
-  item: Item;
-  imgRef: Ref<HTMLImageElement>;
   dispatchState: Dispatch<Action>;
+  imgRef: Ref<HTMLImageElement>;
+  item: Item;
 }) {
   const { imgRef, item, dispatchState } = props;
 
