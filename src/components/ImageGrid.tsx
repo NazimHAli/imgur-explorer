@@ -19,7 +19,7 @@ function ImageGrid(props: {
 }): JSX.Element {
   const { state, dispatchState } = props;
   const [idxsToLoad, setidxsToLoad] = useState([0, 1, 2, 3, 4]);
-  const [selectedCard, setSelectedCard] = useState(null);
+  const [selectedCard, setSelectedCard] = useState(undefined);
 
   const cardImgRef = HandleImageLazyLoad(state, setidxsToLoad);
 
