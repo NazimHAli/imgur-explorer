@@ -1,6 +1,8 @@
-import ParentComment from "./ParentComment";
+import { SelectedComments } from "@/types";
 
-function ItemModalComments(props: { comments }) {
+import ItemComment from "./ItemComment";
+
+function ItemModalComments(props: { comments: SelectedComments }) {
   const { comments } = props;
 
   return (
@@ -9,10 +11,7 @@ function ItemModalComments(props: { comments }) {
 
       <div className="space-y-4">
         {Array.from(comments.length ? comments : []).map((comment) => (
-          <ParentComment
-            key={comment?.id}
-            comment={comment?.comment.length ? comment : undefined}
-          />
+          <ItemComment key={comment?.id} comment={comment} />
         ))}
       </div>
     </div>

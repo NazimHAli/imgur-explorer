@@ -26,6 +26,23 @@ export type Item = {
   views: number;
 };
 
+export type BaseComment = {
+  author: string;
+  datetime: number;
+  comment: string;
+  id: string;
+};
+
+export type Comments = {
+  author: string;
+  datetime: number;
+  children: Array<BaseComment>;
+  comment: string;
+  id: string;
+};
+
+export type SelectedComments = Array<Comments>;
+
 export type State = {
   finishedLazyLoading: boolean;
   galleryTags: { galleries?: []; tags?: [] };
@@ -43,7 +60,7 @@ export type State = {
     window: string;
   };
   requestError: boolean;
-  selectedItemComments?: Array<any>;
+  selectedItemComments?: SelectedComments;
   selectedTag: selectedTag;
 };
 

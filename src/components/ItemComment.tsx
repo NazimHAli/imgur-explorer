@@ -1,9 +1,8 @@
+import { BaseComment, Comments } from "@/types";
 import { getDateString } from "@/utils/dataUtils";
 
-function ParentComment(props: { comment }) {
-  const { comment } = props;
-
-  const childComments = (children) => (
+function commentReplies(children: Array<BaseComment>) {
+  return (
     <>
       <h4 className="my-5 uppercase tracking-wide text-gray-400 font-bold text-xs">
         {children.length || 0} Replies
@@ -28,6 +27,10 @@ function ParentComment(props: { comment }) {
       </div>
     </>
   );
+}
+
+function ItemComment(props: { comment: Comments }) {
+  const { comment } = props;
 
   return (
     <div className="flex">
@@ -44,10 +47,10 @@ function ParentComment(props: { comment }) {
           {getDateString(comment?.datetime)}
         </span>
         <p className="text-sm">{comment?.comment}</p>
-        {comment.children.length > 0 && childComments(comment.children)}
+        {comment.children.length > 0 && commentReplies(comment.children)}
       </div>
     </div>
   );
 }
 
-export default ParentComment;
+export default ItemComment;

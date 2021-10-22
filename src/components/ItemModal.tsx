@@ -1,3 +1,4 @@
+import { SelectedComments } from "@/types";
 import Modal from "react-modal";
 
 import ItemModalComments from "./ItemModalComments";
@@ -5,7 +6,7 @@ import ItemModalComments from "./ItemModalComments";
 // Bind modal to appElement for accessibility
 Modal.setAppElement("#root");
 
-function ItemModal(props: { selectedItemComments: any }) {
+function ItemModal(props: { selectedItemComments: SelectedComments }) {
   const { selectedItemComments } = props;
 
   function closeModal() {
@@ -19,9 +20,7 @@ function ItemModal(props: { selectedItemComments: any }) {
       onRequestClose={closeModal}
       preventScroll={true}
     >
-      <>
-        <ItemModalComments comments={selectedItemComments} />
-      </>
+      <ItemModalComments comments={selectedItemComments} />
     </Modal>
   );
 }
