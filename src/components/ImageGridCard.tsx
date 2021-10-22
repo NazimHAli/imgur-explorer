@@ -38,7 +38,7 @@ function ImageGridCard(props: {
     event.preventDefault();
   };
 
-  const cardEl = (
+  return (
     <a href="#explore" className="card" onClick={handleOnClick}>
       <span className="card__img">
         <img
@@ -52,8 +52,6 @@ function ImageGridCard(props: {
       {imageInfo}
     </a>
   );
-
-  return cardEl;
 }
 
 export default ImageGridCard;
