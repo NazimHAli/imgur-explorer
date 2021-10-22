@@ -32,9 +32,11 @@ function ImageGridCard(props: {
 
   const handleOnClick = (event: { preventDefault: () => void }) => {
     dispatchState({
-      filter: false,
-      method: "comments",
-      selectedItemID: item.id,
+      requestArgs: {
+        filter: false,
+        method: "comments",
+        selectedItemID: item.id,
+      },
       type: "setSearchRequestArgs",
     });
     event.preventDefault();

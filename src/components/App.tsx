@@ -23,15 +23,15 @@ function App() {
 
   useEffect(() => {
     let method = "";
-    if (state.requestArgs.tagName.length) {
+    if (state.requestArgs?.tagName && state.requestArgs.tagName.length) {
       method = "tagName";
     } else if (
-      state.requestArgs?.selectedItemID?.length &&
+      state.requestArgs.selectedItemID?.length &&
       state.requestArgs.method === "comments"
     ) {
       method = "comments";
     } else if (
-      state.requestArgs.query.length &&
+      state.requestArgs.query?.length &&
       state.requestArgs.method === "search"
     ) {
       method = "search";
@@ -53,13 +53,14 @@ function App() {
     <Suspense fallback={<span></span>}>
       <Header
         dispatchState={dispatchState}
-        defaultQuery={state.requestArgs.query}
+        defaultQuery={state.requestArgs.query || ""}
         state={state}
       />
       <Explore galleryTags={state.galleryTags} />
-      {state.requestArgs.query.length > 0 && (
-        <SearchToolBar dispatchState={dispatchState} state={state} />
-      )}
+      {state.requestArgs.query?.length ||
+        (0 > 0 && (
+          <SearchToolBar dispatchState={dispatchState} state={state} />
+        ))}
 
       {/* Loading */}
       {state.isLoading && (

@@ -53,15 +53,15 @@ export type State = {
   isLoading: boolean;
   items: Array<Item>;
   requestArgs: {
-    filter: boolean;
-    method: string;
+    filter?: boolean;
+    method?: string;
     newSearch?: boolean;
-    page: number;
-    query: string;
+    page?: number;
+    query?: string;
     selectedItemID?: string;
-    sort: string;
-    tagName: string;
-    window: string;
+    sort?: string;
+    tagName?: string;
+    window?: string;
   };
   requestError: boolean;
   selectedItemComments?: SelectedComments;

@@ -1,4 +1,5 @@
 import { imgObserver } from "@/components/ImageGrid";
+import { initialState } from "@/state";
 import { Action, State } from "@/types";
 import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
 
@@ -24,7 +25,7 @@ function HandleImageLazyLoad(
 function HandleNewItems(
   isIntersecting: boolean,
   idxsToLoad: number[],
-  state: State,
+  state: typeof initialState,
   dispatchState: Dispatch<Action>,
   setidxsToLoad: Dispatch<SetStateAction<number[]>>
 ): void {
@@ -40,7 +41,7 @@ function HandleNewItems(
       if (state.items.length - newIdxs.length <= 20) {
         dispatchState({
           newSearch: false,
-          page: state.requestArgs.page + 1,
+          page: (state.requestArgs?.page || 0) + 1,
           type: "submitSearchRequest",
         });
       }

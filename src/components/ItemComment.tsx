@@ -2,7 +2,7 @@ import { BaseComment, Comments } from "@/types";
 import { getDateString } from "@/utils/dataUtils";
 import { ThumbsUp, ThumbsDown } from "react-feather";
 
-function thumbsUpDown(comment) {
+function thumbsUpDown(comment: BaseComment) {
   return (
     <span className="comment-thumbs">
       <ThumbsUp /> {comment.ups.toLocaleString()} <ThumbsDown />

@@ -1,6 +1,6 @@
 import { State, Action } from "./types";
 
-const initialState: State = {
+const initialState = {
   finishedLazyLoading: false,
   galleryTags: {},
   isLoading: true,
@@ -77,7 +77,7 @@ function setSearchRequestArgs(state: State, action: Action): State {
     ...state,
     requestArgs: {
       ...state["requestArgs"],
-      ...action,
+      ...action.requestArgs,
     },
   };
 }

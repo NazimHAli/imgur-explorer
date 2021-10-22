@@ -30,6 +30,9 @@ describe("ImageGridCard", () => {
           imgRef={() => {
             null;
           }}
+          dispatchState={function (): void {
+            throw new Error("Function not implemented.");
+          }}
         />
       </div>
     );
