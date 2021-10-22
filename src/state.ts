@@ -1,4 +1,5 @@
 import { State, Action } from "./types";
+import { getSelectedItem } from "./utils/dataUtils";
 
 const initialState = {
   finishedLazyLoading: false,
@@ -17,6 +18,7 @@ const initialState = {
     window: "all",
   },
   requestError: false,
+  selectedItem: {},
   selectedItemComments: [],
   selectedTag: {},
 };
@@ -65,8 +67,13 @@ function setSelectedItemComments(state: State, action: Action): State {
       ...state["requestArgs"],
       filter: false,
       method: "",
+      selectedItemID: "",
     },
-    selectedItemComments: action?.selectedItemComments?.length
+    selectedItem: getSelectedItem(
+      state.requestArgs.selectedItemID,
+      state.items
+    ),
+    selectedItemComments: action.selectedItemComments?.length
       ? action.selectedItemComments
       : state.selectedItemComments,
   };
@@ -102,7 +109,7 @@ function submitSearchRequest(
   action: Action,
   state: State
 ) {
-  const doneLoading = action?.newSearch ? false : state.finishedLazyLoading;
+  const doneLoading = action.newSearch ? false : state.finishedLazyLoading;
 
   updatedArgs = {
     ...updatedArgs,

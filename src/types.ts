@@ -64,6 +64,7 @@ export type State = {
     window: string;
   };
   requestError: boolean;
+  selectedItem: Item | undefined;
   selectedItemComments: SelectedComments;
   selectedTag: selectedTag;
 };

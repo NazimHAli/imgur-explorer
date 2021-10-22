@@ -1,5 +1,5 @@
 import { Item, SelectedComments } from "@/types";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Modal from "react-modal";
 
 import ItemModalComments from "./ItemModalComments";
@@ -8,15 +8,16 @@ import ItemModalComments from "./ItemModalComments";
 Modal.setAppElement("#root");
 
 function ItemModal(props: {
+  isOpen;
+  setIsOpen;
   selectedItem?: Item;
   selectedItemComments: SelectedComments;
 }) {
-  const { selectedItemComments } = props;
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, setIsOpen, selectedItem, selectedItemComments } = props;
 
-  function closeModal() {
+  function closeModal(e) {
     setIsOpen(false);
-    console.log("Request to close modal");
+    e.preventDefault();
   }
 
   function openModal() {
@@ -27,7 +28,7 @@ function ItemModal(props: {
     if (selectedItemComments.length > 0) {
       openModal();
     }
-  }, [selectedItemComments]);
+  }, [selectedItem, selectedItemComments]);
 
   return (
     <Modal

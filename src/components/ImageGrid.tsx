@@ -1,9 +1,8 @@
 import { Action, State } from "@/types";
-import { getSelectedItem } from "@/utils/dataUtils";
 import { HandleNewItems, HandleImageLazyLoad } from "@/utils/imageGridHelpers";
 import { useIntersectionObserver } from "@/utils/useIntersectionObserver";
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
-import { Dispatch, lazy, useRef, useState } from "react";
+import { Dispatch, lazy, useEffect, useRef, useState } from "react";
 
 import ItemModal from "./ItemModal";
 
@@ -34,19 +33,21 @@ function ImageGrid(props: {
     setidxsToLoad
   );
 
-  const selectedItem =
-    (state.requestArgs.selectedItemID.length > 0 &&
-      getSelectedItem(state.requestArgs.selectedItemID, state.items)) ||
-    undefined;
+  const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    if (state.requestArgs.selectedItemID.length) {
+      setIsOpen(true);
+    }
+  }, [state.requestArgs.selectedItemID]);
 
   return (
     <div className="grid-viewport">
-      {state.selectedItemComments.length > 0 && (
-        <ItemModal
-          selectedItem={selectedItem}
-          selectedItemComments={state.selectedItemComments}
-        />
-      )}
+      <ItemModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        selectedItem={state.selectedItem}
+        selectedItemComments={state.selectedItemComments}
+      />
 
       <div className="image-grid">
         {idxsToLoad.map(

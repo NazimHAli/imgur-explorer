@@ -25,10 +25,7 @@ function App() {
     let method = "";
     if (state.requestArgs?.tagName && state.requestArgs.tagName.length) {
       method = "tagName";
-    } else if (
-      state.requestArgs.method === "comments" &&
-      !state.selectedItemComments.length
-    ) {
+    } else if (state.requestArgs.method === "comments") {
       method = "comments";
     } else if (
       state.requestArgs.query?.length &&
