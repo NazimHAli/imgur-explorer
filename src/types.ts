@@ -31,6 +31,8 @@ export type BaseComment = {
   datetime: number;
   comment: string;
   id: string;
+  ups: number;
+  downs: number;
 };
 
 export type Comments = {
@@ -39,6 +41,8 @@ export type Comments = {
   children: Array<BaseComment>;
   comment: string;
   id: string;
+  ups: number;
+  downs: number;
 };
 
 export type SelectedComments = Array<Comments>;

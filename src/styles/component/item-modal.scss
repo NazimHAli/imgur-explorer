@@ -24,3 +24,9 @@
     grid-template-rows: 1fr 2fr;
   }
 }
+
+.comment-thumbs {
+  @apply flex;
+  @apply justify-end;
+  @apply gap-2;
+}

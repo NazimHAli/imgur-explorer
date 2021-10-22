@@ -1,5 +1,15 @@
 import { BaseComment, Comments } from "@/types";
 import { getDateString } from "@/utils/dataUtils";
+import { ThumbsUp, ThumbsDown } from "react-feather";
+
+function thumbsUpDown(comment) {
+  return (
+    <span className="comment-thumbs">
+      <ThumbsUp /> {comment.ups.toLocaleString()} <ThumbsDown />
+      {comment.downs.toLocaleString()}
+    </span>
+  );
+}
 
 function commentReplies(children: Array<BaseComment>) {
   return (
@@ -21,6 +31,7 @@ function commentReplies(children: Array<BaseComment>) {
               <strong>{childComment.author}</strong>
               <span className="text-xs text-gray-400">3:34 PM</span>
               <p className="text-xs sm:text-sm">{childComment.comment}</p>
+              {thumbsUpDown(childComment)}
             </div>
           </div>
         ))}
@@ -47,6 +58,7 @@ function ItemComment(props: { comment: Comments }) {
           {getDateString(comment?.datetime)}
         </span>
         <p className="text-sm">{comment?.comment}</p>
+        {thumbsUpDown(comment)}
         {comment.children.length > 0 && commentReplies(comment.children)}
       </div>
     </div>

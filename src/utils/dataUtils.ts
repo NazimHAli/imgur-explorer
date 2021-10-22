@@ -100,8 +100,8 @@ function getDateString(datetime: number): string | null {
     return null;
   }
 
-  const dt = Date(datetime);
-  return dt.toLocaleString().split("GMT")[0];
+  const dt = new Date(datetime * 1000);
+  return dt.toLocaleString();
 }
 
 export {
