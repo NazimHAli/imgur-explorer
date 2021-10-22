@@ -56,10 +56,9 @@ function App() {
         state={state}
       />
       <Explore galleryTags={state.galleryTags} />
-      {state.requestArgs.query?.length ||
-        (0 > 0 && (
-          <SearchToolBar dispatchState={dispatchState} state={state} />
-        ))}
+      {state.requestArgs.query?.length > 0 && (
+        <SearchToolBar dispatchState={dispatchState} state={state} />
+      )}
 
       {/* Loading */}
       {state.isLoading && (
