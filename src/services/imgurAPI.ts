@@ -107,32 +107,39 @@ class ImgurAPI {
   }
 
   public testEndPoint() {
-    // /3/gallery/{{galleryHash}}/comments/{{commentSort}}
-    // const hotItems = `${BASE}/hot/time/today/${this.requestArgs.page}`;
+    const hotItems = `${BASE}/hot/time/today/${this.requestArgs.page}`;
 
-    // /3/account/{{username}}
-    const albumImageComments = `${BASE}/account/?account_id=28489214&account_id=22608111`;
-
-    return this.imgurBaseApi({ endPoint: albumImageComments });
+    return this.imgurBaseApi({ endPoint: hotItems });
   }
 
   public methodDispatcher(method: string) {
+    let response;
+
     switch (method) {
       case "account":
-        return this.getAccountInfo();
+        response = this.getAccountInfo();
+        break;
       case "comments":
-        return this.getComments();
+        response = this.getComments();
+        break;
       case "test":
-        return this.testEndPoint();
+        response = this.testEndPoint();
+        break;
       case "search":
-        return this.getGallerySearchResults();
+        response = this.getGallerySearchResults();
+        break;
       case "tags":
-        return this.getGalleryTags();
+        response = this.getGalleryTags();
+        break;
       case "tagName":
-        return this.getGalleryTagMetadata();
+        response = this.getGalleryTagMetadata();
+        break;
       default:
-        return this.getGallerySearchResults();
+        response = this.getGallerySearchResults();
+        break;
     }
+
+    return response;
   }
 
   private constructSearchEndPointURL(): string {
@@ -161,7 +168,9 @@ class ImgurAPI {
   }
 
   private getWindow(): string {
-    return this.requestArgs.sort === "top" ? this.requestArgs.window : "all";
+    return this.requestArgs?.sort === "top"
+      ? this.requestArgs?.window || "all"
+      : "all";
   }
 }
 
