@@ -113,33 +113,22 @@ class ImgurAPI {
   }
 
   public methodDispatcher(method: string) {
-    let response;
-
     switch (method) {
       case "account":
-        response = this.getAccountInfo();
-        break;
+        return this.getAccountInfo();
       case "comments":
-        response = this.getComments();
-        break;
+        return this.getComments();
       case "test":
-        response = this.testEndPoint();
-        break;
+        return this.testEndPoint();
       case "search":
-        response = this.getGallerySearchResults();
-        break;
+        return this.getGallerySearchResults();
       case "tags":
-        response = this.getGalleryTags();
-        break;
+        return this.getGalleryTags();
       case "tagName":
-        response = this.getGalleryTagMetadata();
-        break;
+        return this.getGalleryTagMetadata();
       default:
-        response = this.getGallerySearchResults();
-        break;
+        return this.getGallerySearchResults();
     }
-
-    return response;
   }
 
   private constructSearchEndPointURL(): string {
@@ -168,9 +157,7 @@ class ImgurAPI {
   }
 
   private getWindow(): string {
-    return this.requestArgs?.sort === "top"
-      ? this.requestArgs?.window || "all"
-      : "all";
+    return this.requestArgs.sort === "top" ? this.requestArgs.window : "all";
   }
 }
 
