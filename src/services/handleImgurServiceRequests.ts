@@ -67,7 +67,7 @@ function handleImgurServiceRequests(
         dispatchState({ loading: false, type: "setIsLoading" });
       }
     },
-    (): void => {}
+    () => dispatchState({ type: "requestError" })
   );
 }
 
