@@ -29,7 +29,9 @@ function commentReplies(children: Array<BaseComment>) {
             </div>
             <div className="flex-1 bg-gray-100 rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
               <strong>{childComment.author}</strong>
-              <span className="text-xs text-gray-400">3:34 PM</span>
+              <span className="text-xs text-gray-400">
+                {getDateString(childComment?.datetime)}
+              </span>
               <p className="text-xs sm:text-sm">{childComment.comment}</p>
               {thumbsUpDown(childComment)}
             </div>
