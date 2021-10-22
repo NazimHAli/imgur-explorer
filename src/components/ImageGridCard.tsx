@@ -43,7 +43,7 @@ function ImageGridCard(props: {
   };
 
   const cardEl = (
-    <a href="" className="card" onClick={handleOnClick}>
+    <a href="#explore" className="card" onClick={handleOnClick}>
       <span className="card__img">
         <img
           alt={item?.title}
