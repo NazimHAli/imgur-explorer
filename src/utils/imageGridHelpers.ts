@@ -1,5 +1,4 @@
 import { imgObserver } from "@/components/ImageGrid";
-import { initialState } from "@/state";
 import { Action, State } from "@/types";
 import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
 
@@ -25,7 +24,7 @@ function HandleImageLazyLoad(
 function HandleNewItems(
   isIntersecting: boolean,
   idxsToLoad: number[],
-  state: typeof initialState,
+  state: State,
   dispatchState: Dispatch<Action>,
   setidxsToLoad: Dispatch<SetStateAction<number[]>>
 ): void {
