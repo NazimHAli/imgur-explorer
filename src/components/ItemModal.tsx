@@ -1,4 +1,5 @@
 import { Item, SelectedComments } from "@/types";
+import { useEffect, useState } from "react";
 import Modal from "react-modal";
 
 import ItemModalComments from "./ItemModalComments";
@@ -11,16 +12,27 @@ function ItemModal(props: {
   selectedItemComments: SelectedComments;
 }) {
   const { selectedItemComments } = props;
+  const [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
-    // setSelectedCard(undefined);
+    setIsOpen(false);
     console.log("Request to close modal");
   }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  useEffect(() => {
+    if (selectedItemComments.length > 0) {
+      openModal();
+    }
+  }, [selectedItemComments]);
 
   return (
     <Modal
       contentLabel="Example Modal"
-      isOpen={selectedItemComments.length > 0}
+      isOpen={isOpen}
       onRequestClose={closeModal}
       preventScroll={true}
     >

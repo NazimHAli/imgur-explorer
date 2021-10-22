@@ -29,7 +29,7 @@ function commentReplies(children: Array<BaseComment>) {
       <div className="space-y-4">
         {Array.from(children.length ? children : []).map((comment) => (
           <div key={comment.id} className="flex">
-            <User className="flex-shrink-0 mr-3" />
+            <User />
 
             <div className="flex-1 bg-gray-100 rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
               <strong>{comment.author}</strong>
@@ -51,7 +51,7 @@ function ItemComment(props: { comment: Comments }) {
 
   return (
     <div className="flex">
-      <User className="flex-shrink-0 mr-3" />
+      <User />
 
       <div className="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
         <strong>{comment?.author} </strong>

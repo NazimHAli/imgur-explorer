@@ -41,7 +41,7 @@ function ImageGrid(props: {
 
   return (
     <div className="grid-viewport">
-      {state?.selectedItemComments.length > 0 && (
+      {state.selectedItemComments.length > 0 && (
         <ItemModal
           selectedItem={selectedItem}
           selectedItemComments={state.selectedItemComments}
