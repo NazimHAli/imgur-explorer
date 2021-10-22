@@ -59,13 +59,16 @@ function handleImgurServiceRequests(
   const { items, requestArgs } = state;
   const imgurClient = ImgurAPI.getInstance(requestArgs);
 
-  imgurClient.methodDispatcher(method).then((response) => {
-    _dispatchResponse(method, dispatchState, requestArgs, response, items);
+  imgurClient.methodDispatcher(method).then(
+    (response) => {
+      _dispatchResponse(method, dispatchState, requestArgs, response, items);
 
-    if (state.requestArgs.newSearch && response) {
-      dispatchState({ loading: false, type: "setIsLoading" });
-    }
-  });
+      if (state.requestArgs.newSearch && response) {
+        dispatchState({ loading: false, type: "setIsLoading" });
+      }
+    },
+    (_rejected) => {}
+  );
 }
 
 export { handleImgurServiceRequests };
