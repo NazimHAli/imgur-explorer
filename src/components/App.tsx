@@ -26,8 +26,8 @@ function App() {
     if (state.requestArgs?.tagName && state.requestArgs.tagName.length) {
       method = "tagName";
     } else if (
-      state.requestArgs.selectedItemID?.length &&
-      state.requestArgs.method === "comments"
+      state.requestArgs.method === "comments" &&
+      !state.selectedItemComments.length
     ) {
       method = "comments";
     } else if (
@@ -56,6 +56,8 @@ function App() {
         state={state}
       />
       <Explore galleryTags={state.galleryTags} />
+
+      {/* Don't display toolbar for tagName searches */}
       {state.requestArgs.query?.length > 0 && (
         <SearchToolBar dispatchState={dispatchState} state={state} />
       )}
@@ -68,7 +70,7 @@ function App() {
         </>
       )}
 
-      {/* Render results */}
+      {/* Have results */}
       {state.items.length > 0 && (
         <ImageGrid dispatchState={dispatchState} state={state} />
       )}
@@ -76,7 +78,7 @@ function App() {
       {/* No results */}
       {state.items.length === 0 && !state.isLoading && <ImageGridNoResults />}
 
-      {/* Hide footer */}
+      {/* Dynamically render footer */}
       <Footer finishedLazyLoading={state.finishedLazyLoading} />
     </Suspense>
   );

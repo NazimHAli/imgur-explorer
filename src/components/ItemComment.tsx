@@ -2,6 +2,14 @@ import { BaseComment, Comments } from "@/types";
 import { getDateString } from "@/utils/dataUtils";
 import { ThumbsUp, ThumbsDown, User } from "react-feather";
 
+function dateTime(comment: BaseComment) {
+  return (
+    <span className="text-xs text-gray-400">
+      {getDateString(comment?.datetime)}
+    </span>
+  );
+}
+
 function thumbsIcons(comment: BaseComment) {
   return (
     <span className="comment-thumbs">
@@ -19,19 +27,17 @@ function commentReplies(children: Array<BaseComment>) {
       </h4>
 
       <div className="space-y-4">
-        {Array.from(children.length ? children : []).map((childComment) => (
-          <div key={childComment.id} className="flex">
+        {Array.from(children.length ? children : []).map((comment) => (
+          <div key={comment.id} className="flex">
             <User className="flex-shrink-0 mr-3" />
 
             <div className="flex-1 bg-gray-100 rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
-              <strong>{childComment.author}</strong>
+              <strong>{comment.author}</strong>
 
-              <span className="text-xs text-gray-400">
-                {getDateString(childComment?.datetime)}
-              </span>
+              {dateTime(comment)}
 
-              <p className="text-xs sm:text-sm">{childComment.comment}</p>
-              {thumbsIcons(childComment)}
+              <p className="text-xs sm:text-sm">{comment.comment}</p>
+              {thumbsIcons(comment)}
             </div>
           </div>
         ))}
@@ -50,9 +56,7 @@ function ItemComment(props: { comment: Comments }) {
       <div className="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
         <strong>{comment?.author} </strong>
 
-        <span className="text-xs text-gray-400">
-          {getDateString(comment?.datetime)}
-        </span>
+        {dateTime(comment)}
 
         <p className="text-sm">{comment?.comment}</p>
         {thumbsIcons(comment)}

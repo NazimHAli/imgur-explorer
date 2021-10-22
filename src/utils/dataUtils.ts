@@ -1,4 +1,4 @@
-import { State } from "@/types";
+import { Item, State } from "@/types";
 
 function isValidImageType(text: string): boolean {
   const pattern = /\.(jpg|png)\b/;
@@ -104,6 +104,15 @@ function getDateString(datetime: number): string | null {
   return dt.toLocaleString();
 }
 
+function getSelectedItem(
+  selectedId: string,
+  items: Array<Item>
+): Item | undefined {
+  return items.find((item) => {
+    return item.id === selectedId;
+  });
+}
+
 export {
   arrToMatrix,
   capitalize,
@@ -111,6 +120,7 @@ export {
   extractImageResults,
   genRandomColor,
   getDateString,
+  getSelectedItem,
   truncateText,
   updateImageSize,
 };

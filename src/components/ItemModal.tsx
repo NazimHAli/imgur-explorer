@@ -1,4 +1,4 @@
-import { SelectedComments } from "@/types";
+import { Item, SelectedComments } from "@/types";
 import Modal from "react-modal";
 
 import ItemModalComments from "./ItemModalComments";
@@ -6,11 +6,15 @@ import ItemModalComments from "./ItemModalComments";
 // Bind modal to appElement for accessibility
 Modal.setAppElement("#root");
 
-function ItemModal(props: { selectedItemComments: SelectedComments }) {
+function ItemModal(props: {
+  selectedItem?: Item;
+  selectedItemComments: SelectedComments;
+}) {
   const { selectedItemComments } = props;
 
   function closeModal() {
     // setSelectedCard(undefined);
+    console.log("Request to close modal");
   }
 
   return (

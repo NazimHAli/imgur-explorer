@@ -27,14 +27,16 @@ function ImageGridCard(props: {
   );
 
   const handleOnClick = (event: { preventDefault: () => void }) => {
-    dispatchState({
-      requestArgs: {
-        filter: false,
-        method: "comments",
-        selectedItemID: item.id,
-      },
-      type: "setSearchRequestArgs",
-    });
+    if (item.id.length) {
+      dispatchState({
+        requestArgs: {
+          filter: false,
+          method: "comments",
+          selectedItemID: item.id,
+        },
+        type: "setSearchRequestArgs",
+      });
+    }
     event.preventDefault();
   };
 

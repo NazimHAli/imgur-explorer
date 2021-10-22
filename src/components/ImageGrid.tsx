@@ -1,4 +1,5 @@
 import { Action, State } from "@/types";
+import { getSelectedItem } from "@/utils/dataUtils";
 import { HandleNewItems, HandleImageLazyLoad } from "@/utils/imageGridHelpers";
 import { useIntersectionObserver } from "@/utils/useIntersectionObserver";
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
@@ -33,10 +34,18 @@ function ImageGrid(props: {
     setidxsToLoad
   );
 
+  const selectedItem =
+    (state.requestArgs.selectedItemID.length > 0 &&
+      getSelectedItem(state.requestArgs.selectedItemID, state.items)) ||
+    undefined;
+
   return (
     <div className="grid-viewport">
       {state?.selectedItemComments.length > 0 && (
-        <ItemModal selectedItemComments={state.selectedItemComments} />
+        <ItemModal
+          selectedItem={selectedItem}
+          selectedItemComments={state.selectedItemComments}
+        />
       )}
 
       <div className="image-grid">

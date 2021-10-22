@@ -64,7 +64,7 @@ function setSelectedItemComments(state: State, action: Action): State {
     requestArgs: {
       ...state["requestArgs"],
       filter: false,
-      selectedItemID: "",
+      method: "",
     },
     selectedItemComments: action?.selectedItemComments?.length
       ? action.selectedItemComments
