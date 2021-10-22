@@ -53,18 +53,18 @@ export type State = {
   isLoading: boolean;
   items: Array<Item>;
   requestArgs: {
-    filter?: boolean;
-    method?: string;
-    newSearch?: boolean;
-    page?: number;
-    query?: string;
-    selectedItemID?: string;
-    sort?: string;
-    tagName?: string;
-    window?: string;
+    filter: boolean;
+    method: string;
+    newSearch: boolean;
+    page: number;
+    query: string;
+    selectedItemID: string;
+    sort: string;
+    tagName: string;
+    window: string;
   };
   requestError: boolean;
-  selectedItemComments?: SelectedComments;
+  selectedItemComments: SelectedComments;
   selectedTag: selectedTag;
 };
 
@@ -77,7 +77,7 @@ export type Action = {
   newSearch?: State["requestArgs"]["newSearch"];
   page?: State["requestArgs"]["page"];
   query?: State["requestArgs"]["query"];
-  requestArgs?: State["requestArgs"];
+  requestArgs?: Partial<State["requestArgs"]>;
   requestError?: boolean;
   selectedItemComments?: State["selectedItemComments"];
   sort?: State["requestArgs"]["sort"];
