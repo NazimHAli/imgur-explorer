@@ -47,11 +47,11 @@ function _dispatchResponse(
  * and dispatch state updates
  *
  */
-async function handleImgurServiceRequests(
+function handleImgurServiceRequests(
   dispatchState: Dispatch<Action>,
   state: State,
   method = "search"
-): Promise<void> {
+): void {
   if (state.requestArgs.newSearch) {
     dispatchState({ loading: true, type: "setIsLoading" });
   }
@@ -59,12 +59,13 @@ async function handleImgurServiceRequests(
   const { items, requestArgs } = state;
   const imgurClient = ImgurAPI.getInstance(requestArgs);
 
-  const res = await imgurClient.methodDispatcher(method);
-  _dispatchResponse(method, dispatchState, requestArgs, res, items);
+  imgurClient.methodDispatcher(method).then((response) => {
+    _dispatchResponse(method, dispatchState, requestArgs, response, items);
 
-  if (state.requestArgs.newSearch && res) {
-    dispatchState({ loading: false, type: "setIsLoading" });
-  }
+    if (state.requestArgs.newSearch && response) {
+      dispatchState({ loading: false, type: "setIsLoading" });
+    }
+  });
 }
 
 export { handleImgurServiceRequests };
