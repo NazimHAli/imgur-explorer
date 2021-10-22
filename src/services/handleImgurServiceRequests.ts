@@ -51,7 +51,7 @@ async function handleImgurServiceRequests(
   dispatchState: Dispatch<Action>,
   state: State,
   method = "search"
-) {
+): Promise<void> {
   if (state.requestArgs.newSearch) {
     dispatchState({ loading: true, type: "setIsLoading" });
   }
