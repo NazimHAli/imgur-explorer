@@ -35,11 +35,11 @@ function ExploreTags(props: {
   const { dispatchState, galleryTags } = props;
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    const element = event.currentTarget;
-    const tagName = element.dataset.tag;
-
     dispatchState({
-      tagName: tagName,
+      method: "tagName",
+      requestArgs: {
+        tagName: event.currentTarget.dataset.tag,
+      },
       type: "setTagName",
     });
     event.preventDefault();

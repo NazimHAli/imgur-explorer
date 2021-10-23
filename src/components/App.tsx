@@ -34,7 +34,7 @@ function App() {
         defaultQuery={state.requestArgs.query || ""}
         state={state}
       />
-      <Explore galleryTags={state.galleryTags} />
+      <Explore dispatchState={dispatchState} galleryTags={state.galleryTags} />
 
       {/* Don't display toolbar for tagName searches */}
       {state.requestArgs.query?.length > 0 && (
