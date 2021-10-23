@@ -20,7 +20,7 @@ module.exports = {
         "src/*.ts*",
       ],
       rules: {
-        "sort-keys-fix/sort-keys-fix": "warn",
+        "sort-keys-fix/sort-keys-fix": "error",
       },
     },
   ],

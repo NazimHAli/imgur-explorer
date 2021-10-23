@@ -4,7 +4,7 @@ import { getSelectedItem } from "./utils/dataUtils";
 const initialState = {
   finishedLazyLoading: false,
   galleryTags: {},
-  isLoading: true,
+  isLoading: false,
   items: [],
   requestArgs: {
     filter: true,

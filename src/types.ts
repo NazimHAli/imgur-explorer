@@ -26,23 +26,14 @@ export type Item = {
   views: number;
 };
 
-export type BaseComment = {
-  author: string;
-  datetime: number;
-  comment: string;
-  id: string;
-  ups: number;
-  downs: number;
-};
-
 export type Comments = {
   author: string;
-  datetime: number;
-  children: Array<BaseComment>;
+  children: Array<Comments>;
   comment: string;
+  datetime: number;
+  downs: number;
   id: string;
   ups: number;
-  downs: number;
 };
 
 export type SelectedComments = Array<Comments>;

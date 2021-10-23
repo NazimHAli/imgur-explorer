@@ -4,8 +4,7 @@ import { useIntersectionObserver } from "@/utils/useIntersectionObserver";
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
 import { Dispatch, lazy, useEffect, useRef, useState } from "react";
 
-import ItemModal from "./ItemModal";
-
+const ItemModal = lazy(() => import("@/components/ItemModal"));
 const ImageGridCard = lazy(() => import("@/components/ImageGridCard"));
 const LazyLoadingSpinner = lazy(
   () => import("@/components/LazyLoadingSpinner")

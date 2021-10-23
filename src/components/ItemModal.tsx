@@ -1,5 +1,5 @@
 import { Item, SelectedComments } from "@/types";
-import { useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import Modal from "react-modal";
 
 import ItemModalComments from "./ItemModalComments";
@@ -8,19 +8,21 @@ import ItemModalComments from "./ItemModalComments";
 Modal.setAppElement("#root");
 
 function ItemModal(props: {
-  isOpen;
-  setIsOpen;
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
   selectedItem?: Item;
   selectedItemComments: SelectedComments;
-}) {
+}): JSX.Element {
   const { isOpen, setIsOpen, selectedItem, selectedItemComments } = props;
 
-  function closeModal(e) {
+  function closeModal(
+    event: React.MouseEvent<Element, MouseEvent> | React.KeyboardEvent<Element>
+  ): void {
     setIsOpen(false);
-    e.preventDefault();
+    event.preventDefault();
   }
 
-  function openModal() {
+  function openModal(): void {
     setIsOpen(true);
   }
 
@@ -32,7 +34,7 @@ function ItemModal(props: {
 
   return (
     <Modal
-      contentLabel="Example Modal"
+      contentLabel="Image Modal"
       isOpen={isOpen}
       onRequestClose={closeModal}
       preventScroll={true}

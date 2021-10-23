@@ -52,9 +52,9 @@ function handleImgurServiceRequests(
   state: State,
   method = "search"
 ): void {
-  if (state.requestArgs.newSearch) {
-    dispatchState({ loading: true, type: "setIsLoading" });
-  }
+  // if (state.requestArgs.newSearch) {
+  //   dispatchState({ loading: true, type: "setIsLoading" });
+  // }
 
   const { items, requestArgs } = state;
   const imgurClient = ImgurAPI.getInstance(requestArgs);
@@ -63,9 +63,9 @@ function handleImgurServiceRequests(
     (response) => {
       _dispatchResponse(method, dispatchState, requestArgs, response, items);
 
-      if (state.requestArgs.newSearch && response) {
-        dispatchState({ loading: false, type: "setIsLoading" });
-      }
+      // if (state.requestArgs.newSearch && response) {
+      //   dispatchState({ loading: false, type: "setIsLoading" });
+      // }
     },
     () => dispatchState({ type: "requestError" })
   );
