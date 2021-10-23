@@ -1,7 +1,8 @@
 /*! purgecss start ignore */
 
 .ReactModal__Body--open {
-  overflow: hidden;
+  @apply overflow-hidden;
+  @apply pr-3;
 }
 
 .ReactModal__Content {

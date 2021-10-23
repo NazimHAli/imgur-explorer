@@ -9,11 +9,9 @@ module.exports = {
     require("tailwindcss"),
     isProd ? require("autoprefixer") : null,
     isProd ? cssnano({ preset: "default" }) : null,
-    isProd
-      ? purgecss({
-          content: ["./*.html", "./src/**/*.tsx", "./src/**/*.ts"],
-          defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
-        })
-      : null,
+    purgecss({
+      content: ["./*.html", "./src/**/*.tsx", "./src/**/*.ts"],
+      defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
+    }),
   ],
 };
