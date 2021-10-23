@@ -4,7 +4,7 @@ import { State, Action } from "@/utils/types";
 const initialState = {
   finishedLazyLoading: false,
   galleryTags: {},
-  isLoading: false,
+  isLoading: true,
   items: [],
   requestArgs: {
     filter: true,

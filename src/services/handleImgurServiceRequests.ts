@@ -58,14 +58,20 @@ function handleImgurServiceRequests(
   state: State
 ): void {
   const { items, requestArgs } = state;
+
+  if (requestArgs.method === "search" && requestArgs.newSearch) {
+    dispatchState({ loading: true, type: "setIsLoading" });
+  }
+
   const imgurClient = ImgurAPI.getInstance(requestArgs);
 
-  imgurClient.methodDispatcher(state.requestArgs.method).then(
-    (response) => {
+  imgurClient
+    .methodDispatcher(state.requestArgs.method)
+    .then((response) => {
       _dispatchResponse(dispatchState, requestArgs, response, items);
-    },
-    () => dispatchState({ type: "requestError" })
-  );
+    })
+    .catch(() => dispatchState({ type: "requestError" }))
+    .finally(() => dispatchState({ loading: false, type: "setIsLoading" }));
 }
 
 export { handleImgurServiceRequests };

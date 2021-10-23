@@ -30,8 +30,8 @@ function Header(props: {
     if (isValid) {
       dispatchState({
         requestArgs: {
-          newSearch: true,
           method: "search",
+          newSearch: true,
           query: inputRef.current.value,
         },
         type: "submitSearchRequest",
