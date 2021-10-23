@@ -25,7 +25,7 @@ function App() {
     if (state.requestArgs.method.length > 0) {
       handleImgurServiceRequests(dispatchState, state);
     }
-  }, [state.requestArgs.method]);
+  }, [state.requestArgs.method, state.requestArgs.page]);
 
   return (
     <Suspense fallback={<span></span>}>
