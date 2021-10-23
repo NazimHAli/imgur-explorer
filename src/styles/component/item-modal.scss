@@ -1,3 +1,5 @@
+/*! purgecss start ignore */
+
 .ReactModal__Body--open {
   overflow: hidden;
 }
@@ -85,3 +87,5 @@
     @apply text-gray-400;
   }
 }
+
+/*! purgecss end ignore */
