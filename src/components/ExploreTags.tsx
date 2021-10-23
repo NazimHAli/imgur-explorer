@@ -36,8 +36,8 @@ function ExploreTags(props: {
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     dispatchState({
-      method: "tagName",
       requestArgs: {
+        method: "tagName",
         tagName: event.currentTarget.dataset.tag,
       },
       type: "setTagName",

@@ -30,6 +30,10 @@ function setItems(state: State, action: Action): State {
       ? true
       : state.finishedLazyLoading,
     items: action?.items ? action.items : state.items,
+    requestArgs: {
+      ...state.requestArgs,
+      method: "",
+    },
   };
 }
 
@@ -40,10 +44,11 @@ function setTagName(
 ) {
   updatedArgs = {
     ...updatedArgs,
+    ...action.requestArgs,
+    method: "",
     newSearch: true,
     page: 1,
     query: "",
-    tagName: action?.tagName ? action.tagName : "",
   };
   return {
     ...state,
@@ -111,7 +116,6 @@ function submitSearchRequest(
 
   updatedArgs = {
     ...updatedArgs,
-    ...action,
     ...action.requestArgs,
     tagName: "",
   };

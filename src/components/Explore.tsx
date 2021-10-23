@@ -10,12 +10,12 @@ function Explore(props: {
 
   useEffect(() => {
     dispatchState({
-      method: "tags",
-      type: "submitSearchRequest",
       requestArgs: {
-        newSearch: true,
         filter: false,
+        method: "tags",
+        newSearch: true,
       },
+      type: "submitSearchRequest",
     });
   }, []);
 
