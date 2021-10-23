@@ -7,6 +7,7 @@
 .ReactModal__Content {
   @apply md:max-w-7xl;
   @apply md:mx-auto;
+  @apply top-0;
 
   &--after-open {
     .ReactModal__Body {
