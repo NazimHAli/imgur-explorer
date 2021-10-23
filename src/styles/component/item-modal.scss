@@ -21,7 +21,7 @@
 
 .ReactModal__Overlay {
   @apply transition-opacity;
-  @apply duration-300;
+  @apply duration-500;
   @apply opacity-0;
 
   &--after-open {

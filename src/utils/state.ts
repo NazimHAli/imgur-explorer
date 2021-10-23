@@ -116,6 +116,7 @@ function submitSearchRequest(
 
   updatedArgs = {
     ...updatedArgs,
+    filter: true,
     ...action.requestArgs,
     tagName: "",
   };

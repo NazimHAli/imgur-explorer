@@ -52,6 +52,7 @@ function ItemModal(props: {
               width={selectedItem?.images[0].width}
               height={selectedItem?.images[0].height}
               srcSet={selectedItem?.images[0].link}
+              loading="lazy"
             />
           </div>
           <div className="card-info__icons">

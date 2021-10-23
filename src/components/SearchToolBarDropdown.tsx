@@ -6,12 +6,12 @@ function getDispatchArgs(
   actionArg: string,
   event: FormEvent<HTMLSelectElement>
 ) {
-  const dispatchArgs: Action = {
+  const dispatchArgs = {
     requestArgs: {
       filter: true,
       method: "search",
       newSearch: true,
-    },
+    } as State["requestArgs"],
     type: "submitSearchRequest",
   };
 
@@ -19,9 +19,9 @@ function getDispatchArgs(
   const displayValue = element.value.toLowerCase();
 
   if (actionArg === "sort") {
-    dispatchArgs.sort = displayValue;
+    dispatchArgs.requestArgs.sort = displayValue;
   } else if (actionArg === "window") {
-    dispatchArgs.window = displayValue;
+    dispatchArgs.requestArgs.window = displayValue;
   }
 
   return dispatchArgs;
