@@ -1,6 +1,8 @@
 import ItemModalComments from "@/components/ItemModalComments";
+import { truncateText } from "@/utils/dataUtils";
 import { Item, SelectedComments } from "@/utils/types";
 import { Dispatch, SetStateAction, useEffect } from "react";
+import { ThumbsUp, MessageSquare, Eye } from "react-feather";
 import Modal from "react-modal";
 
 // Bind modal to appElement for accessibility
@@ -38,6 +40,32 @@ function ItemModal(props: {
       onRequestClose={closeModal}
       preventScroll={true}
     >
+      {selectedItem?.images && (
+        <>
+          <h3 className="item-modal__title">
+            Title: {truncateText(selectedItem?.title, 100)}
+          </h3>
+
+          <div className="item-modal__image">
+            <img
+              alt={selectedItem?.title}
+              width={selectedItem?.images[0].width}
+              height={selectedItem?.images[0].height}
+              srcSet={selectedItem?.images[0].link}
+            />
+          </div>
+          <div className="card-info__icons">
+            <ThumbsUp width="20" height="20" />
+            {selectedItem?.ups?.toLocaleString()}
+
+            <MessageSquare width="20" height="20" />
+            {selectedItem?.comment_count?.toLocaleString()}
+
+            <Eye width="20" height="20" />
+            <span>{selectedItem?.views?.toLocaleString()}</span>
+          </div>
+        </>
+      )}
       <ItemModalComments comments={selectedItemComments} />
     </Modal>
   );

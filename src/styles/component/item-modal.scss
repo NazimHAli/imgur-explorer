@@ -54,10 +54,27 @@
   @apply mt-4;
 }
 
+.item-modal {
+  &__image {
+    @apply flex;
+    @apply justify-center;
+
+    img {
+      @apply max-h-96;
+      @apply w-auto;
+    }
+  }
+
+  &__title {
+    @apply text-2xl;
+    @apply text-center;
+  }
+}
+
 .modal-comment {
   @apply antialiased;
   @apply mx-auto;
-  @apply max-w-screen-sm;
+  @apply max-w-full;
   @apply break-all;
 
   &__text {
