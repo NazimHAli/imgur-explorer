@@ -7,7 +7,11 @@ function getDispatchArgs(
   event: FormEvent<HTMLSelectElement>
 ) {
   const dispatchArgs: Action = {
-    newSearch: true,
+    requestArgs: {
+      filter: true,
+      method: "search",
+      newSearch: true,
+    },
     type: "submitSearchRequest",
   };
 
