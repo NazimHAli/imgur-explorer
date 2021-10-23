@@ -45,7 +45,7 @@ function setTagName(
   updatedArgs = {
     ...updatedArgs,
     ...action.requestArgs,
-    method: "",
+    filter: false,
     newSearch: true,
     page: 1,
     query: "",

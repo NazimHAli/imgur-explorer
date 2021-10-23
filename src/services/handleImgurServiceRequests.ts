@@ -37,6 +37,8 @@ function _dispatchResponse(
       type: "setItems",
     });
   } else if (method === "search") {
+    response = requestArgs.filter ? extractImageResults(response) : response;
+
     dispatchState({
       finishedLazyLoading: response?.length === 0 ? true : false,
       items: requestArgs.newSearch ? response : items.concat(response),

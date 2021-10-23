@@ -63,7 +63,7 @@ function updateImageSize(images: State["items"], newSize = "l") {
 function extractImageResults(response: State["items"]) {
   let resultImages: State["items"] = [];
 
-  if (!response.length) {
+  if (!response || !response.length) {
     return resultImages;
   }
 
