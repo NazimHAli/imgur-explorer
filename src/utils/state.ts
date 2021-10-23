@@ -112,6 +112,7 @@ function submitSearchRequest(
   updatedArgs = {
     ...updatedArgs,
     ...action,
+    ...action.requestArgs,
     tagName: "",
   };
 
