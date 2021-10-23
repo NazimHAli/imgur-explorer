@@ -41,7 +41,7 @@ function ItemModal(props: {
       preventScroll={true}
     >
       {selectedItem?.images && (
-        <>
+        <div className="item-modal">
           <h3 className="item-modal__title">
             Title: {truncateText(selectedItem?.title, 100)}
           </h3>
@@ -64,7 +64,7 @@ function ItemModal(props: {
             <Eye width="20" height="20" />
             <span>{selectedItem?.views?.toLocaleString()}</span>
           </div>
-        </>
+        </div>
       )}
       <ItemModalComments comments={selectedItemComments} />
     </Modal>

@@ -19,7 +19,7 @@
     @apply py-6;
     @apply grid-cols-4;
     @apply md:grid-cols-5;
-    @apply lg:grid-cols-10;
+    @apply xl:grid-cols-10;
 
     &__item {
       @apply bg-gray-100;

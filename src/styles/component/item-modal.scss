@@ -55,6 +55,11 @@
 }
 
 .item-modal {
+  @apply flex;
+  @apply flex-col;
+  @apply gap-6;
+  @apply mb-4;
+
   &__image {
     @apply flex;
     @apply justify-center;
