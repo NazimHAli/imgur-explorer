@@ -1,5 +1,5 @@
-import { Action, Item } from "@/types";
 import { truncateText } from "@/utils/dataUtils";
+import { Action, Item } from "@/utils/types";
 import { Dispatch, Ref } from "react";
 import { MessageSquare, ThumbsUp, Eye } from "react-feather";
 

@@ -1,5 +1,5 @@
 import { handleImgurServiceRequests } from "@/services/handleImgurServiceRequests";
-import { initialState, stateReducer } from "@/state";
+import { initialState, stateReducer } from "@/utils/state";
 import { lazy, Suspense, useEffect, useReducer } from "react";
 
 const Explore = lazy(() => import("@/components/Explore"));
@@ -67,12 +67,12 @@ function App() {
         </>
       )}
 
-      {/* Have results */}
+      {/* With results */}
       {state.items.length > 0 && (
         <ImageGrid dispatchState={dispatchState} state={state} />
       )}
 
-      {/* No results */}
+      {/* Without results */}
       {state.items.length === 0 && !state.isLoading && <ImageGridNoResults />}
 
       {/* Dynamically render footer */}

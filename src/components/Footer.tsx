@@ -1,8 +1,7 @@
-import { State } from "@/types";
-
-import FooterBottom from "./FooterBottom";
-import FooterRight from "./FooterRight";
-import FooterSection from "./FooterSection";
+import FooterBottom from "@/components/FooterBottom";
+import FooterRight from "@/components/FooterRight";
+import FooterSection from "@/components/FooterSection";
+import { State } from "@/utils/types";
 
 function Footer(props: { finishedLazyLoading: State["finishedLazyLoading"] }) {
   const { finishedLazyLoading } = props;

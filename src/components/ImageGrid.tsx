@@ -1,5 +1,5 @@
-import { Action, State } from "@/types";
 import { HandleNewItems, HandleImageLazyLoad } from "@/utils/imageGridHelpers";
+import { Action, State } from "@/utils/types";
 import { useIntersectionObserver } from "@/utils/useIntersectionObserver";
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
 import { Dispatch, lazy, useEffect, useRef, useState } from "react";

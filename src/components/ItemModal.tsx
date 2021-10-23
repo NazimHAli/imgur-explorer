@@ -1,8 +1,7 @@
-import { Item, SelectedComments } from "@/types";
+import ItemModalComments from "@/components/ItemModalComments";
+import { Item, SelectedComments } from "@/utils/types";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import Modal from "react-modal";
-
-import ItemModalComments from "./ItemModalComments";
 
 // Bind modal to appElement for accessibility
 Modal.setAppElement("#root");

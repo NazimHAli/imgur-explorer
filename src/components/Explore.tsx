@@ -1,6 +1,5 @@
-import { State } from "@/types";
-
-import ExploreGalleries from "./ExploreGalleries";
+import ExploreGalleries from "@/components/ExploreGalleries";
+import { State } from "@/utils/types";
 
 function Explore(props: { galleryTags: State["galleryTags"] }) {
   const { galleryTags } = props;

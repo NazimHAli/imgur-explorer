@@ -1,5 +1,5 @@
-import { State } from "@/types";
 import { extractImageResults } from "@/utils/dataUtils";
+import { State } from "@/utils/types";
 
 const imgurClientId: string | undefined | boolean = import.meta.env
   .PUBLIC_IMGUR_CLIENT_ID;

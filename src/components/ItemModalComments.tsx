@@ -1,5 +1,5 @@
-import { Comments, SelectedComments } from "@/types";
 import { getDateString } from "@/utils/dataUtils";
+import { Comments, SelectedComments } from "@/utils/types";
 import { ThumbsUp, ThumbsDown, User } from "react-feather";
 
 function dateTime(comment: Comments): JSX.Element {

@@ -1,5 +1,5 @@
 import { imgObserver } from "@/components/ImageGrid";
-import { Action, State } from "@/types";
+import { Action, State } from "@/utils/types";
 import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
 
 function HandleImageLazyLoad(

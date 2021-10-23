@@ -1,9 +1,8 @@
 import galleryIcon from "@/assets/gallery.svg";
 import profileIcon from "@/assets/profile.svg";
-import { Action, State } from "@/types";
+import ExploreTags from "@/components/ExploreTags";
+import { Action, State } from "@/utils/types";
 import { Dispatch, RefObject, useRef } from "react";
-
-import ExploreTags from "./ExploreTags";
 
 function handleClearQuery(
   defaultQuery: string,

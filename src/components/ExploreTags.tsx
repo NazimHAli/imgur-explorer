@@ -1,5 +1,5 @@
-import { Action, State, TypeTag } from "@/types";
 import { capitalize } from "@/utils/dataUtils";
+import { Action, State, TypeTag } from "@/utils/types";
 import { Dispatch, MouseEvent, MouseEventHandler } from "react";
 
 function renderTags(

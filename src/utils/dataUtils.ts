@@ -1,4 +1,4 @@
-import { Item, State } from "@/types";
+import { Item, State } from "@/utils/types";
 
 function isValidImageType(text: string): boolean {
   const pattern = /\.(jpg|png)\b/;

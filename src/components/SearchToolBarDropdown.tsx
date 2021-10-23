@@ -1,5 +1,5 @@
-import { Action, State } from "@/types";
 import { capitalize } from "@/utils/dataUtils";
+import { Action, State } from "@/utils/types";
 import { Dispatch, FormEvent } from "react";
 
 function getDispatchArgs(

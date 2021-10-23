@@ -1,8 +1,7 @@
-import { Action, State } from "@/types";
+import { ImgurAPI } from "@/services/imgurAPI";
 import { extractImageResults } from "@/utils/dataUtils";
+import { Action, State } from "@/utils/types";
 import { Dispatch } from "react";
-
-import { ImgurAPI } from "./imgurAPI";
 
 function _dispatchResponse(
   method: string,
