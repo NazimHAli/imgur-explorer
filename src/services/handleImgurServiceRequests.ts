@@ -4,12 +4,17 @@ import { Action, State } from "@/utils/types";
 import { Dispatch } from "react";
 
 function _dispatchResponse(
-  method: string,
   dispatchState: Dispatch<Action>,
   requestArgs: State["requestArgs"],
   response,
   items: State["items"]
 ): void {
+  const method = requestArgs.method;
+
+  if (!method) {
+    throw new Error("Method not provided");
+  }
+
   if (method === "test") {
     return;
   } else if (method === "comments") {
@@ -31,7 +36,7 @@ function _dispatchResponse(
       requestError: false,
       type: "setItems",
     });
-  } else {
+  } else if (method === "search") {
     dispatchState({
       finishedLazyLoading: response?.length === 0 ? true : false,
       items: requestArgs.newSearch ? response : items.concat(response),
@@ -48,23 +53,14 @@ function _dispatchResponse(
  */
 function handleImgurServiceRequests(
   dispatchState: Dispatch<Action>,
-  state: State,
-  method = "search"
+  state: State
 ): void {
-  // if (state.requestArgs.newSearch) {
-  //   dispatchState({ loading: true, type: "setIsLoading" });
-  // }
-
   const { items, requestArgs } = state;
   const imgurClient = ImgurAPI.getInstance(requestArgs);
 
-  imgurClient.methodDispatcher(method).then(
+  imgurClient.methodDispatcher(state.requestArgs.method).then(
     (response) => {
-      _dispatchResponse(method, dispatchState, requestArgs, response, items);
-
-      // if (state.requestArgs.newSearch && response) {
-      //   dispatchState({ loading: false, type: "setIsLoading" });
-      // }
+      _dispatchResponse(dispatchState, requestArgs, response, items);
     },
     () => dispatchState({ type: "requestError" })
   );

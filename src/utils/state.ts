@@ -18,7 +18,7 @@ const initialState = {
     window: "all",
   },
   requestError: false,
-  selectedItem: {},
+  selectedItem: null,
   selectedItemComments: [],
   selectedTag: {},
 };

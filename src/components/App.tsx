@@ -22,28 +22,10 @@ function App() {
    */
 
   useEffect(() => {
-    let method = "";
-    if (state.requestArgs?.tagName && state.requestArgs.tagName.length) {
-      method = "tagName";
-    } else if (state.requestArgs.method === "comments") {
-      method = "comments";
-    } else if (
-      state.requestArgs.query?.length &&
-      state.requestArgs.method === "search"
-    ) {
-      method = "search";
+    if (state.requestArgs.method.length > 0) {
+      handleImgurServiceRequests(dispatchState, state);
     }
-
-    if (method) {
-      handleImgurServiceRequests(dispatchState, state, method);
-    }
-  }, [state.requestArgs]);
-
-  useEffect(() => {
-    if (Object.keys(state.galleryTags).length === 0) {
-      handleImgurServiceRequests(dispatchState, state, "tags");
-    }
-  }, []);
+  }, [state.requestArgs.method]);
 
   return (
     <Suspense fallback={<span></span>}>
@@ -67,10 +49,7 @@ function App() {
         </>
       )}
 
-      {/* With results */}
-      {state.items.length > 0 && (
-        <ImageGrid dispatchState={dispatchState} state={state} />
-      )}
+      <ImageGrid dispatchState={dispatchState} state={state} />
 
       {/* Without results */}
       {state.items.length === 0 && !state.isLoading && <ImageGridNoResults />}

@@ -47,7 +47,7 @@ function ImageGridCard(props: {
           alt={item?.title}
           width={320}
           height={320}
-          data-srcset={item?.images[0]?.link}
+          data-srcset={item?.images && item.images[0].link}
           ref={imgRef}
         />
       </span>
