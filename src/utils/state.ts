@@ -73,9 +73,7 @@ function setSelectedItemComments(state: State, action: Action): State {
       state.requestArgs.selectedItemID,
       state.items
     ),
-    selectedItemComments: action.selectedItemComments?.length
-      ? action.selectedItemComments
-      : state.selectedItemComments,
+    selectedItemComments: action.selectedItemComments || [],
   };
 }
 
