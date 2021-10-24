@@ -4,10 +4,13 @@
   background-color: $base-color2;
 
   &__top {
-    @apply p-4
-    grid
+    @apply grid
     content-center
     transition-all
+    max-w-screen-2xl
+    mx-auto
+    px-2
+    lg:px-0
     duration-500
     h-48;
 
@@ -18,16 +21,10 @@
     @include breakpoint($from: "lg") {
       grid-template-columns: 1fr 2fr 1fr;
     }
-
-    @include breakpoint($until: "md") {
-      grid-template-rows: 1fr 2fr;
-    }
   }
 
   &__logo,
   &__profile {
-    @apply justify-self-center;
-
     /* stylelint-disable scss/no-global-function-names */
     img {
       filter: invert(100%);
@@ -37,10 +34,10 @@
 
   &__logo {
     @apply w-full
-    max-w-xs
     text-3xl
     justify-center
     items-center
+    md:justify-start
     font-sans
     gap-x-2
     flex
@@ -53,6 +50,8 @@
   }
 
   &__profile {
+    @apply justify-self-end;
+
     @include breakpoint($until: "md") {
       @apply hidden;
     }
