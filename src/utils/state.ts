@@ -13,7 +13,7 @@ const initialState: State = {
     page: 1,
     query: "meow",
     selectedItemID: "",
-    sort: "viral",
+    sort: "top",
     tagName: "",
     window: "all",
   },
