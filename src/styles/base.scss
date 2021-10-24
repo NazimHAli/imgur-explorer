@@ -6,28 +6,21 @@ $base-bg-color: #c51162;
 $base-color2: #ff0080;
 
 img {
-  max-width: 100%;
-  height: auto;
-  vertical-align: middle;
-  display: inline-block;
+  @apply max-w-full h-auto align-middle inline-block;
 }
 
 .data-badge[data-count]:after {
   content: attr(data-count);
-  position: relative;
-  top: -2rem;
-  right: -1.25rem;
-  font-size: 1rem;
+  @apply relative -top-8 -right-5 text-base;
 }
 
 .full-vh {
-  min-height: 100vh;
+  @apply min-h-screen;
 }
 
 .scroll-hidden {
   scrollbar-width: none;
   ::-webkit-scrollbar {
-    height: 0px;
-    background: transparent; /* make scrollbar transparent */
+    @apply h-0 bg-transparent;
   }
 }
