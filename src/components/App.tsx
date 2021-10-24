@@ -1,5 +1,5 @@
 import { handleImgurServiceRequests } from "@/services/handleImgurServiceRequests";
-import { initialState, stateReducer } from "@/state";
+import { initialState, stateReducer } from "@/utils/state";
 import { lazy, Suspense, useEffect, useReducer } from "react";
 
 const Explore = lazy(() => import("@/components/Explore"));
@@ -14,6 +14,8 @@ const SearchToolBar = lazy(() => import("@/components/SearchToolBar"));
 
 function App() {
   const [state, dispatchState] = useReducer(stateReducer, initialState);
+  const showFooter =
+    state.finishedLazyLoading || (state.items.length === 0 && !state.isLoading);
 
   /**
    * Submit search request for new queries
@@ -22,28 +24,22 @@ function App() {
    */
 
   useEffect(() => {
-    if (state.requestArgs.tagName.length) {
-      handleImgurServiceRequests(dispatchState, state, "tagName");
-    } else if (state.requestArgs.query.length) {
+    if (state.requestArgs.method.length > 0) {
       handleImgurServiceRequests(dispatchState, state);
     }
-  }, [state.requestArgs]);
-
-  useEffect(() => {
-    if (Object.keys(state.galleryTags).length === 0) {
-      handleImgurServiceRequests(dispatchState, state, "tags");
-    }
-  }, []);
+  }, [state.requestArgs.method, state.requestArgs.page]);
 
   return (
     <Suspense fallback={<span></span>}>
       <Header
         dispatchState={dispatchState}
-        defaultQuery={state.requestArgs.query}
+        defaultQuery={state.requestArgs.query || ""}
         state={state}
       />
-      <Explore galleryTags={state.galleryTags} />
-      {state.requestArgs.query.length > 0 && (
+      <Explore dispatchState={dispatchState} galleryTags={state.galleryTags} />
+
+      {/* Don't display toolbar for tagName searches */}
+      {state.requestArgs.query?.length > 0 && (
         <SearchToolBar dispatchState={dispatchState} state={state} />
       )}
 
@@ -55,16 +51,13 @@ function App() {
         </>
       )}
 
-      {/* Render results */}
-      {state.items.length > 0 && (
-        <ImageGrid dispatchState={dispatchState} state={state} />
-      )}
+      <ImageGrid dispatchState={dispatchState} state={state} />
 
-      {/* No results */}
+      {/* Without results */}
       {state.items.length === 0 && !state.isLoading && <ImageGridNoResults />}
 
-      {/* Hide footer */}
-      <Footer finishedLazyLoading={state.finishedLazyLoading} />
+      {/* Dynamically render footer */}
+      {showFooter && <Footer />}
     </Suspense>
   );
 }

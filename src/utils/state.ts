@@ -1,30 +1,39 @@
-import { State, Action } from "./types";
+import { getSelectedItem } from "@/utils/dataUtils";
+import { State, Action } from "@/utils/types";
 
-const initialState: State = {
-  isLoading: true,
+const initialState = {
   finishedLazyLoading: false,
+  galleryTags: {},
+  isLoading: true,
   items: [],
   requestArgs: {
     filter: true,
+    method: "search",
     newSearch: true,
     page: 1,
     query: "meow",
+    selectedItemID: "",
     sort: "viral",
     tagName: "",
     window: "all",
   },
   requestError: false,
-  galleryTags: {},
+  selectedItem: null,
+  selectedItemComments: [],
   selectedTag: {},
 };
 
 function setItems(state: State, action: Action): State {
   return {
     ...state,
-    items: action?.items ? action.items : state.items,
     finishedLazyLoading: action?.finishedLazyLoading
       ? true
       : state.finishedLazyLoading,
+    items: action?.items ? action.items : state.items,
+    requestArgs: {
+      ...state.requestArgs,
+      method: "",
+    },
   };
 }
 
@@ -35,15 +44,16 @@ function setTagName(
 ) {
   updatedArgs = {
     ...updatedArgs,
-    query: "",
-    tagName: action?.tagName ? action.tagName : "",
-    page: 1,
+    ...action.requestArgs,
+    filter: false,
     newSearch: true,
+    page: 1,
+    query: "",
   };
   return {
     ...state,
-    requestArgs: updatedArgs,
     finishedLazyLoading: false,
+    requestArgs: updatedArgs,
   };
 }
 
@@ -55,11 +65,38 @@ function setTags(state: State, action: Action): State {
   };
 }
 
+function setSelectedItemComments(state: State, action: Action): State {
+  return {
+    ...state,
+    requestArgs: {
+      ...state["requestArgs"],
+      filter: false,
+      method: "",
+      selectedItemID: "",
+    },
+    selectedItem: getSelectedItem(
+      state.requestArgs.selectedItemID,
+      state.items
+    ),
+    selectedItemComments: action.selectedItemComments || [],
+  };
+}
+
+function setSearchRequestArgs(state: State, action: Action): State {
+  return {
+    ...state,
+    requestArgs: {
+      ...state["requestArgs"],
+      ...action.requestArgs,
+    },
+  };
+}
+
 function setRequestError(state: State): State {
   return {
     ...state,
-    requestError: true,
     items: [],
+    requestError: true,
   };
 }
 
@@ -75,18 +112,19 @@ function submitSearchRequest(
   action: Action,
   state: State
 ) {
-  const doneLoading = action?.newSearch ? false : state.finishedLazyLoading;
+  const doneLoading = action.newSearch ? false : state.finishedLazyLoading;
 
   updatedArgs = {
     ...updatedArgs,
-    ...action,
+    filter: true,
+    ...action.requestArgs,
     tagName: "",
   };
 
   return {
     ...state,
-    requestArgs: updatedArgs,
     finishedLazyLoading: doneLoading,
+    requestArgs: updatedArgs,
   };
 }
 
@@ -112,6 +150,12 @@ function stateReducer(state: State, action: Action): State {
 
     case "setItems":
       return setItems(state, action);
+
+    case "selectedItemComments":
+      return setSelectedItemComments(state, action);
+
+    case "setSearchRequestArgs":
+      return setSearchRequestArgs(state, action);
 
     case "setTagName":
       return setTagName(updatedArgs, action, state);

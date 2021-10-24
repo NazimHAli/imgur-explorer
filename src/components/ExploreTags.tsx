@@ -1,5 +1,5 @@
-import { Action, State, TypeTag } from "@/types";
 import { capitalize } from "@/utils/dataUtils";
+import { Action, State, TypeTag } from "@/utils/types";
 import { Dispatch, MouseEvent, MouseEventHandler } from "react";
 
 function renderTags(
@@ -35,12 +35,12 @@ function ExploreTags(props: {
   const { dispatchState, galleryTags } = props;
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    const element = event.currentTarget;
-    const tagName = element.dataset.tag;
-
     dispatchState({
+      requestArgs: {
+        method: "tagName",
+        tagName: event.currentTarget.dataset.tag,
+      },
       type: "setTagName",
-      tagName: tagName,
     });
     event.preventDefault();
   };

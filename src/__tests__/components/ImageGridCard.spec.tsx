@@ -6,20 +6,20 @@ describe("ImageGridCard", () => {
   test("ImageGridCard rendered", () => {
     const mockItem = fakeResponse.data[0];
     const item = {
-      id: mockItem.id,
       account_url: mockItem.account_url,
-      images: [
-        {
-          link: `${mockItem.images[0].link}`,
-          width: mockItem.images[0].width,
-          height: mockItem.images[0].height,
-        },
-      ],
-      ups: mockItem.ups,
+      comment_count: mockItem.comment_count,
       downs: mockItem.downs,
       favorite_count: mockItem.favorite_count,
-      comment_count: mockItem.comment_count,
+      id: mockItem.id,
+      images: [
+        {
+          height: mockItem.images[0].height,
+          link: `${mockItem.images[0].link}`,
+          width: mockItem.images[0].width,
+        },
+      ],
       title: mockItem.title,
+      ups: mockItem.ups,
       views: mockItem.views,
     };
 
@@ -29,6 +29,9 @@ describe("ImageGridCard", () => {
           item={item}
           imgRef={() => {
             null;
+          }}
+          dispatchState={function (): void {
+            throw new Error("Function not implemented.");
           }}
         />
       </div>

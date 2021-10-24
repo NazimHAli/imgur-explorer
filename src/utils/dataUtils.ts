@@ -1,4 +1,4 @@
-import { State } from "@/types";
+import { Item, State } from "@/utils/types";
 
 function isValidImageType(text: string): boolean {
   const pattern = /\.(jpg|png)\b/;
@@ -63,7 +63,7 @@ function updateImageSize(images: State["items"], newSize = "l") {
 function extractImageResults(response: State["items"]) {
   let resultImages: State["items"] = [];
 
-  if (!response.length) {
+  if (!response || !response.length) {
     return resultImages;
   }
 
@@ -95,12 +95,32 @@ function genRandomColor(): string {
   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
 
+function getDateString(datetime: number): string | null {
+  if (!datetime) {
+    return null;
+  }
+
+  const dt = new Date(datetime * 1000);
+  return dt.toLocaleString();
+}
+
+function getSelectedItem(
+  selectedId: string,
+  items: Array<Item>
+): Item | undefined {
+  return items.find((item) => {
+    return item.id === selectedId;
+  });
+}
+
 export {
   arrToMatrix,
   capitalize,
   checkNumberIfFloat,
   extractImageResults,
   genRandomColor,
+  getDateString,
+  getSelectedItem,
   truncateText,
   updateImageSize,
 };

@@ -1,32 +1,36 @@
-import { Action, State } from "@/types";
 import { capitalize } from "@/utils/dataUtils";
+import { Action, State } from "@/utils/types";
 import { Dispatch, FormEvent } from "react";
 
 function getDispatchArgs(
   actionArg: string,
   event: FormEvent<HTMLSelectElement>
 ) {
-  const dispatchArgs: Action = {
+  const dispatchArgs = {
+    requestArgs: {
+      filter: true,
+      method: "search",
+      newSearch: true,
+    } as State["requestArgs"],
     type: "submitSearchRequest",
-    newSearch: true,
   };
 
   const element = event.target as HTMLSelectElement;
   const displayValue = element.value.toLowerCase();
 
   if (actionArg === "sort") {
-    dispatchArgs.sort = displayValue;
+    dispatchArgs.requestArgs.sort = displayValue;
   } else if (actionArg === "window") {
-    dispatchArgs.window = displayValue;
+    dispatchArgs.requestArgs.window = displayValue;
   }
 
   return dispatchArgs;
 }
 
 function SearchToolBarDropdown(props: {
-  options: string[];
   actionArg: string;
   dispatchState: Dispatch<Action>;
+  options: string[];
   requestArgs: State["requestArgs"];
 }): JSX.Element {
   const { options, actionArg, dispatchState, requestArgs } = props;

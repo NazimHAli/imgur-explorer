@@ -1,5 +1,5 @@
-import { State } from "@/types";
 import { extractImageResults } from "@/utils/dataUtils";
+import { State } from "@/utils/types";
 
 const imgurClientId: string | undefined | boolean = import.meta.env
   .PUBLIC_IMGUR_CLIENT_ID;
@@ -7,21 +7,16 @@ const BASE = "https://api.imgur.com/3";
 const EP_GALLERY = `${BASE}/gallery`;
 const EP_GALLERY_TAGS = `${BASE}/tags`;
 
+const EP_ACCOUNT = `${BASE}/account/?account_id=`;
+
 interface Args {
   endPoint: RequestInfo;
-  requestOptions?: RequestInit;
   filterImageResults?: boolean;
+  requestOptions?: RequestInit;
 }
 
 class ImgurAPI {
   private static instance: ImgurAPI;
-  useFakeResponse: boolean;
-  requestArgs!: State["requestArgs"];
-
-  constructor() {
-    this.useFakeResponse = imgurClientId === undefined;
-  }
-
   /**
    * Get or create API instance
    */
@@ -34,6 +29,11 @@ class ImgurAPI {
     ImgurAPI.instance.requestArgs = requestArgs;
     return ImgurAPI.instance;
   }
+  constructor() {
+    this.useFakeResponse = imgurClientId === undefined;
+  }
+  useFakeResponse: boolean;
+  requestArgs!: State["requestArgs"];
 
   private async imgurBaseApi(args: Args) {
     const myHeaders = new Headers({
@@ -42,21 +42,12 @@ class ImgurAPI {
 
     args.requestOptions = {
       ...args.requestOptions,
-      method: "GET",
       headers: myHeaders,
+      method: "GET",
     };
 
     const response = await fetch(args.endPoint, args.requestOptions);
     const responseJson = await response.json();
-
-    const shouldFilter =
-      this.requestArgs.filter &&
-      !responseJson.data?.galleries &&
-      !this.requestArgs.tagName.length;
-
-    if (shouldFilter) {
-      return extractImageResults(responseJson.data);
-    }
 
     return responseJson.data;
   }
@@ -94,14 +85,30 @@ class ImgurAPI {
     return this.imgurBaseApi({ endPoint: endPoint });
   }
 
-  public testEndPoint() {
-    const endPoint = `${BASE}/hot/time/today/${this.requestArgs.page}`;
+  private getComments() {
+    const commentSort = "best"; // best, top, new
+    const imageId = this.requestArgs.selectedItemID;
+    const albumImageComments = `${EP_GALLERY}/${imageId}/comments/${commentSort}`;
 
-    return this.imgurBaseApi({ endPoint: endPoint });
+    return this.imgurBaseApi({ endPoint: albumImageComments });
+  }
+
+  private getAccountInfo(account_id = 0) {
+    return this.imgurBaseApi({ endPoint: `${EP_ACCOUNT}=${account_id}` });
+  }
+
+  public testEndPoint() {
+    const hotItems = `${BASE}/hot/time/today/${this.requestArgs.page}`;
+
+    return this.imgurBaseApi({ endPoint: hotItems });
   }
 
   public methodDispatcher(method: string) {
     switch (method) {
+      case "account":
+        return this.getAccountInfo();
+      case "comments":
+        return this.getComments();
       case "test":
         return this.testEndPoint();
       case "search":

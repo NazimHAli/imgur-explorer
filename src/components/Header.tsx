@@ -1,9 +1,8 @@
 import galleryIcon from "@/assets/gallery.svg";
 import profileIcon from "@/assets/profile.svg";
-import { Action, State } from "@/types";
+import ExploreTags from "@/components/ExploreTags";
+import { Action, State } from "@/utils/types";
 import { Dispatch, RefObject, useRef } from "react";
-
-import ExploreTags from "./ExploreTags";
 
 function handleClearQuery(
   defaultQuery: string,
@@ -15,8 +14,8 @@ function handleClearQuery(
 }
 
 function Header(props: {
-  dispatchState: Dispatch<Action>;
   defaultQuery: string;
+  dispatchState: Dispatch<Action>;
   state: State;
 }): JSX.Element {
   const { defaultQuery, dispatchState, state } = props;
@@ -30,9 +29,12 @@ function Header(props: {
 
     if (isValid) {
       dispatchState({
+        requestArgs: {
+          method: "search",
+          newSearch: true,
+          query: inputRef.current.value,
+        },
         type: "submitSearchRequest",
-        query: inputRef.current.value,
-        newSearch: true,
       });
     }
 

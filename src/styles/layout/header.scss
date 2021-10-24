@@ -51,7 +51,7 @@
       @apply flex-col;
       @apply flex;
       @apply items-center;
-      @apply md:items-baseline;
+
       @apply max-w-screen-2xl;
       @apply mx-auto;
       @apply py-6;
@@ -79,10 +79,10 @@
       @apply hover:bg-yellow-300;
       @apply hover:text-black;
       @apply transition-colors;
-      @apply overflow-hidden;
       @apply flex;
       @apply flex-col;
       @apply justify-between;
+      @apply break-words;
     }
   }
 }

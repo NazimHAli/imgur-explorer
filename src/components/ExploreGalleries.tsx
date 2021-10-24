@@ -1,4 +1,4 @@
-import { State, TypeGallery } from "@/types";
+import { State, TypeGallery } from "@/utils/types";
 
 function renderGallery(galleryTags: State["galleryTags"]): JSX.Element {
   return (

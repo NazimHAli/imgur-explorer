@@ -1,9 +1,23 @@
-import { State } from "@/types";
+import ExploreGalleries from "@/components/ExploreGalleries";
+import { Action, State } from "@/utils/types";
+import { Dispatch, useEffect } from "react";
 
-import ExploreGalleries from "./ExploreGalleries";
+function Explore(props: {
+  dispatchState: Dispatch<Action>;
+  galleryTags: State["galleryTags"];
+}) {
+  const { dispatchState, galleryTags } = props;
 
-function Explore(props: { galleryTags: State["galleryTags"] }) {
-  const { galleryTags } = props;
+  useEffect(() => {
+    dispatchState({
+      requestArgs: {
+        filter: false,
+        method: "tags",
+        newSearch: true,
+      },
+      type: "submitSearchRequest",
+    });
+  }, []);
 
   return (
     <div className="explore">

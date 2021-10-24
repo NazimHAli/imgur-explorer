@@ -1,12 +1,10 @@
-import { State } from "@/types";
+import { lazy } from "react";
 
-import FooterBottom from "./FooterBottom";
-import FooterRight from "./FooterRight";
-import FooterSection from "./FooterSection";
+const FooterBottom = lazy(() => import("@/components/FooterBottom"));
+const FooterRight = lazy(() => import("@/components/FooterRight"));
+const FooterSection = lazy(() => import("@/components/FooterSection"));
 
-function Footer(props: { finishedLazyLoading: State["finishedLazyLoading"] }) {
-  const { finishedLazyLoading } = props;
-
+function Footer() {
   const sectionLinks: string[] = [
     "First Link",
     "Second Link",
@@ -14,7 +12,7 @@ function Footer(props: { finishedLazyLoading: State["finishedLazyLoading"] }) {
     "Fourth Link",
   ];
 
-  const elements = (
+  return (
     <footer className="footer">
       <div className="footer__content">
         <FooterRight />
@@ -28,8 +26,6 @@ function Footer(props: { finishedLazyLoading: State["finishedLazyLoading"] }) {
       <FooterBottom />
     </footer>
   );
-
-  return <>{finishedLazyLoading && elements}</>;
 }
 
 export default Footer;

@@ -1,9 +1,10 @@
-import { Action, State } from "@/types";
 import { HandleNewItems, HandleImageLazyLoad } from "@/utils/imageGridHelpers";
+import { Action, State } from "@/utils/types";
 import { useIntersectionObserver } from "@/utils/useIntersectionObserver";
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
-import { Dispatch, lazy, useRef, useState } from "react";
+import { Dispatch, lazy, useEffect, useRef, useState } from "react";
 
+const ItemModal = lazy(() => import("@/components/ItemModal"));
 const ImageGridCard = lazy(() => import("@/components/ImageGridCard"));
 const LazyLoadingSpinner = lazy(
   () => import("@/components/LazyLoadingSpinner")
@@ -12,12 +13,11 @@ const LazyLoadingSpinner = lazy(
 export const imgObserver = new ObserveElementsInView();
 
 function ImageGrid(props: {
-  state: State;
   dispatchState: Dispatch<Action>;
+  state: State;
 }): JSX.Element {
   const { state, dispatchState } = props;
   const [idxsToLoad, setidxsToLoad] = useState([0, 1, 2, 3, 4]);
-
   const cardImgRef = HandleImageLazyLoad(state, setidxsToLoad);
 
   const elementObserverRef = useRef<HTMLElement>(null);
@@ -32,8 +32,24 @@ function ImageGrid(props: {
     setidxsToLoad
   );
 
+  const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    if (state.requestArgs.selectedItemID.length) {
+      setIsOpen(true);
+    }
+  }, [state.requestArgs.selectedItemID]);
+
   return (
     <div className="grid-viewport">
+      {state.selectedItem && (
+        <ItemModal
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          selectedItem={state.selectedItem}
+          selectedItemComments={state.selectedItemComments}
+        />
+      )}
+
       <div className="image-grid">
         {idxsToLoad.map(
           (idx) =>
@@ -42,6 +58,7 @@ function ImageGrid(props: {
                 item={state.items[idx]}
                 key={`${idx || "0"}-${state.items[idx].id}`}
                 imgRef={cardImgRef}
+                dispatchState={dispatchState}
               />
             )
         )}

@@ -1,37 +1,49 @@
-import { Action, State } from "@/types";
+import { ImgurAPI } from "@/services/imgurAPI";
 import { extractImageResults } from "@/utils/dataUtils";
+import { Action, State } from "@/utils/types";
 import { Dispatch } from "react";
 
-import { ImgurAPI } from "./imgurAPI";
-
 function _dispatchResponse(
-  method: string,
   dispatchState: Dispatch<Action>,
   requestArgs: State["requestArgs"],
   response,
   items: State["items"]
 ): void {
+  const method = requestArgs.method;
+
+  if (!method) {
+    throw new Error("Method not provided");
+  }
+
   if (method === "test") {
     return;
+  } else if (method === "comments") {
+    dispatchState({
+      requestError: false,
+      selectedItemComments: response,
+      type: "selectedItemComments",
+    });
   } else if (method === "tags") {
     dispatchState({
-      type: "setTags",
       galleryTags: response,
       items: response.items,
       requestError: false,
+      type: "setTags",
     });
   } else if (method === "tagName") {
     dispatchState({
-      type: "setItems",
       items: extractImageResults(response.items),
       requestError: false,
-    });
-  } else {
-    dispatchState({
       type: "setItems",
+    });
+  } else if (method === "search") {
+    response = requestArgs.filter ? extractImageResults(response) : response;
+
+    dispatchState({
+      finishedLazyLoading: response?.length === 0 ? true : false,
       items: requestArgs.newSearch ? response : items.concat(response),
       requestError: false,
-      finishedLazyLoading: response?.length === 0 ? true : false,
+      type: "setItems",
     });
   }
 }
@@ -41,24 +53,25 @@ function _dispatchResponse(
  * and dispatch state updates
  *
  */
-async function handleImgurServiceRequests(
+function handleImgurServiceRequests(
   dispatchState: Dispatch<Action>,
-  state: State,
-  method = "search"
-) {
-  if (state.requestArgs.newSearch) {
-    dispatchState({ type: "setIsLoading", loading: true });
+  state: State
+): void {
+  const { items, requestArgs } = state;
+
+  if (requestArgs.method === "search" && requestArgs.newSearch) {
+    dispatchState({ loading: true, type: "setIsLoading" });
   }
 
-  const { items, requestArgs } = state;
   const imgurClient = ImgurAPI.getInstance(requestArgs);
 
-  const res = await imgurClient.methodDispatcher(method);
-  _dispatchResponse(method, dispatchState, requestArgs, res, items);
-
-  if (state.requestArgs.newSearch && res) {
-    dispatchState({ type: "setIsLoading", loading: false });
-  }
+  imgurClient
+    .methodDispatcher(state.requestArgs.method)
+    .then((response) => {
+      _dispatchResponse(dispatchState, requestArgs, response, items);
+    })
+    .catch(() => dispatchState({ type: "requestError" }))
+    .finally(() => dispatchState({ loading: false, type: "setIsLoading" }));
 }
 
 export { handleImgurServiceRequests };

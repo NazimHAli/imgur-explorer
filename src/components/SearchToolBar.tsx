@@ -1,7 +1,6 @@
-import { Action, State } from "@/types";
+import SearchToolBarDropdown from "@/components/SearchToolBarDropdown";
+import { Action, State } from "@/utils/types";
 import { Dispatch } from "react";
-
-import SearchToolBarDropdown from "./SearchToolBarDropdown";
 
 function SearchToolBar(props: {
   dispatchState: Dispatch<Action>;
