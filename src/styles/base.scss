@@ -15,9 +15,9 @@ img {
 .data-badge[data-count]:after {
   content: attr(data-count);
   position: relative;
-  top: -1rem;
-  right: 0;
-  font-size: 0.5rem;
+  top: -2rem;
+  right: -1.25rem;
+  font-size: 1rem;
 }
 
 .full-vh {

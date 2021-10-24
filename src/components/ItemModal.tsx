@@ -2,11 +2,20 @@ import ItemModalComments from "@/components/ItemModalComments";
 import { truncateText } from "@/utils/dataUtils";
 import { Item, SelectedComments } from "@/utils/types";
 import { Dispatch, SetStateAction, useEffect } from "react";
-import { ThumbsUp, MessageSquare, Eye } from "react-feather";
+import { KeyboardEvent, MouseEvent } from "react";
+import { ThumbsUp, MessageSquare, Eye, Icon } from "react-feather";
 import Modal from "react-modal";
 
 // Bind modal to appElement for accessibility
 Modal.setAppElement("#root");
+
+function iconWithDataBadge(dataCount: number, TheIcon: Icon): JSX.Element {
+  return (
+    <span className="data-badge" data-count={dataCount?.toLocaleString()}>
+      <TheIcon width="20" height="20" />
+    </span>
+  );
+}
 
 function ItemModal(props: {
   isOpen: boolean;
@@ -17,7 +26,7 @@ function ItemModal(props: {
   const { isOpen, setIsOpen, selectedItem, selectedItemComments } = props;
 
   function closeModal(
-    event: React.MouseEvent<Element, MouseEvent> | React.KeyboardEvent<Element>
+    event: MouseEvent<Element, MouseEvent> | KeyboardEvent<Element>
   ): void {
     setIsOpen(false);
     event.preventDefault();
@@ -58,14 +67,9 @@ function ItemModal(props: {
             />
           </div>
           <div className="card-info__icons">
-            <ThumbsUp width="20" height="20" />
-            {selectedItem?.ups?.toLocaleString()}
-
-            <MessageSquare width="20" height="20" />
-            {selectedItem?.comment_count?.toLocaleString()}
-
-            <Eye width="20" height="20" />
-            <span>{selectedItem?.views?.toLocaleString()}</span>
+            {iconWithDataBadge(selectedItem?.ups, ThumbsUp)}
+            {iconWithDataBadge(selectedItem?.comment_count, MessageSquare)}
+            {iconWithDataBadge(selectedItem?.views, Eye)}
           </div>
         </div>
       )}

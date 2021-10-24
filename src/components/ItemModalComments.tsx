@@ -42,9 +42,10 @@ function CommentFactory(props: { comment: Comments }): JSX.Element {
         <p className="modal-comment__text">{comment?.comment}</p>
         {thumbIcons(comment)}
 
-        {comment.children.map((nestedComment) => (
-          <CommentFactory key={nestedComment.id} comment={nestedComment} />
-        ))}
+        {comment?.children &&
+          comment.children.map((nestedComment) => (
+            <CommentFactory key={nestedComment.id} comment={nestedComment} />
+          ))}
       </div>
     </div>
   );
@@ -58,9 +59,10 @@ function ItemModalComments(props: { comments: SelectedComments }): JSX.Element {
       <h3 className="modal-comment__title">Comments</h3>
 
       <div className="space-y-4">
-        {comments.map((comment) => (
-          <CommentFactory key={comment.id} comment={comment} />
-        ))}
+        {comments?.map &&
+          comments.map((comment) => (
+            <CommentFactory key={comment.id} comment={comment} />
+          ))}
       </div>
     </div>
   );

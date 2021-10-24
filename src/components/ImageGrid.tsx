@@ -6,9 +6,6 @@ import { Dispatch, lazy, useEffect, useRef, useState } from "react";
 
 const ItemModal = lazy(() => import("@/components/ItemModal"));
 const ImageGridCard = lazy(() => import("@/components/ImageGridCard"));
-const LazyLoadingSpinner = lazy(
-  () => import("@/components/LazyLoadingSpinner")
-);
 
 export const imgObserver = new ObserveElementsInView();
 
@@ -61,7 +58,7 @@ function ImageGrid(props: {
             )
         )}
       </div>
-      {state.isLoading && <LazyLoadingSpinner />}
+
       <span ref={elementObserverRef} className="block w-px h-px"></span>
     </div>
   );

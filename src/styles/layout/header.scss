@@ -9,7 +9,7 @@
     transition: all ease-in-out 500ms;
 
     @include breakpoint($from: "md") {
-      grid-template-columns: 1fr 6fr 1fr;
+      grid-template-columns: 1fr 4fr 1fr;
     }
 
     @include breakpoint($from: "lg") {
@@ -24,6 +24,7 @@
   &__logo,
   &__profile {
     justify-self: center;
+
     img {
       filter: invert(100%);
     }
@@ -31,7 +32,13 @@
 
   &__logo {
     width: 100%;
-    max-width: 4rem;
+    max-width: 20rem;
+    display: flex;
+    font-size: 2rem;
+    justify-content: center;
+    font-family: Montserrat;
+    column-gap: 0.5rem;
+    @apply flex-wrap text-white;
 
     @include breakpoint($until: "md") {
       margin-bottom: 1rem;
@@ -54,7 +61,8 @@
       md:items-baseline
       max-w-screen-2xl
       mx-auto
-      py-6
+      p-2
+      lg:p-0
       text-white
       w-full;
     }
