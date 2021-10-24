@@ -1,5 +1,10 @@
 # Imgur Explorer
 
+[![DeepSource](https://deepsource.io/gh/NazimHAli/imgur-explorer.svg/?label=active+issues&show_trend=true&token=aO_Hx9m4iDxMopueaxAigoGd)](https://deepsource.io/gh/NazimHAli/imgur-explorer)
+[![DeepSource](https://deepsource.io/gh/NazimHAli/imgur-explorer.svg/?label=resolved+issues&show_trend=true&token=aO_Hx9m4iDxMopueaxAigoGd)](https://deepsource.io/gh/NazimHAli/imgur-explorer)
+[![CodeQL](https://github.com/NazimHAli/imgur-explorer/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/NazimHAli/imgur-explorer/actions/workflows/codeql-analysis.yml)
+[![Unit Tests](https://github.com/NazimHAli/imgur-explorer/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/NazimHAli/imgur-explorer/actions/workflows/unit-tests.yml)
+
 ReactJS + [Imgur API](https://imgur.com/) + [vitejs bundler](https://github.com/vitejs/vite) in TypeScript.
 
 ## Features
@@ -16,11 +21,6 @@ ReactJS + [Imgur API](https://imgur.com/) + [vitejs bundler](https://github.com/
 ##### Mocked Data From API
 
 If you don't want to register and use the free Imgur API, it will use mocked data/saved responses from the API. It's also useful for faster local development so you don't have to make new requests with every HMR update.
-
-[![DeepSource](https://deepsource.io/gh/NazimHAli/imgur-explorer.svg/?label=active+issues&show_trend=true&token=aO_Hx9m4iDxMopueaxAigoGd)](https://deepsource.io/gh/NazimHAli/imgur-explorer)
-[![DeepSource](https://deepsource.io/gh/NazimHAli/imgur-explorer.svg/?label=resolved+issues&show_trend=true&token=aO_Hx9m4iDxMopueaxAigoGd)](https://deepsource.io/gh/NazimHAli/imgur-explorer)
-[![CodeQL](https://github.com/NazimHAli/imgur-explorer/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/NazimHAli/imgur-explorer/actions/workflows/codeql-analysis.yml)
-[![Unit Tests](https://github.com/NazimHAli/imgur-explorer/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/NazimHAli/imgur-explorer/actions/workflows/unit-tests.yml)
 
 ##### Google PageSpeed Scores (need to automate to add a badege for live scores)
 
