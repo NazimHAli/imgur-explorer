@@ -19,7 +19,8 @@ img {
 .hide-sr {
   display: none;
 }
-.data-badge[data-count]:after {
+
+.data-badge[data-count]::after {
   content: attr(data-count);
   position: relative;
   top: -1rem;
@@ -33,8 +34,9 @@ img {
 
 .scroll-hidden {
   scrollbar-width: none;
+
   ::-webkit-scrollbar {
-    height: 0px;
+    height: 0;
     background: transparent; /* make scrollbar transparent */
   }
 }

@@ -1,3 +1,5 @@
+@use "sass:color";
+
 .header {
   background-color: $base-color2;
 
@@ -24,9 +26,12 @@
   &__logo,
   &__profile {
     justify-self: center;
+
+    /* stylelint-disable scss/no-global-function-names */
     img {
       filter: invert(100%);
     }
+    /* stylelint-enable scss/no-global-function-names */
   }
 
   &__logo {

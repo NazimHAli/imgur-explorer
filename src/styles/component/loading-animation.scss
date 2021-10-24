@@ -1,49 +1,46 @@
+@use "sass:list";
+
 /*
 * Playing around with this idea - https://codepen.io/crayon-code/pen/eYdVLJo
 */
 
-$--p-1: #d4aee0;
-$--p-2: #8975b4;
-$--p-3: #64518a;
-$--p-4: #565190;
-
-$--b-1: #44abac;
-$--b-2: #2ca7d8;
-$--b-3: #1482ce;
-$--b-4: #05597c;
-
-$--g-1: #b2dd57;
-$--g-2: #57c443;
-$--g-3: #05b853;
-$--g-4: #19962e;
-
-$--y-1: #fdc82e;
-$--y-2: #fd9c2e;
-$--y-3: #d5385a;
-$--y-4: #911750;
-
-$--s-1: #d9d9d9;
-$--s-2: #9e9e9e;
-$--s-3: #666666;
-$--s-4: #2b2b2b;
-
+$p-1: #d4aee0;
+$p-2: #8975b4;
+$p-3: #64518a;
+$p-4: #565190;
+$b-1: #44abac;
+$b-2: #2ca7d8;
+$b-3: #1482ce;
+$b-4: #05597c;
+$g-1: #b2dd57;
+$g-2: #57c443;
+$g-3: #05b853;
+$g-4: #19962e;
+$y-1: #fdc82e;
+$y-2: #fd9c2e;
+$y-3: #d5385a;
+$y-4: #911750;
+$s-1: #d9d9d9;
+$s-2: #9e9e9e;
+$s-3: #666;
+$s-4: #2b2b2b;
 $colors: (
-  $--p-1,
-  $--p-2,
-  $--p-3,
-  $--p-4,
-  $--b-1,
-  $--b-2,
-  $--b-3,
-  $--b-4,
-  $--g-1,
-  $--g-2,
-  $--g-3,
-  $--g-4,
-  $--y-1,
-  $--y-2,
-  $--y-3,
-  $--y-4
+  $p-1,
+  $p-2,
+  $p-3,
+  $p-4,
+  $b-1,
+  $b-2,
+  $b-3,
+  $b-4,
+  $g-1,
+  $g-2,
+  $g-3,
+  $g-4,
+  $y-1,
+  $y-2,
+  $y-3,
+  $y-4
 );
 
 .mosaic-loader {
@@ -62,12 +59,12 @@ $colors: (
 
   > .cell {
     --cell-color: white;
+
     flex: 0 0 var(--cell-size);
     margin: var(--cell-spacing);
     background-color: transparent;
     box-sizing: border-box;
     border: var(--border-width) solid var(--cell-color);
-
     animation: 1.5s ripple ease infinite;
 
     $delays: (2 * 4) - 2;
@@ -79,7 +76,7 @@ $colors: (
 
     @for $i from 1 through length($colors) {
       &:nth-child(#{$i}) {
-        --cell-color: #{nth($colors, $i)};
+        --cell-color: #{list.nth($colors, $i)};
       }
     }
   }
