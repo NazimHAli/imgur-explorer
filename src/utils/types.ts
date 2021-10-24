@@ -77,3 +77,10 @@ export type Action = {
   type: string | null;
   window?: State["requestArgs"]["window"];
 };
+
+export type TypeSearchResponse = {
+  data: Item[] | SelectedComments;
+  items: Item[];
+  status: number;
+  success: boolean;
+};

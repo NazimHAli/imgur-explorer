@@ -1,5 +1,5 @@
 .no-results {
-  min-height: 100vh;
-  text-align: center;
-  padding-top: 1rem;
+  @apply min-h-screen
+  text-center
+  pt-4;
 }

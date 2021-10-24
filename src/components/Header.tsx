@@ -1,4 +1,4 @@
-import galleryIcon from "@/assets/gallery.svg";
+import imgurLogo from "@/assets/imgur.svg";
 import profileIcon from "@/assets/profile.svg";
 import HeaderTags from "@/components/HeaderTags";
 import { Action, State } from "@/utils/types";
@@ -45,7 +45,8 @@ function Header(props: {
 
   const logo = (
     <a href="/" className="header__logo">
-      <img src={galleryIcon} alt="Logo" width="64" height="64" />
+      <img src={imgurLogo} alt="Logo" width="100" height="35" />
+      <span>explorer</span>
     </a>
   );
 

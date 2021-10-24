@@ -11,8 +11,11 @@
 }
 
 .card {
-  border: solid 1px #00000036;
   @apply h-80
+  border-solid
+  border-black
+  border
+  border-opacity-20
   overflow-hidden
   relative
   w-full;

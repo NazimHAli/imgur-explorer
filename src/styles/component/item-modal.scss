@@ -6,32 +6,32 @@
   pr-3;
 }
 
-.ReactModal__Content {
-  @apply md:max-w-7xl
-  md:mx-auto
-  top-0;
-
-  &--after-open {
-    .ReactModal__Body {
-      &--open {
-        @apply overflow-hidden;
-      }
-    }
-  }
+.ReactModal__Overlay--after-open.myModal__Overlay {
+  @apply h-full
+  transition-all
+  duration-500
+  opacity-100;
 }
 
-.ReactModal__Overlay {
-  @apply transition-opacity
-  duration-500
-  opacity-0;
+.myModal__Content {
+  @apply md:max-w-7xl
+  md:mx-auto
+  p-4
+  overflow-y-scroll
+  h-full
+  bg-white;
+}
 
-  &--after-open {
-    @apply opacity-100;
-  }
-
-  &--before-close {
-    @apply opacity-0;
-  }
+.myModal__Overlay {
+  @apply bg-black
+  bg-opacity-95
+  fixed
+  top-0
+  mx-auto
+  w-full
+  opacity-0
+  transition-all
+  duration-500;
 
   .card {
     @apply h-full
@@ -47,6 +47,11 @@
 
   .card-info {
     grid-template-rows: 1fr 2fr;
+
+    &__icons {
+      @apply mx-auto
+      gap-x-16;
+    }
   }
 }
 /* stylelint-enable selector-class-pattern */
@@ -82,7 +87,6 @@
 
 .modal-comment {
   @apply antialiased
-  mx-auto
   max-w-full
   break-all;
 
@@ -98,14 +102,19 @@
   }
 
   &__nested {
-    @apply flex-1
-    border
-    rounded-lg
+    @apply border
+    flex-1
+    leading-relaxed
+    my-2
     px-4
     py-2
+    rounded-lg
     sm:px-6
-    sm:py-4
-    leading-relaxed;
+    sm:py-4;
+
+    div:nth-child(2) {
+      @apply bg-gray-100;
+    }
   }
 
   &__datetime {

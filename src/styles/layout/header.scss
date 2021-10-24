@@ -4,29 +4,27 @@
   background-color: $base-color2;
 
   &__top {
-    height: 12rem;
-    padding: 1rem;
-    display: grid;
-    align-content: center;
-    transition: all ease-in-out 500ms;
+    @apply grid
+    content-center
+    transition-all
+    max-w-screen-2xl
+    mx-auto
+    px-2
+    lg:px-0
+    duration-500
+    h-48;
 
     @include breakpoint($from: "md") {
-      grid-template-columns: 1fr 6fr 1fr;
+      grid-template-columns: 1fr 4fr 1fr;
     }
 
     @include breakpoint($from: "lg") {
       grid-template-columns: 1fr 2fr 1fr;
     }
-
-    @include breakpoint($until: "md") {
-      grid-template-rows: 1fr 2fr;
-    }
   }
 
   &__logo,
   &__profile {
-    justify-self: center;
-
     /* stylelint-disable scss/no-global-function-names */
     img {
       filter: invert(100%);
@@ -35,22 +33,33 @@
   }
 
   &__logo {
-    width: 100%;
-    max-width: 4rem;
+    @apply w-full
+    text-3xl
+    justify-center
+    items-center
+    md:justify-start
+    font-sans
+    gap-x-2
+    flex
+    flex-wrap
+    text-white;
 
     @include breakpoint($until: "md") {
-      margin-bottom: 1rem;
+      @apply mb-4;
     }
   }
 
   &__profile {
+    @apply justify-self-end;
+
     @include breakpoint($until: "md") {
-      display: none;
+      @apply hidden;
     }
   }
 
   &__tags {
-    @apply bg-gray-900;
+    @apply bg-gray-900
+    py-4;
 
     &__container {
       @apply flex-col
@@ -59,7 +68,8 @@
       md:items-baseline
       max-w-screen-2xl
       mx-auto
-      py-6
+      px-2
+      lg:px-0
       text-white
       w-full;
     }

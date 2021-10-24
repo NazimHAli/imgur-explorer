@@ -62,6 +62,7 @@ function handleImgurServiceRequests(
   const { items, requestArgs } = state;
 
   if (requestArgs.method === "search" && requestArgs.newSearch) {
+    scrollTo({ behavior: "smooth", top: 0 });
     dispatchState({ loading: true, type: "setIsLoading" });
   }
 
