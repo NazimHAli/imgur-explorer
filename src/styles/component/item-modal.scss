@@ -16,7 +16,7 @@
 .myModal__Content {
   @apply md:max-w-7xl
   md:mx-auto
-  m-4
+  p-4
   overflow-y-scroll
   h-full
   bg-white;
@@ -87,7 +87,6 @@
 
 .modal-comment {
   @apply antialiased
-  mx-auto
   max-w-full
   break-all;
 
@@ -103,14 +102,19 @@
   }
 
   &__nested {
-    @apply flex-1
-    border
-    rounded-lg
+    @apply border
+    flex-1
+    leading-relaxed
+    my-2
     px-4
     py-2
+    rounded-lg
     sm:px-6
-    sm:py-4
-    leading-relaxed;
+    sm:py-4;
+
+    & .modal-comment__nested:nth-child(2) {
+      @apply bg-gray-100;
+    }
   }
 
   &__datetime {
