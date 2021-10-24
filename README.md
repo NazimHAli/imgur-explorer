@@ -1,15 +1,26 @@
 # Imgur Explorer
 
-ReactJS + [Imgur API](https://imgur.com/) + [vitejs bundler](https://github.com/vitejs/vite) in TypeScript.
-
-##### Mocked Data From API
-
-If you don't want to register and use the free Imgur API, it will use mocked data/saved responses from the API. It's also useful for faster local development so you don't have to make new requests with every HMR update.
-
 [![DeepSource](https://deepsource.io/gh/NazimHAli/imgur-explorer.svg/?label=active+issues&show_trend=true&token=aO_Hx9m4iDxMopueaxAigoGd)](https://deepsource.io/gh/NazimHAli/imgur-explorer)
 [![DeepSource](https://deepsource.io/gh/NazimHAli/imgur-explorer.svg/?label=resolved+issues&show_trend=true&token=aO_Hx9m4iDxMopueaxAigoGd)](https://deepsource.io/gh/NazimHAli/imgur-explorer)
 [![CodeQL](https://github.com/NazimHAli/imgur-explorer/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/NazimHAli/imgur-explorer/actions/workflows/codeql-analysis.yml)
 [![Unit Tests](https://github.com/NazimHAli/imgur-explorer/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/NazimHAli/imgur-explorer/actions/workflows/unit-tests.yml)
+
+ReactJS + [Imgur API](https://imgur.com/) + [vitejs bundler](https://github.com/vitejs/vite) in TypeScript.
+
+## Features
+
+- ReactJS in TypeScript
+- ViteJS
+- Lazy loading & code splitting
+- Image modal
+- [imgur API features](https://api.imgur.com/)
+  - Search
+  - Sort results
+  - Explore tags
+
+##### Mocked Data From API
+
+If you don't want to register and use the free Imgur API, it will use mocked data/saved responses from the API. It's also useful for faster local development so you don't have to make new requests with every HMR update.
 
 ##### Google PageSpeed Scores (need to automate to add a badege for live scores)
 
@@ -40,21 +51,11 @@ yarn serve
 2. Pass the client ID as an environemnt variable (can be in .env or through CLI)
    - `PUBLIC_IMGUR_CLIENT_ID=xxxxx yarn dev`
 
-## Features
-
-- ReactJS with TypeScript
-- ViteJS
-- Lazy loading & code splitting
-- [imgur API](https://api.imgur.com/)
-
 ## TODO
 
 ### Features
 
-- [x] Search
-- [x] Sort results
-- [x] Explore by categories
-- [x] Explore tags
+- [ ] Explore by categories
 - [ ] Profile login
 - [ ] Upload images
 
