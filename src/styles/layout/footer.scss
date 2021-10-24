@@ -1,89 +1,89 @@
 .footer {
   background-color: $base-color2;
-  @apply mt-12;
-  @apply text-white;
+  @apply mt-12
+  text-white;
 
   &__content {
-    @apply flex-col;
-    @apply flex-wrap;
-    @apply flex;
-    @apply lg:items-start;
-    @apply md:flex-nowrap;
-    @apply md:flex-row;
-    @apply md:items-center;
-    @apply mx-auto;
-    @apply py-24;
+    @apply flex-col
+    flex-wrap
+    flex
+    lg:items-start
+    md:flex-nowrap
+    md:flex-row
+    md:items-center
+    mx-auto
+    py-24;
 
     &__sections {
-      @apply -mb-10;
-      @apply flex-grow;
-      @apply flex-wrap;
-      @apply flex;
-      @apply md:pr-20;
-      @apply order-first;
+      @apply -mb-10
+      flex-grow
+      flex-wrap
+      flex
+      md:pr-20
+      order-first;
     }
 
     &__right {
-      @apply w-64;
-      @apply flex-shrink-0;
-      @apply md:mx-0;
-      @apply mx-auto;
-      @apply text-center;
-      @apply md:text-left;
-      @apply md:mt-0;
-      @apply mt-10;
+      @apply w-64
+      flex-shrink-0
+      md:mx-0
+      mx-auto
+      text-center
+      md:text-left
+      md:mt-0
+      mt-10;
 
       &__link {
-        @apply flex;
-        @apply font-medium;
-        @apply items-center;
-        @apply md:justify-start;
+        @apply flex
+        font-medium
+        items-center
+        md:justify-start;
       }
     }
   }
 
   &__bottom {
-    @apply bg-gray-100;
-    @apply text-black;
+    @apply bg-gray-100
+    text-black;
 
     &__container {
-      @apply mx-auto;
-      @apply py-4;
-      @apply px-5;
-      @apply flex;
-      @apply flex-wrap;
-      @apply flex-col;
-      @apply sm:flex-row;
+      @apply mx-auto
+      py-4
+      px-5
+      flex
+      flex-wrap
+      flex-col
+      sm:flex-row;
     }
 
     &__left {
-      @apply text-sm;
-      @apply text-center;
-      @apply sm:text-left;
+      @apply text-sm
+      text-center
+      sm:text-left;
     }
 
     &__center {
-      @apply inline-flex;
-      @apply sm:ml-auto;
-      @apply sm:mt-0;
-      @apply mt-2;
-      @apply justify-center;
-      @apply sm:justify-start;
+      @apply inline-flex
+      sm:ml-auto
+      sm:mt-0
+      mt-2
+      justify-center
+      sm:justify-start;
     }
   }
 }
 
 .footer-section {
-  @apply text-center;
-  @apply md:text-justify;
-  @apply w-2/4;
-  @apply lg:w-1/4;
-  @apply px-4;
+  @apply text-center
+  md:text-justify
+  w-2/4
+  lg:w-1/4
+  px-4;
 
   &__title {
-    @apply font-medium;
-    @apply tracking-widest;
-    @apply text-lg;
-    @apply mb-3;
+    @apply font-medium
+    tracking-widest
+    text-lg
+    mb-3;
   }
 }

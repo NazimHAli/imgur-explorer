@@ -1,63 +1,63 @@
 .explore {
-  @apply grid-flow-row;
-  @apply grid;
-  @apply max-w-screen-2xl;
-  @apply mx-auto;
+  @apply grid-flow-row
+  grid
+  max-w-screen-2xl
+  mx-auto;
 
   &__title {
-    @apply font-extrabold;
-    @apply leading-10;
-    @apply my-6;
-    @apply text-2xl;
-    @apply justify-self-center;
-    @apply md:justify-self-auto;
+    @apply font-extrabold
+    leading-10
+    my-6
+    text-2xl
+    justify-self-center
+    md:justify-self-auto;
   }
 
   &__tags {
-    @apply gap-1;
-    @apply grid;
-    @apply py-6;
-    @apply grid-cols-4;
-    @apply md:grid-cols-5;
-    @apply xl:grid-cols-10;
+    @apply gap-1
+    grid
+    py-6
+    grid-cols-4
+    md:grid-cols-5
+    xl:grid-cols-10;
 
     &__item {
-      @apply bg-gray-100;
-      @apply duration-500;
-      @apply hover:bg-yellow-300;
-      @apply p-4;
-      @apply transition-colors;
-      @apply flex;
-      @apply flex-col;
-      @apply justify-between;
-      @apply text-center;
-      @apply overflow-hidden;
+      @apply bg-gray-100
+      duration-500
+      hover:bg-yellow-300
+      p-4
+      transition-colors
+      flex
+      flex-col
+      justify-between
+      text-center
+      overflow-hidden;
     }
   }
 
   &__galleries {
-    @apply max-w-screen-2xl;
-    @apply gap-1;
-    @apply grid-cols-2;
-    @apply grid;
-    @apply md:grid-cols-4;
-    @apply mx-auto;
-    @apply w-full;
+    @apply max-w-screen-2xl
+    gap-1
+    grid-cols-2
+    grid
+    md:grid-cols-4
+    mx-auto
+    w-full;
 
     &__item {
-      @apply list-none;
-      @apply bg-indigo-800;
-      @apply text-white;
-      @apply h-40;
-      @apply p-5;
-      @apply hover:bg-purple-900;
-      @apply transition-colors;
-      @apply duration-500;
-      @apply select-none;
+      @apply list-none
+      bg-indigo-800
+      text-white
+      h-40
+      p-5
+      hover:bg-purple-900
+      transition-colors
+      duration-500
+      select-none;
 
       h3 {
-        @apply font-bold;
-        @apply leading-8;
+        @apply font-bold
+        leading-8;
       }
     }
   }

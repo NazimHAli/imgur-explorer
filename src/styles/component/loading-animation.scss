@@ -116,18 +116,18 @@ $colors: (
 }
 
 .lazy-load {
-  @apply grid;
-  @apply mx-auto;
-  @apply max-w-xs;
-  @apply justify-items-center;
-  @apply mt-4;
+  @apply grid
+ mx-auto
+ max-w-xs
+ justify-items-center
+ mt-4;
 
   &__spinner {
-    @apply animate-spin;
-    @apply -m-1;
-    @apply mr-3;
-    @apply h-10;
-    @apply w-10;
-    @apply text-black;
+    @apply animate-spin
+   -m-1
+   mr-3
+   h-10
+   w-10
+   text-black;
   }
 }
