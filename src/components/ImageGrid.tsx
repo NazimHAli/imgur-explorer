@@ -41,14 +41,12 @@ function ImageGrid(props: {
 
   return (
     <div className="grid-viewport">
-      {state.selectedItem && (
-        <ItemModal
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          selectedItem={state.selectedItem}
-          selectedItemComments={state.selectedItemComments}
-        />
-      )}
+      <ItemModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        selectedItem={state.selectedItem}
+        selectedItemComments={state.selectedItemComments}
+      />
 
       <div className="image-grid">
         {idxsToLoad.map(

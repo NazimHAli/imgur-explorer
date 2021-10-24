@@ -12,13 +12,6 @@ img {
   display: inline-block;
 }
 
-.test {
-  color: black;
-}
-
-.hide-sr {
-  display: none;
-}
 .data-badge[data-count]:after {
   content: attr(data-count);
   position: relative;

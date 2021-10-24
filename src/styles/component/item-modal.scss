@@ -22,7 +22,8 @@
 }
 
 .myModal__Overlay {
-  @apply bg-gray-900
+  @apply bg-black
+  bg-opacity-95
   fixed
   top-0
   mx-auto

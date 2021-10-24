@@ -14,8 +14,6 @@ const SearchToolBar = lazy(() => import("@/components/SearchToolBar"));
 
 function App() {
   const [state, dispatchState] = useReducer(stateReducer, initialState);
-  const showFooter =
-    state.finishedLazyLoading || (state.items.length === 0 && !state.isLoading);
 
   /**
    * Submit search request for new queries
@@ -56,8 +54,8 @@ function App() {
       {/* Without results */}
       {state.items.length === 0 && !state.isLoading && <ImageGridNoResults />}
 
-      {/* Dynamically render footer */}
-      {showFooter && <Footer />}
+      {/* TODO: Investigate why dynamically rendering footer causes full re-render */}
+      <Footer />
     </Suspense>
   );
 }
