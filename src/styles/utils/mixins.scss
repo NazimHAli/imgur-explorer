@@ -1,3 +1,6 @@
+@use "sass:map";
+@use "sass:string";
+
 /*
  *
  * Breakpoints
@@ -17,11 +20,11 @@ $breakpoints: (
   $bk-final-query-str: "";
 
   @if $from {
-    $min-width: map-get($breakpoints, $from);
+    $min-width: map.get($breakpoints, $from);
   }
 
   @if $until {
-    $max-width: map-get($breakpoints, $until) - 1em;
+    $max-width: map.get($breakpoints, $until) - 1em;
   }
 
   @if $min-width != 0 {
@@ -36,9 +39,9 @@ $breakpoints: (
     $bk-final-query-str: "#{$bk-final-query-str} and (#{$and})";
   }
 
-  @if ($media-type == "all" and $bk-final-query-str != "") {
+  @if $media-type == "all" and $bk-final-query-str != "" {
     $media-type: "";
-    $bk-final-query-str: str-slice(unquote($bk-final-query-str), 6);
+    $bk-final-query-str: string.slice(string.unquote($bk-final-query-str), 6);
   }
 
   @media #{$media-type + $bk-final-query-str} {
@@ -94,17 +97,13 @@ $breakpoints: (
   transform: translateY(-50%);
 }
 
+/* stylelint-disable keyframes-name-pattern */
 @mixin keyframes($name) {
-  @-webkit-keyframes #{$name} {
-    @content;
-  }
-  @-moz-keyframes #{$name} {
-    @content;
-  }
   @keyframes #{$name} {
     @content;
   }
 }
+/* stylelint-enable keyframes-name-pattern */
 
 @mixin truncate-lines($maxLines: 1) {
   overflow: hidden;
@@ -115,7 +114,7 @@ $breakpoints: (
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: initial;
-    display: -webkit-box;
+    display: box;
     -webkit-line-clamp: $maxLines;
     -webkit-box-orient: vertical;
   }

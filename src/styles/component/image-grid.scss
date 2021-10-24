@@ -25,10 +25,6 @@
       background-color: #222;
       @apply translate-y-0;
     }
-
-    .card_badges_icons {
-      @apply opacity-100;
-    }
   }
 
   &__img {
@@ -58,6 +54,7 @@
   pb-1
   text-white
   transition-all;
+
   grid-template-rows: 3fr 2fr;
 
   &__title {
