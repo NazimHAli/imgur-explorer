@@ -12,10 +12,10 @@ function renderTags(
         (tag: TypeTag) => (
           <a
             key={tag?.display_name}
-            href="#explore-tags"
+            href="#header-tags"
             data-tag={tag?.name}
             onClick={handleClick}
-            className="explore__tags__item"
+            className="header__tags__item"
           >
             <p className="text-lg font-medium">
               {capitalize(tag?.display_name)}
@@ -28,7 +28,7 @@ function renderTags(
   );
 }
 
-function ExploreTags(props: {
+function HeaderTags(props: {
   dispatchState: Dispatch<Action>;
   galleryTags: State["galleryTags"];
 }) {
@@ -47,14 +47,14 @@ function ExploreTags(props: {
 
   return (
     <>
-      <h2 id="explore-tags" className="header__tags__title">
+      <h2 id="header-tags" className="header__tags__title">
         Explore Tags
       </h2>
-      <div className="explore__tags">
+      <div className="header__tags__list">
         {renderTags(galleryTags, handleClick)}
       </div>
     </>
   );
 }
 
-export default ExploreTags;
+export default HeaderTags;

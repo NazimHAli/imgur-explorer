@@ -1,0 +1,22 @@
+.header__tags__list {
+  @apply gap-1
+      grid
+      py-6
+      grid-cols-4
+      md:grid-cols-5
+      w-full
+      xl:grid-cols-10;
+
+  &__item {
+    @apply bg-gray-100
+        duration-500
+        hover:bg-yellow-300
+        p-4
+        transition-colors
+        flex
+        flex-col
+        justify-between
+        text-center
+        overflow-hidden;
+  }
+}

@@ -1,7 +1,7 @@
 import { getSelectedItem } from "@/utils/dataUtils";
 import { State, Action } from "@/utils/types";
 
-const initialState = {
+const initialState: State = {
   finishedLazyLoading: false,
   galleryTags: {},
   isLoading: true,
@@ -18,7 +18,7 @@ const initialState = {
     window: "all",
   },
   requestError: false,
-  selectedItem: null,
+  selectedItem: undefined,
   selectedItemComments: [],
   selectedTag: {},
 };
@@ -61,7 +61,6 @@ function setTags(state: State, action: Action): State {
   return {
     ...state,
     galleryTags: action?.galleryTags || {},
-    items: action?.items?.length ? action.items : state.items,
   };
 }
 

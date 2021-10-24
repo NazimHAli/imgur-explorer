@@ -1,5 +1,5 @@
 import { ImgurAPI } from "@/services/imgurAPI";
-import { extractImageResults } from "@/utils/dataUtils";
+import { extractImageResults, filterTags } from "@/utils/dataUtils";
 import { Action, State } from "@/utils/types";
 import { Dispatch } from "react";
 
@@ -25,8 +25,10 @@ function _dispatchResponse(
     });
   } else if (method === "tags") {
     dispatchState({
-      galleryTags: response,
-      items: response.items,
+      galleryTags: {
+        galleries: response.galleries,
+        tags: filterTags(response.tags),
+      },
       requestError: false,
       type: "setTags",
     });

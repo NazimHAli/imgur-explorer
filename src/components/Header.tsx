@@ -1,6 +1,6 @@
 import galleryIcon from "@/assets/gallery.svg";
 import profileIcon from "@/assets/profile.svg";
-import ExploreTags from "@/components/ExploreTags";
+import HeaderTags from "@/components/HeaderTags";
 import { Action, State } from "@/utils/types";
 import { Dispatch, RefObject, useRef } from "react";
 
@@ -87,7 +87,7 @@ function Header(props: {
 
   const tagsContainer = (
     <div className="header__tags__container">
-      <ExploreTags
+      <HeaderTags
         dispatchState={dispatchState}
         galleryTags={state.galleryTags}
       />

@@ -11,7 +11,7 @@ export type TypeGallery = {
 export type TypeTag = {
   display_name: string;
   name: string;
-  total_items?: number;
+  total_items: number;
 };
 
 export type Item = {
@@ -40,7 +40,7 @@ export type SelectedComments = Array<Comments>;
 
 export type State = {
   finishedLazyLoading: boolean;
-  galleryTags: { galleries?: []; tags?: [] };
+  galleryTags: { galleries?: TypeGallery[]; tags?: TypeTag[] };
   isLoading: boolean;
   items: Array<Item>;
   requestArgs: {

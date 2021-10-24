@@ -1,4 +1,4 @@
-import { Item, State } from "@/utils/types";
+import { Item, State, TypeTag } from "@/utils/types";
 
 function isValidImageType(text: string): boolean {
   const pattern = /\.(jpg|png)\b/;
@@ -113,11 +113,18 @@ function getSelectedItem(
   });
 }
 
+function filterTags(tagsList: TypeTag[], maxNum = 10): TypeTag[] {
+  return tagsList
+    .filter((tag: TypeTag) => tag.total_items >= 1000)
+    .slice(0, maxNum);
+}
+
 export {
   arrToMatrix,
   capitalize,
   checkNumberIfFloat,
   extractImageResults,
+  filterTags,
   genRandomColor,
   getDateString,
   getSelectedItem,
