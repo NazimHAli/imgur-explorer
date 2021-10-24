@@ -112,7 +112,7 @@
     sm:px-6
     sm:py-4;
 
-    & .modal-comment__nested:nth-child(2) {
+    div:nth-child(2) {
       @apply bg-gray-100;
     }
   }
