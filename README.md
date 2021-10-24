@@ -5,18 +5,20 @@
 [![CodeQL](https://github.com/NazimHAli/imgur-explorer/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/NazimHAli/imgur-explorer/actions/workflows/codeql-analysis.yml)
 [![Unit Tests](https://github.com/NazimHAli/imgur-explorer/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/NazimHAli/imgur-explorer/actions/workflows/unit-tests.yml)
 
-ReactJS + [Imgur API](https://imgur.com/) + [vitejs bundler](https://github.com/vitejs/vite) in TypeScript.
+Example application using ReactJS + [Imgur API](https://imgur.com/) + [vite bundler](https://github.com/vitejs/vite). Fluid & responsive layout.
 
 ## Features
 
 - ReactJS in TypeScript
-- ViteJS
+- Vite (fast production bundler)
+- TailwindCSS
 - Lazy loading & code splitting
 - Image modal
 - [imgur API features](https://api.imgur.com/)
   - Search
   - Sort results
   - Explore tags
+  - Item comments (in modal)
 
 ##### Mocked Data From API
 
@@ -29,7 +31,7 @@ If you don't want to register and use the free Imgur API, it will use mocked dat
 
 ### [Live Demo](https://imgur-explorer.vercel.app/)
 
-![image](https://user-images.githubusercontent.com/26750288/137959059-cdb00104-2c32-4a7e-bc42-d0f680561f4d.png)
+![image](https://user-images.githubusercontent.com/26750288/138617127-bb83802e-17e4-40f9-a774-badb021c8c02.png)
 
 ## Quick start
 
