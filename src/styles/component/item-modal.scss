@@ -5,32 +5,31 @@
   pr-3;
 }
 
-.ReactModal__Content {
-  @apply md:max-w-7xl
-  md:mx-auto
-  top-0;
-
-  &--after-open {
-    .ReactModal__Body {
-      &--open {
-        @apply overflow-hidden;
-      }
-    }
-  }
+.ReactModal__Overlay--after-open.myModal__Overlay {
+  @apply h-full
+  transition-all
+  duration-500
+  opacity-100;
 }
 
-.ReactModal__Overlay {
-  @apply transition-opacity
-  duration-500
-  opacity-0;
+.myModal__Content {
+  @apply md:max-w-7xl
+  md:mx-auto
+  m-4
+  overflow-y-scroll
+  h-full
+  bg-white;
+}
 
-  &--after-open {
-    @apply opacity-100;
-  }
-
-  &--before-close {
-    @apply opacity-0;
-  }
+.myModal__Overlay {
+  @apply bg-gray-900
+  fixed
+  top-0
+  mx-auto
+  w-full
+  opacity-0
+  transition-all
+  duration-500;
 
   .card {
     @apply h-full
@@ -46,6 +45,11 @@
 
   .card-info {
     grid-template-rows: 1fr 2fr;
+
+    &__icons {
+      @apply mx-auto
+      gap-x-8;
+    }
   }
 }
 

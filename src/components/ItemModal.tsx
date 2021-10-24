@@ -36,6 +36,8 @@ function ItemModal(props: {
   return (
     <Modal
       contentLabel="Image Modal"
+      className="myModal__Content"
+      overlayClassName="myModal__Overlay"
       isOpen={isOpen}
       onRequestClose={closeModal}
       preventScroll={true}
