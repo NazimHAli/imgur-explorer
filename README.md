@@ -24,14 +24,15 @@ Example application using ReactJS + [Imgur API](https://imgur.com/) + [vite bund
 
 If you don't want to register and use the free Imgur API, it will use mocked data/saved responses from the API. It's also useful for faster local development so you don't have to make new requests with every HMR update.
 
-##### Google PageSpeed Scores (need to automate to add a badege for live scores)
+##### Google PageSpeed Scores
+###### TODO: automate + add badge for live scores
 
 - Mobile [93/100](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fimgur-explorer.vercel.app%2F&tab=mobile)
 - Desktop [99/100](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fimgur-explorer.vercel.app%2F&tab=desktop)
 
 ### [Live Demo](https://imgur-explorer.vercel.app/)
 
-![image](https://user-images.githubusercontent.com/26750288/138617127-bb83802e-17e4-40f9-a774-badb021c8c02.png)
+![image](https://user-images.githubusercontent.com/26750288/138617442-45625d9d-a92b-4011-ba41-875db8862e31.png)
 
 ## Quick start
 
