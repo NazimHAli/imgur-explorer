@@ -2,11 +2,12 @@
   background-color: $base-color2;
 
   &__top {
-    height: 12rem;
-    padding: 1rem;
-    display: grid;
-    align-content: center;
-    transition: all ease-in-out 500ms;
+    @apply p-4
+    grid
+    content-center
+    transition-all
+    duration-500
+    h-48;
 
     @include breakpoint($from: "md") {
       grid-template-columns: 1fr 4fr 1fr;
@@ -23,7 +24,7 @@
 
   &__logo,
   &__profile {
-    justify-self: center;
+    @apply justify-self-center;
 
     img {
       filter: invert(100%);
@@ -31,28 +32,30 @@
   }
 
   &__logo {
-    width: 100%;
-    max-width: 20rem;
-    display: flex;
-    font-size: 2rem;
-    justify-content: center;
-    font-family: Montserrat;
-    column-gap: 0.5rem;
-    @apply flex-wrap text-white;
+    @apply w-full
+    max-w-xs
+    text-lg
+    justify-center
+    font-sans
+    gap-x-2
+    flex
+    flex-wrap
+    text-white;
 
     @include breakpoint($until: "md") {
-      margin-bottom: 1rem;
+      @apply mb-4;
     }
   }
 
   &__profile {
     @include breakpoint($until: "md") {
-      display: none;
+      @apply hidden;
     }
   }
 
   &__tags {
-    @apply bg-gray-900;
+    @apply bg-gray-900
+    py-4;
 
     &__container {
       @apply flex-col
@@ -61,8 +64,8 @@
       md:items-baseline
       max-w-screen-2xl
       mx-auto
-      p-2
-      lg:p-0
+      px-2
+      lg:px-0
       text-white
       w-full;
     }
