@@ -26,7 +26,7 @@ function ItemModal(props: {
   const { isOpen, setIsOpen, selectedItem, selectedItemComments } = props;
 
   function closeModal(
-    event: MouseEvent<Element, MouseEvent> | KeyboardEvent<Element>
+    event: MouseEvent<Element, globalThis.MouseEvent> | KeyboardEvent<Element>
   ): void {
     setIsOpen(false);
     event.preventDefault();
