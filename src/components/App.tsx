@@ -26,7 +26,7 @@ function App() {
   }, [state.requestArgs.method, state.requestArgs.page]);
 
   return (
-    <Suspense fallback={<></>}>
+    <Suspense fallback={<span></span>}>
       <Header
         dispatchState={dispatchState}
         defaultQuery={state.requestArgs.query || ""}
