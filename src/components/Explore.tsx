@@ -1,21 +1,15 @@
 import ExploreGalleries from "@/components/ExploreGalleries";
-import { Action, State } from "@/utils/types";
-import { Dispatch, useEffect } from "react";
+import { State } from "@/utils/types";
+import { useEffect } from "react";
 
-function Explore(props: {
-  dispatchState: Dispatch<Action>;
-  galleryTags: State["galleryTags"];
-}) {
-  const { dispatchState, galleryTags } = props;
+function Explore(props: { setRequestArgs; galleryTags: State["galleryTags"] }) {
+  const { setRequestArgs, galleryTags } = props;
 
   useEffect(() => {
-    dispatchState({
-      requestArgs: {
-        filter: false,
-        method: "tags",
-        newSearch: true,
-      },
-      type: "submitSearchRequest",
+    setRequestArgs({
+      filter: false,
+      method: "tags",
+      newSearch: true,
     });
   }, []);
 

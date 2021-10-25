@@ -1,27 +1,24 @@
 import { capitalize } from "@/utils/dataUtils";
-import { Action, State } from "@/utils/types";
-import { Dispatch, FormEvent } from "react";
+import { State } from "@/utils/types";
+import { FormEvent } from "react";
 
 function getDispatchArgs(
   actionArg: string,
   event: FormEvent<HTMLSelectElement>
 ) {
   const dispatchArgs = {
-    requestArgs: {
-      filter: true,
-      method: "search",
-      newSearch: true,
-    } as State["requestArgs"],
-    type: "submitSearchRequest",
+    filter: true,
+    method: "search",
+    newSearch: true,
   };
 
   const element = event.target as HTMLSelectElement;
   const displayValue = element.value.toLowerCase();
 
   if (actionArg === "sort") {
-    dispatchArgs.requestArgs.sort = displayValue;
+    dispatchArgs.sort = displayValue;
   } else if (actionArg === "window") {
-    dispatchArgs.requestArgs.window = displayValue;
+    dispatchArgs.window = displayValue;
   }
 
   return dispatchArgs;
@@ -29,11 +26,11 @@ function getDispatchArgs(
 
 function SearchToolBarDropdown(props: {
   actionArg: string;
-  dispatchState: Dispatch<Action>;
+  setRequestArgs;
   options: string[];
   requestArgs: State["requestArgs"];
 }): JSX.Element {
-  const { options, actionArg, dispatchState, requestArgs } = props;
+  const { options, actionArg, setRequestArgs, requestArgs } = props;
   const selectedValue =
     actionArg === "sort"
       ? capitalize(requestArgs.sort)
@@ -41,9 +38,9 @@ function SearchToolBarDropdown(props: {
   const renderListItems = options.length > 0;
 
   const handleOnClick = (event: FormEvent<HTMLSelectElement>) => {
-    const dispatchArgs: Action = getDispatchArgs(actionArg, event);
+    const dispatchArgs = getDispatchArgs(actionArg, event);
 
-    dispatchState(dispatchArgs);
+    setRequestArgs(dispatchArgs);
     event.preventDefault();
   };
 

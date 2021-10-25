@@ -1,6 +1,7 @@
+import { GlobalContext } from "@/components/GlobalContext";
 import { capitalize } from "@/utils/dataUtils";
-import { Action, State, TypeTag } from "@/utils/types";
-import { Dispatch, MouseEvent, MouseEventHandler } from "react";
+import { State, TypeTag } from "@/utils/types";
+import { MouseEvent, MouseEventHandler, useContext } from "react";
 
 function renderTags(
   galleryTags: State["galleryTags"],
@@ -28,19 +29,13 @@ function renderTags(
   );
 }
 
-function HeaderTags(props: {
-  dispatchState: Dispatch<Action>;
-  galleryTags: State["galleryTags"];
-}) {
-  const { dispatchState, galleryTags } = props;
+function HeaderTags() {
+  const { setRequestArgs, state } = useContext(GlobalContext);
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    dispatchState({
-      requestArgs: {
-        method: "tagName",
-        tagName: event.currentTarget.dataset.tag,
-      },
-      type: "setTagName",
+    setRequestArgs({
+      method: "tagName",
+      tagName: event.currentTarget.dataset.tag,
     });
     event.preventDefault();
   };
@@ -51,7 +46,7 @@ function HeaderTags(props: {
         Explore Tags
       </h2>
       <div className="header__tags__list">
-        {renderTags(galleryTags, handleClick)}
+        {renderTags(state.galleryTags, handleClick)}
       </div>
     </>
   );

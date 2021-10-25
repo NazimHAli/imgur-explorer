@@ -1,4 +1,4 @@
-type selectedTag = {
+export type selectedTag = {
   items?: Array<string>;
 };
 
@@ -83,4 +83,10 @@ export type TypeSearchResponse = {
   items: Item[];
   status: number;
   success: boolean;
+};
+
+export type TypeGlobalContext = {
+  state: State;
+  addItems: (items: Item[]) => void;
+  setRequestArgs: (requestArgs: State["requestArgs"]) => void;
 };

@@ -24,6 +24,7 @@ class ImgurAPI {
     // Create instance once
     if (ImgurAPI.instance === undefined) {
       ImgurAPI.instance = new ImgurAPI();
+      console.log("Created new API instance");
     }
 
     ImgurAPI.instance.requestArgs = requestArgs;

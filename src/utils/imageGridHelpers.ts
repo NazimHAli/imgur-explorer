@@ -1,5 +1,5 @@
 import { imgObserver } from "@/components/ImageGrid";
-import { Action, State } from "@/utils/types";
+import { State } from "@/utils/types";
 import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
 
 function HandleImageLazyLoad(
@@ -25,7 +25,7 @@ function HandleNewItems(
   isIntersecting: boolean,
   idxsToLoad: number[],
   state: State,
-  dispatchState: Dispatch<Action>,
+  setRequestArgs,
   setidxsToLoad: Dispatch<SetStateAction<number[]>>
 ): void {
   useEffect(() => {
@@ -38,17 +38,18 @@ function HandleNewItems(
       const newIdxs = [...Array(idxsToLoad.length + 10).keys()];
 
       if (state.items.length - newIdxs.length <= 20) {
-        dispatchState({
+        setRequestArgs({
+          filter: true,
+          method: "search",
           newSearch: false,
           page: (state.requestArgs?.page || 0) + 1,
-          type: "submitSearchRequest",
         });
       }
 
       if (newIdxs.length <= state.items.length) {
         setidxsToLoad(newIdxs);
       } else {
-        dispatchState({ finishedLazyLoading: true, type: "setItems" });
+        setRequestArgs({ finishedLazyLoading: true });
       }
     }
   }, [isIntersecting]);
