@@ -1,5 +1,4 @@
-import { GlobalContext } from "@/components/GlobalContext";
-import { lazy, Suspense, useContext } from "react";
+import { lazy, Suspense } from "react";
 
 const Explore = lazy(() => import("@/components/Explore"));
 const Footer = lazy(() => import("@/components/Footer"));
@@ -8,21 +7,11 @@ const ImageGrid = lazy(() => import("@/components/ImageGrid"));
 const SearchToolBar = lazy(() => import("@/components/SearchToolBar"));
 
 function App() {
-  const { setRequestArgs, state } = useContext(GlobalContext);
-
   return (
     <Suspense fallback={<span></span>}>
       <Header />
-      <Explore
-        setRequestArgs={setRequestArgs}
-        galleryTags={state.galleryTags}
-      />
-
-      {/* Don't display toolbar for tagName searches */}
-      {state.requestArgs.query?.length > 0 && (
-        <SearchToolBar setRequestArgs={setRequestArgs} state={state} />
-      )}
-
+      <Explore />
+      <SearchToolBar />
       <ImageGrid />
 
       {/* TODO: Investigate why dynamically rendering footer causes full re-render */}

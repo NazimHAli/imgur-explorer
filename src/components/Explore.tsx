@@ -1,9 +1,9 @@
 import ExploreGalleries from "@/components/ExploreGalleries";
-import { State } from "@/utils/types";
-import { useEffect } from "react";
+import { GlobalContext } from "@/components/GlobalContext";
+import { useContext, useEffect } from "react";
 
-function Explore(props: { setRequestArgs; galleryTags: State["galleryTags"] }) {
-  const { setRequestArgs, galleryTags } = props;
+function Explore() {
+  const { setRequestArgs, state } = useContext(GlobalContext);
 
   useEffect(() => {
     setRequestArgs({
@@ -15,7 +15,7 @@ function Explore(props: { setRequestArgs; galleryTags: State["galleryTags"] }) {
 
   return (
     <div className="explore">
-      <ExploreGalleries galleryTags={galleryTags} />
+      <ExploreGalleries galleryTags={state.galleryTags} />
     </div>
   );
 }

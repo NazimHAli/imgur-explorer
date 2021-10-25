@@ -1,8 +1,9 @@
+import { GlobalContext } from "@/components/GlobalContext";
 import SearchToolBarDropdown from "@/components/SearchToolBarDropdown";
-import { State } from "@/utils/types";
+import { useContext } from "react";
 
-function SearchToolBar(props: { setRequestArgs; state: State }): JSX.Element {
-  const { setRequestArgs, state } = props;
+function SearchToolBar(): JSX.Element {
+  const { setRequestArgs, state } = useContext(GlobalContext);
 
   // imgur API only allows 'window' options if sort == 'top'
   const enableSort = state.requestArgs.query.length > 0;
