@@ -57,6 +57,16 @@ function ImageGrid(props: {
               />
             )
         )}
+
+        {state.isLoading &&
+          Array.from(Array(10)).map((_, index) => (
+            <div className="loading-skeleton" key={index}>
+              <div className="loading-skeleton__anim">
+                <div className="loading-skeleton__square"></div>
+                <div className="loading-skeleton__bottom"></div>
+              </div>
+            </div>
+          ))}
       </div>
 
       <span ref={elementObserverRef} className="block w-px h-px"></span>
