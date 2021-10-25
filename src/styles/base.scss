@@ -9,14 +9,6 @@ img {
   @apply max-w-full h-auto align-middle inline-block;
 }
 
-.test {
-  color: black;
-}
-
-.hide-sr {
-  display: none;
-}
-
 .data-badge[data-count]::after {
   content: attr(data-count);
   @apply relative -top-8 -right-5 text-base;

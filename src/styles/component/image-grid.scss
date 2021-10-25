@@ -70,3 +70,28 @@
     opacity-70;
   }
 }
+
+.loading-skeleton {
+  @apply h-80 
+  flex 
+  flex-col 
+  border 
+  border-blue-100 
+  shadow 
+  rounded-sm 
+  p-4 
+  w-full 
+  mx-auto;
+
+  &__anim {
+    @apply flex flex-col animate-pulse;
+  }
+
+  &__square {
+    @apply bg-gray-200 h-52 mb-2;
+  }
+
+  &__bottom {
+    @apply h-16 bg-gray-300 rounded;
+  }
+}

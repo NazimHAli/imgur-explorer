@@ -6,10 +6,6 @@ const Explore = lazy(() => import("@/components/Explore"));
 const Footer = lazy(() => import("@/components/Footer"));
 const Header = lazy(() => import("@/components/Header"));
 const ImageGrid = lazy(() => import("@/components/ImageGrid"));
-const ImageGridNoResults = lazy(
-  () => import("@/components/ImageGridNoResults")
-);
-const LoadingAnimation = lazy(() => import("@/components/LoadingAnimation"));
 const SearchToolBar = lazy(() => import("@/components/SearchToolBar"));
 
 function App() {
@@ -23,12 +19,14 @@ function App() {
 
   useEffect(() => {
     if (state.requestArgs.method.length > 0) {
-      handleImgurServiceRequests(dispatchState, state);
+      setTimeout(() => {
+        handleImgurServiceRequests(dispatchState, state);
+      }, 3000);
     }
   }, [state.requestArgs.method, state.requestArgs.page]);
 
   return (
-    <Suspense fallback={<span></span>}>
+    <Suspense fallback={<></>}>
       <Header
         dispatchState={dispatchState}
         defaultQuery={state.requestArgs.query || ""}
@@ -36,23 +34,12 @@ function App() {
       />
       <Explore dispatchState={dispatchState} galleryTags={state.galleryTags} />
 
-      {/* Don't display toolbar for tagName searches */}
+      {/* Display toolbar for searches with queries */}
       {state.requestArgs.query?.length > 0 && (
         <SearchToolBar dispatchState={dispatchState} state={state} />
       )}
 
-      {/* Loading */}
-      {state.isLoading && (
-        <>
-          <LoadingAnimation />
-          <div className="full-vh" />
-        </>
-      )}
-
       <ImageGrid dispatchState={dispatchState} state={state} />
-
-      {/* Without results */}
-      {state.items.length === 0 && !state.isLoading && <ImageGridNoResults />}
 
       {/* TODO: Investigate why dynamically rendering footer causes full re-render */}
       <Footer />
