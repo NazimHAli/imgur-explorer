@@ -1,4 +1,4 @@
-import { GlobalContext } from "@/components/GlobalContext";
+import { GlobalContext } from "@/state/GlobalContext";
 import { capitalize } from "@/utils/dataUtils";
 import { State, TypeTag } from "@/utils/types";
 import { MouseEvent, MouseEventHandler, useContext } from "react";

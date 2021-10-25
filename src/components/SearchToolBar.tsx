@@ -1,5 +1,5 @@
-import { GlobalContext } from "@/components/GlobalContext";
 import SearchToolBarDropdown from "@/components/SearchToolBarDropdown";
+import { GlobalContext } from "@/state/GlobalContext";
 import { useContext } from "react";
 
 function SearchToolBar(): JSX.Element {

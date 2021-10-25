@@ -1,5 +1,5 @@
 import ExploreGalleries from "@/components/ExploreGalleries";
-import { GlobalContext } from "@/components/GlobalContext";
+import { GlobalContext } from "@/state/GlobalContext";
 import { useContext, useEffect } from "react";
 
 function Explore() {

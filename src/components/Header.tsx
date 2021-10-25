@@ -1,7 +1,7 @@
 import imgurLogo from "@/assets/imgur.svg";
 import profileIcon from "@/assets/profile.svg";
-import { GlobalContext } from "@/components/GlobalContext";
 import HeaderTags from "@/components/HeaderTags";
+import { GlobalContext } from "@/state/GlobalContext";
 import { RefObject, useContext, useRef } from "react";
 
 function handleClearQuery(

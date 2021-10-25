@@ -1,4 +1,4 @@
-import { GlobalContext } from "@/components/GlobalContext";
+import { GlobalContext } from "@/state/GlobalContext";
 import { HandleNewItems, HandleImageLazyLoad } from "@/utils/imageGridHelpers";
 import { useIntersectionObserver } from "@/utils/useIntersectionObserver";
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
