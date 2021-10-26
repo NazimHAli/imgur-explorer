@@ -1,6 +1,6 @@
-import { Item } from "@/utils/types";
+import { TypeItem } from "@/utils/types";
 
-function addItems(setState, items: Item[]): void {
+function addItems(setState, items: TypeItem[]): void {
   setState((currentState) => {
     return {
       ...currentState,

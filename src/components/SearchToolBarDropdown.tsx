@@ -1,5 +1,5 @@
 import { capitalize } from "@/utils/dataUtils";
-import { State } from "@/utils/types";
+import { TypeState } from "@/utils/types";
 import { FormEvent } from "react";
 
 function getDispatchArgs(
@@ -28,7 +28,7 @@ function SearchToolBarDropdown(props: {
   actionArg: string;
   setRequestArgs;
   options: string[];
-  requestArgs: State["requestArgs"];
+  requestArgs: TypeState["requestArgs"];
 }): JSX.Element {
   const { options, actionArg, setRequestArgs, requestArgs } = props;
   const selectedValue =

@@ -1,4 +1,6 @@
-export type selectedTag = {
+import { Dispatch, SetStateAction } from "react";
+
+export type TypeselectedTag = {
   items?: Array<string>;
 };
 
@@ -14,7 +16,7 @@ export type TypeTag = {
   total_items: number;
 };
 
-export type Item = {
+export type TypeItem = {
   account_url: string;
   comment_count: number;
   downs: number;
@@ -26,9 +28,9 @@ export type Item = {
   views: number;
 };
 
-export type Comments = {
+export type TypeComments = {
   author: string;
-  children: Array<Comments>;
+  children: Array<TypeComments>;
   comment: string;
   datetime: number;
   downs: number;
@@ -36,13 +38,13 @@ export type Comments = {
   ups: number;
 };
 
-export type SelectedComments = Array<Comments>;
+export type SelectedComments = Array<TypeComments>;
 
-export type State = {
+export type TypeState = {
   finishedLazyLoading: boolean;
   galleryTags: { galleries?: TypeGallery[]; tags?: TypeTag[] };
   isLoading: boolean;
-  items: Array<Item>;
+  items: Array<TypeItem>;
   requestArgs: {
     filter: boolean;
     method: string;
@@ -55,38 +57,22 @@ export type State = {
     window: string;
   };
   requestError: boolean;
-  selectedItem: Item | undefined;
+  selectedItem: TypeItem | undefined;
   selectedItemComments: SelectedComments;
-  selectedTag: selectedTag;
-};
-
-export type Action = {
-  finishedLazyLoading?: State["finishedLazyLoading"];
-  galleryTags?: State["galleryTags"];
-  items?: State["items"];
-  loading?: State["isLoading"];
-  method?: State["requestArgs"]["method"];
-  newSearch?: State["requestArgs"]["newSearch"];
-  page?: State["requestArgs"]["page"];
-  query?: State["requestArgs"]["query"];
-  requestArgs?: Partial<State["requestArgs"]>;
-  requestError?: boolean;
-  selectedItemComments?: State["selectedItemComments"];
-  sort?: State["requestArgs"]["sort"];
-  tagName?: State["requestArgs"]["tagName"];
-  type: string | null;
-  window?: State["requestArgs"]["window"];
+  selectedTag: TypeselectedTag;
 };
 
 export type TypeSearchResponse = {
-  data: Item[] | SelectedComments;
-  items: Item[];
+  data: TypeItem[] | SelectedComments;
+  items: TypeItem[];
   status: number;
   success: boolean;
 };
 
 export type TypeGlobalContext = {
-  setState: () => void;
-  state: State;
-  setRequestArgs: (requestArgs: Partial<State["requestArgs"]>) => void;
+  isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  setState: Dispatch<SetStateAction<TypeState>>;
+  state: TypeState;
+  setRequestArgs: (requestArgs: Partial<TypeState["requestArgs"]>) => void;
 };

@@ -1,10 +1,10 @@
 import { useGlobalContext } from "@/state/GlobalContext";
 import { capitalize } from "@/utils/dataUtils";
-import { State, TypeTag } from "@/utils/types";
+import { TypeState, TypeTag } from "@/utils/types";
 import { MouseEvent, MouseEventHandler } from "react";
 
 function renderTags(
-  galleryTags: State["galleryTags"],
+  galleryTags: TypeState["galleryTags"],
   handleClick: MouseEventHandler<HTMLAnchorElement> | undefined
 ) {
   return (
@@ -36,6 +36,7 @@ function HeaderTags() {
     setRequestArgs({
       filter: true,
       method: "tagName",
+      newSearch: true,
       tagName: event.currentTarget.dataset.tag || "",
     });
     event.preventDefault();

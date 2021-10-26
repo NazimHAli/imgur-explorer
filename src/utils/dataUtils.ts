@@ -1,4 +1,4 @@
-import { Item, State, TypeTag } from "@/utils/types";
+import { TypeItem, TypeState, TypeTag } from "@/utils/types";
 
 function isValidImageType(text: string): boolean {
   const pattern = /\.(jpg|png)\b/;
@@ -12,7 +12,10 @@ function isValidImageType(text: string): boolean {
  * @param size
  * @returns array
  */
-function arrToMatrix(arr: State["items"], size: number): Array<State["items"]> {
+function arrToMatrix(
+  arr: TypeState["items"],
+  size: number
+): Array<TypeState["items"]> {
   return Array.from({ length: Math.ceil(arr.length / size) }, (_v, i) =>
     arr.slice(i * size, i * size + size)
   );
@@ -37,7 +40,7 @@ function checkNumberIfFloat(num: number): boolean {
  * @param images
  * @param newSize
  */
-function updateImageSize(images: State["items"], newSize = "l") {
+function updateImageSize(images: TypeState["items"], newSize = "l") {
   const imgJPG = `${newSize}.jpg`;
   const imgPNG = `${newSize}.png`;
 
@@ -60,8 +63,8 @@ function updateImageSize(images: State["items"], newSize = "l") {
  * @param response
  * @returns array
  */
-function extractImageResults(response: State["items"]) {
-  let resultImages: State["items"] = [];
+function extractImageResults(response: TypeState["items"]) {
+  let resultImages: TypeState["items"] = [];
 
   if (!response || !response.length) {
     return resultImages;
@@ -70,7 +73,7 @@ function extractImageResults(response: State["items"]) {
   const rawImageResults = response.filter((res) => res.images);
 
   resultImages = rawImageResults.filter((res) => {
-    return res.images && isValidImageType(res.images[0].link);
+    return res.images?.length && isValidImageType(res.images[0].link);
   });
 
   return updateImageSize(resultImages);
@@ -106,8 +109,8 @@ function getDateString(datetime: number): string | null {
 
 function getSelectedItem(
   selectedId: string,
-  items: Array<Item>
-): Item | undefined {
+  items: Array<TypeItem>
+): TypeItem | undefined {
   return items.find((item) => {
     return item.id === selectedId;
   });
@@ -130,7 +133,7 @@ function filterTags(tagsList: TypeTag[], maxNum = 10) {
   return selectRandomItems(tagsList, maxNum);
 }
 
-function filterNewResults(response: any, state: State) {
+function filterNewResults(response: any, state: TypeState) {
   response = state.requestArgs.filter
     ? extractImageResults(response)
     : response;

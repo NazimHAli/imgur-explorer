@@ -1,6 +1,6 @@
-import { State, TypeGallery } from "@/utils/types";
+import { TypeState, TypeGallery } from "@/utils/types";
 
-function renderGallery(galleryTags: State["galleryTags"]): JSX.Element {
+function renderGallery(galleryTags: TypeState["galleryTags"]): JSX.Element {
   return (
     <div className="explore__galleries">
       {Array.from(galleryTags?.galleries ? galleryTags.galleries : []).map(
@@ -19,7 +19,7 @@ function renderGallery(galleryTags: State["galleryTags"]): JSX.Element {
   );
 }
 
-function ExploreGalleries(props: { galleryTags: State["galleryTags"] }) {
+function ExploreGalleries(props: { galleryTags: TypeState["galleryTags"] }) {
   const { galleryTags } = props;
 
   return (

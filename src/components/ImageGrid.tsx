@@ -10,7 +10,7 @@ const ImageGridCard = lazy(() => import("@/components/ImageGridCard"));
 export const imgObserver = new ObserveElementsInView();
 
 function ImageGrid(): JSX.Element {
-  const { setRequestArgs, state } = useGlobalContext();
+  const { setRequestArgs, state, isLoading } = useGlobalContext();
   const [idxsToLoad, setidxsToLoad] = useState([0, 1, 2, 3, 4]);
 
   const cardImgRef = HandleImageLazyLoad(state, setidxsToLoad);

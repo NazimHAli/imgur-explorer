@@ -1,6 +1,6 @@
 import ItemModalComments from "@/components/ItemModalComments";
 import { truncateText } from "@/utils/dataUtils";
-import { Item, SelectedComments } from "@/utils/types";
+import { TypeItem, SelectedComments } from "@/utils/types";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { KeyboardEvent, MouseEvent } from "react";
 import { ThumbsUp, MessageSquare, Eye, Icon } from "react-feather";
@@ -20,7 +20,7 @@ function iconWithDataBadge(dataCount: number, TheIcon: Icon): JSX.Element {
 function ItemModal(props: {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  selectedItem?: Item;
+  selectedItem?: TypeItem;
   selectedItemComments: SelectedComments;
 }): JSX.Element {
   const { isOpen, setIsOpen, selectedItem, selectedItemComments } = props;

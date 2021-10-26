@@ -1,6 +1,6 @@
-import { State } from "@/utils/types";
+import { TypeState } from "@/utils/types";
 
-const initialState: State = {
+const initialState: TypeState = {
   finishedLazyLoading: false,
   galleryTags: {},
   isLoading: true,

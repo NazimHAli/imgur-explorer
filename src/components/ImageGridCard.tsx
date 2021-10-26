@@ -1,12 +1,12 @@
 import { truncateText } from "@/utils/dataUtils";
-import { Item } from "@/utils/types";
+import { TypeItem } from "@/utils/types";
 import { memo, Ref } from "react";
 import { MessageSquare, ThumbsUp, Eye } from "react-feather";
 
 function ImageGridCard(props: {
   setRequestArgs;
   imgRef: Ref<HTMLImageElement>;
-  item: Item;
+  item: TypeItem;
 }) {
   const { imgRef, item, setRequestArgs } = props;
 
