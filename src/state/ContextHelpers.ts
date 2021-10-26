@@ -22,7 +22,7 @@ function addComments(setState, response): void {
 }
 
 function handleRespose(method, setState, response): void {
-  if (method === "search") {
+  if (method === "search" || method === "tagName") {
     addItems(setState, response);
   } else if (method === "tags") {
     addTags(setState, response);

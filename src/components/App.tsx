@@ -25,6 +25,8 @@ function App() {
           response = filterNewResults(response, state);
         } else if (method === "tags") {
           response = { ...response, tags: filterTags(response?.tags) };
+        } else if (method === "tagName") {
+          response = filterNewResults(response.items, state);
         }
         handleRespose(method, setState, response);
       });
@@ -33,6 +35,8 @@ function App() {
     state.requestArgs.method,
     state.requestArgs.query,
     state.requestArgs.page,
+    state.requestArgs.sort,
+    state.requestArgs.window,
   ]);
 
   return (

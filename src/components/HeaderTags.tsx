@@ -34,6 +34,7 @@ function HeaderTags() {
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     setRequestArgs({
+      filter: true,
       method: "tagName",
       tagName: event.currentTarget.dataset.tag || "",
     });
