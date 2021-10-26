@@ -1,11 +1,10 @@
-import { ImgurAPI } from "@/services/imgurAPI";
-import { handleRespose } from "@/state/ContextHelpers";
 import { initialState } from "@/state/initialState";
-import { State, TypeGlobalContext } from "@/utils/types";
-import { createContext, FC, useEffect, useState } from "react";
+import { TypeGlobalContext } from "@/utils/types";
+import { createContext, FC, useContext, useState } from "react";
 
-export const GlobalContext = createContext<TypeGlobalContext>({
+const GlobalContext = createContext<TypeGlobalContext>({
   /* eslint-disable @typescript-eslint/no-empty-function */
+  setState: () => {},
   setRequestArgs: () => {},
   /* eslint-enable @typescript-eslint/no-empty-function */
   state: initialState,
@@ -14,7 +13,7 @@ export const GlobalContext = createContext<TypeGlobalContext>({
 const GlobalContextProvider: FC = (props) => {
   const [state, setState] = useState(initialState);
 
-  const setRequestArgs = (requestArgs: State["requestArgs"]) => {
+  const setRequestArgs = (requestArgs) => {
     setState((currentState) => {
       return {
         ...currentState,
@@ -28,24 +27,10 @@ const GlobalContextProvider: FC = (props) => {
   };
 
   const contextValue: TypeGlobalContext = {
+    setState: setState,
     setRequestArgs: setRequestArgs,
     state: state,
   };
-
-  useEffect(() => {
-    const method = state.requestArgs.method;
-
-    if (method.length > 0) {
-      const imgurClient = ImgurAPI.getInstance(state.requestArgs);
-      imgurClient.methodDispatcher(method).then((response) => {
-        handleRespose(method, setState, response);
-      });
-    }
-  }, [
-    state.requestArgs.method,
-    state.requestArgs.query,
-    state.requestArgs.page,
-  ]);
 
   return (
     <GlobalContext.Provider value={contextValue}>
@@ -54,4 +39,9 @@ const GlobalContextProvider: FC = (props) => {
   );
 };
 
-export default GlobalContextProvider;
+const useGlobalContext = () => {
+  const context = useContext(GlobalContext);
+  return context;
+};
+
+export { GlobalContextProvider, useGlobalContext };

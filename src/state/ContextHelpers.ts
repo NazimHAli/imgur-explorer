@@ -1,17 +1,10 @@
-import { extractImageResults } from "@/utils/dataUtils";
 import { Item } from "@/utils/types";
 
 function addItems(setState, items: Item[]): void {
   setState((currentState) => {
-    items = currentState.requestArgs.filter
-      ? extractImageResults(items)
-      : items;
-
     return {
       ...currentState,
-      items: currentState.requestArgs.newSearch
-        ? items
-        : currentState.items.concat(items),
+      items: items,
     };
   });
 }

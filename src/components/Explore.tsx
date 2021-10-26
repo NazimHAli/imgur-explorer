@@ -1,9 +1,9 @@
 import ExploreGalleries from "@/components/ExploreGalleries";
-import { GlobalContext } from "@/state/GlobalContext";
-import { useContext, useEffect } from "react";
+import { useGlobalContext } from "@/state/GlobalContext";
+import { memo, useEffect } from "react";
 
 function Explore() {
-  const { setRequestArgs, state } = useContext(GlobalContext);
+  const { setRequestArgs, state } = useGlobalContext();
 
   useEffect(() => {
     setRequestArgs({
@@ -20,4 +20,4 @@ function Explore() {
   );
 }
 
-export default Explore;
+export default memo(Explore);

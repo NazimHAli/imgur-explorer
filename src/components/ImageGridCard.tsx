@@ -1,6 +1,6 @@
 import { truncateText } from "@/utils/dataUtils";
 import { Item } from "@/utils/types";
-import { Ref } from "react";
+import { memo, Ref } from "react";
 import { MessageSquare, ThumbsUp, Eye } from "react-feather";
 
 function ImageGridCard(props: {
@@ -53,4 +53,4 @@ function ImageGridCard(props: {
   );
 }
 
-export default ImageGridCard;
+export default memo(ImageGridCard);

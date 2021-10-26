@@ -1,7 +1,7 @@
-import { GlobalContext } from "@/state/GlobalContext";
+import { useGlobalContext } from "@/state/GlobalContext";
 import { capitalize } from "@/utils/dataUtils";
 import { State, TypeTag } from "@/utils/types";
-import { MouseEvent, MouseEventHandler, useContext } from "react";
+import { MouseEvent, MouseEventHandler } from "react";
 
 function renderTags(
   galleryTags: State["galleryTags"],
@@ -30,12 +30,12 @@ function renderTags(
 }
 
 function HeaderTags() {
-  const { setRequestArgs, state } = useContext(GlobalContext);
+  const { setRequestArgs, state } = useGlobalContext();
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     setRequestArgs({
       method: "tagName",
-      tagName: event.currentTarget.dataset.tag,
+      tagName: event.currentTarget.dataset.tag || "",
     });
     event.preventDefault();
   };

@@ -1,8 +1,8 @@
 import imgurLogo from "@/assets/imgur.svg";
 import profileIcon from "@/assets/profile.svg";
 import HeaderTags from "@/components/HeaderTags";
-import { GlobalContext } from "@/state/GlobalContext";
-import { RefObject, useContext, useRef } from "react";
+import { useGlobalContext } from "@/state/GlobalContext";
+import { memo, RefObject, useRef } from "react";
 
 function handleClearQuery(
   defaultQuery: string,
@@ -15,7 +15,7 @@ function handleClearQuery(
 
 function Header(): JSX.Element {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { setRequestArgs, state } = useContext(GlobalContext);
+  const { setRequestArgs, state } = useGlobalContext();
 
   function _handleSubmit(event: { preventDefault: () => void }) {
     const isValid =
@@ -98,4 +98,4 @@ function Header(): JSX.Element {
   );
 }
 
-export default Header;
+export default memo(Header);

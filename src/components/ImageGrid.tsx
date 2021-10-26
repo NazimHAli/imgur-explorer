@@ -1,8 +1,8 @@
-import { GlobalContext } from "@/state/GlobalContext";
+import { useGlobalContext } from "@/state/GlobalContext";
 import { HandleNewItems, HandleImageLazyLoad } from "@/utils/imageGridHelpers";
 import { useIntersectionObserver } from "@/utils/useIntersectionObserver";
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
-import { lazy, useContext, useEffect, useRef, useState } from "react";
+import { lazy, useEffect, useRef, useState } from "react";
 
 const ItemModal = lazy(() => import("@/components/ItemModal"));
 const ImageGridCard = lazy(() => import("@/components/ImageGridCard"));
@@ -10,10 +10,10 @@ const ImageGridCard = lazy(() => import("@/components/ImageGridCard"));
 export const imgObserver = new ObserveElementsInView();
 
 function ImageGrid(): JSX.Element {
-  const { setRequestArgs, state } = useContext(GlobalContext);
+  const { setRequestArgs, state } = useGlobalContext();
   const [idxsToLoad, setidxsToLoad] = useState([0, 1, 2, 3, 4]);
-  const cardImgRef = HandleImageLazyLoad(state, setidxsToLoad);
 
+  const cardImgRef = HandleImageLazyLoad(state, setidxsToLoad);
   const elementObserverRef = useRef<HTMLElement>(null);
   const entry = useIntersectionObserver(elementObserverRef);
   const isIntersecting = entry?.isIntersecting || false;

@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, memo } from "react";
 
 const FooterBottom = lazy(() => import("@/components/FooterBottom"));
 const FooterRight = lazy(() => import("@/components/FooterRight"));
@@ -28,4 +28,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default memo(Footer);

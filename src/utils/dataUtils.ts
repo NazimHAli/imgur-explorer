@@ -113,10 +113,32 @@ function getSelectedItem(
   });
 }
 
-function filterTags(tagsList: TypeTag[], maxNum = 10): TypeTag[] {
-  return tagsList
-    .filter((tag: TypeTag) => tag.total_items >= 1000)
-    .slice(0, maxNum);
+function selectRandomItems(arr: TypeTag[], maxNum = 1) {
+  let arrLen = arr.length;
+
+  while (arrLen) {
+    const randomItem = Math.floor(Math.random() * arrLen--);
+    [arr[arrLen], arr[randomItem]] = [arr[randomItem], arr[arrLen]];
+  }
+
+  return arr.slice(0, maxNum);
+}
+
+function filterTags(tagsList: TypeTag[], maxNum = 10) {
+  tagsList = tagsList.filter((tag) => tag.total_items >= 1000).slice(0, 1000);
+
+  return selectRandomItems(tagsList, maxNum);
+}
+
+function filterNewResults(response: any, state: State) {
+  response = state.requestArgs.filter
+    ? extractImageResults(response)
+    : response;
+
+  response = state.requestArgs.newSearch
+    ? response
+    : state.items.concat(response);
+  return response;
 }
 
 export {
@@ -124,6 +146,7 @@ export {
   capitalize,
   checkNumberIfFloat,
   extractImageResults,
+  filterNewResults,
   filterTags,
   genRandomColor,
   getDateString,

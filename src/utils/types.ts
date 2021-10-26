@@ -86,6 +86,7 @@ export type TypeSearchResponse = {
 };
 
 export type TypeGlobalContext = {
+  setState: () => void;
   state: State;
   setRequestArgs: (requestArgs: State["requestArgs"]) => void;
 };
