@@ -1,5 +1,5 @@
 import { capitalize } from "@/utils/dataUtils";
-import { TypeState } from "@/utils/types";
+import { TypeGlobalContext, TypeState } from "@/utils/types";
 import { FormEvent } from "react";
 
 function getDispatchArgs(
@@ -26,7 +26,7 @@ function getDispatchArgs(
 
 function SearchToolBarDropdown(props: {
   actionArg: string;
-  setRequestArgs;
+  setRequestArgs: TypeGlobalContext["setRequestArgs"];
   options: string[];
   requestArgs: TypeState["requestArgs"];
 }): JSX.Element {

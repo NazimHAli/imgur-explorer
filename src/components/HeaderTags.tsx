@@ -37,6 +37,7 @@ function HeaderTags() {
       filter: true,
       method: "tagName",
       newSearch: true,
+      query: "",
       tagName: event.currentTarget.dataset.tag || "",
     });
     event.preventDefault();
