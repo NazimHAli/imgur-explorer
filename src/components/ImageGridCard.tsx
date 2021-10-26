@@ -1,13 +1,13 @@
 import { truncateText } from "@/utils/dataUtils";
-import { TypeItem } from "@/utils/types";
+import { TypeGlobalContext, TypeItem } from "@/utils/types";
 import { memo, Ref } from "react";
 import { MessageSquare, ThumbsUp, Eye } from "react-feather";
 
 function ImageGridCard(props: {
-  setRequestArgs;
+  setRequestArgs: TypeGlobalContext["setRequestArgs"];
   imgRef: Ref<HTMLImageElement>;
   item: TypeItem;
-}) {
+}): JSX.Element {
   const { imgRef, item, setRequestArgs } = props;
 
   const imageInfo = (

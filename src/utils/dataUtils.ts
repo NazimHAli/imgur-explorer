@@ -133,7 +133,7 @@ function filterTags(tagsList: TypeTag[], maxNum = 10) {
   return selectRandomItems(tagsList, maxNum);
 }
 
-function filterNewResults(response: any, state: TypeState) {
+function filterNewResults(response, state: TypeState) {
   response = state.requestArgs.filter
     ? extractImageResults(response)
     : response;

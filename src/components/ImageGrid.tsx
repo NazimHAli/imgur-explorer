@@ -10,7 +10,7 @@ const ImageGridCard = lazy(() => import("@/components/ImageGridCard"));
 export const imgObserver = new ObserveElementsInView();
 
 function ImageGrid(): JSX.Element {
-  const { setRequestArgs, state, isLoading } = useGlobalContext();
+  const { setRequestArgs, state } = useGlobalContext();
   const [idxsToLoad, setidxsToLoad] = useState([0, 1, 2, 3, 4]);
 
   const cardImgRef = HandleImageLazyLoad(state, setidxsToLoad);
@@ -35,12 +35,14 @@ function ImageGrid(): JSX.Element {
 
   return (
     <div className="grid-viewport">
-      <ItemModal
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        selectedItem={state.selectedItem}
-        selectedItemComments={state.selectedItemComments}
-      />
+      {state.selectedItem && (
+        <ItemModal
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          selectedItem={state.selectedItem}
+          selectedItemComments={state.selectedItemComments}
+        />
+      )}
 
       <div className="image-grid">
         {idxsToLoad.map(

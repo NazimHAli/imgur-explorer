@@ -1,7 +1,11 @@
 import { ImgurAPI } from "@/services/imgurAPI";
 import { handleRespose } from "@/state/ContextHelpers";
 import { useGlobalContext } from "@/state/GlobalContext";
-import { filterNewResults, filterTags } from "@/utils/dataUtils";
+import {
+  filterNewResults,
+  filterTags,
+  getSelectedItem,
+} from "@/utils/dataUtils";
 import { lazy, Suspense, useEffect } from "react";
 
 const Explore = lazy(() => import("@/components/Explore"));
@@ -27,7 +31,15 @@ function App() {
       imgurClient
         .methodDispatcher(method)
         .then((response) => {
-          if (method === "search") {
+          if (method === "comments") {
+            setState({
+              ...state,
+              selectedItem: getSelectedItem(
+                state.requestArgs.selectedItemID,
+                state.items
+              ),
+            });
+          } else if (method === "search") {
             response = filterNewResults(response, state);
           } else if (method === "tags") {
             response = { ...response, tags: filterTags(response?.tags) };
