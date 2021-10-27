@@ -18,13 +18,7 @@ function ImageGrid(): JSX.Element {
   const entry = useIntersectionObserver(elementObserverRef);
   const isIntersecting = entry?.isIntersecting || false;
 
-  HandleNewItems(
-    isIntersecting,
-    idxsToLoad,
-    state,
-    setRequestArgs,
-    setidxsToLoad
-  );
+  HandleNewItems(isIntersecting, idxsToLoad, setidxsToLoad);
 
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {

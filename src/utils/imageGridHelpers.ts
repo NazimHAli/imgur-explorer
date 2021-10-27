@@ -1,5 +1,6 @@
 import { imgObserver } from "@/components/ImageGrid";
-import { TypeGlobalContext, TypeState } from "@/utils/types";
+import { useGlobalContext } from "@/state/GlobalContext";
+import { TypeState } from "@/utils/types";
 import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
 
 function HandleImageLazyLoad(
@@ -24,10 +25,10 @@ function HandleImageLazyLoad(
 function HandleNewItems(
   isIntersecting: boolean,
   idxsToLoad: number[],
-  state: TypeState,
-  setRequestArgs: TypeGlobalContext["setRequestArgs"],
   setidxsToLoad: Dispatch<SetStateAction<number[]>>
 ): void {
+  const { setRequestArgs, setState, state } = useGlobalContext();
+
   useEffect(() => {
     const checkForNewItems =
       isIntersecting &&
@@ -49,8 +50,10 @@ function HandleNewItems(
       if (newIdxs.length <= state.items.length) {
         setidxsToLoad(newIdxs);
       } else {
-        setRequestArgs({ finishedLazyLoading: true });
+        setState({ ...state, finishedLazyLoading: true });
       }
+    } else {
+      setState({ ...state, finishedLazyLoading: true });
     }
   }, [isIntersecting]);
 }

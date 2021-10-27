@@ -43,7 +43,6 @@ export type SelectedComments = Array<TypeComments>;
 export type TypeState = {
   finishedLazyLoading: boolean;
   galleryTags: { galleries?: TypeGallery[]; tags?: TypeTag[] };
-  isLoading: boolean;
   items: Array<TypeItem>;
   requestArgs: {
     filter: boolean;

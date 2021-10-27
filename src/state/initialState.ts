@@ -3,7 +3,6 @@ import { TypeState } from "@/utils/types";
 const initialState: TypeState = {
   finishedLazyLoading: false,
   galleryTags: {},
-  isLoading: true,
   items: [],
   requestArgs: {
     filter: true,
