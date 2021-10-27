@@ -1,5 +1,5 @@
 import { useGlobalContext } from "@/state/GlobalContext";
-import { lazy, Suspense } from "react";
+import { lazy, memo, Suspense } from "react";
 
 import { listenForSearchRequests } from "./listenForSearchRequests";
 
@@ -10,10 +10,7 @@ const ImageGrid = lazy(() => import("@/components/ImageGrid"));
 const SearchToolBar = lazy(() => import("@/components/SearchToolBar"));
 
 function App() {
-  const { state, setState, isLoading, setIsLoading } = useGlobalContext();
-  const showFooter =
-    state.finishedLazyLoading || (state.items.length === 0 && !isLoading);
-
+  const { state, setState, setIsLoading } = useGlobalContext();
   listenForSearchRequests(state, setIsLoading, setState);
 
   return (
@@ -24,9 +21,9 @@ function App() {
       <ImageGrid />
 
       {/* Dynamically render footer */}
-      {showFooter && <Footer />}
+      <Footer />
     </Suspense>
   );
 }
 
-export default App;
+export default memo(App);

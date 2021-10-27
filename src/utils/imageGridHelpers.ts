@@ -52,8 +52,6 @@ function HandleNewItems(
       } else {
         setState({ ...state, finishedLazyLoading: true });
       }
-    } else {
-      setState({ ...state, finishedLazyLoading: true });
     }
   }, [isIntersecting]);
 }
