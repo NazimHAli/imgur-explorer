@@ -1,6 +1,6 @@
 import ItemModalComments from "@/components/ItemModalComments";
+import { useGlobalContext } from "@/state/GlobalContext";
 import { truncateText } from "@/utils/dataUtils";
-import { TypeItem, SelectedComments } from "@/utils/types";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { KeyboardEvent, MouseEvent } from "react";
 import { ThumbsUp, MessageSquare, Eye, Icon } from "react-feather";
@@ -20,15 +20,17 @@ function iconWithDataBadge(dataCount: number, TheIcon: Icon): JSX.Element {
 function ItemModal(props: {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  selectedItem?: TypeItem;
-  selectedItemComments: SelectedComments;
 }): JSX.Element {
-  const { isOpen, setIsOpen, selectedItem, selectedItemComments } = props;
+  const { isOpen, setIsOpen } = props;
+  const { setState, state } = useGlobalContext();
 
   function closeModal(
     event: MouseEvent<Element, globalThis.MouseEvent> | KeyboardEvent<Element>
   ): void {
     setIsOpen(false);
+    setState((currentState) => {
+      return { ...currentState, selectedItem: {}, selectedItemComments: [] };
+    });
     event.preventDefault();
   }
 
@@ -37,10 +39,10 @@ function ItemModal(props: {
   }
 
   useEffect(() => {
-    if (selectedItemComments.length > 0) {
+    if (state.selectedItemComments.length > 0) {
       openModal();
     }
-  }, [selectedItem, selectedItemComments]);
+  }, [state.selectedItem, state.selectedItemComments]);
 
   return (
     <Modal
@@ -51,29 +53,32 @@ function ItemModal(props: {
       onRequestClose={closeModal}
       preventScroll={true}
     >
-      {selectedItem?.images && (
+      {state.selectedItem?.images && (
         <div className="item-modal">
           <h3 className="item-modal__title">
-            Title: {truncateText(selectedItem?.title, 100)}
+            Title: {truncateText(state.selectedItem?.title, 100)}
           </h3>
 
           <div className="item-modal__image">
             <img
-              alt={selectedItem?.title}
-              width={selectedItem?.images[0].width}
-              height={selectedItem?.images[0].height}
-              srcSet={selectedItem?.images[0].link}
+              alt={state.selectedItem?.title}
+              width={state.selectedItem?.images[0].width}
+              height={state.selectedItem?.images[0].height}
+              srcSet={state.selectedItem?.images[0].link}
               loading="lazy"
             />
           </div>
           <div className="card-info__icons">
-            {iconWithDataBadge(selectedItem?.ups, ThumbsUp)}
-            {iconWithDataBadge(selectedItem?.comment_count, MessageSquare)}
-            {iconWithDataBadge(selectedItem?.views, Eye)}
+            {iconWithDataBadge(state.selectedItem?.ups, ThumbsUp)}
+            {iconWithDataBadge(
+              state.selectedItem?.comment_count,
+              MessageSquare
+            )}
+            {iconWithDataBadge(state.selectedItem?.views, Eye)}
           </div>
         </div>
       )}
-      <ItemModalComments comments={selectedItemComments} />
+      <ItemModalComments comments={state.selectedItemComments} />
     </Modal>
   );
 }

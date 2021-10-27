@@ -1,5 +1,5 @@
 import { initialState } from "@/state/initialState";
-import { TypeGlobalContext } from "@/utils/types";
+import { TypeGlobalContext, TypeState } from "@/utils/types";
 import { createContext, FC, useContext, useState } from "react";
 
 const GlobalContext = createContext<TypeGlobalContext>({
@@ -16,7 +16,9 @@ const GlobalContextProvider: FC = (props) => {
   const [state, setState] = useState(initialState);
   const [isLoading, setIsLoading] = useState(true);
 
-  const setRequestArgs = (requestArgs) => {
+  const setRequestArgs: TypeGlobalContext["setRequestArgs"] = (
+    requestArgs: TypeState["requestArgs"]
+  ) => {
     setState((currentState) => {
       return {
         ...currentState,
