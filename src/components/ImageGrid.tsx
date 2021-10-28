@@ -1,16 +1,13 @@
 import { useGlobalContext } from "@/state/GlobalContext";
 import { HandleNewItems, HandleImageLazyLoad } from "@/utils/imageGridHelpers";
 import { useIntersectionObserver } from "@/utils/useIntersectionObserver";
-import { ObserveElementsInView } from "@/utils/visibilityUtils";
 import { lazy, useEffect, useRef, useState } from "react";
 
 const ItemModal = lazy(() => import("@/components/ItemModal"));
 const ImageGridCard = lazy(() => import("@/components/ImageGridCard"));
 
-export const imgObserver = new ObserveElementsInView();
-
 function ImageGrid(): JSX.Element {
-  const { setRequestArgs, state } = useGlobalContext();
+  const { setRequestArgs, state, isLoading } = useGlobalContext();
   const [idxsToLoad, setidxsToLoad] = useState([0, 1, 2, 3, 4]);
 
   const cardImgRef = HandleImageLazyLoad(state, setidxsToLoad);
@@ -40,6 +37,7 @@ function ImageGrid(): JSX.Element {
                 key={`${idx || "0"}-${state.items[idx].id}`}
                 imgRef={cardImgRef}
                 setRequestArgs={setRequestArgs}
+                isLoading={isLoading}
               />
             )
         )}

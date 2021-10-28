@@ -52,12 +52,10 @@ function listenForSearchRequests(
           handleRespose(method, setState, response);
         })
         .finally(() => {
-          if (
-            state.requestArgs.method === "search" &&
-            state.requestArgs.newSearch
-          ) {
+          // Simulate slow load
+          setTimeout(() => {
             setIsLoading(false);
-          }
+          }, 2500);
         });
     }
   }, [

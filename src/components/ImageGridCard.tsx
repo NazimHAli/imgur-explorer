@@ -7,8 +7,9 @@ function ImageGridCard(props: {
   setRequestArgs: TypeGlobalContext["setRequestArgs"];
   imgRef: Ref<HTMLImageElement>;
   item: TypeItem;
+  isLoading: boolean;
 }): JSX.Element {
-  const { imgRef, item, setRequestArgs } = props;
+  const { imgRef, item, setRequestArgs, isLoading } = props;
 
   const imageInfo = (
     <div className="card-info">
@@ -26,6 +27,15 @@ function ImageGridCard(props: {
     </div>
   );
 
+  const loadingSkeleton = () => (
+    <div className="loading-skeleton">
+      <div className="loading-skeleton__anim">
+        <div className="loading-skeleton__square"></div>
+        <div className="loading-skeleton__bottom"></div>
+      </div>
+    </div>
+  );
+
   const handleOnClick = (event: { preventDefault: () => void }) => {
     if (item.id.length) {
       setRequestArgs({
@@ -38,18 +48,23 @@ function ImageGridCard(props: {
   };
 
   return (
-    <a href="#explore" className="card" onClick={handleOnClick}>
-      <span className="card__img">
-        <img
-          alt={item?.title}
-          width={320}
-          height={320}
-          data-srcset={item?.images && item.images[0].link}
-          ref={imgRef}
-        />
-      </span>
-      {imageInfo}
-    </a>
+    <>
+      {isLoading && loadingSkeleton()}
+      {!isLoading && (
+        <a href="#explore" className="card" onClick={handleOnClick}>
+          <span className="card__img">
+            <img
+              alt={item?.title}
+              width={320}
+              height={320}
+              data-srcset={item?.images && item.images[0].link}
+              ref={imgRef}
+            />
+          </span>
+          {imageInfo}
+        </a>
+      )}
+    </>
   );
 }
 

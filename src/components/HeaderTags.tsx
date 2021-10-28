@@ -30,9 +30,10 @@ function renderTags(
 }
 
 function HeaderTags() {
-  const { setRequestArgs, state } = useGlobalContext();
+  const { setRequestArgs, state, setIsLoading } = useGlobalContext();
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    setIsLoading(true);
     setRequestArgs({
       filter: true,
       method: "tagName",

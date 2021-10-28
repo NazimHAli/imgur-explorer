@@ -1,7 +1,9 @@
-import { imgObserver } from "@/components/ImageGrid";
 import { useGlobalContext } from "@/state/GlobalContext";
 import { TypeState } from "@/utils/types";
+import { ObserveElementsInView } from "@/utils/visibilityUtils";
 import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
+
+const imgObserver = new ObserveElementsInView();
 
 function HandleImageLazyLoad(
   state: TypeState,
