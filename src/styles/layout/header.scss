@@ -36,7 +36,7 @@
     @apply w-full
     text-3xl
     justify-center
-    items-center
+    items-end
     md:justify-start
     font-sans
     gap-x-2
@@ -91,13 +91,17 @@
       @apply p-2
       bg-gray-800
       duration-500
-      hover:bg-yellow-300
-      hover:text-black
       transition-colors
       flex
       flex-col
       justify-between
       break-words;
+    }
+
+    @media (hover: hover) {
+      a:hover {
+        @apply bg-yellow-300 text-black;
+      }
     }
   }
 }
