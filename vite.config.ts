@@ -14,7 +14,7 @@ export default defineConfig({
     replace({
       preventAssignment: true,
       "process.env.PUBLIC_IMGUR_CLIENT_ID": JSON.stringify(
-        env.PUBLIC_IMGUR_CLIENT_ID
+        env.PUBLIC_IMGUR_CLIENT_ID || process.env.PUBLIC_IMGUR_CLIENT_ID
       ),
     }),
   ],
