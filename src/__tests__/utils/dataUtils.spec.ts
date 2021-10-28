@@ -19,9 +19,16 @@ describe("truncateText", () => {
 });
 
 describe("updateImageSize", () => {
-  test("should update image link", () => {
-    const images = fakeResponse.data.slice(0, 2);
-    const res = updateImageSize(images);
-    expect(res[0].images[0].link).toBe(images[0].images[0].link);
+  let res;
+  const images = fakeResponse.data.slice(0, 2);
+
+  test("default behavior sets image size to 'l'", () => {
+    res = updateImageSize(images);
+    expect(res[0].images[0].link.endsWith("l.jpg")).toBe(true);
+  });
+
+  test("sets image size to 'm'", () => {
+    res = updateImageSize(images, "m");
+    expect(res[0].images[0].link.endsWith("m.jpg")).toBe(true);
   });
 });
