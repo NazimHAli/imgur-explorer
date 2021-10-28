@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^4.0.3",
+    "@rollup/plugin-replace": "^3.0.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.2",
     "@trivago/prettier-plugin-sort-imports": "^2.0.4",
@@ -42,6 +43,7 @@
     "@vitejs/plugin-react": "^1.0.0",
     "autoprefixer": "^10.3.7",
     "cssnano": "^5.0.8",
+    "dotenv": "^10.0.0",
     "eslint": "^8.0.1",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-sort-keys-fix": "^1.1.2",

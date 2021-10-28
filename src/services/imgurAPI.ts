@@ -1,12 +1,10 @@
 import { extractImageResults } from "@/utils/dataUtils";
 import { TypeState } from "@/utils/types";
 
-const imgurClientId: string | undefined | boolean = import.meta.env
-  .PUBLIC_IMGUR_CLIENT_ID;
+const imgurClientId = process.env.PUBLIC_IMGUR_CLIENT_ID;
 const BASE = "https://api.imgur.com/3";
 const EP_GALLERY = `${BASE}/gallery`;
 const EP_GALLERY_TAGS = `${BASE}/tags`;
-
 const EP_ACCOUNT = `${BASE}/account/?account_id=`;
 
 interface Args {

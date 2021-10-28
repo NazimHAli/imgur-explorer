@@ -16,7 +16,7 @@
     "skipLibCheck": false,
     "strict": true,
     "target": "ESNext",
-    "types": ["vite/client", "jest", "node", "react"],
+    "types": ["vite/client", "jest", "node", "react", "@types/snowpack-env"],
     "useDefineForClassFields": true,
     "baseUrl": ".",
     "paths": {
