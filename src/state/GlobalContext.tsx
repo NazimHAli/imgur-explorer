@@ -1,6 +1,6 @@
 import { initialState } from "@/state/initialState";
 import { TypeGlobalContext, TypeState } from "@/utils/types";
-import { createContext, FC, useContext, useState } from "react";
+import { createContext, ReactElement, useContext, useState } from "react";
 
 const GlobalContext = createContext<TypeGlobalContext>({
   isLoading: true,
@@ -12,7 +12,9 @@ const GlobalContext = createContext<TypeGlobalContext>({
   state: initialState,
 });
 
-const GlobalContextProvider: FC = (props) => {
+function GlobalContextProvider(props: {
+  children: ReactElement<any, any>;
+}): JSX.Element {
   const [state, setState] = useState(initialState);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -44,7 +46,7 @@ const GlobalContextProvider: FC = (props) => {
       {props.children}
     </GlobalContext.Provider>
   );
-};
+}
 
 const useGlobalContext = () => {
   const context = useContext(GlobalContext);
