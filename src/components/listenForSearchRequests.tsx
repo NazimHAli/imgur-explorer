@@ -52,10 +52,7 @@ function listenForSearchRequests(
           handleRespose(method, setState, response);
         })
         .finally(() => {
-          // Simulate slow load
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 2500);
+          setIsLoading(false);
         });
     }
   }, [
