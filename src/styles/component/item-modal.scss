@@ -14,7 +14,7 @@
 }
 
 .myModal__Content {
-  @apply md:max-w-7xl
+  @apply md:w-11/12
   md:mx-auto
   p-4
   overflow-y-scroll
@@ -82,6 +82,12 @@
   &__title {
     @apply text-2xl
     text-center;
+  }
+
+  &--button {
+    &__close {
+      @apply p-1 bg-gray-100 border border-gray-300 w-16 h-16 self-end;
+    }
   }
 }
 

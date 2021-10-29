@@ -26,11 +26,12 @@ describe("ImageGridCard", () => {
     render(
       <div data-testid="card">
         <ImageGridCard
+          isLoading={false}
           item={item}
           imgRef={() => {
             null;
           }}
-          dispatchState={function (): void {
+          setRequestArgs={function (): void {
             throw new Error("Function not implemented.");
           }}
         />

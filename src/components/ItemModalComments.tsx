@@ -1,8 +1,8 @@
 import { getDateString } from "@/utils/dataUtils";
-import { Comments, SelectedComments } from "@/utils/types";
+import { TypeComments, SelectedComments } from "@/utils/types";
 import { ThumbsUp, ThumbsDown, User } from "react-feather";
 
-function dateTime(comment: Comments): JSX.Element {
+function dateTime(comment: TypeComments): JSX.Element {
   return (
     <span className="modal-comment__datetime">
       {getDateString(comment?.datetime)}
@@ -10,7 +10,7 @@ function dateTime(comment: Comments): JSX.Element {
   );
 }
 
-function thumbIcons(comment: Comments): JSX.Element {
+function thumbIcons(comment: TypeComments): JSX.Element {
   return (
     <span className="comment-thumbs">
       <ThumbsUp /> {comment.ups.toLocaleString()} <ThumbsDown />
@@ -28,7 +28,7 @@ function thumbIcons(comment: Comments): JSX.Element {
  * @param props
  * @returns
  */
-function CommentFactory(props: { comment: Comments }): JSX.Element {
+function CommentFactory(props: { comment: TypeComments }): JSX.Element {
   const { comment } = props;
 
   return (
@@ -68,4 +68,4 @@ function ItemModalComments(props: { comments: SelectedComments }): JSX.Element {
   );
 }
 
-export default ItemModalComments;
+export { ItemModalComments };

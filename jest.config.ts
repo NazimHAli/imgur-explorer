@@ -5,19 +5,23 @@ const { compilerOptions } = require("./tsconfig");
 
 export default () => {
   return {
-    // Bug with vite, ts-jest, import.meta syntax + coverage
-    // collectCoverage: true,
-    // collectCoverageFrom: ["<rootDir>/src/**/*.{ts,tsx}"],
-    // coverageReporters: ["text"],
-    // coverageThreshold: {
-    //   global: {
-    //     branches: 0,
-    //     functions: 0,
-    //     lines: 0,
-    //     statements: -200,
-    //   },
-    // },
+    collectCoverage: true,
+    collectCoverageFrom: [
+      "<rootDir>/src/**/*.{ts,tsx}",
+      "!<rootDir>/src/__tests__/**/*",
+    ],
+    coverageReporters: ["text"],
+    coverageThreshold: {
+      global: {
+        branches: 18,
+        functions: 11,
+        lines: 16,
+        statements: -500,
+      },
+    },
     preset: "ts-jest",
+    restoreMocks: true,
+    resetMocks: true,
     resetModules: true,
     transform: {
       "^.+\\.(ts|tsx)": "ts-jest",

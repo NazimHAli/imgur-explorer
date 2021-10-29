@@ -1,29 +1,23 @@
 import ExploreGalleries from "@/components/ExploreGalleries";
-import { Action, State } from "@/utils/types";
-import { Dispatch, useEffect } from "react";
+import { useGlobalContext } from "@/state/GlobalContext";
+import { memo, useEffect } from "react";
 
-function Explore(props: {
-  dispatchState: Dispatch<Action>;
-  galleryTags: State["galleryTags"];
-}) {
-  const { dispatchState, galleryTags } = props;
+function Explore() {
+  const { setRequestArgs, state } = useGlobalContext();
 
   useEffect(() => {
-    dispatchState({
-      requestArgs: {
-        filter: false,
-        method: "tags",
-        newSearch: true,
-      },
-      type: "submitSearchRequest",
+    setRequestArgs({
+      filter: false,
+      method: "tags",
+      newSearch: true,
     });
   }, []);
 
   return (
     <div className="explore">
-      <ExploreGalleries galleryTags={galleryTags} />
+      <ExploreGalleries galleryTags={state.galleryTags} />
     </div>
   );
 }
 
-export default Explore;
+export default memo(Explore);

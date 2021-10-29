@@ -1,33 +1,21 @@
+import { useGlobalContext } from "@/state/GlobalContext";
 import { HandleNewItems, HandleImageLazyLoad } from "@/utils/imageGridHelpers";
-import { Action, State } from "@/utils/types";
 import { useIntersectionObserver } from "@/utils/useIntersectionObserver";
-import { ObserveElementsInView } from "@/utils/visibilityUtils";
-import { Dispatch, lazy, useEffect, useRef, useState } from "react";
+import { lazy, useEffect, useRef, useState } from "react";
 
 const ItemModal = lazy(() => import("@/components/ItemModal"));
 const ImageGridCard = lazy(() => import("@/components/ImageGridCard"));
 
-export const imgObserver = new ObserveElementsInView();
-
-function ImageGrid(props: {
-  dispatchState: Dispatch<Action>;
-  state: State;
-}): JSX.Element {
-  const { state, dispatchState } = props;
+function ImageGrid(): JSX.Element {
+  const { setRequestArgs, state, isLoading } = useGlobalContext();
   const [idxsToLoad, setidxsToLoad] = useState([0, 1, 2, 3, 4]);
-  const cardImgRef = HandleImageLazyLoad(state, setidxsToLoad);
 
+  const cardImgRef = HandleImageLazyLoad(state, setidxsToLoad);
   const elementObserverRef = useRef<HTMLElement>(null);
   const entry = useIntersectionObserver(elementObserverRef);
   const isIntersecting = entry?.isIntersecting || false;
 
-  HandleNewItems(
-    isIntersecting,
-    idxsToLoad,
-    state,
-    dispatchState,
-    setidxsToLoad
-  );
+  HandleNewItems(isIntersecting, idxsToLoad, setidxsToLoad);
 
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
@@ -38,12 +26,7 @@ function ImageGrid(props: {
 
   return (
     <div className="grid-viewport">
-      <ItemModal
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        selectedItem={state.selectedItem}
-        selectedItemComments={state.selectedItemComments}
-      />
+      <ItemModal isOpen={isOpen} setIsOpen={setIsOpen} />
 
       <div className="image-grid">
         {idxsToLoad.map(
@@ -53,7 +36,8 @@ function ImageGrid(props: {
                 item={state.items[idx]}
                 key={`${idx || "0"}-${state.items[idx].id}`}
                 imgRef={cardImgRef}
-                dispatchState={dispatchState}
+                setRequestArgs={setRequestArgs}
+                isLoading={isLoading}
               />
             )
         )}

@@ -1,14 +1,15 @@
 import { truncateText } from "@/utils/dataUtils";
-import { Action, Item } from "@/utils/types";
-import { Dispatch, Ref } from "react";
+import { TypeGlobalContext, TypeItem } from "@/utils/types";
+import { memo, Ref } from "react";
 import { MessageSquare, ThumbsUp, Eye } from "react-feather";
 
 function ImageGridCard(props: {
-  dispatchState: Dispatch<Action>;
+  setRequestArgs: TypeGlobalContext["setRequestArgs"];
   imgRef: Ref<HTMLImageElement>;
-  item: Item;
-}) {
-  const { imgRef, item, dispatchState } = props;
+  item: TypeItem;
+  isLoading: boolean;
+}): JSX.Element {
+  const { imgRef, item, setRequestArgs, isLoading } = props;
 
   const imageInfo = (
     <div className="card-info">
@@ -26,34 +27,45 @@ function ImageGridCard(props: {
     </div>
   );
 
+  const loadingSkeleton = () => (
+    <div className="loading-skeleton">
+      <div className="loading-skeleton__anim">
+        <div className="loading-skeleton__square"></div>
+        <div className="loading-skeleton__bottom"></div>
+      </div>
+    </div>
+  );
+
   const handleOnClick = (event: { preventDefault: () => void }) => {
     if (item.id.length) {
-      dispatchState({
-        requestArgs: {
-          filter: false,
-          method: "comments",
-          selectedItemID: item.id,
-        },
-        type: "setSearchRequestArgs",
+      setRequestArgs({
+        filter: false,
+        method: "comments",
+        selectedItemID: item.id,
       });
     }
     event.preventDefault();
   };
 
   return (
-    <a href="#explore" className="card" onClick={handleOnClick}>
-      <span className="card__img">
-        <img
-          alt={item?.title}
-          width={320}
-          height={320}
-          data-srcset={item?.images && item.images[0].link}
-          ref={imgRef}
-        />
-      </span>
-      {imageInfo}
-    </a>
+    <>
+      {isLoading && loadingSkeleton()}
+      {!isLoading && (
+        <a href="#explore" className="card" onClick={handleOnClick}>
+          <span className="card__img">
+            <img
+              alt={item?.title}
+              width={320}
+              height={320}
+              data-srcset={item?.images && item.images[0].link}
+              ref={imgRef}
+            />
+          </span>
+          {imageInfo}
+        </a>
+      )}
+    </>
   );
 }
 
-export default ImageGridCard;
+export default memo(ImageGridCard);

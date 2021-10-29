@@ -1,9 +1,12 @@
-import { imgObserver } from "@/components/ImageGrid";
-import { Action, State } from "@/utils/types";
+import { useGlobalContext } from "@/state/GlobalContext";
+import { TypeState } from "@/utils/types";
+import { ObserveElementsInView } from "@/utils/visibilityUtils";
 import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
 
+const imgObserver = new ObserveElementsInView();
+
 function HandleImageLazyLoad(
-  state: State,
+  state: TypeState,
   setidxsToLoad: Dispatch<SetStateAction<number[]>>
 ) {
   useEffect(() => {
@@ -24,10 +27,10 @@ function HandleImageLazyLoad(
 function HandleNewItems(
   isIntersecting: boolean,
   idxsToLoad: number[],
-  state: State,
-  dispatchState: Dispatch<Action>,
   setidxsToLoad: Dispatch<SetStateAction<number[]>>
 ): void {
+  const { setRequestArgs, setState, state } = useGlobalContext();
+
   useEffect(() => {
     const checkForNewItems =
       isIntersecting &&
@@ -38,17 +41,18 @@ function HandleNewItems(
       const newIdxs = [...Array(idxsToLoad.length + 10).keys()];
 
       if (state.items.length - newIdxs.length <= 20) {
-        dispatchState({
+        setRequestArgs({
+          filter: true,
+          method: "search",
           newSearch: false,
           page: (state.requestArgs?.page || 0) + 1,
-          type: "submitSearchRequest",
         });
       }
 
       if (newIdxs.length <= state.items.length) {
         setidxsToLoad(newIdxs);
       } else {
-        dispatchState({ finishedLazyLoading: true, type: "setItems" });
+        setState({ ...state, finishedLazyLoading: true });
       }
     }
   }, [isIntersecting]);

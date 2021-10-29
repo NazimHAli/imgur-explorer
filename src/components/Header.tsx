@@ -1,8 +1,8 @@
 import imgurLogo from "@/assets/imgur.svg";
 import profileIcon from "@/assets/profile.svg";
 import HeaderTags from "@/components/HeaderTags";
-import { Action, State } from "@/utils/types";
-import { Dispatch, RefObject, useRef } from "react";
+import { useGlobalContext } from "@/state/GlobalContext";
+import { memo, RefObject, useRef } from "react";
 
 function handleClearQuery(
   defaultQuery: string,
@@ -13,35 +13,28 @@ function handleClearQuery(
   }
 }
 
-function Header(props: {
-  defaultQuery: string;
-  dispatchState: Dispatch<Action>;
-  state: State;
-}): JSX.Element {
-  const { defaultQuery, dispatchState, state } = props;
+function Header(): JSX.Element {
   const inputRef = useRef<HTMLInputElement>(null);
+  const { setRequestArgs, state } = useGlobalContext();
 
   function _handleSubmit(event: { preventDefault: () => void }) {
     const isValid =
       inputRef.current &&
       inputRef.current.value.length &&
-      inputRef.current.value !== defaultQuery;
+      inputRef.current.value !== state.requestArgs.query;
 
     if (isValid) {
-      dispatchState({
-        requestArgs: {
-          method: "search",
-          newSearch: true,
-          query: inputRef.current.value,
-        },
-        type: "submitSearchRequest",
+      setRequestArgs({
+        method: "search",
+        newSearch: true,
+        query: inputRef.current.value,
       });
     }
 
     event.preventDefault();
   }
 
-  handleClearQuery(defaultQuery, inputRef);
+  handleClearQuery(state.requestArgs.query, inputRef);
 
   const logo = (
     <a href="/" className="header__logo">
@@ -67,7 +60,7 @@ function Header(props: {
         type="search"
         className="input-search"
         placeholder="Search for it"
-        defaultValue={defaultQuery}
+        defaultValue={state.requestArgs.query}
         ref={inputRef}
       />
     </form>
@@ -88,10 +81,7 @@ function Header(props: {
 
   const tagsContainer = (
     <div className="header__tags__container">
-      <HeaderTags
-        dispatchState={dispatchState}
-        galleryTags={state.galleryTags}
-      />
+      <HeaderTags />
     </div>
   );
 
@@ -108,4 +98,4 @@ function Header(props: {
   );
 }
 
-export default Header;
+export default memo(Header);

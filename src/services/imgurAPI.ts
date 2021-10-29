@@ -1,12 +1,10 @@
 import { extractImageResults } from "@/utils/dataUtils";
-import { State } from "@/utils/types";
+import { TypeState } from "@/utils/types";
 
-const imgurClientId: string | undefined | boolean = import.meta.env
-  .PUBLIC_IMGUR_CLIENT_ID;
+const imgurClientId = process.env.PUBLIC_IMGUR_CLIENT_ID;
 const BASE = "https://api.imgur.com/3";
 const EP_GALLERY = `${BASE}/gallery`;
 const EP_GALLERY_TAGS = `${BASE}/tags`;
-
 const EP_ACCOUNT = `${BASE}/account/?account_id=`;
 
 interface Args {
@@ -20,7 +18,7 @@ class ImgurAPI {
   /**
    * Get or create API instance
    */
-  public static getInstance(requestArgs: State["requestArgs"]): ImgurAPI {
+  public static getInstance(requestArgs: TypeState["requestArgs"]): ImgurAPI {
     // Create instance once
     if (ImgurAPI.instance === undefined) {
       ImgurAPI.instance = new ImgurAPI();
@@ -33,7 +31,7 @@ class ImgurAPI {
     this.useFakeResponse = imgurClientId === undefined;
   }
   useFakeResponse: boolean;
-  requestArgs!: State["requestArgs"];
+  requestArgs!: TypeState["requestArgs"];
 
   private async imgurBaseApi(args: Args) {
     const myHeaders = new Headers({
