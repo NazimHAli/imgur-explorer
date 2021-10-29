@@ -14,9 +14,9 @@ export default () => {
     coverageReporters: ["text"],
     coverageThreshold: {
       global: {
-        branches: 0,
-        functions: 0,
-        lines: 0,
+        branches: 18,
+        functions: 11,
+        lines: 16,
         statements: -500,
       },
     },
