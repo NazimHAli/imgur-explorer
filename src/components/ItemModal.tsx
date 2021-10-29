@@ -59,7 +59,11 @@ function ItemModal(props: {
             Title: {truncateText(state.selectedItem?.title, 100)}
           </h3>
 
-          <button className="item-modal--button__close" onClick={closeModal}>
+          <button
+            className="item-modal--button__close"
+            onClick={closeModal}
+            type="button"
+          >
             <svg
               xmlns="https://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
