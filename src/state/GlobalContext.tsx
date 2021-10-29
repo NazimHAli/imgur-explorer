@@ -15,6 +15,7 @@ const GlobalContext = createContext<TypeGlobalContext>({
 function GlobalContextProvider(props: {
   children: ReactElement<any, any>;
 }): JSX.Element {
+  const { children } = props;
   const [state, setState] = useState(initialState);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -43,7 +44,7 @@ function GlobalContextProvider(props: {
 
   return (
     <GlobalContext.Provider value={contextValue}>
-      {props.children}
+      {children}
     </GlobalContext.Provider>
   );
 }
