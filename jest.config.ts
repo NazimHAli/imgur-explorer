@@ -5,7 +5,7 @@ const { compilerOptions } = require("./tsconfig");
 
 export default () => {
   return {
-    // Bug with vite, ts-jest, import.meta syntax + coverage
+    // Bug with vite + ts-jest + import.meta syntax + coverage
     // collectCoverage: true,
     // collectCoverageFrom: [
     //   "<rootDir>/src/**/*.{ts,tsx}",
@@ -21,6 +21,8 @@ export default () => {
     //   },
     // },
     preset: "ts-jest",
+    restoreMocks: true,
+    resetMocks: true,
     resetModules: true,
     transform: {
       "^.+\\.(ts|tsx)": "ts-jest",
