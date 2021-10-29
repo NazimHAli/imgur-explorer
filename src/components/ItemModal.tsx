@@ -28,7 +28,7 @@ function ItemModal(props: {
     event: MouseEvent<Element, globalThis.MouseEvent> | KeyboardEvent<Element>
   ): void {
     setIsOpen(false);
-    setState((currentState) => {
+    setState((currentState: any) => {
       return { ...currentState, selectedItem: {}, selectedItemComments: [] };
     });
     event.preventDefault();

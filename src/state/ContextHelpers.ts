@@ -1,6 +1,9 @@
-import { TypeItem } from "@/utils/types";
+import { TypeGlobalContext, TypeItem, TypeState } from "@/utils/types";
 
-function addItems(setState, items: TypeItem[]): void {
+function addItems(
+  setState: TypeGlobalContext["setState"],
+  items: TypeItem[]
+): void {
   setState((currentState) => {
     return {
       ...currentState,
@@ -9,19 +12,29 @@ function addItems(setState, items: TypeItem[]): void {
   });
 }
 
-function addTags(setState, response): void {
+function addTags(
+  setState: TypeGlobalContext["setState"],
+  response: TypeState["galleryTags"]
+): void {
   setState((currentState) => {
     return { ...currentState, galleryTags: response };
   });
 }
 
-function addComments(setState, response): void {
+function addComments(
+  setState: TypeGlobalContext["setState"],
+  response: TypeState["selectedItemComments"]
+): void {
   setState((currentState) => {
     return { ...currentState, selectedItemComments: response };
   });
 }
 
-function handleRespose(method, setState, response): void {
+function handleRespose(
+  method: string,
+  setState: TypeGlobalContext["setState"],
+  response: any
+): void {
   if (method === "search" || method === "tagName") {
     addItems(setState, response);
   } else if (method === "tags") {

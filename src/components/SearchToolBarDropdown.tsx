@@ -6,7 +6,7 @@ function getDispatchArgs(
   actionArg: string,
   event: FormEvent<HTMLSelectElement>
 ) {
-  const dispatchArgs = {
+  const dispatchArgs: Partial<TypeState["requestArgs"]> = {
     filter: true,
     method: "search",
     newSearch: true,

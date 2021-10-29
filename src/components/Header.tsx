@@ -81,7 +81,7 @@ function Header(): JSX.Element {
 
   const tagsContainer = (
     <div className="header__tags__container">
-      <HeaderTags galleryTags={state.galleryTags} />
+      <HeaderTags />
     </div>
   );
 

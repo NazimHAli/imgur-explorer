@@ -1,20 +1,20 @@
 import { Dispatch, SetStateAction } from "react";
 
-export type TypeselectedTag = {
+export interface TypeselectedTag {
   items?: Array<string>;
-};
+}
 
-export type TypeGallery = {
+export interface TypeGallery {
   description: string;
   id: string;
   name: string;
-};
+}
 
-export type TypeTag = {
+export interface TypeTag {
   display_name: string;
   name: string;
   total_items: number;
-};
+}
 
 export type TypeItem = {
   account_url: string;
@@ -28,7 +28,7 @@ export type TypeItem = {
   views: number;
 };
 
-export type TypeComments = {
+export interface TypeComments {
   author: string;
   children: Array<TypeComments>;
   comment: string;
@@ -36,11 +36,11 @@ export type TypeComments = {
   downs: number;
   id: string;
   ups: number;
-};
+}
 
 export type SelectedComments = Array<TypeComments>;
 
-export type TypeState = {
+export interface TypeState {
   finishedLazyLoading: boolean;
   galleryTags: { galleries?: TypeGallery[]; tags?: TypeTag[] };
   items: Array<TypeItem>;
@@ -59,19 +59,19 @@ export type TypeState = {
   selectedItem: TypeItem | undefined;
   selectedItemComments: SelectedComments;
   selectedTag: TypeselectedTag;
-};
+}
 
-export type TypeSearchResponse = {
+export interface TypeSearchResponse {
   data: TypeItem[] | SelectedComments;
   items: TypeItem[];
   status: number;
   success: boolean;
-};
+}
 
-export type TypeGlobalContext = {
+export interface TypeGlobalContext {
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   setState: Dispatch<SetStateAction<TypeState>>;
   state: TypeState;
   setRequestArgs: (requestArgs: Partial<TypeState["requestArgs"]>) => void;
-};
+}
