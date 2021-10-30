@@ -7,7 +7,7 @@
 
 | Branches                                                                                                    | Functions                                                                                                     | Lines                                                                                                 | Statements                                                                                                      |
 | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| ![Coverage: Branches](https://github.com/NazimHAli/imgur-explorer/blob/master/coverage/badges/branches.svg) | ![Coverage: Functions](https://github.com/NazimHAli/imgur-explorer/blob/master/coverage/badges/functions.svg) | ![Coverage: Lines](https://github.com/NazimHAli/imgur-explorer/blob/master/coverage/badges/lines.svg) | ![Coverage: Statements](https://github.com/NazimHAli/imgur-explorer/blob/master/coverage/badges/statements.svg) |
+| ![Coverage: Branches](/coverage/badges/branches.svg) | ![Coverage: Functions](/coverage/badges/functions.svg) | ![Coverage: Lines](/coverage/badges/lines.svg) | ![Coverage: Statements](/coverage/badges/statements.svg) |
 
 Example application using ReactJS + [Imgur API](https://imgur.com/) + [vite bundler](https://github.com/vitejs/vite). Fluid & responsive layout.
 
