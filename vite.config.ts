@@ -15,11 +15,10 @@ export default defineConfig({
   envPrefix: "PUBLIC_",
   plugins: [
     react(),
-    imgurClientID &&
-      replace({
-        preventAssignment: true,
-        "process.env.PUBLIC_IMGUR_CLIENT_ID": JSON.stringify(imgurClientID),
-      }),
+    replace({
+      preventAssignment: true,
+      "process.env.PUBLIC_IMGUR_CLIENT_ID": JSON.stringify(imgurClientID),
+    }),
   ],
   resolve: {
     alias: {
