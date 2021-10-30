@@ -5,11 +5,12 @@
   "scripts": {
     "dev": "vite --host 10.0.0.211 --port 3001",
     "build": "yarn lint && vite build",
-    "lint": "yarn lint:pre && yarn lint:es && yarn lint:style",
+    "lint": "yarn lint:pre && yarn lint:es && yarn lint:ts && yarn lint:style",
     "lint:es": "eslint --config .eslintrc.js ./src",
     "lint:fix": "yarn lint:pre --write && yarn lint:es --fix && yarn lint:style --fix",
     "lint:pre": "prettier -c .",
     "lint:style": "stylelint src/styles",
+    "lint:ts": "tsc",
     "lint:watch": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}",
     "serve": "vite preview --host 10.0.0.211 --port 3001",
     "test": "jest",
