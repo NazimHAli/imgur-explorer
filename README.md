@@ -5,10 +5,6 @@
 [![CodeQL](https://github.com/NazimHAli/imgur-explorer/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/NazimHAli/imgur-explorer/actions/workflows/codeql-analysis.yml)
 [![Unit Tests](https://github.com/NazimHAli/imgur-explorer/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/NazimHAli/imgur-explorer/actions/workflows/unit-tests.yml)
 
-| Branches                                                                                                    | Functions                                                                                                     | Lines                                                                                                 | Statements                                                                                                      |
-| ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| ![Coverage: Branches](/coverage/badges/branches.svg) | ![Coverage: Functions](/coverage/badges/functions.svg) | ![Coverage: Lines](/coverage/badges/lines.svg) | ![Coverage: Statements](/coverage/badges/statements.svg) |
-
 Example application using ReactJS + [Imgur API](https://imgur.com/) + [vite bundler](https://github.com/vitejs/vite). Fluid & responsive layout.
 
 ## Features
@@ -67,7 +63,11 @@ yarn serve
 - [ ] Profile login
 - [ ] Upload images
 
-### Tests
+### Tests WIP
+
+| Branches                                                                                                    | Functions                                                                                                     | Lines                                                                                                 | Statements                                                                                                      |
+| ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| ![Coverage: Branches](/coverage/badges/branches.svg) | ![Coverage: Functions](/coverage/badges/functions.svg) | ![Coverage: Lines](/coverage/badges/lines.svg) | ![Coverage: Statements](/coverage/badges/statements.svg) |
 
 - [ ] ~70% unit test coverage
 - [ ] Cypress performance & integration tests
