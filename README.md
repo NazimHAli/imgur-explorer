@@ -1,9 +1,10 @@
 # Imgur Explorer
 
 [![DeepSource](https://deepsource.io/gh/NazimHAli/imgur-explorer.svg/?label=active+issues&show_trend=true&token=aO_Hx9m4iDxMopueaxAigoGd)](https://deepsource.io/gh/NazimHAli/imgur-explorer)
-[![DeepSource](https://deepsource.io/gh/NazimHAli/imgur-explorer.svg/?label=resolved+issues&show_trend=true&token=aO_Hx9m4iDxMopueaxAigoGd)](https://deepsource.io/gh/NazimHAli/imgur-explorer)
+[![DeepSource](https://deepsource.io/gh/NazimHAli/imgur-explorer.svg/?label=resolved+issues&show_trend=true&token=aO_Hx9m4iDxMopueaxAigoGd)](https://deepsource.io/gh/NazimHAli/imgur-explorer)  
 [![CodeQL](https://github.com/NazimHAli/imgur-explorer/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/NazimHAli/imgur-explorer/actions/workflows/codeql-analysis.yml)
 [![Unit Tests](https://github.com/NazimHAli/imgur-explorer/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/NazimHAli/imgur-explorer/actions/workflows/unit-tests.yml)
+[![Lint](https://github.com/NazimHAli/imgur-explorer/actions/workflows/lint.yml/badge.svg?branch=master)](https://github.com/NazimHAli/imgur-explorer/actions/workflows/lint.yml)
 
 Example application using ReactJS + [Imgur API](https://imgur.com/) + [vite bundler](https://github.com/vitejs/vite). Fluid & responsive layout.
 
