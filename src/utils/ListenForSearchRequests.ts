@@ -26,7 +26,7 @@ function ListenForSearchRequests(
   state: TypeState,
   setIsLoading: TypeGlobalContext["setIsLoading"],
   setState: TypeGlobalContext["setState"]
-) {
+): void {
   useEffect(() => {
     const method = state.requestArgs.method;
     if (state.requestArgs.method === "search" && state.requestArgs.newSearch) {
