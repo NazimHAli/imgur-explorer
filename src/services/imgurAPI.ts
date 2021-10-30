@@ -16,6 +16,13 @@ interface Args {
 class ImgurAPI {
   private static instance: ImgurAPI;
 
+  constructor() {
+    this.useFakeResponse = imgurClientId === undefined;
+  }
+
+  useFakeResponse: boolean;
+  requestArgs!: TypeState["requestArgs"];
+
   /**
    * Get or create API instance
    */
@@ -28,12 +35,6 @@ class ImgurAPI {
     ImgurAPI.instance.requestArgs = requestArgs;
     return ImgurAPI.instance;
   }
-  constructor() {
-    this.useFakeResponse = imgurClientId === undefined;
-  }
-
-  useFakeResponse: boolean;
-  requestArgs!: TypeState["requestArgs"];
 
   private async imgurBaseApi(args: Args) {
     const myHeaders = new Headers({

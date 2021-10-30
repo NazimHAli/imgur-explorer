@@ -1,4 +1,3 @@
-import { ImgurAPI } from "@/services/imgurAPI";
 import { initialState } from "@/state/initialState";
 import fetchMock from "jest-fetch-mock";
 import { rest } from "msw";
@@ -18,38 +17,45 @@ const requestHandlers = [
   }),
 ];
 
+const server = setupServer(...requestHandlers);
+
+beforeAll(() => {
+  server.listen();
+  fetchMock.doMock();
+});
+
+afterAll(() => {
+  delete process.env.PUBLIC_IMGUR_CLIENT_ID;
+  server.resetHandlers();
+  server.close();
+  fetchMock.disableMocks();
+});
+
 describe("test mock API server", () => {
   let api, response;
 
-  const server = setupServer(...requestHandlers);
-
-  beforeAll(() => {
+  const getInst = async () => {
     process.env.PUBLIC_IMGUR_CLIENT_ID = "mockAPI";
-    server.listen();
-    fetchMock.doMock();
-  });
 
-  afterAll(() => {
-    delete process.env.PUBLIC_IMGUR_CLIENT_ID;
-    server.resetHandlers();
-    server.close();
-    fetchMock.disableMocks();
+    const { ImgurAPI } = await import("@/services/imgurAPI");
+    const napi = ImgurAPI.getInstance(initialRequestArgs);
+    return napi;
+  };
+
+  beforeEach(async () => {
+    api = await getInst();
   });
 
   test("useFakeResponse is false", async () => {
-    api = ImgurAPI.getInstance(initialRequestArgs);
     expect(await api.useFakeResponse).toBeFalsy();
   });
 
   test("get galleries", async () => {
-    api = ImgurAPI.getInstance(initialRequestArgs);
     response = await api.getGallerySearchResults();
     expect(response.length).toEqual(1);
   });
 
   test("get user account", async () => {
-    api = ImgurAPI.getInstance(initialRequestArgs);
-
     response = await api.methodDispatcher("account");
     expect(response.user.name).toEqual("First Last");
   });
