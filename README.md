@@ -5,6 +5,10 @@
 [![CodeQL](https://github.com/NazimHAli/imgur-explorer/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/NazimHAli/imgur-explorer/actions/workflows/codeql-analysis.yml)
 [![Unit Tests](https://github.com/NazimHAli/imgur-explorer/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/NazimHAli/imgur-explorer/actions/workflows/unit-tests.yml)
 
+| Branches                                                                                                    | Functions                                                                                                     | Lines                                                                                                 | Statements                                                                                                      |
+| ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| ![Coverage: Branches](https://github.com/NazimHAli/imgur-explorer/blob/master/coverage/badges/branches.svg) | ![Coverage: Functions](https://github.com/NazimHAli/imgur-explorer/blob/master/coverage/badges/functions.svg) | ![Coverage: Lines](https://github.com/NazimHAli/imgur-explorer/blob/master/coverage/badges/lines.svg) | ![Coverage: Statements](https://github.com/NazimHAli/imgur-explorer/blob/master/coverage/badges/statements.svg) |
+
 Example application using ReactJS + [Imgur API](https://imgur.com/) + [vite bundler](https://github.com/vitejs/vite). Fluid & responsive layout.
 
 ## Features
