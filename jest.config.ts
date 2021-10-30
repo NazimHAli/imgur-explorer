@@ -14,10 +14,10 @@ export default () => {
     coverageReporters: ["text"],
     coverageThreshold: {
       global: {
-        branches: 18,
-        functions: 11,
-        lines: 16,
-        statements: -500,
+        branches: 29,
+        functions: 23,
+        lines: 30,
+        statements: -295,
       },
     },
     moduleDirectories: [
