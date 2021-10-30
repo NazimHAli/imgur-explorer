@@ -11,7 +11,7 @@ import { useEffect } from "react";
 function updateCommentState(
   setState: TypeGlobalContext["setState"],
   state: TypeState
-) {
+): void {
   setState({
     ...state,
     requestArgs: { ...state.requestArgs, method: "" },
