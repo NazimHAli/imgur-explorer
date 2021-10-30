@@ -103,8 +103,4 @@ function ItemModal(props: {
   );
 }
 
-ItemModal.defaultProps = {
-  selectedItem: {},
-};
-
 export default ItemModal;
