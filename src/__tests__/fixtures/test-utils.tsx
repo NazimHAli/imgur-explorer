@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { GlobalContextProvider } from "@/state/GlobalContext";
 import { act, render, RenderOptions } from "@testing-library/react";
 import { ReactElement } from "react";
@@ -20,3 +21,4 @@ function customRender(
 
 export * from "@testing-library/react";
 export { customRender as render };
+/* eslint-enable */

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const path = require("path");
 
 module.exports = {
@@ -5,3 +7,5 @@ module.exports = {
     return "module.exports = " + JSON.stringify(path.basename(filename)) + ";";
   },
 };
+
+/* eslint-enable */

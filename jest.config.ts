@@ -9,6 +9,7 @@ export default () => {
     collectCoverageFrom: [
       "<rootDir>/src/**/*.{ts,tsx}",
       "!<rootDir>/src/__tests__/**/*",
+      "!<rootDir>/src/*.d.ts",
     ],
     coverageReporters: ["text"],
     coverageThreshold: {
