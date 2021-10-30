@@ -19,6 +19,11 @@ export default () => {
         statements: -500,
       },
     },
+    moduleDirectories: [
+      "<rootDir>/node_modules",
+      "<rootDir>",
+      "<rootDir>/src/__tests__",
+    ],
     preset: "ts-jest",
     restoreMocks: true,
     resetMocks: true,
@@ -26,6 +31,8 @@ export default () => {
     transform: {
       "^.+\\.(ts|tsx)": "ts-jest",
       "^.+\\.(js|jsx)": "babel-jest",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+        "<rootDir>/src/__tests__/fixtures/fileTransformer.ts",
     },
     moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
       prefix: "<rootDir>/",

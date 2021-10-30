@@ -47,15 +47,4 @@ describe("ImgurAPI", () => {
       { headers: {}, method: "GET" }
     );
   });
-
-  test.skip("dev", async () => {
-    jest.mock("@/services/imgurAPI");
-    api = ImgurAPI.getInstance(initialRequestArgs);
-
-    res = await api.methodDispatcher("account");
-    expect(global.fetch).toHaveBeenCalledWith(
-      "https://api.imgur.com/3/account/?account_id==0",
-      { headers: {}, method: "GET" }
-    );
-  });
 });
