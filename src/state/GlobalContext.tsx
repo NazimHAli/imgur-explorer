@@ -6,8 +6,8 @@ const GlobalContext = createContext<TypeGlobalContext>({
   isLoading: true,
   /* eslint-disable @typescript-eslint/no-empty-function */
   setIsLoading: () => {},
-  setState: () => {},
   setRequestArgs: () => {},
+  setState: () => {},
   /* eslint-enable @typescript-eslint/no-empty-function */
   state: initialState,
 });
@@ -37,8 +37,8 @@ function GlobalContextProvider(props: {
   const contextValue: TypeGlobalContext = {
     isLoading: isLoading,
     setIsLoading: setIsLoading,
-    setState: setState,
     setRequestArgs: setRequestArgs,
+    setState: setState,
     state: state,
   };
 

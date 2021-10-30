@@ -1,9 +1,8 @@
 import App from "@/components/App";
+import { GlobalContextProvider } from "@/state/GlobalContext";
 import "@/styles/index.scss";
 import { StrictMode } from "react";
 import { render } from "react-dom";
-
-import { GlobalContextProvider } from "./state/GlobalContext";
 
 render(
   <StrictMode>

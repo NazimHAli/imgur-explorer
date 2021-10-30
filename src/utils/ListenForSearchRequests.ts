@@ -11,7 +11,7 @@ import { useEffect } from "react";
 function updateCommentState(
   setState: TypeGlobalContext["setState"],
   state: TypeState
-) {
+): void {
   setState({
     ...state,
     requestArgs: { ...state.requestArgs, method: "" },
@@ -26,7 +26,7 @@ function ListenForSearchRequests(
   state: TypeState,
   setIsLoading: TypeGlobalContext["setIsLoading"],
   setState: TypeGlobalContext["setState"]
-) {
+): void {
   useEffect(() => {
     const method = state.requestArgs.method;
     if (state.requestArgs.method === "search" && state.requestArgs.newSearch) {
