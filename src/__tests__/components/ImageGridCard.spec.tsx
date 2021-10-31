@@ -55,27 +55,11 @@ describe("ImageGridCard", () => {
     });
   });
 
-  test("card title displayed", () => {
-    renderEle();
-    testElement = screen.getByRole("heading", { level: 4 });
-
-    expect(
-      item.title.startsWith(testElement.textContent.replace("…", ""))
-    ).toBeTruthy();
-  });
-
   test("img srcset populated", () => {
     renderEle();
     testElement = screen.getByRole("img");
 
     expect(testElement.dataset.srcset).toEqual(item.images[0].link);
-  });
-
-  test("3 icons displayed", () => {
-    renderEle();
-    testElement = document.querySelectorAll("svg");
-
-    expect(testElement.length).toEqual(3);
   });
 
   test("clicking on card dispatches setRequestArgs", () => {
@@ -97,6 +81,24 @@ describe("ImageGridCard", () => {
       filter: false,
       method: "comments",
       selectedItemID: item.id,
+    });
+  });
+
+  describe("card info", () => {
+    test("card title displayed", () => {
+      renderEle();
+      testElement = screen.getByRole("heading", { level: 4 });
+
+      expect(
+        item.title.startsWith(testElement.textContent.replace("…", ""))
+      ).toBeTruthy();
+    });
+
+    test("3 icons displayed", () => {
+      renderEle();
+      testElement = document.querySelectorAll("svg");
+
+      expect(testElement.length).toEqual(3);
     });
   });
 });
