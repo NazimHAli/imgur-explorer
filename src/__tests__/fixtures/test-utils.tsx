@@ -1,11 +1,13 @@
-/* eslint-disable */
 import { GlobalContextProvider } from "@/state/GlobalContext";
 import { act, render, RenderOptions } from "@testing-library/react";
 import { ReactElement } from "react";
 
+global.IntersectionObserver = jest.fn();
 global.scrollTo = jest.fn();
 
-const AllTheProviders = ({ children }) => {
+const AllTheProviders = (props: { children: ReactElement<any, any> }) => {
+  const { children } = props;
+
   return <GlobalContextProvider>{children}</GlobalContextProvider>;
 };
 
@@ -23,4 +25,3 @@ function customRender(
 
 export * from "@testing-library/react";
 export { customRender as render };
-/* eslint-enable */
