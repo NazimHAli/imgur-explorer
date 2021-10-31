@@ -35,7 +35,7 @@ describe("Header", () => {
       expect(testElement.value).toBe("meow");
     });
 
-    test("new query value works", async () => {
+    test("updating query and submitting works", async () => {
       testElement = screen.getByRole("searchbox");
       expect(testElement.value).toBe("meow");
 

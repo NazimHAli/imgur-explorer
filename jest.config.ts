@@ -41,7 +41,6 @@ const config: InitialOptionsTsJest = {
   }),
   testEnvironment: "jsdom",
   testPathIgnorePatterns: ["node_modules", "fixtures"],
-  verbose: true,
 };
 
 export default config;
