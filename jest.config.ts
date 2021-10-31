@@ -12,7 +12,7 @@ const config: InitialOptionsTsJest = {
     "!<rootDir>/src/*.d.ts",
   ],
   // @ts-ignore: Unreachable code error
-  coverageReporters: ["text", "jest-badges"],
+  coverageReporters: ["text", "text-summary", "jest-badges"],
   coverageThreshold: {
     global: {
       branches: 29,
