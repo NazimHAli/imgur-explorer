@@ -1,4 +1,4 @@
-import { mockedServer } from "@/__tests__/fixtures/requestHandlers";
+import { mockedServer } from "@/__tests__/fixtures/mockedServer";
 import { initialState } from "@/state/initialState";
 import fetchMock from "jest-fetch-mock";
 
