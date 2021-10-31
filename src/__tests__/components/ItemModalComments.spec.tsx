@@ -19,7 +19,6 @@ describe("ItemModalComments", () => {
   test("comments displayed", () => {
     testElement = render(
       // @ts-ignore
-
       <ItemModalComments comments={mockItemComments} />
     ).container;
 
