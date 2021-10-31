@@ -14,6 +14,7 @@
     "lint:watch": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}",
     "serve": "vite preview --host 10.0.0.211 --port 3001",
     "test": "jest",
+    "test:nc": "jest --coverage=false -o -e",
     "test:watch": "yarn test --watch",
     "postinstall": "husky install",
     "prepublishOnly": "pinst --disable",
