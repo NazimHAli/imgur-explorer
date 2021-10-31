@@ -1,23 +1,67 @@
-import { render, screen } from "@/__tests__/fixtures/test-utils";
+import { mockSelectedItem } from "@/__tests__/fixtures/mockSelectedItem";
+import { act, render, screen } from "@/__tests__/fixtures/test-utils";
 import ItemModal from "@/components/ItemModal";
+import { useGlobalContext } from "@/state/GlobalContext";
 import "@testing-library/jest-dom";
+import { useEffect } from "react";
 
-function renderModal({
+mockSelectedItem;
+
+/* eslint-disable react/prop-types */
+function TestComponent({
+  setSelectedItem = false,
   isOpen = false,
   setIsOpen = () => {
     null;
   },
 } = {}) {
-  render(<ItemModal isOpen={isOpen} setIsOpen={setIsOpen} />, {
-    container: document.getElementById("root"),
-  });
+  const { setState } = useGlobalContext();
+
+  useEffect(() => {
+    if (setSelectedItem) {
+      act(() => {
+        setState((currentState) => {
+          return { ...currentState, selectedItem: mockSelectedItem };
+        });
+      });
+    }
+  }, []);
+
+  return <ItemModal isOpen={isOpen} setIsOpen={setIsOpen} />;
+}
+/* eslint-enable react/prop-types */
+
+function renderModal(args) {
+  const updArgs = {
+    setSelectedItem: false,
+    isOpen: false,
+    setIsOpen: () => {
+      null;
+    },
+    ...args,
+  };
+
+  const { setSelectedItem, isOpen, setIsOpen } = updArgs;
+
+  render(
+    <TestComponent
+      isOpen={isOpen}
+      setIsOpen={setIsOpen}
+      setSelectedItem={setSelectedItem}
+    />,
+    {
+      container: document.getElementById("root"),
+    }
+  );
 }
 
 describe("ItemModal", () => {
-  let testElement;
+  let args, testElement;
 
   describe("renders one element when not open", () => {
-    renderModal();
+    beforeEach(() => {
+      renderModal({});
+    });
 
     test("should match snapshot", () => {
       expect(document.querySelector("body")).toMatchSnapshot();
@@ -47,10 +91,60 @@ describe("ItemModal", () => {
       testElement = screen.getByRole("heading", { level: 3 });
       expect(testElement).toHaveTextContent("Comments");
     });
+  });
+
+  describe("selected item", () => {
+    beforeEach(() => {
+      args = {
+        setSelectedItem: true,
+        isOpen: true,
+      };
+      renderModal(args);
+    });
+
+    test("img rendered", () => {
+      const image = screen.queryByRole("img");
+      expect(image).toMatchInlineSnapshot(
+        `
+        <img
+          alt="Garden Meow"
+          height="898"
+          loading="lazy"
+          srcset="https://i.imgur.com/Ykajvmel.jpg"
+          width="450"
+        />
+      `
+      );
+    });
+
+    test("has info badges", () => {
+      testElement = document.querySelectorAll("span.data-badge");
+      expect(testElement).toHaveLength(3);
+
+      expect(testElement[0].dataset.count).toEqual(
+        mockSelectedItem.ups.toLocaleString()
+      );
+      expect(testElement[1].dataset.count).toEqual(
+        mockSelectedItem.comment_count.toLocaleString()
+      );
+      expect(testElement[2].dataset.count).toEqual(
+        mockSelectedItem.views.toLocaleString()
+      );
+    });
 
     test.skip("dev", () => {
       screen.debug();
-      expect(screen.queryAllByRole("img")).toHaveLength(0);
+      testElement = document.querySelectorAll("span.data-badge");
+      expect(testElement).toHaveLength(3);
+      expect(testElement[0].dataset.count).toEqual(
+        mockSelectedItem.ups.toLocaleString()
+      );
+      expect(testElement[1].dataset.count).toEqual(
+        mockSelectedItem.comment_count.toLocaleString()
+      );
+      expect(testElement[2].dataset.count).toEqual(
+        mockSelectedItem.views.toLocaleString()
+      );
     });
   });
 });
