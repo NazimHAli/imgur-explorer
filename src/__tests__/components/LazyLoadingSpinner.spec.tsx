@@ -1,6 +1,5 @@
+import { render } from "@/__tests__/fixtures/test-utils";
 import LazyLoadingSpinner from "@/components/LazyLoadingSpinner";
-
-import { render } from "../fixtures/test-utils";
 
 describe("LazyLoadingSpinner", () => {
   test("loads", () => {

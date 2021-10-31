@@ -1,8 +1,7 @@
+import { mockItemComments } from "@/__tests__/fixtures/modalItemComments";
+import { render } from "@/__tests__/fixtures/test-utils";
 import { ItemModalComments } from "@/components/ItemModalComments";
 import "@testing-library/jest-dom";
-
-import { mockItemComments } from "../fixtures/modalItemComments";
-import { render } from "../fixtures/test-utils";
 
 const countCommentEls = (testElement) => {
   return testElement.querySelectorAll(".modal-comment__nested").length;

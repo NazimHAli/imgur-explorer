@@ -7,9 +7,6 @@ import {
 } from "@testing-library/react";
 import { ReactElement } from "react";
 
-global.IntersectionObserver = jest.fn();
-global.scrollTo = jest.fn();
-
 function AllTheProviders(props: { children: ReactElement<any, any> }) {
   const { children } = props;
 

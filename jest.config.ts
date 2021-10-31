@@ -30,6 +30,7 @@ const config: InitialOptionsTsJest = {
   restoreMocks: true,
   resetMocks: true,
   resetModules: true,
+  setupFiles: ["<rootDir>/.jest/setupFiles.ts"],
   transform: {
     ...tsjPreset.transform,
     "^.+\\.(ts|tsx|js|jsx)": "ts-jest",
