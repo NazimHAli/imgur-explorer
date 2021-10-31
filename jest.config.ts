@@ -15,10 +15,10 @@ const config: InitialOptionsTsJest = {
   coverageReporters: ["text", "text-summary", "jest-badges"],
   coverageThreshold: {
     global: {
-      branches: 29,
-      functions: 36,
-      lines: 39,
-      statements: -295,
+      branches: 34,
+      functions: 46,
+      lines: 50,
+      statements: 50,
     },
   },
   moduleDirectories: [
