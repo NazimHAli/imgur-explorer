@@ -14,7 +14,8 @@
     "lint:watch": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}",
     "serve": "vite preview --host 10.0.0.211 --port 3001",
     "test": "jest",
-    "test:watch": "yarn test --watch",
+    "test:nc": "jest --coverage=false -o -e",
+    "test:watch": "yarn test:nc --watch",
     "postinstall": "husky install",
     "prepublishOnly": "pinst --disable",
     "postpublish": "pinst --enable"
@@ -32,6 +33,7 @@
     "@fullhuman/postcss-purgecss": "^4.0.3",
     "@rollup/plugin-replace": "^3.0.0",
     "@testing-library/dom": "^8.10.1",
+    "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "@trivago/prettier-plugin-sort-imports": "^3.0.0",

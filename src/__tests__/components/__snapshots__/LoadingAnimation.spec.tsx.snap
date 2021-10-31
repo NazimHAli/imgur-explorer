@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadingAnimation loads 1`] = `
+<div>
+  <div
+    class="loading-container"
+  >
+    <div
+      class="mosaic-loader"
+    >
+      <div
+        class="cell d-0"
+      />
+      <div
+        class="cell d-1"
+      />
+      <div
+        class="cell d-2"
+      />
+      <div
+        class="cell d-3"
+      />
+      <div
+        class="cell d-1"
+      />
+      <div
+        class="cell d-2"
+      />
+      <div
+        class="cell d-3"
+      />
+      <div
+        class="cell d-4"
+      />
+      <div
+        class="cell d-2"
+      />
+      <div
+        class="cell d-3"
+      />
+      <div
+        class="cell d-4"
+      />
+      <div
+        class="cell d-5"
+      />
+      <div
+        class="cell d-3"
+      />
+      <div
+        class="cell d-4"
+      />
+      <div
+        class="cell d-5"
+      />
+      <div
+        class="cell d-6"
+      />
+    </div>
+  </div>
+</div>
+`;

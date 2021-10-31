@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImageGridNoResults matches snapshot 1`] = `
+<DocumentFragment>
+  <section
+    class="no-results"
+  >
+    <h2>
+      No results found :p
+    </h2>
+  </section>
+</DocumentFragment>
+`;

@@ -12,13 +12,13 @@ const config: InitialOptionsTsJest = {
     "!<rootDir>/src/*.d.ts",
   ],
   // @ts-ignore: Unreachable code error
-  coverageReporters: ["text", "jest-badges"],
+  coverageReporters: ["text", "text-summary", "jest-badges"],
   coverageThreshold: {
     global: {
-      branches: 29,
-      functions: 36,
-      lines: 39,
-      statements: -295,
+      branches: 40,
+      functions: 48,
+      lines: 58,
+      statements: 58,
     },
   },
   moduleDirectories: [
@@ -41,7 +41,6 @@ const config: InitialOptionsTsJest = {
   }),
   testEnvironment: "jsdom",
   testPathIgnorePatterns: ["node_modules", "fixtures"],
-  verbose: true,
 };
 
 export default config;

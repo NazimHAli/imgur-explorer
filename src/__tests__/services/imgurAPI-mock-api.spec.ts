@@ -1,37 +1,22 @@
+import { mockedServer } from "@/__tests__/fixtures/mockedServer";
 import { initialState } from "@/state/initialState";
 import fetchMock from "jest-fetch-mock";
-import { rest } from "msw";
-import { setupServer } from "msw/node";
 
 const initialRequestArgs = initialState["requestArgs"];
 
-const requestHandlers = [
-  rest.get(
-    "https://api.imgur.com/3/gallery/search/top/all/1",
-    (_req, res, ctx) => {
-      return res(ctx.json({ data: ["meow"] }));
-    }
-  ),
-  rest.get("https://api.imgur.com/3/account/", (_req, res, ctx) => {
-    return res(ctx.json({ data: { user: { name: "First Last" } } }));
-  }),
-];
-
-const server = setupServer(...requestHandlers);
-
 beforeAll(() => {
-  server.listen();
+  mockedServer.listen();
   fetchMock.doMock();
 });
 
 afterAll(() => {
   delete process.env.PUBLIC_IMGUR_CLIENT_ID;
-  server.resetHandlers();
-  server.close();
+  mockedServer.resetHandlers();
+  mockedServer.close();
   fetchMock.disableMocks();
 });
 
-describe("test mock API server", () => {
+describe("test mocked API", () => {
   let api, response;
 
   const getInst = async () => {
