@@ -1,4 +1,4 @@
-import { mockItemComments } from "@/__tests__/fixtures/modalItemComments";
+import { mockItemComments } from "@/__tests__/fixtures/mockItemComments";
 import { render } from "@/__tests__/fixtures/test-utils";
 import { ItemModalComments } from "@/components/ItemModalComments";
 import "@testing-library/jest-dom";

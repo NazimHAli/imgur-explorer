@@ -1,27 +1,38 @@
+import { mockItemComments } from "@/__tests__/fixtures/mockItemComments";
 import { mockSelectedItem } from "@/__tests__/fixtures/mockSelectedItem";
-import { act, render, screen } from "@/__tests__/fixtures/test-utils";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+} from "@/__tests__/fixtures/test-utils";
 import ItemModal from "@/components/ItemModal";
 import { useGlobalContext } from "@/state/GlobalContext";
 import "@testing-library/jest-dom";
 import { useEffect } from "react";
 
-mockSelectedItem;
+const setIsOpen = jest.fn();
 
 /* eslint-disable react/prop-types */
 function TestComponent({
   setSelectedItem = false,
+  setItemComments = false,
   isOpen = false,
-  setIsOpen = () => {
-    null;
-  },
 } = {}) {
   const { setState } = useGlobalContext();
 
   useEffect(() => {
-    if (setSelectedItem) {
+    if (setSelectedItem || setItemComments) {
+      let newState = { selectedItem: mockSelectedItem };
+
+      if (setSelectedItem) {
+        // @ts-ignore
+        newState = { ...newState, selectedItemComments: mockItemComments };
+      }
+
       act(() => {
         setState((currentState) => {
-          return { ...currentState, selectedItem: mockSelectedItem };
+          return { ...currentState, ...newState };
         });
       });
     }
@@ -34,19 +45,17 @@ function TestComponent({
 function renderModal(args) {
   const updArgs = {
     setSelectedItem: false,
+    setItemComments: false,
     isOpen: false,
-    setIsOpen: () => {
-      null;
-    },
     ...args,
   };
 
-  const { setSelectedItem, isOpen, setIsOpen } = updArgs;
+  const { setItemComments, setSelectedItem, isOpen } = updArgs;
 
   render(
     <TestComponent
       isOpen={isOpen}
-      setIsOpen={setIsOpen}
+      setItemComments={setItemComments}
       setSelectedItem={setSelectedItem}
     />,
     {
@@ -132,19 +141,25 @@ describe("ItemModal", () => {
       );
     });
 
-    test.skip("dev", () => {
-      screen.debug();
-      testElement = document.querySelectorAll("span.data-badge");
-      expect(testElement).toHaveLength(3);
-      expect(testElement[0].dataset.count).toEqual(
-        mockSelectedItem.ups.toLocaleString()
-      );
-      expect(testElement[1].dataset.count).toEqual(
-        mockSelectedItem.comment_count.toLocaleString()
-      );
-      expect(testElement[2].dataset.count).toEqual(
-        mockSelectedItem.views.toLocaleString()
-      );
+    test("close modal on button click", () => {
+      fireEvent.click(screen.getByRole("button"));
+
+      testElement = document.querySelector(".item-modal");
+      expect(testElement).toBeNull();
+    });
+  });
+
+  describe("with item + comments", () => {
+    beforeEach(() => {
+      args = {
+        setSelectedItem: true,
+        setItemComments: true,
+      };
+      renderModal(args);
+    });
+
+    test("on mount sets isOpen=true", () => {
+      expect(setIsOpen).toHaveBeenCalledWith(true);
     });
   });
 });
