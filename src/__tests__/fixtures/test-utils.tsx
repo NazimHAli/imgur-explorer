@@ -3,6 +3,8 @@ import { GlobalContextProvider } from "@/state/GlobalContext";
 import { act, render, RenderOptions } from "@testing-library/react";
 import { ReactElement } from "react";
 
+global.scrollTo = jest.fn();
+
 const AllTheProviders = ({ children }) => {
   return <GlobalContextProvider>{children}</GlobalContextProvider>;
 };
