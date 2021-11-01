@@ -1,18 +1,18 @@
-import { mockedServer } from "@/__tests__/fixtures/mockedServer";
+import { mockServer } from "@/__tests__/fixtures/mockServer";
 import { initialState } from "@/state/initialState";
 import fetchMock from "jest-fetch-mock";
 
 const initialRequestArgs = initialState["requestArgs"];
 
 beforeAll(() => {
-  mockedServer.listen();
+  mockServer.listen();
   fetchMock.doMock();
 });
 
 afterAll(() => {
   delete process.env.PUBLIC_IMGUR_CLIENT_ID;
-  mockedServer.resetHandlers();
-  mockedServer.close();
+  mockServer.resetHandlers();
+  mockServer.close();
   fetchMock.disableMocks();
 });
 

@@ -10,6 +10,6 @@ const requestHandlers = [
   }),
 ];
 
-const mockedServer = setupServer(...requestHandlers);
+const mockServer = setupServer(...requestHandlers);
 
-export { mockedServer };
+export { mockServer };
