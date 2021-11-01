@@ -55,8 +55,8 @@ class ImgurAPI {
 
   public async getGallerySearchResults() {
     if (this.useFakeResponse) {
-      const mod = await import("@/__tests__/fixtures/imgurResponse");
-      return extractImageResults(mod.fakeResponse.data);
+      const mod = await import("@/__tests__/fixtures/mockItems");
+      return extractImageResults(mod.mockItems.data);
     }
 
     return this.getLiveResultsFromAPI();

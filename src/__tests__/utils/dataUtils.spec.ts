@@ -1,4 +1,4 @@
-import { fakeResponse } from "@/__tests__/fixtures/imgurResponse";
+import { mockItems } from "@/__tests__/fixtures/mockItems";
 import { truncateText, updateImageSize } from "@/utils/dataUtils";
 
 describe("truncateText", () => {
@@ -20,7 +20,7 @@ describe("truncateText", () => {
 
 describe("updateImageSize", () => {
   let res;
-  const images = fakeResponse.data.slice(0, 2);
+  const images = mockItems.data.slice(0, 2);
 
   test("default behavior sets image size to 'l'", () => {
     res = updateImageSize(images);
