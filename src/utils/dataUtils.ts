@@ -154,6 +154,7 @@ export {
   genRandomColor,
   getDateString,
   getSelectedItem,
+  selectRandomItems,
   truncateText,
   updateImageSize,
 };
