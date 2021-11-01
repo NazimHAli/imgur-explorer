@@ -56,8 +56,18 @@ describe("HandleNewItems", () => {
   });
 
   test("adds new idxs when intersecting", () => {
-    render(<TestHandleNewItems idxsToLoad={[0, 1, 2, 3, 4, 5, 6]} />);
+    render(
+      <TestHandleNewItems idxsToLoad={[0, 1, 2, 3, 4, 5, 6]} maxItems={50} />
+    );
     expect(bindIdxsToLoad).toHaveLength(17);
+  });
+
+  test("sets new request args for page 2", () => {
+    render(
+      <TestHandleNewItems idxsToLoad={[0, 1, 2, 3, 4, 5, 6]} maxItems={20} />
+    );
+
+    expect(bindState.requestArgs.page).toEqual(2);
   });
 
   test("finishes lazyloading", () => {
