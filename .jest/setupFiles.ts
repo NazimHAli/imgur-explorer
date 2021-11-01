@@ -8,5 +8,13 @@ const root = document.createElement("div");
 root.setAttribute("id", "root");
 document.body.appendChild(root);
 
-global.IntersectionObserver = jest.fn();
+const observe = jest.fn();
+const unobserve = jest.fn();
+
+// @ts-ignore
+global.IntersectionObserver = jest.fn(() => ({
+  observe,
+  unobserve,
+}));
+
 global.scrollTo = jest.fn();
