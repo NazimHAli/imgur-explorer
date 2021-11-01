@@ -1,12 +1,11 @@
+import { mockItemComments } from "@/__tests__/fixtures/mockItemComments";
+import { mockItems } from "@/__tests__/fixtures/mockItems";
+import { mockTags } from "@/__tests__/fixtures/mockTags";
+import { render } from "@/__tests__/fixtures/test-utils";
 import { handleRespose } from "@/state/ContextHelpers";
 import { useGlobalContext } from "@/state/GlobalContext";
 import { act } from "@testing-library/react";
 import { useEffect } from "react";
-
-import { mockItemComments } from "../fixtures/mockItemComments";
-import { mockItems } from "../fixtures/mockItems";
-import { mockTags } from "../fixtures/mockTags";
-import { render } from "../fixtures/test-utils";
 
 let bindedState;
 
