@@ -73,8 +73,8 @@ class ImgurAPI {
    */
   private async getGalleryTags() {
     if (this.useFakeResponse) {
-      const mod = await import("@/__tests__/fixtures/galleryTags");
-      return mod.fakeGalleryTags.data;
+      const mod = await import("@/__tests__/fixtures/mockGalleryTags");
+      return mod.mockGalleryTags.data;
     }
 
     return this.imgurBaseApi({ endPoint: EP_GALLERY_TAGS });
