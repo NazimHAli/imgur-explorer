@@ -37,7 +37,7 @@ describe("extractImageResults", () => {
 
 describe("genRandomColor", () => {
   test.each([[0], [1], [2]])("%# random HEX color", () => {
-    expect(dataUtils.genRandomColor().length).toBeGreaterThan(5);
+    expect(dataUtils.genRandomColor().length).toBeGreaterThan(2);
   });
 });
 
