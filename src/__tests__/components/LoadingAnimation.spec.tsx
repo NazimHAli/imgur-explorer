@@ -1,6 +1,5 @@
+import { render } from "@/__tests__/fixtures/test-utils";
 import LoadingAnimation from "@/components/LoadingAnimation";
-
-import { render } from "../fixtures/test-utils";
 
 describe("LoadingAnimation", () => {
   test("loads", () => {

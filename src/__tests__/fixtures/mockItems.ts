@@ -1,4 +1,4 @@
-export const fakeResponse = {
+export const mockItems = {
   data: [
     {
       account_id: 39301964,

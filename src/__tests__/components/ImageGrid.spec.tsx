@@ -1,9 +1,8 @@
+import { act, render, screen } from "@/__tests__/fixtures/test-utils";
 import ImageGrid from "@/components/ImageGrid";
 import { useGlobalContext } from "@/state/GlobalContext";
 import { ListenForSearchRequests } from "@/utils/ListenForSearchRequests";
 import { Suspense } from "react";
-
-import { act, render, screen } from "../fixtures/test-utils";
 
 jest.mock("@/utils/imageGridHelpers");
 jest.mock("@/utils/visibilityUtils");

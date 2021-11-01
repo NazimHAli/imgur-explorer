@@ -1,4 +1,4 @@
-import { mockTags } from "@/__tests__/fixtures/tags";
+import { mockTags } from "@/__tests__/fixtures/mockTags";
 import { render } from "@/__tests__/fixtures/test-utils";
 import ExploreGalleries from "@/components/ExploreGalleries";
 import { screen } from "@testing-library/react";

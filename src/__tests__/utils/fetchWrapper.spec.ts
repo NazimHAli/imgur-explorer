@@ -7,6 +7,15 @@ const requestHandlers = [
   rest.get("https://www.cats.moo/meow/data", (_req, res, ctx) => {
     return res(ctx.json({ results: ["meow"] }));
   }),
+
+  rest.get("https://www.cats.moo/meow/error", (_req, res, ctx) => {
+    return res(
+      ctx.status(400, "No cake 4 u :p"),
+      ctx.json({
+        errorMessage: "Not authorized",
+      })
+    );
+  }),
 ];
 
 const server = setupServer(...requestHandlers);
@@ -29,5 +38,12 @@ describe("fetchData", () => {
   test("successfull response", async () => {
     response = await fetchData("https://www.cats.moo/meow/data");
     expect(response).toEqual(["meow"]);
+  });
+
+  test("errors out", async () => {
+    response = await fetchData("https://www.cats.moo/meow/error");
+
+    expect(response.statusText).toBe("No cake 4 u :p");
+    expect(response.status).toBe(400);
   });
 });

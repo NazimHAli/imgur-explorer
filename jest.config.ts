@@ -15,10 +15,10 @@ const config: InitialOptionsTsJest = {
   coverageReporters: ["text", "text-summary", "jest-badges"],
   coverageThreshold: {
     global: {
-      branches: 40,
-      functions: 48,
-      lines: 58,
-      statements: 58,
+      branches: 66,
+      functions: 72,
+      lines: 77,
+      statements: 77,
     },
   },
   moduleDirectories: [
@@ -30,6 +30,7 @@ const config: InitialOptionsTsJest = {
   restoreMocks: true,
   resetMocks: true,
   resetModules: true,
+  setupFiles: ["<rootDir>/.jest/setupFiles.ts"],
   transform: {
     ...tsjPreset.transform,
     "^.+\\.(ts|tsx|js|jsx)": "ts-jest",

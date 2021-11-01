@@ -28,7 +28,7 @@ function TestComponent(props: { setEmptyQuery: boolean }) {
 }
 
 describe("Header", () => {
-  describe("with query", () => {
+  describe("renders", () => {
     beforeEach(() => {
       process.env.PUBLIC_IMGUR_CLIENT_ID = "mockAPI";
       container = render(<TestComponent setEmptyQuery={false} />);
@@ -44,41 +44,46 @@ describe("Header", () => {
       expect(testElement.alt).toBe("Logo");
       expect(testElement.src).toBe("http://localhost/imgur.svg");
     });
+  });
 
-    describe("search box - with query", () => {
-      test("input type = search", () => {
-        testElement = screen.getByRole("searchbox");
+  describe("search box - with query", () => {
+    beforeEach(() => {
+      process.env.PUBLIC_IMGUR_CLIENT_ID = "mockAPI";
+      container = render(<TestComponent setEmptyQuery={false} />);
+    });
 
-        expect(testElement.type).toBe("search");
+    test("input type = search", () => {
+      testElement = screen.getByRole("searchbox");
+
+      expect(testElement.type).toBe("search");
+    });
+
+    test("has default value", () => {
+      testElement = screen.getByRole("searchbox");
+
+      expect(testElement.value).toBe("meow");
+    });
+
+    test("can modify query", () => {
+      testElement = screen.getByRole("searchbox");
+      expect(testElement.value).toBe("meow");
+
+      fireEvent.change(testElement, {
+        target: { value: "query 2" },
       });
 
-      test("has default value", () => {
-        testElement = screen.getByRole("searchbox");
+      expect(testElement.value).toBe("query 2");
+    });
 
-        expect(testElement.value).toBe("meow");
+    test("requestArgs updates query", () => {
+      testElement = screen.getByRole("searchbox");
+
+      fireEvent.change(testElement, {
+        target: { value: "query 2" },
       });
+      fireEvent.click(screen.getByRole("button"));
 
-      test("can modify query", () => {
-        testElement = screen.getByRole("searchbox");
-        expect(testElement.value).toBe("meow");
-
-        fireEvent.change(testElement, {
-          target: { value: "query 2" },
-        });
-
-        expect(testElement.value).toBe("query 2");
-      });
-
-      test("requestArgs updates query", () => {
-        testElement = screen.getByRole("searchbox");
-
-        fireEvent.change(testElement, {
-          target: { value: "query 2" },
-        });
-        fireEvent.click(screen.getByRole("button"));
-
-        expect(requestArgs.query).toBe("query 2");
-      });
+      expect(requestArgs.query).toBe("query 2");
     });
   });
 

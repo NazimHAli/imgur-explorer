@@ -1,10 +1,10 @@
-import { fakeResponse } from "@/__tests__/fixtures/imgurResponse";
+import { mockItems } from "@/__tests__/fixtures/mockItems";
 import ImageGridCard from "@/components/ImageGridCard";
 import { render, screen, fireEvent } from "@testing-library/react";
 
 let testElement;
 
-const mockItem = fakeResponse.data[0];
+const mockItem = mockItems.data[0];
 const item = {
   account_url: mockItem.account_url,
   comment_count: mockItem.comment_count,

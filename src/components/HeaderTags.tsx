@@ -39,7 +39,7 @@ function HeaderTags() {
       method: "tagName",
       newSearch: true,
       query: "",
-      tagName: event.currentTarget.dataset.tag || "",
+      tagName: event.currentTarget?.dataset?.tag,
     });
     event.preventDefault();
   };

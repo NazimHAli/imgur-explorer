@@ -40,15 +40,18 @@ function HandleNewItems(
     if (checkForNewItems) {
       const newIdxs = [...Array(idxsToLoad.length + 10).keys()];
 
+      // Set request args to get the next page of results
       if (state.items.length - newIdxs.length <= 20) {
         setRequestArgs({
           filter: true,
           method: "search",
           newSearch: false,
-          page: (state.requestArgs?.page || 0) + 1,
+          page: state.requestArgs.page + 1,
         });
       }
 
+      // Add new idxs to lazyload
+      // TODO: Account for remaining items that are skipped from being lazyloaded
       if (newIdxs.length <= state.items.length) {
         setidxsToLoad(newIdxs);
       } else {

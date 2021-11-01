@@ -1,10 +1,12 @@
 export const fetchData = async (url: RequestInfo) => {
   try {
-    const response = await fetch(url);
-    const response_1 = await response.json();
-    return response_1.results;
+    const rawRes = await fetch(url);
+    const response = await rawRes.json();
+    if (!response.results) {
+      return rawRes;
+    }
+    return response.results;
   } catch (error: unknown | undefined) {
-    console.error(`Fetch problem: ${error || "unknown error"}`);
-    return Promise.reject({ statue: 400 });
+    return Promise.reject({ message: error || "", status: 400 });
   }
 };
