@@ -1,8 +1,7 @@
 import { mockItems } from "@/__tests__/fixtures/mockItems";
+import { mockTags } from "@/__tests__/fixtures/mockTags";
 import { initialState } from "@/state/initialState";
 import * as dataUtils from "@/utils/dataUtils";
-
-import { mockTags } from "../fixtures/mockTags";
 
 let res;
 
