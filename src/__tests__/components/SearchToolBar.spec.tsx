@@ -1,16 +1,30 @@
-import { render } from "@/__tests__/fixtures/test-utils";
+import { act, render } from "@/__tests__/fixtures/test-utils";
 import SearchToolBar from "@/components/SearchToolBar";
+import { useGlobalContext } from "@/state/GlobalContext";
 import userEvent from "@testing-library/user-event";
+import { useEffect } from "react";
+
+function TestComponent() {
+  const { setRequestArgs } = useGlobalContext();
+
+  useEffect(() => {
+    act(() => {
+      setRequestArgs({ query: "" });
+    });
+  }, []);
+
+  return <SearchToolBar />;
+}
 
 describe("SearchToolBar", () => {
   let container;
 
-  beforeEach(() => {
-    container = render(<SearchToolBar />).container;
-  });
-
   describe("dropdown options", () => {
     let options, selectSort;
+
+    beforeEach(() => {
+      container = render(<SearchToolBar />).container;
+    });
 
     test("sort options selectable", () => {
       selectSort = container.querySelector("#sort");
@@ -30,6 +44,20 @@ describe("SearchToolBar", () => {
         userEvent.selectOptions(selectSort, option);
         expect(selectSort.value).toBe(option);
       });
+    });
+  });
+
+  describe("empty query", () => {
+    beforeAll(() => {
+      container = render(<TestComponent />).container;
+    });
+
+    test("sort options not displayed", () => {
+      expect(container.querySelector("#sort")).toBeNull();
+    });
+
+    test("window options not displayed", () => {
+      expect(container.querySelector("#window")).toBeNull();
     });
   });
 });
