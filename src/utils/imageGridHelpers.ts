@@ -46,7 +46,7 @@ function HandleNewItems(
           filter: true,
           method: "search",
           newSearch: false,
-          page: (state.requestArgs?.page || 0) + 1,
+          page: state.requestArgs.page + 1,
         });
       }
 
