@@ -1,4 +1,5 @@
 import { mockServer } from "@/__tests__/fixtures/mockServer";
+import { ImgurAPI } from "@/services/imgurAPI";
 import { initialState } from "@/state/initialState";
 import fetchMock from "jest-fetch-mock";
 
@@ -19,16 +20,8 @@ afterAll(() => {
 describe("test mocked API", () => {
   let api, response;
 
-  const getInst = async () => {
-    process.env.PUBLIC_IMGUR_CLIENT_ID = "mockAPI";
-
-    const { ImgurAPI } = await import("@/services/imgurAPI");
-    const napi = ImgurAPI.getInstance(initialRequestArgs);
-    return napi;
-  };
-
   beforeEach(async () => {
-    api = await getInst();
+    api = ImgurAPI.getInstance(initialRequestArgs);
   });
 
   test("useFakeResponse is false", async () => {
@@ -37,7 +30,7 @@ describe("test mocked API", () => {
 
   test("get galleries", async () => {
     response = await api.getGallerySearchResults();
-    expect(response.length).toEqual(1);
+    expect(response.length).toEqual(31);
   });
 
   test("get user account", async () => {

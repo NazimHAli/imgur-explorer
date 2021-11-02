@@ -1,12 +1,21 @@
-import { act, render, screen } from "@/__tests__/fixtures/test-utils";
 import ImageGrid from "@/components/ImageGrid";
 import { useGlobalContext } from "@/state/GlobalContext";
 import { ListenForSearchRequests } from "@/utils/ListenForSearchRequests";
+import { act, render } from "@testing-library/react";
+import fetchMock from "jest-fetch-mock";
 import { Suspense } from "react";
 
 jest.mock("@/utils/imageGridHelpers");
 jest.mock("@/utils/visibilityUtils");
 jest.mock("@/utils/useIntersectionObserver");
+
+beforeAll(() => {
+  fetchMock.doMock();
+});
+
+afterAll(() => {
+  fetchMock.disableMocks();
+});
 
 function TestComponent() {
   act(() => {
@@ -21,13 +30,12 @@ function TestComponent() {
   );
 }
 
-describe.skip("ImageGrid", () => {
+describe("ImageGrid", () => {
   beforeEach(() => {
     render(<TestComponent />);
   });
 
-  test("should meow", () => {
-    screen.debug();
-    expect(screen).toBeTruthy();
+  test("mounts", () => {
+    expect(document.querySelector(".grid-viewport")).toBeDefined();
   });
 });
