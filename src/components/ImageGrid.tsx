@@ -29,18 +29,17 @@ function ImageGrid(): JSX.Element {
       <ItemModal isOpen={isOpen} setIsOpen={setIsOpen} />
 
       <div className="image-grid">
-        {idxsToLoad.map(
-          (idx) =>
-            state.items[idx] && (
-              <ImageGridCard
-                item={state.items[idx]}
-                key={`${idx || "0"}-${state.items[idx].id}`}
-                imgRef={cardImgRef}
-                setRequestArgs={setRequestArgs}
-                isLoading={isLoading}
-              />
-            )
-        )}
+        {idxsToLoad.map((idx) => (
+          <ImageGridCard
+            item={state?.items.length > 0 && state?.items[idx]}
+            key={`${idx || "0"}-${
+              state?.items.length > 0 && state?.items[idx].id
+            }`}
+            imgRef={cardImgRef}
+            setRequestArgs={setRequestArgs}
+            isLoading={isLoading}
+          />
+        ))}
       </div>
 
       <span ref={elementObserverRef} className="block w-px h-px"></span>

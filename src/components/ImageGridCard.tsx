@@ -13,7 +13,9 @@ function ImageGridCard(props: {
 
   const imageInfo = (
     <div className="card-info">
-      <h4 className="card-info__title">{truncateText(item?.title, 20)}</h4>
+      <h4 className="card-info__title">
+        {item?.title && truncateText(item.title, 20)}
+      </h4>
       <div className="card-info__icons">
         <ThumbsUp width="15" height="15" />
         {item?.ups?.toLocaleString()}
