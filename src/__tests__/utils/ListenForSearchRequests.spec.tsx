@@ -19,12 +19,11 @@ afterAll(() => {
 });
 
 const setIsLoading = jest.fn();
-const setState = jest.fn();
 let bindState;
 
 function TestComponent(props: { method: string }) {
   const { method } = props;
-  const { setRequestArgs, state } = useGlobalContext();
+  const { setState, setRequestArgs, state } = useGlobalContext();
 
   act(() => {
     ListenForSearchRequests(state, setIsLoading, setState);
@@ -44,16 +43,16 @@ function TestComponent(props: { method: string }) {
 }
 
 describe("ListenForSearchRequests", () => {
-  let root;
+  test.todo("Update tests below to validate methods");
 
   test("method = comments", async () => {
-    root = render(<TestComponent method={"comments"} />);
-    await waitFor(() => expect(setState).toBeCalledTimes(1));
+    render(<TestComponent method={"comments"} />);
+    await waitFor(() => expect(setIsLoading).nthCalledWith(1, true));
+    await waitFor(() => expect(setIsLoading).nthCalledWith(2, false));
   });
 
   test("method = search", () => {
-    root = render(<TestComponent method={"search"} />);
-    expect(root).toBeTruthy();
+    render(<TestComponent method={"search"} />);
     expect(bindState).toBeDefined();
   });
 
