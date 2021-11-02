@@ -31,9 +31,9 @@ function ImageGrid(): JSX.Element {
       <div className="image-grid">
         {idxsToLoad.map((idx) => (
           <ImageGridCard
-            item={state?.items.length > 0 && state?.items[idx]}
+            item={state.items.length > 0 && state.items[idx]}
             key={`${idx || "0"}-${
-              state?.items.length > 0 && state?.items[idx].id
+              state.items.length > 0 && state.items[idx].id
             }`}
             imgRef={cardImgRef}
             setRequestArgs={setRequestArgs}
@@ -42,7 +42,7 @@ function ImageGrid(): JSX.Element {
         ))}
       </div>
 
-      <span ref={elementObserverRef} className="block w-px h-px"></span>
+      <span ref={elementObserverRef} className="block w-px h-px" />
     </div>
   );
 }

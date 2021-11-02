@@ -30,10 +30,10 @@ function ImageGridCard(props: {
   );
 
   const loadingSkeleton = () => (
-    <div className="loading-skeleton">
+    <div data-testid="loading-skeleton" className="loading-skeleton">
       <div className="loading-skeleton__anim">
-        <div className="loading-skeleton__square"></div>
-        <div className="loading-skeleton__bottom"></div>
+        <div className="loading-skeleton__square" />
+        <div className="loading-skeleton__bottom" />
       </div>
     </div>
   );
@@ -53,7 +53,12 @@ function ImageGridCard(props: {
     <>
       {isLoading && loadingSkeleton()}
       {!isLoading && (
-        <a href="#explore" className="card" onClick={handleOnClick}>
+        <a
+          data-testid="card-link"
+          href="#explore"
+          className="card"
+          onClick={handleOnClick}
+        >
           <span className="card__img">
             <img
               alt={item?.title}
