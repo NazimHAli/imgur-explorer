@@ -26,7 +26,7 @@ describe.skip("ImageGrid", () => {
     render(<TestComponent />);
   });
 
-  test("should meow", () => {
+  test("mounts", () => {
     screen.debug();
     expect(screen).toBeTruthy();
   });

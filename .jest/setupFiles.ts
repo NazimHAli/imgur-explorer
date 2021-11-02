@@ -18,3 +18,6 @@ global.IntersectionObserver = jest.fn(() => ({
 }));
 
 global.scrollTo = jest.fn();
+
+// Mock client ID for all unit tests
+process.env.PUBLIC_IMGUR_CLIENT_ID = "mockAPI";

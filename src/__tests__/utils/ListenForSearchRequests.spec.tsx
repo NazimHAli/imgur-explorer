@@ -1,10 +1,12 @@
 import { mockServer } from "@/__tests__/fixtures/mockServer";
 import { useGlobalContext } from "@/state/GlobalContext";
 import { ListenForSearchRequests } from "@/utils/ListenForSearchRequests";
+import { act, render, waitFor } from "@testing-library/react";
 import fetchMock from "jest-fetch-mock";
-import { create, act } from "react-test-renderer";
+import { useEffect } from "react";
 
 beforeAll(() => {
+  process.env.PUBLIC_IMGUR_CLIENT_ID = "mockAPI";
   mockServer.listen();
   fetchMock.doMock();
 });
@@ -16,26 +18,47 @@ afterAll(() => {
   fetchMock.disableMocks();
 });
 
-function TestComponent() {
-  act(() => {
-    const { state, setState, setIsLoading } = useGlobalContext();
+const setIsLoading = jest.fn();
+const setState = jest.fn();
+let bindState;
 
+function TestComponent(props: { method: string }) {
+  const { method } = props;
+  const { setRequestArgs, state } = useGlobalContext();
+
+  act(() => {
     ListenForSearchRequests(state, setIsLoading, setState);
   });
 
-  return <p></p>;
+  useEffect(() => {
+    act(() => {
+      if (method !== "search" && state.requestArgs.method === "search") {
+        setRequestArgs({ method: method });
+      }
+    });
+  }, []);
+
+  bindState = state;
+
+  return <div />;
 }
 
-describe("ImageGrid", () => {
+describe("ListenForSearchRequests", () => {
   let root;
 
-  beforeEach(() => {
-    act(() => {
-      root = create(<TestComponent />);
-    });
+  test("method = comments", async () => {
+    root = render(<TestComponent method={"comments"} />);
+    await waitFor(() => expect(setState).toBeCalledTimes(1));
   });
 
-  test("mounts", () => {
+  test("method = search", () => {
+    root = render(<TestComponent method={"search"} />);
     expect(root).toBeTruthy();
+    expect(bindState).toBeDefined();
+  });
+
+  test("on mounted calls setIsLoading=true", () => {
+    render(<TestComponent method={"search"} />);
+    expect(setIsLoading).nthCalledWith(1, true);
   });
 });
