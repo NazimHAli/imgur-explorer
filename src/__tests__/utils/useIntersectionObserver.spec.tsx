@@ -42,7 +42,6 @@ describe("useIntersectionObserver", () => {
 
   test.todo("disconnect gets called, but Jest can't detect it");
   test.skip("disconnects element", async () => {
-    // expect(disconnect).toBeCalledTimes(1);
     await waitFor(() => expect(disconnect).toBeCalledTimes(1));
   });
 });
