@@ -1,6 +1,7 @@
 import { useStore } from "@/state/ZuState";
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
 import { lazy, useCallback, useEffect, useState } from "react";
+import shallow from "zustand/shallow";
 
 const ItemModal = lazy(() => import("@/components/ItemModal"));
 const ImageGridCard = lazy(() => import("@/components/ImageGridCard"));
@@ -8,10 +9,15 @@ const ImageGridCard = lazy(() => import("@/components/ImageGridCard"));
 const imgObserver = new ObserveElementsInView();
 
 function ImageGrid(): JSX.Element {
-  const idxsToLoad = useStore((state) => state.idxsToLoad);
-  const isLoading = useStore((state) => state.isLoading);
-  const items = useStore((state) => state.items);
-  const selectedItemID = useStore((state) => state.requestArgs.selectedItemID);
+  const { idxsToLoad, items, isLoading, selectedItemID } = useStore(
+    (state) => ({
+      idxsToLoad: state.idxsToLoad,
+      isLoading: state.isLoading,
+      items: state.items,
+      selectedItemID: state.requestArgs.selectedItemID,
+    }),
+    shallow
+  );
 
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {

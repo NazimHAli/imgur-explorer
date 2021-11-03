@@ -52,6 +52,11 @@ const dispatchIsLoading = (isLoading) =>
     isLoading: isLoading,
   }));
 
+const dispatchFinishedLazyLoading = (isFinished) =>
+  useStore.setState(() => ({
+    finishedLazyLoading: isFinished,
+  }));
+
 const dispatchItems = (response) =>
   useStore.setState(() => ({
     items: extractImageResults(response),
@@ -82,7 +87,8 @@ const dispatchSelectedItemComments = (response) =>
   }));
 
 const dispatchClearSelectedItem = () =>
-  useStore.setState(() => ({
+  useStore.setState((state) => ({
+    requestArgs: { ...state.requestArgs, method: "", selectedItemID: "" },
     selectedItem: {},
     selectedItemComments: [],
   }));
@@ -90,6 +96,7 @@ const dispatchClearSelectedItem = () =>
 export {
   useStore,
   dispatchClearSelectedItem,
+  dispatchFinishedLazyLoading,
   dispatchIdxsToLoad,
   dispatchIsLoading,
   dispatchItems,

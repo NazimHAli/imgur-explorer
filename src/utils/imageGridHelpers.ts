@@ -1,7 +1,12 @@
-import { useGlobalContext } from "@/state/GlobalContext";
+import {
+  dispatchFinishedLazyLoading,
+  dispatchRequestArgs,
+  useStore,
+} from "@/state/ZuState";
 import { TypeState } from "@/utils/types";
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
 import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
+import shallow from "zustand/shallow";
 
 const imgObserver = new ObserveElementsInView();
 
@@ -29,33 +34,40 @@ function HandleNewItems(
   idxsToLoad: number[],
   setidxsToLoad: Dispatch<SetStateAction<number[]>>
 ): void {
-  const { setRequestArgs, setState, state } = useGlobalContext();
+  const { finishedLazyLoading, items, page } = useStore(
+    (state) => ({
+      finishedLazyLoading: state.finishedLazyLoading,
+      items: state.items,
+      page: state.requestArgs.page,
+    }),
+    shallow
+  );
 
   useEffect(() => {
     const checkForNewItems =
       isIntersecting &&
-      !state.finishedLazyLoading &&
-      idxsToLoad.length < state.items.length;
+      !finishedLazyLoading &&
+      idxsToLoad.length < items.length;
 
     if (checkForNewItems) {
       const newIdxs = [...Array(idxsToLoad.length + 10).keys()];
 
       // Set request args to get the next page of results
-      if (state.items.length - newIdxs.length <= 20) {
-        setRequestArgs({
+      if (items.length - newIdxs.length <= 20) {
+        dispatchRequestArgs({
           filter: true,
           method: "search",
           newSearch: false,
-          page: state.requestArgs.page + 1,
+          page: page + 1,
         });
       }
 
       // Add new idxs to lazyload
       // TODO: Account for remaining items that are skipped from being lazyloaded
-      if (newIdxs.length <= state.items.length) {
+      if (newIdxs.length <= items.length) {
         setidxsToLoad(newIdxs);
       } else {
-        setState({ ...state, finishedLazyLoading: true });
+        dispatchFinishedLazyLoading(true);
       }
     }
   }, [isIntersecting]);
