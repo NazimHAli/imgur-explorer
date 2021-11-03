@@ -11,6 +11,7 @@ import create from "zustand";
 interface ZuState {
   finishedLazyLoading: boolean;
   galleryTags: { galleries?: TypeGallery[]; tags?: TypeTag[] };
+  idxsToLoad: Array<number>;
   isLoading: boolean;
   items: Array<TypeItem>;
   requestArgs: {
@@ -32,8 +33,14 @@ interface ZuState {
 
 const useStore = create<ZuState>(() => ({
   ...initialState,
+  idxsToLoad: [0, 1, 2, 3, 4],
   isLoading: false,
 }));
+
+const dispatchIdxsToLoad = () =>
+  useStore.setState((state) => ({
+    idxsToLoad: [...Array(state.idxsToLoad.length + 10).keys()],
+  }));
 
 const dispatchIsLoading = (isLoading) =>
   useStore.setState(() => ({
@@ -50,4 +57,10 @@ const dispatchRequestArgs = (newArgs) =>
     requestArgs: newArgs,
   }));
 
-export { useStore, dispatchIsLoading, dispatchItems, dispatchRequestArgs };
+export {
+  useStore,
+  dispatchIdxsToLoad,
+  dispatchIsLoading,
+  dispatchItems,
+  dispatchRequestArgs,
+};

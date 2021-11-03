@@ -1,21 +1,30 @@
 import { useStore } from "@/state/ZuState";
-import { lazy, useEffect, useState } from "react";
+import { ObserveElementsInView } from "@/utils/visibilityUtils";
+import { lazy, useCallback, useEffect, useState } from "react";
 
 const ItemModal = lazy(() => import("@/components/ItemModal"));
 const ImageGridCard = lazy(() => import("@/components/ImageGridCard"));
 
+const imgObserver = new ObserveElementsInView();
+
 function ImageGrid(): JSX.Element {
+  const idxsToLoad = useStore((state) => state.idxsToLoad);
   const isLoading = useStore((state) => state.isLoading);
   const items = useStore((state) => state.items);
-  const requestArgs = useStore((state) => state.requestArgs);
-  const [idxsToLoad, _setidxsToLoad] = useState([0, 1, 2, 3, 4]);
+  const selectedItemID = useStore((state) => state.requestArgs.selectedItemID);
 
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
-    if (requestArgs.selectedItemID.length) {
+    if (selectedItemID.length) {
       setIsOpen(true);
     }
-  }, [requestArgs.selectedItemID]);
+  }, [selectedItemID]);
+
+  const cardImgRef = useCallback((node) => {
+    if (node !== null) {
+      imgObserver.observeElements([node]);
+    }
+  }, []);
 
   return (
     <div className="grid-viewport">
@@ -24,8 +33,9 @@ function ImageGrid(): JSX.Element {
       <div className="image-grid">
         {idxsToLoad.map((idx) => (
           <ImageGridCard
+            imgRef={cardImgRef}
             item={items?.length > 0 && items[idx]}
-            key={`${idx || "0"}-${items?.length > 0 && items[idx].id}`}
+            key={`${idx || "0"}-${items?.length > 0 && items[idx]?.id}`}
             isLoading={isLoading}
           />
         ))}

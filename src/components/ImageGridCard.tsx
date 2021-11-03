@@ -1,14 +1,15 @@
 import { dispatchRequestArgs } from "@/state/ZuState";
 import { truncateText } from "@/utils/dataUtils";
 import { TypeItem } from "@/utils/types";
-import { memo } from "react";
+import { memo, Ref } from "react";
 import { MessageSquare, ThumbsUp, Eye } from "react-feather";
 
 function ImageGridCard(props: {
+  imgRef: Ref<HTMLImageElement>;
   item: TypeItem;
   isLoading: boolean;
 }): JSX.Element {
-  const { item, isLoading } = props;
+  const { imgRef, item, isLoading } = props;
 
   const imageInfo = (
     <div className="card-info">
@@ -38,7 +39,7 @@ function ImageGridCard(props: {
   );
 
   const handleOnClick = (event: { preventDefault: () => void }) => {
-    if (item.id.length) {
+    if (item?.id?.length) {
       dispatchRequestArgs({
         filter: false,
         method: "comments",
@@ -58,7 +59,8 @@ function ImageGridCard(props: {
               alt={item?.title}
               width={320}
               height={320}
-              srcSet={item?.images && item.images[0].link}
+              data-srcset={item?.images && item.images[0].link}
+              ref={imgRef}
             />
           </span>
           {imageInfo}

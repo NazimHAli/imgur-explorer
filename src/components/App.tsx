@@ -1,6 +1,12 @@
 import { ImgurAPI } from "@/services/imgurAPI";
-import { dispatchIsLoading, dispatchItems, useStore } from "@/state/ZuState";
-import { lazy, memo, Suspense, useEffect } from "react";
+import {
+  dispatchIdxsToLoad,
+  dispatchIsLoading,
+  dispatchItems,
+  useStore,
+} from "@/state/ZuState";
+import { useIntersectionObserver } from "@/utils/useIntersectionObserver";
+import { lazy, memo, Suspense, useEffect, useRef } from "react";
 
 const Explore = lazy(() => import("@/components/Explore"));
 const Footer = lazy(() => import("@/components/Footer"));
@@ -32,13 +38,23 @@ function App() {
     }
   }, []);
 
+  const elementObserverRef = useRef<HTMLElement>(null);
+  const entry = useIntersectionObserver(elementObserverRef);
+  const isIntersecting = entry?.isIntersecting || false;
+
+  useEffect(() => {
+    if (isIntersecting) {
+      dispatchIdxsToLoad();
+    }
+  }, [isIntersecting]);
+
   return (
     <Suspense fallback={<span></span>}>
       <Header />
       <Explore />
       <SearchToolBar />
       <ImageGrid />
-
+      <span ref={elementObserverRef} className="block w-px h-px" />
       {/* Dynamically render footer */}
       <Footer />
     </Suspense>
