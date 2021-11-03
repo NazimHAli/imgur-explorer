@@ -31,7 +31,7 @@ interface ZuState {
     window: string;
   };
   requestError: boolean;
-  selectedItem: TypeItem;
+  selectedItem: Partial<TypeItem>;
   selectedItemComments: SelectedComments;
   selectedTag: TypeSelectedTag;
 }
@@ -81,8 +81,15 @@ const dispatchSelectedItemComments = (response) =>
     selectedItemComments: response,
   }));
 
+const dispatchClearSelectedItem = () =>
+  useStore.setState(() => ({
+    selectedItem: {},
+    selectedItemComments: [],
+  }));
+
 export {
   useStore,
+  dispatchClearSelectedItem,
   dispatchIdxsToLoad,
   dispatchIsLoading,
   dispatchItems,

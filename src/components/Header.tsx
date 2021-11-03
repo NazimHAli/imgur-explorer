@@ -1,8 +1,9 @@
 import imgurLogo from "@/assets/imgur.svg";
 import profileIcon from "@/assets/profile.svg";
 import HeaderTags from "@/components/HeaderTags";
-import { useGlobalContext } from "@/state/GlobalContext";
+import { dispatchRequestArgs, useStore } from "@/state/ZuState";
 import { memo, RefObject, useRef } from "react";
+import shallow from "zustand/shallow";
 
 function handleClearQuery(
   defaultQuery: string,
@@ -15,16 +16,19 @@ function handleClearQuery(
 
 function Header(): JSX.Element {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { setRequestArgs, state } = useGlobalContext();
+  const { requestArgs } = useStore(
+    (state) => ({ requestArgs: state.requestArgs }),
+    shallow
+  );
 
   function _handleSubmit(event: { preventDefault: () => void }) {
     const isValid =
       inputRef.current &&
       inputRef.current.value.length &&
-      inputRef.current.value !== state.requestArgs.query;
+      inputRef.current.value !== requestArgs.query;
 
     if (isValid) {
-      setRequestArgs({
+      dispatchRequestArgs({
         method: "search",
         newSearch: true,
         query: inputRef.current.value,
@@ -34,7 +38,7 @@ function Header(): JSX.Element {
     event.preventDefault();
   }
 
-  handleClearQuery(state.requestArgs.query, inputRef);
+  handleClearQuery(requestArgs.query, inputRef);
 
   const logo = (
     <a href="/" className="header__logo">
@@ -60,7 +64,7 @@ function Header(): JSX.Element {
         type="search"
         className="input-search"
         placeholder="Search for it"
-        defaultValue={state.requestArgs.query}
+        defaultValue={requestArgs.query}
         ref={inputRef}
       />
     </form>
