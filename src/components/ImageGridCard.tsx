@@ -1,15 +1,14 @@
+import { dispatchRequestArgs } from "@/state/ZuState";
 import { truncateText } from "@/utils/dataUtils";
-import { TypeGlobalContext, TypeItem } from "@/utils/types";
-import { memo, Ref } from "react";
+import { TypeItem } from "@/utils/types";
+import { memo } from "react";
 import { MessageSquare, ThumbsUp, Eye } from "react-feather";
 
 function ImageGridCard(props: {
-  setRequestArgs: TypeGlobalContext["setRequestArgs"];
-  imgRef: Ref<HTMLImageElement>;
   item: TypeItem;
   isLoading: boolean;
 }): JSX.Element {
-  const { imgRef, item, setRequestArgs, isLoading } = props;
+  const { item, isLoading } = props;
 
   const imageInfo = (
     <div className="card-info">
@@ -40,7 +39,7 @@ function ImageGridCard(props: {
 
   const handleOnClick = (event: { preventDefault: () => void }) => {
     if (item.id.length) {
-      setRequestArgs({
+      dispatchRequestArgs({
         filter: false,
         method: "comments",
         selectedItemID: item.id,
@@ -59,8 +58,7 @@ function ImageGridCard(props: {
               alt={item?.title}
               width={320}
               height={320}
-              data-srcset={item?.images && item.images[0].link}
-              ref={imgRef}
+              srcSet={item?.images && item.images[0].link}
             />
           </span>
           {imageInfo}

@@ -25,7 +25,8 @@
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-feather": "^2.0.9",
-    "react-modal": "^3.14.3"
+    "react-modal": "^3.14.3",
+    "zustand": "^3.6.3"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^4.0.3",
