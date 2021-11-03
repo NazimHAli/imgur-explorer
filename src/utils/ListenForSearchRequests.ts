@@ -2,7 +2,7 @@ import { ImgurAPI } from "@/services/imgurAPI";
 import {
   dispatchIsLoading,
   dispatchItems,
-  dispatchSelectedItemComments,
+  dispatchSelectedItem,
   dispatchTags,
   useStore,
 } from "@/state/ZuState";
@@ -33,7 +33,7 @@ function ListenForSearchRequests(): void {
       .methodDispatcher(method)
       .then((response) => {
         if (method === "comments") {
-          dispatchSelectedItemComments(response);
+          dispatchSelectedItem(response);
         } else if (method === "search") {
           dispatchItems(response);
         } else if (method === "tags") {

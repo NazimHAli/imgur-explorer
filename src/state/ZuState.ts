@@ -74,17 +74,13 @@ const dispatchTags = (response) =>
     galleryTags: { ...response, tags: filterTags(response?.tags) },
   }));
 
-const dispatchSelectedItem = () =>
+const dispatchSelectedItem = (response) =>
   useStore.setState((state) => ({
     requestArgs: { ...state.requestArgs, method: "" },
     selectedItem: getSelectedItem(
       state.requestArgs.selectedItemID,
       state.items
     ),
-  }));
-
-const dispatchSelectedItemComments = (response) =>
-  useStore.setState(() => ({
     selectedItemComments: response,
   }));
 
@@ -104,6 +100,5 @@ export {
   dispatchItems,
   dispatchRequestArgs,
   dispatchSelectedItem,
-  dispatchSelectedItemComments,
   dispatchTags,
 };

@@ -1,8 +1,5 @@
 import { mockItems } from "@/__tests__/fixtures/mockItems";
 import { act, render } from "@/__tests__/fixtures/test-utils";
-import { addItems } from "@/state/ContextHelpers";
-import { useGlobalContext } from "@/state/GlobalContext";
-import { initialState } from "@/state/initialState";
 import { HandleImageLazyLoad, HandleNewItems } from "@/utils/imageGridHelpers";
 import { useEffect, useState } from "react";
 
@@ -10,8 +7,10 @@ let bindIdxsToLoad, bindState;
 
 describe("HandleImageLazyLoad", () => {
   function TestComponent() {
+    const isNewSearch = true;
+
     const [idxsToLoad, setidxsToLoad] = useState([0, 1, 2, 3, 4]);
-    const imgRef = HandleImageLazyLoad(initialState, setidxsToLoad);
+    const imgRef = HandleImageLazyLoad(isNewSearch, setidxsToLoad);
 
     bindIdxsToLoad = idxsToLoad;
     return <img src="/meow.webp" alt="Meowdy partner" ref={imgRef} />;
