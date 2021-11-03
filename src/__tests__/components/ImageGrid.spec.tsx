@@ -39,12 +39,4 @@ describe("ImageGrid", () => {
     testElement = await screen.findAllByTestId("loading-skeleton");
     expect(testElement).toHaveLength(5);
   });
-
-  test.skip("ok", async () => {
-    testElement = await screen.findAllByTestId("card-link");
-    // screen.debug();
-
-    expect(testElement).toHaveLength(5);
-    // await waitFor(() => expect(bindState).toBeFalsy());
-  });
 });
