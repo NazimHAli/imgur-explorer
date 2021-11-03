@@ -7,7 +7,6 @@ import {
   screen,
 } from "@/__tests__/fixtures/test-utils";
 import ItemModal from "@/components/ItemModal";
-import { useGlobalContext } from "@/state/GlobalContext";
 import "@testing-library/jest-dom";
 import { useEffect } from "react";
 
@@ -19,8 +18,6 @@ function TestComponent({
   setItemComments = false,
   isOpen = false,
 } = {}) {
-  const { setState } = useGlobalContext();
-
   useEffect(() => {
     if (setSelectedItem || setItemComments) {
       let newState = { selectedItem: mockSelectedItem };

@@ -1,6 +1,5 @@
 import { render } from "@/__tests__/fixtures/test-utils";
 import Header from "@/components/Header";
-import { useGlobalContext } from "@/state/GlobalContext";
 import { screen, fireEvent } from "@testing-library/dom";
 import "@testing-library/jest-dom";
 import { useEffect } from "react";
@@ -8,7 +7,6 @@ import { useEffect } from "react";
 let requestArgs, testElement, container;
 
 function TestComponent(props: { setEmptyQuery: boolean }) {
-  const { setRequestArgs, state } = useGlobalContext();
   const { setEmptyQuery } = props;
 
   useEffect(() => {

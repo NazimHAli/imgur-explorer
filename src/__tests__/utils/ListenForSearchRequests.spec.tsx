@@ -1,5 +1,4 @@
 import { mockServer } from "@/__tests__/fixtures/mockServer";
-import { useGlobalContext } from "@/state/GlobalContext";
 import { ListenForSearchRequests } from "@/utils/ListenForSearchRequests";
 import { act, render, waitFor } from "@testing-library/react";
 import fetchMock from "jest-fetch-mock";
@@ -23,7 +22,6 @@ let bindState;
 
 function TestComponent(props: { method: string }) {
   const { method } = props;
-  const { setState, setRequestArgs, state } = useGlobalContext();
 
   act(() => {
     ListenForSearchRequests(state, setIsLoading, setState);

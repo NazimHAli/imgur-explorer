@@ -1,6 +1,5 @@
 import { mockServer } from "@/__tests__/fixtures/mockServer";
 import App from "@/components/App";
-import { useGlobalContext } from "@/state/GlobalContext";
 import { act, render, screen } from "@testing-library/react";
 import fetchMock from "jest-fetch-mock";
 
@@ -24,7 +23,6 @@ let bindState, bindSet;
 
 function TestComponent() {
   act(() => {
-    const { state, setState } = useGlobalContext();
     bindState = state;
     bindSet = setState;
   });

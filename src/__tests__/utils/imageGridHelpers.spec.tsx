@@ -25,9 +25,6 @@ describe("HandleImageLazyLoad", () => {
 describe("HandleNewItems", () => {
   /* eslint-disable react/prop-types */
   function TestHandleNewItems(props) {
-    const { setState, state } = useGlobalContext();
-    const [idxsToLoad, setidxsToLoad] = useState([0, 1, 2]);
-
     useEffect(() => {
       act(() => {
         addItems(setState, mockItems.data.slice(0, props?.maxItems || 20));

@@ -1,14 +1,11 @@
 import { mockGalleryTags } from "@/__tests__/fixtures/mockGalleryTags";
 import { fireEvent, render, screen } from "@/__tests__/fixtures/test-utils";
 import HeaderTags from "@/components/HeaderTags";
-import { useGlobalContext } from "@/state/GlobalContext";
 import { useEffect } from "react";
 
 let bindedState;
 
 function TestComponent() {
-  const { state, setState } = useGlobalContext();
-
   useEffect(() => {
     // @ts-ignore
     setState((currentState) => {
