@@ -30,10 +30,10 @@ function ImageGridCard(props: {
   );
 
   const loadingSkeleton = () => (
-    <div className="loading-skeleton">
+    <div data-testid="loading-skeleton" className="loading-skeleton">
       <div className="loading-skeleton__anim">
-        <div className="loading-skeleton__square"></div>
-        <div className="loading-skeleton__bottom"></div>
+        <div className="loading-skeleton__square" />
+        <div className="loading-skeleton__bottom" />
       </div>
     </div>
   );

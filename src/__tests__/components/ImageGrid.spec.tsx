@@ -1,7 +1,7 @@
 import ImageGrid from "@/components/ImageGrid";
 import { useGlobalContext } from "@/state/GlobalContext";
 import { ListenForSearchRequests } from "@/utils/ListenForSearchRequests";
-import { act, render } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import fetchMock from "jest-fetch-mock";
 import { Suspense } from "react";
 
@@ -31,11 +31,12 @@ function TestComponent() {
 }
 
 describe("ImageGrid", () => {
-  beforeEach(() => {
-    render(<TestComponent />);
-  });
+  let testElement;
 
-  test("mounts", () => {
-    expect(document.querySelector(".grid-viewport")).toBeDefined();
+  render(<TestComponent />);
+
+  test("on mounted displays loading skeletons", async () => {
+    testElement = await screen.findAllByTestId("loading-skeleton");
+    expect(testElement).toHaveLength(5);
   });
 });
