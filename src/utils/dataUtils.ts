@@ -109,7 +109,7 @@ function getDateString(datetime: number): string | null {
 
 function getSelectedItem(
   selectedId: string,
-  items: Array<TypeItem>
+  items: Partial<TypeItem[]>
 ): TypeItem | undefined {
   return items.find((item) => {
     return item.id === selectedId;
@@ -133,7 +133,7 @@ function filterTags(tagsList: TypeTag[], maxNum = 10) {
   return selectRandomItems(tagsList, maxNum);
 }
 
-function filterNewResults(response: TypeItem[], state: TypeState) {
+function filterNewResults(response: Partial<TypeItem[]>, state: TypeState) {
   response = state.requestArgs.filter
     ? extractImageResults(response)
     : response;

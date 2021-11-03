@@ -1,9 +1,9 @@
 import {
   dispatchFinishedLazyLoading,
+  dispatchIdxsToLoad,
   dispatchRequestArgs,
   useStore,
 } from "@/state/ZuState";
-import { TypeState } from "@/utils/types";
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
 import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
 import shallow from "zustand/shallow";
@@ -11,14 +11,14 @@ import shallow from "zustand/shallow";
 const imgObserver = new ObserveElementsInView();
 
 function HandleImageLazyLoad(
-  state: TypeState,
+  isNewSearch: boolean,
   setidxsToLoad: Dispatch<SetStateAction<number[]>>
 ) {
   useEffect(() => {
-    if (state.requestArgs.newSearch) {
+    if (isNewSearch) {
       setidxsToLoad([0, 1, 2, 3, 4]);
     }
-  }, [state.requestArgs.newSearch]);
+  }, [isNewSearch]);
 
   const cardImgRef = useCallback((node) => {
     if (node !== null) {
@@ -29,14 +29,11 @@ function HandleImageLazyLoad(
 }
 
 // TODO: Refactor & cleanup the mess
-function HandleNewItems(
-  isIntersecting: boolean,
-  idxsToLoad: number[],
-  setidxsToLoad: Dispatch<SetStateAction<number[]>>
-): void {
-  const { finishedLazyLoading, items, page } = useStore(
+function HandleNewItems(isIntersecting: boolean): void {
+  const { finishedLazyLoading, idxsToLoad, items, page } = useStore(
     (state) => ({
       finishedLazyLoading: state.finishedLazyLoading,
+      idxsToLoad: state.idxsToLoad,
       items: state.items,
       page: state.requestArgs.page,
     }),
@@ -52,7 +49,7 @@ function HandleNewItems(
     if (checkForNewItems) {
       const newIdxs = [...Array(idxsToLoad.length + 10).keys()];
 
-      // Set request args to get the next page of results
+      // Dispatch request to get the next page of results
       if (items.length - newIdxs.length <= 20) {
         dispatchRequestArgs({
           filter: true,
@@ -65,7 +62,7 @@ function HandleNewItems(
       // Add new idxs to lazyload
       // TODO: Account for remaining items that are skipped from being lazyloaded
       if (newIdxs.length <= items.length) {
-        setidxsToLoad(newIdxs);
+        dispatchIdxsToLoad(newIdxs);
       } else {
         dispatchFinishedLazyLoading(true);
       }

@@ -18,7 +18,7 @@ interface ZuState {
   galleryTags: { galleries?: TypeGallery[]; tags?: TypeTag[] };
   idxsToLoad: Array<number>;
   isLoading: boolean;
-  items: Array<TypeItem>;
+  items: Partial<TypeItem[]>;
   requestArgs: {
     filter: boolean;
     method: string;
@@ -42,9 +42,9 @@ const useStore = create<ZuState>(() => ({
   isLoading: false,
 }));
 
-const dispatchIdxsToLoad = () =>
-  useStore.setState((state) => ({
-    idxsToLoad: [...Array(state.idxsToLoad.length + 10).keys()],
+const dispatchIdxsToLoad = (newIdxsToLoad) =>
+  useStore.setState(() => ({
+    idxsToLoad: newIdxsToLoad,
   }));
 
 const dispatchIsLoading = (isLoading) =>
@@ -58,8 +58,10 @@ const dispatchFinishedLazyLoading = (isFinished) =>
   }));
 
 const dispatchItems = (response) =>
-  useStore.setState(() => ({
-    items: extractImageResults(response),
+  useStore.setState((state) => ({
+    items: state.requestArgs.newSearch
+      ? extractImageResults(response)
+      : state.items.concat(extractImageResults(response)),
   }));
 
 const dispatchRequestArgs = (newArgs) =>

@@ -1,6 +1,8 @@
 import { useStore } from "@/state/ZuState";
+import { HandleNewItems } from "@/utils/imageGridHelpers";
+import { useIntersectionObserver } from "@/utils/useIntersectionObserver";
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
-import { lazy, useCallback, useEffect, useState } from "react";
+import { lazy, useCallback, useEffect, useRef, useState } from "react";
 import shallow from "zustand/shallow";
 
 const ItemModal = lazy(() => import("@/components/ItemModal"));
@@ -18,6 +20,12 @@ function ImageGrid(): JSX.Element {
     }),
     shallow
   );
+
+  const elementObserverRef = useRef<HTMLElement>(null);
+  const entry = useIntersectionObserver(elementObserverRef);
+  const isIntersecting = entry?.isIntersecting || false;
+
+  HandleNewItems(isIntersecting);
 
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
@@ -45,6 +53,8 @@ function ImageGrid(): JSX.Element {
             isLoading={isLoading}
           />
         ))}
+
+        <span ref={elementObserverRef} className="block w-px h-px" />
       </div>
     </div>
   );
