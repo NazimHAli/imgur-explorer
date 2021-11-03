@@ -53,12 +53,7 @@ function ImageGridCard(props: {
     <>
       {isLoading && loadingSkeleton()}
       {!isLoading && (
-        <a
-          data-testid="card-link"
-          href="#explore"
-          className="card"
-          onClick={handleOnClick}
-        >
+        <a href="#explore" className="card" onClick={handleOnClick}>
           <span className="card__img">
             <img
               alt={item?.title}
