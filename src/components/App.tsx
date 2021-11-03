@@ -1,10 +1,5 @@
-import { ImgurAPI } from "@/services/imgurAPI";
-import {
-  dispatchIdxsToLoad,
-  dispatchIsLoading,
-  dispatchItems,
-  useStore,
-} from "@/state/ZuState";
+import { dispatchIdxsToLoad } from "@/state/ZuState";
+import { ListenForSearchRequests } from "@/utils/ListenForSearchRequests";
 import { useIntersectionObserver } from "@/utils/useIntersectionObserver";
 import { lazy, memo, Suspense, useEffect, useRef } from "react";
 
@@ -15,28 +10,7 @@ const ImageGrid = lazy(() => import("@/components/ImageGrid"));
 const SearchToolBar = lazy(() => import("@/components/SearchToolBar"));
 
 function App() {
-  // const isLoading = useStore((state) => state.isLoading);
-  const requestArgs = useStore((state) => state.requestArgs);
-
-  useEffect(() => {
-    dispatchIsLoading(true);
-
-    if (requestArgs.method.length > 0) {
-      const imgurClient = ImgurAPI.getInstance(requestArgs);
-      imgurClient
-        .methodDispatcher(requestArgs.method)
-        .then((response) => {
-          if (requestArgs.method === "search") {
-            dispatchItems(response);
-          }
-        })
-        .finally(() => {
-          dispatchIsLoading(false);
-        });
-    } else {
-      dispatchIsLoading(false);
-    }
-  }, []);
+  ListenForSearchRequests();
 
   const elementObserverRef = useRef<HTMLElement>(null);
   const entry = useIntersectionObserver(elementObserverRef);

@@ -1,9 +1,14 @@
 import { initialState } from "@/state/initialState";
 import {
+  extractImageResults,
+  filterTags,
+  getSelectedItem,
+} from "@/utils/dataUtils";
+import {
   SelectedComments,
   TypeGallery,
   TypeItem,
-  TypeselectedTag,
+  TypeSelectedTag,
   TypeTag,
 } from "@/utils/types";
 import create from "zustand";
@@ -26,9 +31,9 @@ interface ZuState {
     window: string;
   };
   requestError: boolean;
-  selectedItem: TypeItem | {};
+  selectedItem: TypeItem;
   selectedItemComments: SelectedComments;
-  selectedTag: TypeselectedTag;
+  selectedTag: TypeSelectedTag;
 }
 
 const useStore = create<ZuState>(() => ({
@@ -47,14 +52,33 @@ const dispatchIsLoading = (isLoading) =>
     isLoading: isLoading,
   }));
 
-const dispatchItems = (items) =>
+const dispatchItems = (response) =>
   useStore.setState(() => ({
-    items: items,
+    items: extractImageResults(response),
   }));
 
 const dispatchRequestArgs = (newArgs) =>
+  useStore.setState((state) => ({
+    requestArgs: { ...state.requestArgs, ...newArgs },
+  }));
+
+const dispatchTags = (response) =>
   useStore.setState(() => ({
-    requestArgs: newArgs,
+    galleryTags: { ...response, tags: filterTags(response?.tags) },
+  }));
+
+const dispatchSelectedItem = () =>
+  useStore.setState((state) => ({
+    requestArgs: { ...state.requestArgs, method: "" },
+    selectedItem: getSelectedItem(
+      state.requestArgs.selectedItemID,
+      state.items
+    ),
+  }));
+
+const dispatchSelectedItemComments = (response) =>
+  useStore.setState(() => ({
+    selectedItemComments: response,
   }));
 
 export {
@@ -63,4 +87,7 @@ export {
   dispatchIsLoading,
   dispatchItems,
   dispatchRequestArgs,
+  dispatchSelectedItem,
+  dispatchSelectedItemComments,
+  dispatchTags,
 };

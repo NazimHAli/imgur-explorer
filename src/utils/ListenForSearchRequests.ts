@@ -1,67 +1,57 @@
 import { ImgurAPI } from "@/services/imgurAPI";
-import { handleRespose } from "@/state/ContextHelpers";
 import {
-  filterNewResults,
-  filterTags,
-  getSelectedItem,
-} from "@/utils/dataUtils";
-import { TypeGlobalContext, TypeState } from "@/utils/types";
+  dispatchIsLoading,
+  dispatchItems,
+  dispatchSelectedItemComments,
+  dispatchTags,
+  useStore,
+} from "@/state/ZuState";
 import { useEffect } from "react";
+import shallow from "zustand/shallow";
 
-function updateCommentState(
-  setState: TypeGlobalContext["setState"],
-  state: TypeState
-): void {
-  setState({
-    ...state,
-    requestArgs: { ...state.requestArgs, method: "" },
-    selectedItem: getSelectedItem(
-      state.requestArgs.selectedItemID,
-      state.items
-    ),
-  });
-}
+function ListenForSearchRequests(): void {
+  const { requestArgs } = useStore(
+    (state) => ({ requestArgs: state.requestArgs }),
+    shallow
+  );
 
-function ListenForSearchRequests(
-  state: TypeState,
-  setIsLoading: TypeGlobalContext["setIsLoading"],
-  setState: TypeGlobalContext["setState"]
-): void {
   useEffect(() => {
-    const method = state.requestArgs.method;
-    if (state.requestArgs.method === "search" && state.requestArgs.newSearch) {
+    const method = requestArgs.method;
+    if (method.length === 0) {
+      console.log("useEffect - API: empty method.");
+      return;
+    }
+
+    if (method === "search" && requestArgs.newSearch) {
       scrollTo({ behavior: "smooth", top: 0 });
-      setIsLoading(true);
+      dispatchIsLoading(true);
     }
 
-    if (method.length > 0) {
-      const imgurClient = ImgurAPI.getInstance(state.requestArgs);
-      imgurClient
-        .methodDispatcher(method)
-        .then((response) => {
-          if (method === "comments") {
-            updateCommentState(setState, state);
-          } else if (method === "search") {
-            response = filterNewResults(response, state);
-          } else if (method === "tags") {
-            response = { ...response, tags: filterTags(response?.tags) };
-          } else if (method === "tagName") {
-            response = filterNewResults(response.items, state);
-          }
+    const imgurClient = ImgurAPI.getInstance(requestArgs);
 
-          handleRespose(method, setState, response);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    }
+    imgurClient
+      .methodDispatcher(method)
+      .then((response) => {
+        if (method === "comments") {
+          dispatchSelectedItemComments(response);
+        } else if (method === "search") {
+          dispatchItems(response);
+        } else if (method === "tags") {
+          dispatchTags(response);
+        } else if (method === "tagName") {
+          dispatchItems(response?.items);
+        }
+      })
+      .finally(() => {
+        dispatchIsLoading(false);
+      });
   }, [
-    state.requestArgs.method,
-    state.requestArgs.query,
-    state.requestArgs.page,
-    state.requestArgs.sort,
-    state.requestArgs.window,
-    state.requestArgs.tagName,
+    requestArgs.method,
+    requestArgs.query,
+    requestArgs.page,
+    requestArgs.sort,
+    requestArgs.window,
+    requestArgs.tagName,
   ]);
 }
 

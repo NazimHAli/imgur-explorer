@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 
-export interface TypeselectedTag {
+export interface TypeSelectedTag {
   items?: Array<string>;
 }
 
@@ -58,7 +58,7 @@ export interface TypeState {
   requestError: boolean;
   selectedItem: TypeItem | undefined;
   selectedItemComments: SelectedComments;
-  selectedTag: TypeselectedTag;
+  selectedTag: TypeSelectedTag;
 }
 
 export interface TypeSearchResponse {

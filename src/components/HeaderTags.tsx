@@ -1,7 +1,12 @@
-import { useGlobalContext } from "@/state/GlobalContext";
+import {
+  dispatchIsLoading,
+  dispatchRequestArgs,
+  useStore,
+} from "@/state/ZuState";
 import { capitalize } from "@/utils/dataUtils";
 import { TypeState, TypeTag } from "@/utils/types";
 import { MouseEvent, MouseEventHandler } from "react";
+import shallow from "zustand/shallow";
 
 function renderTags(
   galleryTags: TypeState["galleryTags"],
@@ -30,11 +35,14 @@ function renderTags(
 }
 
 function HeaderTags() {
-  const { setRequestArgs, state, setIsLoading } = useGlobalContext();
+  const { galleryTags } = useStore(
+    (state) => ({ galleryTags: state.galleryTags }),
+    shallow
+  );
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    setIsLoading(true);
-    setRequestArgs({
+    dispatchIsLoading(true);
+    dispatchRequestArgs({
       filter: true,
       method: "tagName",
       newSearch: true,
@@ -50,7 +58,7 @@ function HeaderTags() {
         Explore Tags
       </h2>
       <div className="header__tags__list">
-        {renderTags(state.galleryTags, handleClick)}
+        {renderTags(galleryTags, handleClick)}
       </div>
     </>
   );
