@@ -125,7 +125,7 @@ describe("ItemModal", () => {
     test("has info badges", () => {
       testElement = document.querySelectorAll("span.data-badge");
       expect(testElement).toHaveLength(3);
-
+      mockSelectedItem;
       expect(testElement[0].dataset.count).toEqual(
         mockSelectedItem.ups.toLocaleString()
       );

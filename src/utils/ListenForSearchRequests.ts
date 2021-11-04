@@ -18,7 +18,6 @@ function ListenForSearchRequests(): void {
   useEffect(() => {
     const method = requestArgs.method;
     if (method.length === 0) {
-      console.log("useEffect - API: empty method.");
       return;
     }
 

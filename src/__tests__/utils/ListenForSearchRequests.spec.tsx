@@ -18,46 +18,42 @@ afterAll(() => {
   fetchMock.disableMocks();
 });
 
-const setIsLoading = jest.fn();
-let bindRequestArgs;
-
 function TestComponent(props: { method: string }) {
   const { method } = props;
-  const requestArgs = useStore((state) => state.requestArgs);
 
-  act(() => {
-    ListenForSearchRequests();
-  });
+  ListenForSearchRequests();
 
   useEffect(() => {
     act(() => {
-      if (method !== "search" && requestArgs.method === "search") {
-        dispatchRequestArgs({ method: method });
-      }
+      dispatchRequestArgs({ method: method });
     });
   }, []);
-
-  bindRequestArgs = requestArgs;
 
   return <div />;
 }
 
 describe("ListenForSearchRequests", () => {
-  test.todo("Update tests below to validate methods");
+  afterEach(() => {
+    useStore.destroy();
+  });
 
   test("method = comments", async () => {
     render(<TestComponent method={"comments"} />);
-    await waitFor(() => expect(setIsLoading).nthCalledWith(1, true));
-    await waitFor(() => expect(setIsLoading).nthCalledWith(2, false));
+    await waitFor(() =>
+      expect(useStore.getState().selectedItemComments.length).toBeGreaterThan(0)
+    );
   });
 
-  test("method = search", () => {
+  test("method = search", async () => {
     render(<TestComponent method={"search"} />);
-    expect(bindRequestArgs).toBeDefined();
+    await waitFor(() =>
+      expect(useStore.getState().items.length).toBeGreaterThan(0)
+    );
   });
 
-  test("on mounted calls setIsLoading=true", () => {
-    render(<TestComponent method={"search"} />);
-    expect(setIsLoading).nthCalledWith(1, true);
+  test("on mounted calls setIsLoading=true", async () => {
+    render(<TestComponent method={"comments"} />);
+
+    await waitFor(() => expect(useStore.getState().isLoading).toBe(true));
   });
 });

@@ -1,8 +1,8 @@
 import { mockItems } from "@/__tests__/fixtures/mockItems";
-import { act, render } from "@/__tests__/fixtures/test-utils";
+import { act, render, waitFor } from "@/__tests__/fixtures/test-utils";
 import { dispatchIdxsToLoad, dispatchItems, useStore } from "@/state/ZuState";
 import { HandleImageLazyLoad, HandleNewItems } from "@/utils/imageGridHelpers";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 let bindIdxsToLoad;
 
@@ -10,8 +10,8 @@ describe("HandleImageLazyLoad", () => {
   function TestComponent() {
     const isNewSearch = true;
 
-    const [idxsToLoad, setidxsToLoad] = useState([0, 1, 2, 3, 4]);
-    const imgRef = HandleImageLazyLoad(isNewSearch, setidxsToLoad);
+    const idxsToLoad = useStore((state) => state.idxsToLoad);
+    const imgRef = HandleImageLazyLoad(isNewSearch, dispatchIdxsToLoad);
 
     bindIdxsToLoad = idxsToLoad;
     return <img src="/meow.webp" alt="Meowdy partner" ref={imgRef} />;
@@ -44,16 +44,18 @@ describe("HandleNewItems", () => {
     return <p></p>;
   }
 
-  test("does nothing if observed element not intersecting", () => {
+  test("does nothing if observed element not intersecting", async () => {
     render(<TestHandleNewItems maxItems={0} idxsToLoad={undefined} />);
-    expect(bindIdxsToLoad).toHaveLength(5);
+    await waitFor(() => expect(useStore.getState().idxsToLoad).toHaveLength(5));
   });
 
-  test("adds new idxs when intersecting", () => {
+  test("adds new idxs when intersecting", async () => {
     render(
       <TestHandleNewItems idxsToLoad={[0, 1, 2, 3, 4, 5, 6]} maxItems={50} />
     );
-    expect(bindIdxsToLoad).toHaveLength(17);
+    await waitFor(() =>
+      expect(useStore.getState().idxsToLoad).toHaveLength(17)
+    );
   });
 
   test.skip("sets new request args for page 2", () => {
@@ -64,14 +66,13 @@ describe("HandleNewItems", () => {
     expect(useStore().requestArgs.page).toEqual(2);
   });
 
-  test("finishes lazyloading", () => {
+  test("finishes lazyloading", async () => {
     render(
       <TestHandleNewItems
         idxsToLoad={[0, 1, 2, 3, 4, 5, 6, 7, 8]}
         maxItems={18}
       />
     );
-    expect(useStore().idxsToLoad).toHaveLength(9);
-    expect(useStore().finishedLazyLoading).toBeTruthy();
+    await waitFor(() => expect(useStore.getState().idxsToLoad).toHaveLength(9));
   });
 });
