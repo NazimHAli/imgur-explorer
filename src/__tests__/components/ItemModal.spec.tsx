@@ -1,12 +1,13 @@
 import { mockItemComments } from "@/__tests__/fixtures/mockItemComments";
+import { mockItems } from "@/__tests__/fixtures/mockItems";
 import { mockSelectedItem } from "@/__tests__/fixtures/mockSelectedItem";
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-} from "@/__tests__/fixtures/test-utils";
+import { fireEvent, render, screen } from "@/__tests__/fixtures/test-utils";
 import ItemModal from "@/components/ItemModal";
+import {
+  dispatchItems,
+  dispatchRequestArgs,
+  dispatchSelectedItem,
+} from "@/state/ZuState";
 import "@testing-library/jest-dom";
 import { useEffect } from "react";
 
@@ -18,23 +19,23 @@ function TestComponent({
   setItemComments = false,
   isOpen = false,
 } = {}) {
+  // const state = useStore();
   useEffect(() => {
+    dispatchItems(mockItems.data);
+
     if (setSelectedItem || setItemComments) {
       let newState = { selectedItem: mockSelectedItem };
 
       if (setSelectedItem) {
+        dispatchRequestArgs({ selectedItemID: newState.selectedItem.id });
         // @ts-ignore
         newState = { ...newState, selectedItemComments: mockItemComments };
+        dispatchSelectedItem(newState["selectedItemComments"]);
       }
-
-      act(() => {
-        setState((currentState) => {
-          return { ...currentState, ...newState };
-        });
-      });
     }
   }, []);
 
+  // console.log(state);
   return <ItemModal isOpen={isOpen} setIsOpen={setIsOpen} />;
 }
 /* eslint-enable react/prop-types */
@@ -110,17 +111,15 @@ describe("ItemModal", () => {
 
     test("img rendered", () => {
       const image = screen.queryByRole("img");
-      expect(image).toMatchInlineSnapshot(
-        `
+      expect(image).toMatchInlineSnapshot(`
         <img
-          alt="Garden Meow"
-          height="898"
+          alt="Good night you cool cats and kittens"
+          height="1536"
           loading="lazy"
-          srcset="https://i.imgur.com/Ykajvmel.jpg"
-          width="450"
+          srcset="https://i.imgur.com/fLfIhwRl.jpg"
+          width="2048"
         />
-      `
-      );
+      `);
     });
 
     test("has info badges", () => {

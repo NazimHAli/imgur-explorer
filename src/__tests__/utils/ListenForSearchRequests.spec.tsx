@@ -1,4 +1,5 @@
 import { mockServer } from "@/__tests__/fixtures/mockServer";
+import { dispatchRequestArgs, useStore } from "@/state/ZuState";
 import { ListenForSearchRequests } from "@/utils/ListenForSearchRequests";
 import { act, render, waitFor } from "@testing-library/react";
 import fetchMock from "jest-fetch-mock";
@@ -18,24 +19,25 @@ afterAll(() => {
 });
 
 const setIsLoading = jest.fn();
-let bindState;
+let bindRequestArgs;
 
 function TestComponent(props: { method: string }) {
   const { method } = props;
+  const requestArgs = useStore((state) => state.requestArgs);
 
   act(() => {
-    ListenForSearchRequests(state, setIsLoading, setState);
+    ListenForSearchRequests();
   });
 
   useEffect(() => {
     act(() => {
-      if (method !== "search" && state.requestArgs.method === "search") {
-        setRequestArgs({ method: method });
+      if (method !== "search" && requestArgs.method === "search") {
+        dispatchRequestArgs({ method: method });
       }
     });
   }, []);
 
-  bindState = state;
+  bindRequestArgs = requestArgs;
 
   return <div />;
 }
@@ -51,7 +53,7 @@ describe("ListenForSearchRequests", () => {
 
   test("method = search", () => {
     render(<TestComponent method={"search"} />);
-    expect(bindState).toBeDefined();
+    expect(bindRequestArgs).toBeDefined();
   });
 
   test("on mounted calls setIsLoading=true", () => {

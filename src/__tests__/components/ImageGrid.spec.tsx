@@ -18,7 +18,7 @@ afterAll(() => {
 
 function TestComponent() {
   act(() => {
-    ListenForSearchRequests(state, setIsLoading, setState);
+    ListenForSearchRequests();
   });
 
   return (

@@ -11,7 +11,7 @@
    <g mask="url(#a)">
      <path fill="#555"
            d="M0 0 h62 v20 H0 z"/>
-     <path fill="#dfb317"
+     <path fill="#e05d44"
            d="M62 0 h54 v20 H62 z"/>
      <path fill="url(#b)"
            d="M0 0 h116 v20 H0 z"/>
@@ -26,10 +26,10 @@
          coverage
        </text>
        <text x="89" y="15" fill="#010101" fill-opacity=".3">
-         80.3%
+         78.9%
        </text>
        <text x="89" y="14">
-       80.3%
+       78.9%
        </text>
      </g>
    </g>

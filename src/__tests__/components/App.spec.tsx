@@ -1,6 +1,6 @@
 import { mockServer } from "@/__tests__/fixtures/mockServer";
 import App from "@/components/App";
-import { act, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import fetchMock from "jest-fetch-mock";
 
 jest.mock("@/utils/imageGridHelpers");
@@ -19,14 +19,7 @@ afterAll(() => {
   fetchMock.disableMocks();
 });
 
-let bindState, bindSet;
-
 function TestComponent() {
-  act(() => {
-    bindState = state;
-    bindSet = setState;
-  });
-
   return <App />;
 }
 
@@ -37,7 +30,5 @@ describe("App", () => {
 
   test("mounts", () => {
     screen.queryByRole("button");
-    expect(bindState).toBeDefined();
-    expect(bindSet).toBeDefined();
   });
 });

@@ -1,12 +1,13 @@
 import { act, render } from "@/__tests__/fixtures/test-utils";
 import SearchToolBar from "@/components/SearchToolBar";
+import { dispatchRequestArgs } from "@/state/ZuState";
 import userEvent from "@testing-library/user-event";
 import { useEffect } from "react";
 
 function TestComponent() {
   useEffect(() => {
     act(() => {
-      setRequestArgs({ query: "" });
+      dispatchRequestArgs({ query: "" });
     });
   }, []);
 

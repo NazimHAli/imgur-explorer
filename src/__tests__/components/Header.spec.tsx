@@ -1,17 +1,23 @@
 import { render } from "@/__tests__/fixtures/test-utils";
 import Header from "@/components/Header";
+import { dispatchRequestArgs, useStore } from "@/state/ZuState";
 import { screen, fireEvent } from "@testing-library/dom";
 import "@testing-library/jest-dom";
 import { useEffect } from "react";
+import shallow from "zustand/shallow";
 
-let requestArgs, testElement, container;
+let bindRequestArgs, testElement, container;
 
 function TestComponent(props: { setEmptyQuery: boolean }) {
+  const { requestArgs } = useStore(
+    (state) => ({ requestArgs: state.requestArgs }),
+    shallow
+  );
   const { setEmptyQuery } = props;
 
   useEffect(() => {
     if (setEmptyQuery) {
-      setRequestArgs({
+      dispatchRequestArgs({
         method: "search",
         query: "",
       });
@@ -19,8 +25,8 @@ function TestComponent(props: { setEmptyQuery: boolean }) {
   }, []);
 
   useEffect(() => {
-    requestArgs = state.requestArgs;
-  }, [state.requestArgs.query]);
+    bindRequestArgs = requestArgs;
+  }, [requestArgs.query]);
 
   return <Header />;
 }
@@ -81,7 +87,7 @@ describe("Header", () => {
       });
       fireEvent.click(screen.getByRole("button"));
 
-      expect(requestArgs.query).toBe("query 2");
+      expect(bindRequestArgs.query).toBe("query 2");
     });
   });
 

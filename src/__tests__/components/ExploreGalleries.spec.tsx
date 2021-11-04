@@ -1,33 +1,29 @@
 import { mockTags } from "@/__tests__/fixtures/mockTags";
 import { render } from "@/__tests__/fixtures/test-utils";
 import ExploreGalleries from "@/components/ExploreGalleries";
+import { dispatchTags } from "@/state/ZuState";
 import { screen } from "@testing-library/react";
 
 describe("ExploreGalleries", () => {
   let galleries;
 
   test("zero galleries displayed", () => {
-    render(
-      <ExploreGalleries
-        galleryTags={{
-          galleries: [],
-          tags: [],
-        }}
-      />
-    );
+    render(<ExploreGalleries />);
 
     expect(document.querySelector(".explore__galleries").innerHTML).toBe("");
   });
 
   test("4 galleries displayed", () => {
-    render(<ExploreGalleries galleryTags={mockTags} />);
+    dispatchTags(mockTags);
+    render(<ExploreGalleries />);
 
     galleries = screen.getAllByRole("link");
     expect(galleries.length).toEqual(mockTags.galleries.length);
   });
 
   test("gallery titles displayed", () => {
-    render(<ExploreGalleries galleryTags={mockTags} />);
+    dispatchTags(mockTags);
+    render(<ExploreGalleries />);
 
     galleries = screen.getAllByRole("link");
 

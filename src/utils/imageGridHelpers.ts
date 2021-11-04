@@ -28,7 +28,7 @@ function HandleImageLazyLoad(
   return cardImgRef;
 }
 
-// TODO: Refactor & cleanup the mess
+// TODO: Refactor
 function HandleNewItems(isIntersecting: boolean): void {
   const { finishedLazyLoading, idxsToLoad, items, page } = useStore(
     (state) => ({
