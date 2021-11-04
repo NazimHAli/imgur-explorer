@@ -1,14 +1,14 @@
 import { useStore } from "@/state/ZuState";
-import { HandleNewItems } from "@/utils/imageGridHelpers";
+import {
+  HandleNewItems,
+  imageRefObserveCallback,
+} from "@/utils/imageGridHelpers";
 import { useIntersectionObserver } from "@/utils/useIntersectionObserver";
-import { ObserveElementsInView } from "@/utils/visibilityUtils";
-import { lazy, useCallback, useEffect, useRef, useState } from "react";
+import { lazy, useEffect, useRef, useState } from "react";
 import shallow from "zustand/shallow";
 
 const ItemModal = lazy(() => import("@/components/ItemModal"));
 const ImageGridCard = lazy(() => import("@/components/ImageGridCard"));
-
-const imgObserver = new ObserveElementsInView();
 
 function ImageGrid(): JSX.Element {
   const { idxsToLoad, items, isLoading, selectedItemID } = useStore(
@@ -34,11 +34,7 @@ function ImageGrid(): JSX.Element {
     }
   }, [selectedItemID]);
 
-  const cardImgRef = useCallback((node) => {
-    if (node !== null) {
-      imgObserver.observeElements([node]);
-    }
-  }, []);
+  const cardImgRef = imageRefObserveCallback();
 
   return (
     <div className="grid-viewport">
