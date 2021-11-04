@@ -1,6 +1,7 @@
 import { mockItems } from "@/__tests__/fixtures/mockItems";
 import { act, render, waitFor } from "@/__tests__/fixtures/test-utils";
-import { dispatchIdxsToLoad, dispatchItems, useStore } from "@/state/ZuState";
+import { useStore } from "@/state/ZuState";
+import { dispatchIdxsToLoad, dispatchItems } from "@/state/dispatchHelpers";
 import { HandleImageLazyLoad, HandleNewItems } from "@/utils/imageGridHelpers";
 import { useEffect } from "react";
 

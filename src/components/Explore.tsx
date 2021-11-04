@@ -1,5 +1,5 @@
 import ExploreGalleries from "@/components/ExploreGalleries";
-import { dispatchRequestArgs } from "@/state/ZuState";
+import { dispatchRequestArgs } from "@/state/dispatchHelpers";
 import { memo, useEffect } from "react";
 
 function Explore() {

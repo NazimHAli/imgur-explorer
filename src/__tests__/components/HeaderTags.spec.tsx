@@ -1,7 +1,8 @@
 import { mockGalleryTags } from "@/__tests__/fixtures/mockGalleryTags";
 import { fireEvent, render, screen } from "@/__tests__/fixtures/test-utils";
 import HeaderTags from "@/components/HeaderTags";
-import { dispatchTags, useStore } from "@/state/ZuState";
+import { useStore } from "@/state/ZuState";
+import { dispatchTags } from "@/state/dispatchHelpers";
 import { useEffect } from "react";
 import shallow from "zustand/shallow";
 

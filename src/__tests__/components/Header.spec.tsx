@@ -1,6 +1,7 @@
 import { render } from "@/__tests__/fixtures/test-utils";
 import Header from "@/components/Header";
-import { dispatchRequestArgs, useStore } from "@/state/ZuState";
+import { useStore } from "@/state/ZuState";
+import { dispatchRequestArgs } from "@/state/dispatchHelpers";
 import { screen, fireEvent } from "@testing-library/dom";
 import "@testing-library/jest-dom";
 import { useEffect } from "react";

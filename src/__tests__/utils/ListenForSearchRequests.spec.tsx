@@ -1,5 +1,6 @@
 import { mockServer } from "@/__tests__/fixtures/mockServer";
-import { dispatchRequestArgs, useStore } from "@/state/ZuState";
+import { useStore } from "@/state/ZuState";
+import { dispatchRequestArgs } from "@/state/dispatchHelpers";
 import { ListenForSearchRequests } from "@/utils/ListenForSearchRequests";
 import { act, render, waitFor } from "@testing-library/react";
 import fetchMock from "jest-fetch-mock";

@@ -1,10 +1,5 @@
 import { initialState } from "@/state/initialState";
 import {
-  extractImageResults,
-  filterTags,
-  getSelectedItem,
-} from "@/utils/dataUtils";
-import {
   SelectedComments,
   TypeGallery,
   TypeItem,
@@ -42,63 +37,4 @@ const useStore = create<ZuState>(() => ({
   isLoading: false,
 }));
 
-const dispatchIdxsToLoad = (newIdxsToLoad) =>
-  useStore.setState(() => ({
-    idxsToLoad: newIdxsToLoad,
-  }));
-
-const dispatchIsLoading = (isLoading) =>
-  useStore.setState(() => ({
-    isLoading: isLoading,
-  }));
-
-const dispatchFinishedLazyLoading = (isFinished) =>
-  useStore.setState(() => ({
-    finishedLazyLoading: isFinished,
-  }));
-
-const dispatchItems = (response) =>
-  useStore.setState((state) => ({
-    items: state.requestArgs.newSearch
-      ? extractImageResults(response)
-      : state.items.concat(extractImageResults(response)),
-  }));
-
-const dispatchRequestArgs = (newArgs) =>
-  useStore.setState((state) => ({
-    requestArgs: { ...state.requestArgs, ...newArgs },
-  }));
-
-const dispatchTags = (response) =>
-  useStore.setState(() => ({
-    galleryTags: { ...response, tags: filterTags(response?.tags) },
-  }));
-
-const dispatchSelectedItem = (response) =>
-  useStore.setState((state) => ({
-    requestArgs: { ...state.requestArgs, method: "" },
-    selectedItem: getSelectedItem(
-      state.requestArgs.selectedItemID,
-      state.items
-    ),
-    selectedItemComments: response,
-  }));
-
-const dispatchClearSelectedItem = () =>
-  useStore.setState((state) => ({
-    requestArgs: { ...state.requestArgs, method: "", selectedItemID: "" },
-    selectedItem: {},
-    selectedItemComments: [],
-  }));
-
-export {
-  useStore,
-  dispatchClearSelectedItem,
-  dispatchFinishedLazyLoading,
-  dispatchIdxsToLoad,
-  dispatchIsLoading,
-  dispatchItems,
-  dispatchRequestArgs,
-  dispatchSelectedItem,
-  dispatchTags,
-};
+export { useStore };

@@ -7,7 +7,7 @@ import {
   dispatchItems,
   dispatchRequestArgs,
   dispatchSelectedItem,
-} from "@/state/ZuState";
+} from "@/state/dispatchHelpers";
 import "@testing-library/jest-dom";
 import { useEffect } from "react";
 

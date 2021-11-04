@@ -1,5 +1,6 @@
 import { ItemModalComments } from "@/components/ItemModalComments";
-import { dispatchClearSelectedItem, useStore } from "@/state/ZuState";
+import { useStore } from "@/state/ZuState";
+import { dispatchClearSelectedItem } from "@/state/dispatchHelpers";
 import { truncateText } from "@/utils/dataUtils";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { KeyboardEvent, MouseEvent } from "react";

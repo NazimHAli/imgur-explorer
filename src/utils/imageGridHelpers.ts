@@ -1,9 +1,9 @@
+import { useStore } from "@/state/ZuState";
 import {
   dispatchFinishedLazyLoading,
   dispatchIdxsToLoad,
   dispatchRequestArgs,
-  useStore,
-} from "@/state/ZuState";
+} from "@/state/dispatchHelpers";
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
 import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
 import shallow from "zustand/shallow";

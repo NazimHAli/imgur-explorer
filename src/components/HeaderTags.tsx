@@ -1,8 +1,8 @@
+import { useStore } from "@/state/ZuState";
 import {
   dispatchIsLoading,
   dispatchRequestArgs,
-  useStore,
-} from "@/state/ZuState";
+} from "@/state/dispatchHelpers";
 import { capitalize } from "@/utils/dataUtils";
 import { TypeState, TypeTag } from "@/utils/types";
 import { MouseEvent, MouseEventHandler } from "react";

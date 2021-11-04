@@ -1,6 +1,6 @@
 import { act, render } from "@/__tests__/fixtures/test-utils";
 import SearchToolBar from "@/components/SearchToolBar";
-import { dispatchRequestArgs } from "@/state/ZuState";
+import { dispatchRequestArgs } from "@/state/dispatchHelpers";
 import userEvent from "@testing-library/user-event";
 import { useEffect } from "react";
 

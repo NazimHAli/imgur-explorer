@@ -1,7 +1,8 @@
 import imgurLogo from "@/assets/imgur.svg";
 import profileIcon from "@/assets/profile.svg";
 import HeaderTags from "@/components/HeaderTags";
-import { dispatchRequestArgs, useStore } from "@/state/ZuState";
+import { useStore } from "@/state/ZuState";
+import { dispatchRequestArgs } from "@/state/dispatchHelpers";
 import { memo, RefObject, useRef } from "react";
 import shallow from "zustand/shallow";
 

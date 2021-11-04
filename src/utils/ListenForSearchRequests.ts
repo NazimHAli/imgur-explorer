@@ -1,11 +1,11 @@
 import { ImgurAPI } from "@/services/imgurAPI";
+import { useStore } from "@/state/ZuState";
 import {
   dispatchIsLoading,
   dispatchItems,
   dispatchSelectedItem,
   dispatchTags,
-  useStore,
-} from "@/state/ZuState";
+} from "@/state/dispatchHelpers";
 import { useEffect } from "react";
 import shallow from "zustand/shallow";
 

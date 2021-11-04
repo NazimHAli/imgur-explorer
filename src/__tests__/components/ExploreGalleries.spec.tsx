@@ -1,7 +1,7 @@
 import { mockTags } from "@/__tests__/fixtures/mockTags";
 import { render } from "@/__tests__/fixtures/test-utils";
 import ExploreGalleries from "@/components/ExploreGalleries";
-import { dispatchTags } from "@/state/ZuState";
+import { dispatchTags } from "@/state/dispatchHelpers";
 import { screen } from "@testing-library/react";
 
 describe("ExploreGalleries", () => {
