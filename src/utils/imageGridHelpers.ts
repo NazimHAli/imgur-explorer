@@ -41,7 +41,7 @@ function HandleNewItems(isIntersecting: boolean): void {
       const newIdxs = [...Array(idxsToLoad.length + 8).keys()];
 
       // Dispatch request to get the next page of results
-      if (items.length - newIdxs.length <= 20) {
+      if (items.length - newIdxs.length <= 16) {
         dispatchRequestArgs({
           filter: true,
           method: "search",

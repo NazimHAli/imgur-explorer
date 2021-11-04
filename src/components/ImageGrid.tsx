@@ -41,7 +41,7 @@ function ImageGrid(): JSX.Element {
       <ItemModal isOpen={isOpen} setIsOpen={setIsOpen} />
 
       <div className="image-grid">
-        {idxsToLoad.map((idx) => (
+        {idxsToLoad.slice(0, items.length).map((idx) => (
           <ImageGridCard
             imgRef={cardImgRef}
             item={items?.length > 0 && items[idx]}
