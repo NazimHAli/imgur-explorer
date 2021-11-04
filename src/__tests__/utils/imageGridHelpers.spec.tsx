@@ -2,17 +2,18 @@ import { mockItems } from "@/__tests__/fixtures/mockItems";
 import { act, render, waitFor } from "@/__tests__/fixtures/test-utils";
 import { useStore } from "@/state/ZuState";
 import { dispatchIdxsToLoad, dispatchItems } from "@/state/dispatchHelpers";
-import { HandleImageLazyLoad, HandleNewItems } from "@/utils/imageGridHelpers";
+import {
+  imageRefObserveCallback,
+  HandleNewItems,
+} from "@/utils/imageGridHelpers";
 import { useEffect } from "react";
 
 let bindIdxsToLoad;
 
-describe("HandleImageLazyLoad", () => {
+describe("imageRefObserveCallback", () => {
   function TestComponent() {
-    const isNewSearch = true;
-
     const idxsToLoad = useStore((state) => state.idxsToLoad);
-    const imgRef = HandleImageLazyLoad(isNewSearch, dispatchIdxsToLoad);
+    const imgRef = imageRefObserveCallback();
 
     bindIdxsToLoad = idxsToLoad;
     return <img src="/meow.webp" alt="Meowdy partner" ref={imgRef} />;

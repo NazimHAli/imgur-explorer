@@ -35,7 +35,6 @@ function TestComponent({
     }
   }, []);
 
-  // console.log(state);
   return <ItemModal isOpen={isOpen} setIsOpen={setIsOpen} />;
 }
 /* eslint-enable react/prop-types */

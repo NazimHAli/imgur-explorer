@@ -5,21 +5,12 @@ import {
   dispatchRequestArgs,
 } from "@/state/dispatchHelpers";
 import { ObserveElementsInView } from "@/utils/visibilityUtils";
-import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import shallow from "zustand/shallow";
 
 const imgObserver = new ObserveElementsInView();
 
-function HandleImageLazyLoad(
-  isNewSearch: boolean,
-  setidxsToLoad: Dispatch<SetStateAction<number[]>>
-) {
-  useEffect(() => {
-    if (isNewSearch) {
-      setidxsToLoad([0, 1, 2, 3, 4]);
-    }
-  }, [isNewSearch]);
-
+function imageRefObserveCallback() {
   const cardImgRef = useCallback((node) => {
     if (node !== null) {
       imgObserver.observeElements([node]);
@@ -70,4 +61,4 @@ function HandleNewItems(isIntersecting: boolean): void {
   }, [isIntersecting]);
 }
 
-export { HandleNewItems, HandleImageLazyLoad };
+export { HandleNewItems, imageRefObserveCallback };

@@ -33,8 +33,13 @@ const dispatchRequestArgs = (newArgs) =>
   }));
 
 const dispatchTags = (response) =>
-  useStore.setState(() => ({
-    galleryTags: { ...response, tags: filterTags(response?.tags) },
+  useStore.setState((state) => ({
+    galleryTags: {
+      ...response,
+      tags: state.requestArgs.newSearch
+        ? filterTags(response?.tags)
+        : state.galleryTags.tags.concat(filterTags(response?.tags)),
+    },
   }));
 
 const dispatchSelectedItem = (response) =>

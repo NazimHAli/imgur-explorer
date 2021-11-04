@@ -1,6 +1,7 @@
 import { ImgurAPI } from "@/services/imgurAPI";
 import { useStore } from "@/state/ZuState";
 import {
+  dispatchIdxsToLoad,
   dispatchIsLoading,
   dispatchItems,
   dispatchSelectedItem,
@@ -14,6 +15,12 @@ function ListenForSearchRequests(): void {
     (state) => ({ requestArgs: state.requestArgs }),
     shallow
   );
+
+  useEffect(() => {
+    if (requestArgs.newSearch) {
+      dispatchIdxsToLoad([0, 1, 2, 3, 4]);
+    }
+  }, [requestArgs.newSearch]);
 
   useEffect(() => {
     const method = requestArgs.method;
