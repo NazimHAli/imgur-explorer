@@ -35,6 +35,6 @@ describe("ImageGrid", () => {
 
   test("on mounted displays loading skeletons", async () => {
     testElement = await screen.findAllByTestId("loading-skeleton");
-    expect(testElement).toHaveLength(5);
+    expect(testElement).toHaveLength(8);
   });
 });

@@ -29,7 +29,8 @@ const dispatchItems = (response) =>
 
 const dispatchRequestArgs = (newArgs) => {
   useStore.setState((state) => ({
-    idxsToLoad: newArgs?.newSearch ? [0, 1, 2, 3, 4] : state.idxsToLoad,
+    finishedLazyLoading: newArgs?.newSearch ? false : state.finishedLazyLoading,
+    idxsToLoad: newArgs?.newSearch ? [...Array(8).keys()] : state.idxsToLoad,
     requestArgs: { ...state.requestArgs, ...newArgs },
   }));
 };

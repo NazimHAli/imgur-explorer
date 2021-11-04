@@ -38,7 +38,7 @@ function HandleNewItems(isIntersecting: boolean): void {
       idxsToLoad.length < items.length;
 
     if (checkForNewItems) {
-      const newIdxs = [...Array(idxsToLoad.length + 10).keys()];
+      const newIdxs = [...Array(idxsToLoad.length + 8).keys()];
 
       // Dispatch request to get the next page of results
       if (items.length - newIdxs.length <= 20) {

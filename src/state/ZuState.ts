@@ -33,7 +33,7 @@ interface ZuState {
 
 const useStore = create<ZuState>(() => ({
   ...initialState,
-  idxsToLoad: [0, 1, 2, 3, 4],
+  idxsToLoad: [...Array(8).keys()],
   isLoading: false,
 }));
 
