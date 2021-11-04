@@ -7,28 +7,6 @@ import {
 
 import { initialState } from "./initialState";
 
-const dispatchIdxsToLoad = (newIdxsToLoad) =>
-  useStore.setState(() => ({
-    idxsToLoad: newIdxsToLoad,
-  }));
-
-const dispatchIsLoading = (isLoading) =>
-  useStore.setState(() => ({
-    isLoading: isLoading,
-  }));
-
-const dispatchFinishedLazyLoading = (isFinished) =>
-  useStore.setState(() => ({
-    finishedLazyLoading: isFinished,
-  }));
-
-const dispatchItems = (response) =>
-  useStore.setState((state) => ({
-    items: state.requestArgs.newSearch
-      ? extractImageResults(response)
-      : state.items.concat(extractImageResults(response)),
-  }));
-
 function updatedRequestState(currentState, newArgs) {
   let theState;
   const newSearch = newArgs?.newSearch;
@@ -51,6 +29,28 @@ function updatedRequestState(currentState, newArgs) {
 
   return theState;
 }
+
+const dispatchIdxsToLoad = (newIdxsToLoad) =>
+  useStore.setState(() => ({
+    idxsToLoad: newIdxsToLoad,
+  }));
+
+const dispatchIsLoading = (isLoading) =>
+  useStore.setState(() => ({
+    isLoading: isLoading,
+  }));
+
+const dispatchFinishedLazyLoading = (isFinished) =>
+  useStore.setState(() => ({
+    finishedLazyLoading: isFinished,
+  }));
+
+const dispatchItems = (response) =>
+  useStore.setState((state) => ({
+    items: state.requestArgs.newSearch
+      ? extractImageResults(response)
+      : state.items.concat(extractImageResults(response)),
+  }));
 
 const dispatchRequestArgs = (newArgs) => {
   useStore.setState((currentState) =>

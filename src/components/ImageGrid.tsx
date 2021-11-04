@@ -1,4 +1,5 @@
 import { useStore } from "@/state/ZuState";
+import { initialState } from "@/state/initialState";
 import {
   HandleNewItems,
   imageRefObserveCallback,
@@ -41,14 +42,16 @@ function ImageGrid(): JSX.Element {
       <ItemModal isOpen={isOpen} setIsOpen={setIsOpen} />
 
       <div className="image-grid">
-        {idxsToLoad.slice(0, items.length || 8).map((idx) => (
-          <ImageGridCard
-            imgRef={cardImgRef}
-            item={items?.length > 0 && items[idx]}
-            key={`${idx || "0"}-${items?.length > 0 && items[idx]?.id}`}
-            isLoading={isLoading}
-          />
-        ))}
+        {idxsToLoad
+          .slice(0, items.length || initialState.idxsToLoad.length)
+          .map((index) => (
+            <ImageGridCard
+              imgRef={cardImgRef}
+              item={items?.length > 0 && items[index]}
+              key={`${index || "0"}-${items?.length > 0 && items[index]?.id}`}
+              isLoading={isLoading}
+            />
+          ))}
 
         <span ref={elementObserverRef} className="block w-px h-px" />
       </div>
