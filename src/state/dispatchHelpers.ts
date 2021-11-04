@@ -5,6 +5,8 @@ import {
   getSelectedItem,
 } from "@/utils/dataUtils";
 
+import { initialState } from "./initialState";
+
 const dispatchIdxsToLoad = (newIdxsToLoad) =>
   useStore.setState(() => ({
     idxsToLoad: newIdxsToLoad,
@@ -27,12 +29,33 @@ const dispatchItems = (response) =>
       : state.items.concat(extractImageResults(response)),
   }));
 
+function updatedRequestState(currentState, newArgs) {
+  let theState;
+  const newSearch = newArgs?.newSearch;
+
+  if (newSearch) {
+    theState = {
+      ...initialState,
+      galleryTags: currentState.galleryTags,
+      requestArgs: { ...currentState.requestArgs, ...newArgs },
+    };
+  } else {
+    theState = {
+      finishedLazyLoading: newSearch ? false : currentState.finishedLazyLoading,
+      idxsToLoad: newSearch ? initialState.idxsToLoad : currentState.idxsToLoad,
+      requestArgs: newSearch
+        ? { ...initialState.requestArgs, ...newArgs }
+        : { ...currentState.requestArgs, ...newArgs },
+    };
+  }
+
+  return theState;
+}
+
 const dispatchRequestArgs = (newArgs) => {
-  useStore.setState((state) => ({
-    finishedLazyLoading: newArgs?.newSearch ? false : state.finishedLazyLoading,
-    idxsToLoad: newArgs?.newSearch ? [...Array(8).keys()] : state.idxsToLoad,
-    requestArgs: { ...state.requestArgs, ...newArgs },
-  }));
+  useStore.setState((currentState) =>
+    updatedRequestState(currentState, newArgs)
+  );
 };
 
 const dispatchTags = (response) =>

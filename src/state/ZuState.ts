@@ -31,10 +31,6 @@ interface ZuState {
   selectedTag: TypeSelectedTag;
 }
 
-const useStore = create<ZuState>(() => ({
-  ...initialState,
-  idxsToLoad: [...Array(8).keys()],
-  isLoading: false,
-}));
+const useStore = create<ZuState>(() => initialState);
 
 export { useStore };

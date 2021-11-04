@@ -44,6 +44,8 @@ export interface TypeState {
   finishedLazyLoading: boolean;
   galleryTags: { galleries?: TypeGallery[]; tags?: TypeTag[] };
   items: Array<TypeItem>;
+  idxsToLoad: Array<number>;
+  isLoading: boolean;
   requestArgs: {
     filter: boolean;
     method: string;
