@@ -27,10 +27,12 @@ const dispatchItems = (response) =>
       : state.items.concat(extractImageResults(response)),
   }));
 
-const dispatchRequestArgs = (newArgs) =>
+const dispatchRequestArgs = (newArgs) => {
   useStore.setState((state) => ({
+    idxsToLoad: newArgs?.newSearch ? [0, 1, 2, 3, 4] : state.idxsToLoad,
     requestArgs: { ...state.requestArgs, ...newArgs },
   }));
+};
 
 const dispatchTags = (response) =>
   useStore.setState((state) => ({

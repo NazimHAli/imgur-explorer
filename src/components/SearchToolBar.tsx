@@ -18,14 +18,18 @@ function SearchToolBar(): JSX.Element {
 
   return (
     <div className="search-toolbar">
-      <SearchToolBarDropdown
-        actionArg="sort"
-        options={enableSort ? ["Top", "Viral", "Trending"] : []}
-      />
-      <SearchToolBarDropdown
-        actionArg="window"
-        options={enablewindow ? ["All", "Day", "Week", "Month", "Year"] : []}
-      />
+      {enableSort && (
+        <SearchToolBarDropdown
+          actionArg="sort"
+          options={enableSort ? ["Top", "Viral", "Trending"] : []}
+        />
+      )}
+      {enablewindow && (
+        <SearchToolBarDropdown
+          actionArg="window"
+          options={enablewindow ? ["All", "Day", "Week", "Month", "Year"] : []}
+        />
+      )}
     </div>
   );
 }
