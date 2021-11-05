@@ -13,7 +13,7 @@ function App() {
   ListenForSearchRequests(state, setIsLoading, setState);
 
   return (
-    <Suspense fallback={<span></span>}>
+    <Suspense fallback={<span />}>
       <Header />
       <Explore />
       <SearchToolBar />

@@ -24,7 +24,7 @@ function TestComponent() {
   });
 
   return (
-    <Suspense fallback={<span></span>}>
+    <Suspense fallback={<span />}>
       <ImageGrid />
     </Suspense>
   );

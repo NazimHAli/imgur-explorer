@@ -15,7 +15,7 @@ function Footer(props: { finishedLazyLoading: boolean }) {
   ];
 
   return (
-    <Suspense fallback={<span></span>}>
+    <Suspense fallback={<span />}>
       {finishedLazyLoading && (
         <footer className="footer">
           <div className="footer__content">
