@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 function FooterSection(props: { sectionLinks: string[] }) {
   const { sectionLinks } = props;
 
@@ -17,4 +19,4 @@ function FooterSection(props: { sectionLinks: string[] }) {
   );
 }
 
-export default FooterSection;
+export default memo(FooterSection);

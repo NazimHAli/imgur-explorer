@@ -1,4 +1,3 @@
-import { useGlobalContext } from "@/state/GlobalContext";
 import { ListenForSearchRequests } from "@/utils/ListenForSearchRequests";
 import { lazy, memo, Suspense } from "react";
 
@@ -9,8 +8,7 @@ const ImageGrid = lazy(() => import("@/components/ImageGrid"));
 const SearchToolBar = lazy(() => import("@/components/SearchToolBar"));
 
 function App() {
-  const { state, setState, setIsLoading } = useGlobalContext();
-  ListenForSearchRequests(state, setIsLoading, setState);
+  ListenForSearchRequests();
 
   return (
     <Suspense fallback={<span></span>}>
@@ -18,8 +16,6 @@ function App() {
       <Explore />
       <SearchToolBar />
       <ImageGrid />
-
-      {/* Dynamically render footer */}
       <Footer />
     </Suspense>
   );

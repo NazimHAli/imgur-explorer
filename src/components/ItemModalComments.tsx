@@ -1,5 +1,6 @@
 import { getDateString } from "@/utils/dataUtils";
 import { TypeComments, SelectedComments } from "@/utils/types";
+import { memo } from "react";
 import { ThumbsUp, ThumbsDown, User } from "react-feather";
 
 function dateTime(comment: TypeComments): JSX.Element {
@@ -68,4 +69,4 @@ function ItemModalComments(props: { comments: SelectedComments }): JSX.Element {
   );
 }
 
-export { ItemModalComments };
+export default memo(ItemModalComments);

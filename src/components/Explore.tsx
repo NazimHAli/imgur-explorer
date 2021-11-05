@@ -1,12 +1,10 @@
 import ExploreGalleries from "@/components/ExploreGalleries";
-import { useGlobalContext } from "@/state/GlobalContext";
+import { dispatchRequestArgs } from "@/state/dispatchHelpers";
 import { memo, useEffect } from "react";
 
 function Explore() {
-  const { setRequestArgs, state } = useGlobalContext();
-
   useEffect(() => {
-    setRequestArgs({
+    dispatchRequestArgs({
       filter: false,
       method: "tags",
       newSearch: true,
@@ -15,7 +13,7 @@ function Explore() {
 
   return (
     <div className="explore">
-      <ExploreGalleries galleryTags={state.galleryTags} />
+      <ExploreGalleries />
     </div>
   );
 }

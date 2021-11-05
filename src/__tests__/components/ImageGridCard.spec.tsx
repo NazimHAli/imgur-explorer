@@ -1,5 +1,6 @@
 import { mockItems } from "@/__tests__/fixtures/mockItems";
 import ImageGridCard from "@/components/ImageGridCard";
+import { useStore } from "@/state/ZuState";
 import { render, screen, fireEvent } from "@testing-library/react";
 
 let testElement;
@@ -22,7 +23,6 @@ const item = {
   ups: mockItem.ups,
   views: mockItem.views,
 };
-const mockSetArgs = jest.fn();
 
 function renderEle(isLoading = false) {
   render(
@@ -33,7 +33,6 @@ function renderEle(isLoading = false) {
       imgRef={() => {
         null;
       }}
-      setRequestArgs={mockSetArgs}
     />
   );
 }
@@ -62,22 +61,14 @@ describe("ImageGridCard", () => {
     expect(testElement.dataset.srcset).toEqual(item.images[0].link);
   });
 
-  test("clicking on card dispatches setRequestArgs", () => {
+  test("clicking on card updates requestArgs", () => {
     renderEle();
 
     testElement = screen.getByRole("link");
     fireEvent.click(testElement);
 
-    expect(mockSetArgs).toBeCalledTimes(1);
-    expect(mockSetArgs).toBeCalledWith({
-      filter: false,
-      method: "comments",
-      selectedItemID: item.id,
-    });
-
-    fireEvent.click(testElement);
-    expect(mockSetArgs).toBeCalledTimes(2);
-    expect(mockSetArgs).toBeCalledWith({
+    expect(useStore.getState().requestArgs).toMatchObject({
+      ...useStore.getState().requestArgs,
       filter: false,
       method: "comments",
       selectedItemID: item.id,

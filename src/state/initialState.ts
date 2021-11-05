@@ -4,6 +4,8 @@ const initialState: TypeState = {
   finishedLazyLoading: false,
   galleryTags: {},
   items: [],
+  idxsToLoad: [...Array(8).keys()],
+  isLoading: false,
   requestArgs: {
     filter: true,
     method: "search",

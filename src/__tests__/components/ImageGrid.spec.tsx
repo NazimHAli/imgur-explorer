@@ -1,5 +1,4 @@
 import ImageGrid from "@/components/ImageGrid";
-import { useGlobalContext } from "@/state/GlobalContext";
 import { ListenForSearchRequests } from "@/utils/ListenForSearchRequests";
 import { act, render, screen } from "@testing-library/react";
 import fetchMock from "jest-fetch-mock";
@@ -19,8 +18,7 @@ afterAll(() => {
 
 function TestComponent() {
   act(() => {
-    const { state, setState, setIsLoading } = useGlobalContext();
-    ListenForSearchRequests(state, setIsLoading, setState);
+    ListenForSearchRequests();
   });
 
   return (
@@ -37,6 +35,6 @@ describe("ImageGrid", () => {
 
   test("on mounted displays loading skeletons", async () => {
     testElement = await screen.findAllByTestId("loading-skeleton");
-    expect(testElement).toHaveLength(5);
+    expect(testElement).toHaveLength(8);
   });
 });

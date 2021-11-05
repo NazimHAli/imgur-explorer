@@ -1,15 +1,13 @@
 import { act, render } from "@/__tests__/fixtures/test-utils";
 import SearchToolBar from "@/components/SearchToolBar";
-import { useGlobalContext } from "@/state/GlobalContext";
+import { dispatchRequestArgs } from "@/state/dispatchHelpers";
 import userEvent from "@testing-library/user-event";
 import { useEffect } from "react";
 
 function TestComponent() {
-  const { setRequestArgs } = useGlobalContext();
-
   useEffect(() => {
     act(() => {
-      setRequestArgs({ query: "" });
+      dispatchRequestArgs({ query: "" });
     });
   }, []);
 

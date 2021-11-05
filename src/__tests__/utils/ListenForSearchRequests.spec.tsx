@@ -1,5 +1,6 @@
 import { mockServer } from "@/__tests__/fixtures/mockServer";
-import { useGlobalContext } from "@/state/GlobalContext";
+import { useStore } from "@/state/ZuState";
+import { dispatchRequestArgs } from "@/state/dispatchHelpers";
 import { ListenForSearchRequests } from "@/utils/ListenForSearchRequests";
 import { act, render, waitFor } from "@testing-library/react";
 import fetchMock from "jest-fetch-mock";
@@ -18,46 +19,42 @@ afterAll(() => {
   fetchMock.disableMocks();
 });
 
-const setIsLoading = jest.fn();
-let bindState;
-
 function TestComponent(props: { method: string }) {
   const { method } = props;
-  const { setState, setRequestArgs, state } = useGlobalContext();
 
-  act(() => {
-    ListenForSearchRequests(state, setIsLoading, setState);
-  });
+  ListenForSearchRequests();
 
   useEffect(() => {
     act(() => {
-      if (method !== "search" && state.requestArgs.method === "search") {
-        setRequestArgs({ method: method });
-      }
+      dispatchRequestArgs({ method: method });
     });
   }, []);
-
-  bindState = state;
 
   return <div />;
 }
 
 describe("ListenForSearchRequests", () => {
-  test.todo("Update tests below to validate methods");
+  afterEach(() => {
+    useStore.destroy();
+  });
 
   test("method = comments", async () => {
     render(<TestComponent method={"comments"} />);
-    await waitFor(() => expect(setIsLoading).nthCalledWith(1, true));
-    await waitFor(() => expect(setIsLoading).nthCalledWith(2, false));
+    await waitFor(() =>
+      expect(useStore.getState().selectedItemComments.length).toBeGreaterThan(0)
+    );
   });
 
-  test("method = search", () => {
+  test("method = search", async () => {
     render(<TestComponent method={"search"} />);
-    expect(bindState).toBeDefined();
+    await waitFor(() =>
+      expect(useStore.getState().items.length).toBeGreaterThan(0)
+    );
   });
 
-  test("on mounted calls setIsLoading=true", () => {
-    render(<TestComponent method={"search"} />);
-    expect(setIsLoading).nthCalledWith(1, true);
+  test("on mounted calls setIsLoading=true", async () => {
+    render(<TestComponent method={"comments"} />);
+
+    await waitFor(() => expect(useStore.getState().isLoading).toBe(true));
   });
 });

@@ -1,6 +1,9 @@
+import { useStore } from "@/state/ZuState";
+import { dispatchRequestArgs } from "@/state/dispatchHelpers";
 import { capitalize } from "@/utils/dataUtils";
-import { TypeGlobalContext, TypeState } from "@/utils/types";
+import { TypeState } from "@/utils/types";
 import { FormEvent } from "react";
+import shallow from "zustand/shallow";
 
 function getDispatchArgs(
   actionArg: string,
@@ -26,11 +29,14 @@ function getDispatchArgs(
 
 function SearchToolBarDropdown(props: {
   actionArg: string;
-  setRequestArgs: TypeGlobalContext["setRequestArgs"];
   options: string[];
-  requestArgs: TypeState["requestArgs"];
 }): JSX.Element {
-  const { options, actionArg, setRequestArgs, requestArgs } = props;
+  const { options, actionArg } = props;
+  const { requestArgs } = useStore(
+    (state) => ({ requestArgs: state.requestArgs }),
+    shallow
+  );
+
   const selectedValue =
     actionArg === "sort"
       ? capitalize(requestArgs.sort)
@@ -40,7 +46,7 @@ function SearchToolBarDropdown(props: {
   const handleOnClick = (event: FormEvent<HTMLSelectElement>) => {
     const dispatchArgs = getDispatchArgs(actionArg, event);
 
-    setRequestArgs(dispatchArgs);
+    dispatchRequestArgs(dispatchArgs);
     event.preventDefault();
   };
 

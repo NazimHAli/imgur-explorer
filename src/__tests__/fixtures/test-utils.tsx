@@ -1,4 +1,3 @@
-import { GlobalContextProvider } from "@/state/GlobalContext";
 import {
   act,
   render,
@@ -6,12 +5,6 @@ import {
   RenderResult,
 } from "@testing-library/react";
 import { ReactElement } from "react";
-
-function AllTheProviders(props: { children: ReactElement<any, any> }) {
-  const { children } = props;
-
-  return <GlobalContextProvider>{children}</GlobalContextProvider>;
-}
 
 function customRender(
   ui: ReactElement,
@@ -22,7 +15,7 @@ function customRender(
     HTMLElement
   >;
   act(() => {
-    ac = render(ui, { wrapper: AllTheProviders, ...options });
+    ac = render(ui, { ...options });
   });
 
   return ac;

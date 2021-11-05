@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 
-export interface TypeselectedTag {
+export interface TypeSelectedTag {
   items?: Array<string>;
 }
 
@@ -44,6 +44,8 @@ export interface TypeState {
   finishedLazyLoading: boolean;
   galleryTags: { galleries?: TypeGallery[]; tags?: TypeTag[] };
   items: Array<TypeItem>;
+  idxsToLoad: Array<number>;
+  isLoading: boolean;
   requestArgs: {
     filter: boolean;
     method: string;
@@ -58,7 +60,7 @@ export interface TypeState {
   requestError: boolean;
   selectedItem: TypeItem | undefined;
   selectedItemComments: SelectedComments;
-  selectedTag: TypeselectedTag;
+  selectedTag: TypeSelectedTag;
 }
 
 export interface TypeSearchResponse {
