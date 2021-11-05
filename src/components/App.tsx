@@ -20,7 +20,7 @@ function App() {
       <ImageGrid />
 
       {/* Dynamically render footer */}
-      <Footer />
+      <Footer finishedLazyLoading={state.finishedLazyLoading} />
     </Suspense>
   );
 }
