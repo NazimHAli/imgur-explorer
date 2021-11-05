@@ -80,9 +80,9 @@ describe("ItemModal", () => {
 
   describe("when open", () => {
     beforeEach(() => {
-      const rd = document.createElement("div");
-      rd.setAttribute("id", "root");
-      document.body.append(rd);
+      const rootDiv = document.createElement("div");
+      rootDiv.setAttribute("id", "root");
+      document.body.append(rootDiv);
 
       renderModal({ isOpen: true });
     });
@@ -131,7 +131,7 @@ describe("ItemModal", () => {
       );
     });
 
-    test.skip("has info badges", async () => {
+    test("has info badges", async () => {
       await waitFor(() => screen.findByRole("button"));
 
       testElement = document.querySelectorAll("span.data-badge");
