@@ -7,7 +7,7 @@ describe("Footer", () => {
   beforeEach(() => {
     render(
       <Suspense fallback="<span></span>">
-        <Footer />
+        <Footer finishedLazyLoading={true} />
       </Suspense>
     );
   });

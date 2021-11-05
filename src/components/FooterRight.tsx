@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 function FooterRight() {
   return (
     <div className="footer__content__right">
@@ -21,4 +23,4 @@ function FooterRight() {
   );
 }
 
-export default FooterRight;
+export default memo(FooterRight);

@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 function LeftSide() {
   return <p className="footer__bottom__left">© 2021 Meows</p>;
 }
@@ -46,4 +48,4 @@ function FooterBottom() {
   );
 }
 
-export default FooterBottom;
+export default memo(FooterBottom);
