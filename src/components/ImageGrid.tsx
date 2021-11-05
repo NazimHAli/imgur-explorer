@@ -1,4 +1,5 @@
 import { useGlobalContext } from "@/state/GlobalContext";
+import { initialState } from "@/state/initialState";
 import { HandleNewItems, HandleImageLazyLoad } from "@/utils/imageGridHelpers";
 import { useIntersectionObserver } from "@/utils/useIntersectionObserver";
 import { lazy, useEffect, useRef, useState } from "react";
@@ -29,17 +30,19 @@ function ImageGrid(): JSX.Element {
       <ItemModal isOpen={isOpen} setIsOpen={setIsOpen} />
 
       <div className="image-grid">
-        {idxsToLoad.map((idx) => (
-          <ImageGridCard
-            item={state.items.length > 0 && state.items[idx]}
-            key={`${idx || "0"}-${
-              state.items.length > 0 && state.items[idx].id
-            }`}
-            imgRef={cardImgRef}
-            setRequestArgs={setRequestArgs}
-            isLoading={isLoading}
-          />
-        ))}
+        {idxsToLoad
+          .slice(0, state.items.length || initialState.idxsToLoad.length)
+          .map((idx) => (
+            <ImageGridCard
+              item={state.items.length > 0 && state.items[idx]}
+              key={`${idx || "0"}-${
+                state.items.length > 0 && state.items[idx].id
+              }`}
+              imgRef={cardImgRef}
+              setRequestArgs={setRequestArgs}
+              isLoading={isLoading}
+            />
+          ))}
       </div>
 
       <span ref={elementObserverRef} className="block w-px h-px" />
