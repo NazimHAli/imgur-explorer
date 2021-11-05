@@ -36,10 +36,9 @@ function HandleNewItems(isIntersecting: boolean): void {
       isIntersecting &&
       !finishedLazyLoading &&
       idxsToLoad.length < items.length;
+    const newIdxs = [...Array(idxsToLoad.length + 8).keys()];
 
     if (checkForNewItems) {
-      const newIdxs = [...Array(idxsToLoad.length + 8).keys()];
-
       // Dispatch request to get the next page of results
       if (items.length - newIdxs.length <= 16) {
         dispatchRequestArgs({

@@ -5,7 +5,7 @@ import {
   imageRefObserveCallback,
 } from "@/utils/imageGridHelpers";
 import { useIntersectionObserver } from "@/utils/useIntersectionObserver";
-import { lazy, useEffect, useRef, useState } from "react";
+import { lazy, memo, Suspense, useEffect, useRef, useState } from "react";
 import shallow from "zustand/shallow";
 
 const ItemModal = lazy(() => import("@/components/ItemModal"));
@@ -38,25 +38,27 @@ function ImageGrid(): JSX.Element {
   const cardImgRef = imageRefObserveCallback();
 
   return (
-    <div className="grid-viewport">
-      <ItemModal isOpen={isOpen} setIsOpen={setIsOpen} />
+    <Suspense fallback={<p>Loading...</p>}>
+      <div className="grid-viewport">
+        <ItemModal isOpen={isOpen} setIsOpen={setIsOpen} />
 
-      <div className="image-grid">
-        {idxsToLoad
-          .slice(0, items.length || initialState.idxsToLoad.length)
-          .map((index) => (
-            <ImageGridCard
-              imgRef={cardImgRef}
-              item={items?.length > 0 && items[index]}
-              key={`${index || "0"}-${items?.length > 0 && items[index]?.id}`}
-              isLoading={isLoading}
-            />
-          ))}
+        <div className="image-grid">
+          {idxsToLoad
+            .slice(0, items.length || initialState.idxsToLoad.length)
+            .map((index) => (
+              <ImageGridCard
+                imgRef={cardImgRef}
+                item={items?.length > 0 && items[index]}
+                key={`${index}-${items.length > 0 && items[index]?.id}`}
+                isLoading={isLoading}
+              />
+            ))}
 
-        <span ref={elementObserverRef} className="block w-px h-px" />
+          <span ref={elementObserverRef} className="block w-px h-px" />
+        </div>
       </div>
-    </div>
+    </Suspense>
   );
 }
 
-export default ImageGrid;
+export default memo(ImageGrid);
