@@ -68,4 +68,4 @@ function ItemModalComments(props: { comments: SelectedComments }): JSX.Element {
   );
 }
 
-export { ItemModalComments };
+export default ItemModalComments;

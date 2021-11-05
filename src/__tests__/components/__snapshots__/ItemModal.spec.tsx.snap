@@ -5,8 +5,5 @@ exports[`ItemModal renders one element when not open should match snapshot 1`] =
   <div
     id="root"
   />
-  <div
-    class="ReactModalPortal"
-  />
 </body>
 `;
